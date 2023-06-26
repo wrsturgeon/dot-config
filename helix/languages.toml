@@ -1,0 +1,13 @@
+# Helix language settings
+
+######## Python
+
+[[language]]
+name = "python"
+config = { pylsp.plugins.pylint.enabled = true }
+
+######## Rust
+
+[[language]]
+name = "rust"
+auto-format = true

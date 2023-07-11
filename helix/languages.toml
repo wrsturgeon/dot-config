@@ -6,6 +6,12 @@
 name = "c"
 auto-format = true
 
+######## Nix
+
+[[language]]
+name = "nix"
+auto-format = true
+
 ######## Python
 
 [[language]]
@@ -16,4 +22,10 @@ config = { pylsp.plugins.pylint.enabled = true }
 
 [[language]]
 name = "rust"
+auto-format = true
+
+######## Toml
+
+[[language]]
+name = "toml"
 auto-format = true

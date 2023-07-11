@@ -1,5 +1,11 @@
 # Helix language settings
 
+######## C
+
+[[language]]
+name = "c"
+auto-format = true
+
 ######## Python
 
 [[language]]

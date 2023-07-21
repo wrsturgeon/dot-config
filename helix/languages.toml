@@ -6,6 +6,12 @@
 name = "c"
 auto-format = true
 
+######## C++
+
+[[language]]
+name = "cpp"
+auto-format = true
+
 ######## Nix
 
 [[language]]

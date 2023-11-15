@@ -12,6 +12,12 @@ auto-format = true
 name = "cpp"
 auto-format = true
 
+######## Haskell
+[[language]]
+name = "haskell"
+auto-format = true
+formatter = { command = "ormolu", args = ["--stdin-input-file", "."] }
+
 ######## Nix
 
 [[language]]
@@ -19,11 +25,17 @@ name = "nix"
 auto-format = true
 formatter = { command = "nixfmt" }
 
-######## Python
+######## OCaml
 
 [[language]]
-name = "python"
-config = { pylsp.plugins.pylint.enabled = true }
+name = "ocaml"
+auto-format = true
+formatter = { command = "ocamlformat", args = [
+  "--enable-outside-detected-project",
+  "--profile=janestreet",
+  "--name=buffer.ml",
+  "-",
+] }
 
 ######## Rust
 

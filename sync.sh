@@ -1,5 +1,4 @@
-# Update Nix
-sudo nix upgrade-nix
+# Update everything installed with Nix
 nix profile upgrade '.*'
 
 # Collect garbage

@@ -1,11 +1,10 @@
 # Update everything installed with Nix
 nix profile upgrade '.*'
-
-# Collect garbage
 nix-collect-garbage
 
-# Hook `direnv`
-eval "$(direnv hook zsh)"
+# Update Rust tooling
+rustup self update || :
+rustup update || :
 
 # Synchronize Logseq notes
 pushd ~/Desktop/logseq

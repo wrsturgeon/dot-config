@@ -30,12 +30,7 @@ formatter = { command = "nixfmt" }
 [[language]]
 name = "ocaml"
 auto-format = true
-formatter = { command = "ocamlformat", args = [
-  "--enable-outside-detected-project",
-  "--profile=janestreet",
-  "--name=buffer.ml",
-  "-",
-] }
+formatter = { command = "ocamlformat", args = [] }
 
 ######## Rust
 

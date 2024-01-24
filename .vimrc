@@ -5,8 +5,6 @@ filetype indent on
 
 call plug#begin()
 Plug 'tpope/vim-sensible'
-Plug 'dense-analysis/ale'
-Plug 'neovimhaskell/haskell-vim'
 Plug 'whonore/Coqtail'
 call plug#end()
 

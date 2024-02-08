@@ -94,9 +94,14 @@ set wildmode=list:longest
 
 " install plugins
 call plug#begin()
-Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+" Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'ayu-theme/ayu-vim'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'whonore/Coqtail'
 call plug#end()
 
-colorscheme catppuccin-mocha
+" colorscheme catppuccin-mocha
+
+set termguicolors
+let ayucolor="dark"
+colorscheme ayu

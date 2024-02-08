@@ -92,11 +92,18 @@ set ttyfast
 set wildmenu
 set wildmode=list:longest
 
+" update more often
+" set updatetime=250
+
 " install plugins
 call plug#begin()
 " Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'airblade/vim-gitgutter'
 Plug 'ayu-theme/ayu-vim'
+Plug 'jreybert/vimagit'
+Plug 'lnl7/vim-nix'
 Plug 'nvim-tree/nvim-web-devicons'
+Plug 'tpope/vim-fugitive'
 Plug 'whonore/Coqtail'
 call plug#end()
 

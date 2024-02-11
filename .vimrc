@@ -57,8 +57,8 @@ endif
 
 " search behavior
 set incsearch " match as you type
-set ignorecase " ignore case
-set smartcase " ...except when your search is capitalized
+" set ignorecase " ignore case
+" set smartcase " ...except when your search is capitalized
 
 " day/night coloring
 set t_Co=256
@@ -76,6 +76,7 @@ set sidescrolloff=8
 " shut the fuck up
 " set visualbell " OUCH
 set noerrorbells
+set belloff=all
 
 " detect non-Vim file changes & read them into the buffer
 set autoread

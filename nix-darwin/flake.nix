@@ -15,6 +15,9 @@
     let
       system = "x86_64-darwin";
       pkgs = import nixpkgs { inherit system; };
+      vim = nixvim.legacyPackages.${system}.makeNixvim {
+        colorschemes.ayu.enable = true;
+      };
       configuration = { config, lib, modulesPath, options, specialArgs }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
@@ -29,8 +32,7 @@
           nixfmt
           python3 # <-- for vim
           taplo
-          # vim
-          (nixvim.legacyPackages.${system}.makeNixvim { })
+          vim
         ];
 
         # Auto upgrade nix package and the daemon service.

@@ -11,7 +11,7 @@
       url = "github:nix-community/nixvim";
     };
   };
-  outputs = { nix-darwin, nixpkgs, self }:
+  outputs = { nix-darwin, nixpkgs, nixvim, self }:
     let
       system = "x86_64-darwin";
       pkgs = import nixpkgs { inherit system; };

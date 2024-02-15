@@ -28,7 +28,9 @@
           allowUnsupportedSystem = true;
         };
       };
-      doom-emacs = nix-doom-emacs.packages.${system}.default;
+      doom-emacs = nix-doom-emacs.packages.${system}.default.override {
+        # doomPrivateDir = ./doom.d;
+      };
       sf-mono-liga-bin = pkgs.stdenvNoCC.mkDerivation {
         pname = "sf-mono-liga-bin";
         version = "dev";
@@ -39,10 +41,8 @@
           cp -R $src/*.otf $out/share/fonts/opentype/
         '';
       };
-      vim = nixvim.legacyPackages.${system}.makeNixvim {
-        colorschemes.ayu.enable = true;
-        extraPlugins = with pkgs.vimPlugins; [ Coqtail vim-nix ];
-      };
+      vim = nixvim.legacyPackages.${system}.makeNixvim
+        (import ./vim-config.nix pkgs);
       configuration = { config, lib, modulesPath, options, specialArgs }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget

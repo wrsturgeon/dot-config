@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Rebuilt Nix system configuration
-darwin-rebuild switch --flake ~/.config/nix-darwin#mpb-osx
-
 # Update everything installed with Nix
 nix profile upgrade '.*'
 nix-collect-garbage

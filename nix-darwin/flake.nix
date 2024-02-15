@@ -6,13 +6,17 @@
       url = "github:LnL7/nix-darwin";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixvim = { url = "github:nix-community/nixvim"; };
   };
   outputs = { nix-darwin, nixpkgs, self }:
     let
-      configuration = { pkgs, ... }: {
+      system = "x86_64-darwin";
+      pkgs = import nixpkgs { inherit system; };
+      configuration = { config, lib, modulesPath, options, specialArgs }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
         environment.systemPackages = with pkgs; [
+          coqPackages.coq
           direnv
           fd
           helix
@@ -20,7 +24,7 @@
           gnugrep
           nix-direnv
           nixfmt
-          python3 # for vim
+          python3 # <-- for vim
           taplo
           vim
         ];
@@ -44,7 +48,7 @@
         system.stateVersion = 4;
 
         # The platform the configuration will be used on.
-        nixpkgs.hostPlatform = "x86_64-darwin";
+        nixpkgs.hostPlatform = system;
       };
     in {
       # Build darwin flake using:

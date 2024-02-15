@@ -29,7 +29,8 @@
           nixfmt
           python3 # <-- for vim
           taplo
-          vim
+          # vim
+          (nixvim.legacyPackages.${system}.makeNixvim { })
         ];
 
         # Auto upgrade nix package and the daemon service.

@@ -67,6 +67,7 @@
           taplo
           tree
           vim
+          zoom-us
         ];
 
         # Auto upgrade nix package and the daemon service.

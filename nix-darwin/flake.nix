@@ -17,6 +17,7 @@
       pkgs = import nixpkgs { inherit system; };
       vim = nixvim.legacyPackages.${system}.makeNixvim {
         colorschemes.ayu.enable = true;
+        extraPlugins = with pkgs.vimPlugins; [ coqtail vim-nix ];
       };
       configuration = { config, lib, modulesPath, options, specialArgs }: {
         # List packages installed in system profile. To search by name, run:

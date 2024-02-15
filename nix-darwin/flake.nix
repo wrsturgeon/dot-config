@@ -5,6 +5,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:LnL7/nix-darwin";
     };
+    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixvim = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,7 +57,7 @@
           nixfmt
           python3 # <-- for vim
           ripgrep
-          (builtins.trace "${sf-mono-liga-bin}" sf-mono-liga-bin)
+          sf-mono-liga-bin
           spotify
           taplo
           tree

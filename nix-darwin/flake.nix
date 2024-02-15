@@ -12,7 +12,18 @@
       configuration = { pkgs, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
-        environment.systemPackages = with pkgs; [ helix git nixfmt vim ];
+        environment.systemPackages = with pkgs; [
+          direnv
+          fd
+          helix
+          git
+          gnugrep
+          nix-direnv
+          nixfmt
+          python3 # for vim
+          taplo
+          vim
+        ];
 
         # Auto upgrade nix package and the daemon service.
         services.nix-daemon.enable = true;

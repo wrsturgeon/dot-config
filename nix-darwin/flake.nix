@@ -6,7 +6,10 @@
       url = "github:LnL7/nix-darwin";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixvim = { url = "github:nix-community/nixvim"; };
+    nixvim = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixvim";
+    };
   };
   outputs = { nix-darwin, nixpkgs, self }:
     let

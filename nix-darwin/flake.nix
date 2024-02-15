@@ -29,7 +29,7 @@
         };
       };
       doom-emacs = nix-doom-emacs.packages.${system}.default.override {
-        # doomPrivateDir = ./doom.d;
+        doomPrivateDir = ./doom.d;
       };
       sf-mono-liga-bin = pkgs.stdenvNoCC.mkDerivation {
         pname = "sf-mono-liga-bin";

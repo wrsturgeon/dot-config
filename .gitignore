@@ -59,3 +59,4 @@
 *storage*
 
 !**/flake.lock
+!**/doom.d

@@ -62,6 +62,7 @@
           python3 # <-- for vim
           ripgrep
           sf-mono-liga-bin
+          slack
           spotify
           taplo
           tree

@@ -10,14 +10,24 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nixvim";
     };
+    sf-mono-liga-src = {
+      url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
+      flake = false;
+    };
   };
-  outputs = { nix-darwin, nixpkgs, nixvim, self }:
+  outputs = { nix-darwin, nixpkgs, nixvim, self, sf-mono-liga-src }:
     let
       system = "x86_64-darwin";
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          allowBroken = true;
+          allowUnfree = true;
+        };
+      };
       vim = nixvim.legacyPackages.${system}.makeNixvim {
         colorschemes.ayu.enable = true;
-        extraPlugins = with pkgs.vimPlugins; [ coqtail vim-nix ];
+        extraPlugins = with pkgs.vimPlugins; [ Coqtail vim-nix ];
       };
       configuration = { config, lib, modulesPath, options, specialArgs }: {
         # List packages installed in system profile. To search by name, run:
@@ -27,12 +37,18 @@
           direnv
           fd
           helix
+          iterm2
           git
           gnugrep
+          kitty
+          # logseq
           nix-direnv
           nixfmt
           python3 # <-- for vim
+          ripgrep
+          spotify
           taplo
+          tree
           vim
         ];
 

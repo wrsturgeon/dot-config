@@ -16,7 +16,8 @@
       flake = false;
     };
   };
-  outputs = { nix-darwin, nixpkgs, nixvim, self, sf-mono-liga-src }:
+  outputs =
+    { nix-darwin, nix-doom-emacs, nixpkgs, nixvim, self, sf-mono-liga-src }:
     let
       system = "x86_64-darwin";
       pkgs = import nixpkgs {
@@ -24,8 +25,10 @@
         config = {
           allowBroken = true;
           allowUnfree = true;
+          allowUnsupportedSystem = true;
         };
       };
+      doom-emacs = nix-doom-emacs.packages.${system}.default;
       sf-mono-liga-bin = pkgs.stdenvNoCC.mkDerivation {
         pname = "sf-mono-liga-bin";
         version = "dev";
@@ -46,13 +49,14 @@
         environment.systemPackages = with pkgs; [
           coqPackages.coq
           direnv
+          doom-emacs
           fd
           helix
           iterm2
           git
           gnugrep
           kitty
-          # logseq
+          logseq
           nix-direnv
           nixfmt
           python3 # <-- for vim

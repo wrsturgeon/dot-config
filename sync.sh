@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # Update everything installed with Nix
-nix profile upgrade '.*'
 nix-collect-garbage
 
 # Update Rust tooling

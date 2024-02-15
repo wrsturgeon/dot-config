@@ -24,18 +24,16 @@
           allowBroken = true;
           allowUnfree = true;
         };
-        overlays = (final: prev: {
-          sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation rec {
-            pname = "sf-mono-liga-bin";
-            version = "dev";
-            src = sf-mono-liga-src;
-            dontConfigure = true;
-            installPhase = ''
-              mkdir -p $out/share/fonts/opentype
-              cp -R $src/*.otf $out/share/fonts/opentype/
-            '';
-          };
-        });
+      };
+      sf-mono-liga-bin = pkgs.stdenvNoCC.mkDerivation {
+        pname = "sf-mono-liga-bin";
+        version = "dev";
+        src = sf-mono-liga-src;
+        dontConfigure = true;
+        installPhase = ''
+          mkdir -p $out/share/fonts/opentype
+          cp -R $src/*.otf $out/share/fonts/opentype/
+        '';
       };
       vim = nixvim.legacyPackages.${system}.makeNixvim {
         colorschemes.ayu.enable = true;
@@ -58,6 +56,7 @@
           nixfmt
           python3 # <-- for vim
           ripgrep
+          (builtins.trace "${sf-mono-liga-bin}" sf-mono-liga-bin)
           spotify
           taplo
           tree

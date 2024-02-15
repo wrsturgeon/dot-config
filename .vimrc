@@ -6,9 +6,13 @@ set nocompatible
 " backspace behavior
 set backspace=indent,eol,start
 
+" leader to space
+" let mapleader = "\<Space>"
+
 " safety
 set modelines=0
 
+" enable rich color
 set t_Co=256
 
 " SHOW TRAILING WHITESPACE WOOHOO
@@ -51,9 +55,6 @@ syntax on
 filetype on
 filetype plugin on
 filetype indent on
-if has('nvim')
-  set cursorline
-endif
 
 " search behavior
 set incsearch " match as you type
@@ -98,17 +99,14 @@ set wildmode=list:longest
 
 " install plugins
 call plug#begin()
-" Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 Plug 'airblade/vim-gitgutter'
 Plug 'ayu-theme/ayu-vim'
-Plug 'jreybert/vimagit'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'lnl7/vim-nix'
-Plug 'nvim-tree/nvim-web-devicons'
 Plug 'tpope/vim-fugitive'
 Plug 'whonore/Coqtail'
 call plug#end()
-
-" colorscheme catppuccin-mocha
 
 set termguicolors
 let ayucolor="dark"

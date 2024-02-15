@@ -1,0 +1,8 @@
+-- vim.keymap.set('n', '<leader>g', function() local cmd = vim.fn.input("git "); vim.cmd("Git " .. cmd) end)
+-- vim.keymap.set('n', '<leader>ga', function() vim.cmd("Git add " .. vim.api.nvim_buf_get_name(0)) end)
+vim.keymap.set('n', '<leader>gb', function() vim.cmd("Git blame " .. vim.api.nvim_buf_get_name(0)) end)
+-- vim.keymap.set('n', '<leader>gc', function() vim.cmd("Git commit") end)
+vim.keymap.set('n', '<leader>gd', function() vim.cmd("Git diff -- " .. vim.api.nvim_buf_get_name(0)) end)
+vim.keymap.set('n', '<leader>gl', function() vim.cmd("Git log") end)
+-- vim.keymap.set('n', '<leader>gp', function() vim.cmd("Git pull") end)
+vim.keymap.set('n', '<leader>gs', function() vim.cmd("Git") end) -- vim.cmd("Git status") end)

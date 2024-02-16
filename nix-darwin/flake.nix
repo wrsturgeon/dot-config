@@ -49,10 +49,10 @@
         environment.systemPackages = with pkgs; [
           coqPackages.coq
           direnv
+          discord
           doom-emacs
           fd
           helix
-          iterm2
           git
           gnugrep
           kitty

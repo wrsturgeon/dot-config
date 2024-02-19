@@ -3,10 +3,7 @@ pkgs: {
   colorschemes.ayu.enable = true;
 
   plugins = {
-    # airline = {
-    #   colorscheme = "ayu";
-    #   enable = true;
-    # };
+    airline.enable = true;
     # bufferline.enable = true;
     fugitive.enable = true;
     nix.enable = true;

@@ -59,7 +59,7 @@
           logseq
           nix-direnv
           nixfmt
-          python3 # <-- for vim
+          python3 # for vim only
           ripgrep
           sf-mono-liga-bin
           slack

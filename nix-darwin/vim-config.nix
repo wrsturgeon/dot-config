@@ -1,6 +1,13 @@
 pkgs: {
 
-  colorschemes.ayu.enable = true;
+  colorschemes.ayu = {
+    enable = true;
+    settings.mirage = true; # lighter than ayu-dark
+  };
+
+  # unfortunately space comes up a lot while inserting (obviously),
+  # and so commands available in insert mode clash quite often with ' '
+  globals.mapleader = "\\";
 
   plugins = {
     airline.enable = true;

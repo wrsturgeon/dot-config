@@ -2,7 +2,7 @@ pkgs: {
 
   colorschemes.ayu = {
     enable = true;
-    settings.mirage = true; # lighter than ayu-dark
+    # settings.mirage = true; # lighter than ayu-dark
   };
 
   # unfortunately space comes up a lot while inserting (obviously),

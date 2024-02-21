@@ -1,72 +1,31 @@
-*.bdic*
-*.bnk
+# Ignore everything except...
+*
 
-*CACHE*
-*Cache*
-*cache*
+# ...these specific files:
 
-*COOKIE*
-*Cookie*
-*cookie*
+.gitignore
+.gitmodules
 
-*CRASHPAD*
-*Crashpad*
-*crashpad*
+.vimrc
 
-*DATABASE*
-*Database*
-*database*
+direnv/direnvrc
 
-*DB*
-*db*
+gh/config.yml
+gh/hosts.yml
 
-*EVENTSTORE*
-*EventStore*
-*eventstore*
+helix/
 
-*ID*
-*id*
+kitty/
 
-*INSTALLATION*
-*Installation*
-*installation*
+mimeapps.list
 
-*LOCK*
-*Lock*
-*lock*
+nix/
 
-*LOG*
-*Log*
-*log*
+nvim/
 
-*Network Persistent State*
+Slack/Preferences
+Slack/local-settings.json
 
-*KEY*
-*Key*
-*key*
+spotify/prefs
 
-*SECUR*
-*Secur*
-*secur*
-
-*SESSION*
-*Session*
-*session*
-
-*SingletonSocket*
-
-*STATE*
-*State*
-*state*
-
-*STORAGE*
-*Storage*
-*storage*
-
-# Do ignore:
-dconf/
-discord/
-
-# Don't ignore:
-!**/flake.lock
-!**/doom.d
+touchegg/touchegg.conf

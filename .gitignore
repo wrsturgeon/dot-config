@@ -3,29 +3,46 @@
 
 # ...these specific files:
 
-.gitignore
-.gitmodules
+!.gitignore
+!.gitmodules
 
-.vimrc
+!.vimrc
 
-direnv/direnvrc
+!direnv/
+direnv/**
+!direnv/direnvrc
 
-gh/config.yml
-gh/hosts.yml
+!gh/
+gh/**
+!gh/config.yml
+!gh/hosts.yml
 
-helix/
+!helix/
+!helix/**
 
-kitty/
+!kitty/
+!kitty/**
 
-mimeapps.list
+!mimeapps.list
 
-nix/
+!nix
+!nix/**
 
-nvim/
+!nvim/
+!nvim/**
 
-Slack/Preferences
-Slack/local-settings.json
+!Slack/
+Slack/**
+!Slack/Preferences
+!Slack/local-settings.json
 
-spotify/prefs
+!spotify/
+spotify/**
+!spotify/prefs
 
-touchegg/touchegg.conf
+!touchegg/
+touchegg/**
+!touchegg/touchegg.conf
+
+!user-dirs.dirs
+!user-dirs.locale

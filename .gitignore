@@ -65,6 +65,7 @@
 
 # Do ignore:
 dconf/
+discord/
 
 # Don't ignore:
 !**/flake.lock

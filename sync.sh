@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Update everything installed with Nix
-nix-collect-garbage
+# nix-collect-garbage
 
 # Update Rust tooling
 rustup self update || :

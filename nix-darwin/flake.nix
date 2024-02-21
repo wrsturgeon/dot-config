@@ -5,19 +5,27 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:LnL7/nix-darwin";
     };
+    # home-manager = {
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   url = "github:nix-community/home-manager";
+    # };
     nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
+    # nixos-hardware = {
+    #   flake = false;
+    #   url = "github:kekrby/nixos-hardware";
+    # };
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixvim = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nixvim";
     };
     sf-mono-liga-src = {
-      url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
       flake = false;
+      url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
     };
   };
-  outputs =
-    { nix-darwin, nix-doom-emacs, nixpkgs, nixvim, self, sf-mono-liga-src }:
+  outputs = { nix-darwin, nix-doom-emacs, nixos-hardware, nixpkgs, nixvim, self
+    , sf-mono-liga-src }:
     let
       system = "x86_64-darwin";
       pkgs = import nixpkgs {

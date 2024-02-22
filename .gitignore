@@ -40,6 +40,12 @@ Slack/**
 spotify/**
 !spotify/prefs
 
+!spotify-tui/
+!spotify-tui/client.yml
+
+!spotifyd/
+!spotifyd/spotifyd.conf
+
 !touchegg/
 touchegg/**
 !touchegg/touchegg.conf

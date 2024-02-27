@@ -26,12 +26,15 @@
         };
         networking.hostName = "mbp-nixos";
         nix = {
-          extraOptions = "experimental-features = flakes nix-command";
           package = pkgs.nixUnstable;
           settings = {
             auto-optimise-store = true;
-            experimental-features =
-              [ "auto-allocate-uids" "flakes" "impure-env" "nix-command" ];
+            experimental-features = [
+              "auto-allocate-uids"
+              "configurable-impure-env"
+              "flakes"
+              "nix-command"
+            ];
             log-lines = 32;
             nix-path = [ "nixpkgs=flake:nixpkgs" ];
             substituters = [ "https://cache.nixos.org" ];

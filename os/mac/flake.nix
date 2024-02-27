@@ -8,7 +8,7 @@
       in [{
         environment = {
           shellAliases.nixos-rebuild =
-            "darwin-rebuild --flake ~/.config/nix --keep-going -j auto";
+            "darwin-rebuild --flake ~/.config --keep-going -j auto";
           # systemPackages = builtins.concatMap (cfg:
           #   if cfg ? home-manager then
           #     cfg.home-manager.users.${username}.home.packages ++ (builtins.map

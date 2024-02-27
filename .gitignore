@@ -3,6 +3,19 @@
 
 # ...these specific files:
 
+# All Nix stuff together:
+
+!flake.lock
+!flake.nix
+!hardware-configuration.nix
+!home/
+!home/**
+!os/
+!os/**
+!rebuild.sh
+
+# Everything else:
+
 !.gitignore
 !.gitmodules
 
@@ -14,9 +27,6 @@ gh/**
 !helix/**
 
 !mimeapps.list
-
-!nix
-!nix/**
 
 !touchegg/
 touchegg/**

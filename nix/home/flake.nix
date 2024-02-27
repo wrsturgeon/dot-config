@@ -22,18 +22,16 @@
             };
           };
           programs = { home-manager.enable = true; };
-        };
+        } // (linux-mac {
+          xsession.enable = true;
+          # xsession.windowManager.command = "...";
+        } { });
       in home-manager.${linux-mac "nixosModules" "darwinModules"}.home-manager {
         home-manager = {
           useGlobalPkgs = true;
           useUserPackages = true;
-          users.${username} = { ... }: user-cfg;
+          users.${username} = { }: user-cfg;
         };
       };
-
-    # in home-manager.lib.homeManagerConfiguration {
-    #   pkgs = import nixpkgs nixpkgs-config;
-    #   modules = [ monomodule ];
-    # };
   };
 }

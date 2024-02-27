@@ -82,7 +82,7 @@ autocmd VimEnter * silent !echo -ne "\e[2 q"
 augroup END
 
 " vim-lsp servers
-function! s:register_lsp(name, langs)
+function s:register_lsp(name, langs)
   if executable(a:name)
     au User lsp_setup call lsp#register_server({
       \ 'name': a:name,

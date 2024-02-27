@@ -20,7 +20,7 @@
     };
   };
   outputs = { linux, mac, shared, nix-darwin, nixpkgs, self, }:
-    builtins.trace mac (let
+    builtins.trace shared (let
       is-linux = nixpkgs.lib.strings.hasSuffix "linux";
       is-mac = nixpkgs.lib.strings.hasSuffix "darwin";
       linux-mac = on-linux: on-mac: system:

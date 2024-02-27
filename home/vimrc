@@ -83,11 +83,13 @@ augroup END
 
 " vim-lsp servers
 function s:register_lsp(name, langs)
-  if executable(a:name)
+  let g:name = a:name
+  let g:langs = a:langs
+  if executable(g:name)
     au User lsp_setup call lsp#register_server({
-      \ 'name': a:name,
-      \ 'cmd': {server_info->[a:name]},
-      \ 'allowlist': a:langs,
+      \ 'name': g:name,
+      \ 'cmd': {server_info->[g:name]},
+      \ 'allowlist': g:langs,
       \ })
   endif
 endfunction

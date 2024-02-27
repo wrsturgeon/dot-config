@@ -1,7 +1,6 @@
 {
   description = "System flakes";
   inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
     home = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "path:./home";
@@ -24,52 +23,49 @@
       url = "path:./os/shared";
     };
   };
-  outputs =
-    { flake-utils, home, linux, mac, shared, nix-darwin, nixpkgs, self, }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        is-linux = nixpkgs.lib.strings.hasSuffix "linux" system;
-        is-mac = nixpkgs.lib.strings.hasSuffix "darwin" system;
-        linux-mac = on-linux: on-mac:
-          if is-linux then
-            on-linux
-          else if is-mac then
-            on-mac
-          else
-            throw "Unrecognized OS";
-        username = linux-mac "will" "willsturgeon";
-        nixpkgs-config = {
-          inherit system;
-          config = {
-            allowBroken = true;
-            allowUnfree = true;
-            allowUnsupportedSystem = true;
-          };
+  outputs = { home, linux, mac, shared, nix-darwin, nixpkgs, self, }:
+    let
+      is-linux = nixpkgs.lib.strings.hasSuffix "linux";
+      is-mac = nixpkgs.lib.strings.hasSuffix "darwin";
+      linux-mac = on-linux: on-mac: system:
+        if is-linux system then
+          on-linux
+        else if is-mac system then
+          on-mac
+        else
+          throw "Unrecognized OS";
+      username = linux-mac "will" "willsturgeon";
+      nixpkgs-config = system: {
+        inherit system;
+        config = {
+          allowBroken = true;
+          allowUnfree = true;
+          allowUnsupportedSystem = true;
         };
-        stateVersion = "23.05";
-        config-args = {
-          inherit linux-mac nixpkgs-config shared stateVersion system username;
-        };
-        config-modules = modules: {
-          inherit system;
-          modules = builtins.map (flake: flake.configure config-args)
-            ([ shared ] ++ modules);
-        };
-        laptop-name = "mbp-" + (linux-mac "nixos" "macos");
-      in let
-        common = {
-          homeConfigurations.${laptop-name} = home.configure config-args;
-        };
-        if-mac = {
-          darwinConfigurations.${laptop-name} =
-            nix-darwin.lib.darwinSystem (config-modules [ mac ]);
-        };
-        if-linux = {
-          nixosConfigurations.${laptop-name} =
-            nixpkgs.lib.nixosSystem (config-modules [ linux ]);
-        };
+      };
+      stateVersion = "23.05";
+      config-args = system: {
+        inherit linux-mac shared stateVersion system;
+        nixpkgs-config = nixpkgs-config system;
+        username = username system;
+      };
+      config-modules = modules: system: {
+        inherit system;
+        modules = builtins.map (flake: flake.configure config-args)
+          ([ shared ] ++ modules);
+      };
+      laptop-name = system: "mbp-" + (linux-mac "nixos" "macos" system);
+    in {
+      darwinConfigurations = let system = "x86_64-darwin";
       in {
-        packages = common // (if is-mac then if-mac else { })
-          // (if is-linux then if-linux else { });
-      });
+        ${laptop-name system} =
+          nix-darwin.lib.darwinSystem (config-modules system [ mac ]);
+      };
+      homeConfigurations.${laptop-name} = home.configure config-args;
+      nixosConfigurations = let system = "x86_64-linux";
+      in {
+        ${laptop-name system} =
+          nixpkgs.lib.nixosSystem (config-modules system [ linux ]);
+      };
+    };
 }

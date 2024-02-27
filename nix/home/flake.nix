@@ -27,7 +27,7 @@
         home-manager = {
           useGlobalPkgs = true;
           useUserPackages = true;
-          users.${username} = user-cfg;
+          users.${username} = { ... }: user-cfg;
         };
       };
 

@@ -13,8 +13,8 @@
             '';
           };
           extraInit = ''
-            if [ "${PATH}" != *"/run/current-system/sw/bin"* ]; then
-              export PATH="/run/current-system/sw/bin:${PATH}"
+            if [ "''${PATH}" != *"/run/current-system/sw/bin"* ]; then
+              export PATH="/run/current-system/sw/bin:''${PATH}"
             fi
           '';
           pathsToLink = [ "/share/zsh" ];

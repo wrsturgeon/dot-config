@@ -1,20 +1,10 @@
 {
   description = "Cross-platform config";
-  inputs = {
-    nix-doom-emacs = {
-      # inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/nix-doom-emacs";
-    };
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-  };
-  outputs = { nix-doom-emacs, nixpkgs, self }: {
+  inputs = { nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; };
+  outputs = { nixpkgs, self }: {
     configure =
       { linux-mac, nixpkgs-config, shared, stateVersion, system, username }:
-      let
-        pkgs = import nixpkgs nixpkgs-config;
-        doom-emacs = nix-doom-emacs.packages.${system}.default.override {
-          doomPrivateDir = ./doom.d;
-        };
+      let pkgs = import nixpkgs nixpkgs-config;
       in [{
         environment = {
           etc = {

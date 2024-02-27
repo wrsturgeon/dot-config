@@ -5,22 +5,28 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-doom-emacs = {
+      # inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nix-doom-emacs";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
-  outputs = { home-manager, nixpkgs, self }: {
+  outputs = { nix-doom-emacs, home-manager, nixpkgs, self }: {
     configure =
       { linux-mac, nixpkgs-config, shared, stateVersion, system, username }:
       let
         pkgs = import nixpkgs nixpkgs-config;
+        doom-emacs = nix-doom-emacs.packages.${system}.default.override {
+          doomPrivateDir = ./doom.d;
+        };
         user-cfg = {
           home = {
             inherit stateVersion username;
-            packages = with pkgs; [
+            packages = [ doom-emacs ] ++ (with pkgs; [
               cachix
               cargo
               coqPackages.coq
               discord
-              doom-emacs
               fd
               gcc
               gnumake
@@ -34,7 +40,7 @@
               spotify
               taplo
               zoom-us
-            ];
+            ]);
           };
           programs = {
             direnv = {

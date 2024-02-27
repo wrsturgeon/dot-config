@@ -55,7 +55,8 @@
                     d =
                       "${pkgs.emacsPackages.ayu-theme}/share/emacs/site-lisp/elpa";
                     ls = builtins.readDir d;
-                  in d + "/" + (builtins.head (builtins.attrNames ls))
+                    both = d + "/" + (builtins.head (builtins.attrNames ls));
+                  in builtins.trace both both
                 }")
                 (load-theme 'ayu t)
               '';

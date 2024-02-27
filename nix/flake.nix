@@ -33,7 +33,7 @@
         else if is-mac system then
           on-mac
         else
-          throw "Unrecognized OS";
+          throw ''Unrecognized OS "${system}"'';
       nixpkgs-config = system: {
         inherit system;
         config = {

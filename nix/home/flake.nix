@@ -22,26 +22,25 @@
         user-cfg = {
           home = {
             inherit stateVersion username;
-            packages = [ doom-emacs ] ++ (with pkgs;
-              [
-                cachix
-                cargo
-                coqPackages.coq
-                discord
-                fd
-                gcc
-                gnumake
-                logseq
-                nil
-                nixfmt
-                python3
-                rust-analyzer
-                rustfmt
-                slack
-                spotify
-                taplo
-                zoom-us
-              ] ++ (linux-mac [ firefox ] [ ]));
+            packages = [ doom-emacs ] ++ (with pkgs; [
+              cachix
+              cargo
+              coqPackages.coq
+              discord
+              fd
+              gcc
+              gnumake
+              logseq
+              nil
+              nixfmt
+              python3
+              rust-analyzer
+              rustfmt
+              slack
+              spotify
+              taplo
+              zoom-us
+            ]);
           };
           programs = {
             direnv = {
@@ -137,7 +136,42 @@
                 };
               };
             };
-          };
+          } // (linux-mac {
+            firefox = {
+              enable = true;
+              profiles.will = {
+                # bookmarks directly from <https://nix-community.github.io/home-manager/options.xhtml#opt-programs.firefox.profiles._name_.bookmarks>:
+                bookmarks = [
+                  {
+                    name = "wikipedia";
+                    tags = [ "wiki" ];
+                    keyword = "wiki";
+                    url =
+                      "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
+                  }
+                  {
+                    name = "kernel.org";
+                    url = "https://www.kernel.org";
+                  }
+                  {
+                    name = "Nix sites";
+                    toolbar = true;
+                    bookmarks = [
+                      {
+                        name = "homepage";
+                        url = "https://nixos.org/";
+                      }
+                      {
+                        name = "wiki";
+                        tags = [ "wiki" "nix" ];
+                        url = "https://nixos.wiki/";
+                      }
+                    ];
+                  }
+                ];
+              };
+            };
+          });
         } // (linux-mac {
           xsession.enable = true;
           # xsession.windowManager.command = "...";

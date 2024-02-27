@@ -28,3 +28,8 @@
 
 (require 'ayu-theme)
 (load-theme 'ayu t)
+
+; <https://github.com/7696122/evil-terminal-cursor-changer>
+(unless (display-graphic-p)
+  (require 'evil-terminal-cursor-changer)
+  (evil-terminal-cursor-changer-activate))

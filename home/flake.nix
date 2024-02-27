@@ -50,7 +50,12 @@
             emacs = {
               enable = true;
               extraConfig = builtins.readFile ./init.el;
-              extraPackages = epkgs: with epkgs; [ ayu-theme evil ];
+              extraPackages = epkgs:
+                with epkgs; [
+                  ayu-theme
+                  evil
+                  evil-terminal-cursor-changer
+                ];
               package = pkgs.emacs;
             };
             fzf = {

@@ -51,7 +51,8 @@
       };
       on = system: modules: {
         inherit system;
-        modules = builtins.map (flake: flake.configure (config-args system))
+        modules =
+          builtins.concatMap (flake: flake.configure (config-args system))
           ([ home shared ] ++ modules);
       };
       laptop-name = system: "mbp-" + (linux-mac system "nixos" "macos");

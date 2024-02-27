@@ -34,7 +34,7 @@
         #     customRC = builtins.readFile ./.vimrc;
         #   };
         # };
-      in {
+      in [{
         # config.home-manager = {
         #   useGlobalPkgs = true;
         #   useUserPackages = true;
@@ -139,6 +139,6 @@
           ];
           shell = pkgs.zsh;
         };
-      };
+      }];
   };
 }

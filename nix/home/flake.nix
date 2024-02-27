@@ -26,12 +26,15 @@
           xsession.enable = true;
           # xsession.windowManager.command = "...";
         } { });
-      in home-manager.${linux-mac "nixosModules" "darwinModules"}.home-manager {
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          users.${username} = { }: user-cfg;
-        };
-      };
+      in [
+        home-manager.${linux-mac "nixosModules" "darwinModules"}.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.${username} = { }: user-cfg;
+          };
+        }
+      ];
   };
 }

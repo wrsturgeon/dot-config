@@ -39,7 +39,7 @@
             cp -R $src/*.otf $out/share/fonts/opentype/
           '';
         };
-      in {
+      in [{
         boot = {
           kernelModules = [ "applesmc" ];
           loader = {
@@ -122,6 +122,6 @@
             };
           };
         };
-      };
+      }];
   };
 }

@@ -5,7 +5,7 @@
     configure = { linux-mac, nixpkgs-config, shared, stateVersion, system
       , username }@config-args:
       let pkgs = import nixpkgs nixpkgs-config;
-      in {
+      in [{
         environment = {
           shellAliases.nixos-rebuild =
             "darwin-rebuild --flake .#mbp-macos --keep-going -j auto";
@@ -15,6 +15,6 @@
         nix.linux-builder.enable = true;
         security.pam.enableSudoTouchIdAuth = true;
         services.nix-daemon.enable = true;
-      };
+      }];
   };
 }

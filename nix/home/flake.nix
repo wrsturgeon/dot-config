@@ -2,16 +2,17 @@
   description = "Home Manager config";
   inputs = {
     home-manager = {
-      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
     };
     nix-doom-emacs = {
       # inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nix-doom-emacs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nur.url = "github:nix-community/NUR";
   };
-  outputs = { nix-doom-emacs, home-manager, nixpkgs, self }: {
+  outputs = { home-manager, nix-doom-emacs, nixpkgs, nur, self }: {
     configure =
       { linux-mac, nixpkgs-config, shared, stateVersion, system, username }:
       let
@@ -169,6 +170,7 @@
                     ];
                   }
                 ];
+                extensions = with nur.repos.rycee.firefox-addons; [ adblock ];
               };
             };
           });

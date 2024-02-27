@@ -7,7 +7,7 @@
         environment = {
           shellAliases.nixos-rebuild =
             "darwin-rebuild --flake .#mbp-macos --keep-going -j auto";
-          packages = builtins.concatMap (cfg: if cfg ? home-manager then cfg.home-manager.users.${username}.home.packages else []) (home.configure configure-args);
+          systemPackages = builtins.concatMap (cfg: if cfg ? home-manager then cfg.home-manager.users.${username}.home.packages else []) (home.configure configure-args);
         };
         security.pam.enableSudoTouchIdAuth = true;
         services.nix-daemon.enable = true;

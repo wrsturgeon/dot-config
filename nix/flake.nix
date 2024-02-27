@@ -28,17 +28,17 @@
     , self, }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        is-linux = nixpkgs.lib.strings.hasSuffix "linux";
-        is-mac = nixpkgs.lib.strings.hasSuffix "darwin";
+        is-linux = nixpkgs.lib.strings.hasSuffix "linux" system;
+        is-mac = nixpkgs.lib.strings.hasSuffix "darwin" system;
         linux-mac = on-linux: on-mac:
-          if is-linux system then
+          if is-linux then
             on-linux
-          else if is-mac system then
+          else if is-mac then
             on-mac
           else
             throw "Unrecognized OS";
         username = linux-mac "will" "willsturgeon";
-        nixpkgs-config = system: {
+        nixpkgs-config = {
           inherit system;
           config = {
             allowBroken = true;
@@ -49,10 +49,8 @@
         config-modules = modules: {
           inherit system;
           modules = builtins.map (flake:
-            flake.configure {
-              inherit shared system username;
-              nixpkgs-config = nixpkgs-config system;
-            }) ([ shared ] ++ modules);
+            flake.configure { inherit nixpkgs-config shared system username; })
+            ([ shared ] ++ modules);
         };
         laptop-name = "mbp-" + (linux-mac "nixos" "macos");
       in let
@@ -60,15 +58,16 @@
           homeConfigurations.${laptop-name} =
             home-manager.lib.homeManagerConfiguration { };
         };
-        if-mac = if is-mac system then {
+        if-mac = {
           darwinConfigurations.${laptop-name} =
             nix-darwin.lib.darwinSystem (config-modules [ mac ]);
-        } else
-          { };
-        if-linux = if is-linux system then {
+        };
+        if-linux = {
           nixosConfigurations.${laptop-name} =
             nixpkgs.lib.nixosSystem (config-modules [ linux ]);
-        } else
-          { };
-      in { packages = common // if-mac // if-linux; });
+        };
+      in {
+        packages = common // (if is-mac then if-mac else { })
+          // (if is-linux then if-linux else { });
+      });
 }

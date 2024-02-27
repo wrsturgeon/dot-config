@@ -117,6 +117,7 @@
         time.timeZone = "America/New_York";
         users.users.${username} = {
           description = "Will";
+          home = linux-mac "/home/${username}" "/Users/${username}";
           packages = with pkgs; [
             cargo
             coqPackages.coq

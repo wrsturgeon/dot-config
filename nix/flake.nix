@@ -1,21 +1,21 @@
 {
   description = "System flakes";
-  inputs = {
+  inputs = rec {
     linux = {
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs = nixpkgs;
       url = "git+file:nix/os/linux";
     };
     mac = {
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs = nixpkgs;
       url = "git+file:nix/os/mac";
     };
     nix-darwin = {
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs = nixpkgs;
       url = "github:LnL7/nix-darwin";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     shared = {
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs = nixpkgs;
       url = "git+file:nix/os/shared";
     };
   };

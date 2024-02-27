@@ -43,12 +43,12 @@
             username = get-username system;
           }) ([ shared ] ++ modules);
       };
-      laptop-name = "mbp-" + (linux-mac "nixos" "macos");
+      laptop-name = system: "mbp-" + (linux-mac "nixos" "macos" system);
     in {
-      darwinConfigurations.${laptop-name} =
-        nix-darwin.lib.darwinSystem (config-modules "x86_64-darwin" [ mac ]);
-      homeConfigurations.${laptop-name} =
-        home-manager.lib.homeManagerConfiguration { };
+      darwinConfigurations.${laptop-name "x86_64-darwin"} = { };
+      # nix-darwin.lib.darwinSystem (config-modules "x86_64-darwin" [ mac ]);
+      # homeConfigurations.${laptop-name} =
+      #   home-manager.lib.homeManagerConfiguration { };
       nixosConfigurations.${laptop-name} =
         nixpkgs.lib.nixosSystem (config-modules "x86_64-linux" [ linux ]);
     };

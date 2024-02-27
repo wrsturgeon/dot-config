@@ -173,7 +173,7 @@
                 # extensions = with nur.repos.rycee.firefox-addons; [ adblock ];
               };
             };
-          });
+          } { });
         } // (linux-mac {
           xsession.enable = true;
           # xsession.windowManager.command = "...";

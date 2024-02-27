@@ -9,7 +9,7 @@
           shellAliases.nixos-rebuild =
             "darwin-rebuild --flake .#mbp-macos --keep-going -j auto";
           systemPackages = (shared.configure {
-            inherit shared system username;
+            inherit nixpkgs-config shared system username;
           }).users.users.${username}.packages;
         };
         nix.linux-builder.enable = true;

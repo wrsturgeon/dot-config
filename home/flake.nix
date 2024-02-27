@@ -88,13 +88,13 @@
               enable = true;
               extraConfig = builtins.readFile ./vimrc;
               plugins = with pkgs.vimPlugins; [
-                ale
                 ayu-vim
                 Coqtail
                 fugitive
                 fzf-vim
                 gitgutter
                 vim-airline
+                vim-lsp
                 vim-nix
               ];
               settings = {

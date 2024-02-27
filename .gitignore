@@ -28,21 +28,6 @@ gh/**
 !nix
 !nix/**
 
-!Slack/
-Slack/**
-!Slack/Preferences
-!Slack/local-settings.json
-
-!spotify/
-spotify/**
-!spotify/prefs
-
-!spotify-tui/
-!spotify-tui/client.yml
-
-!spotifyd/
-!spotifyd/spotifyd.conf
-
 !touchegg/
 touchegg/**
 !touchegg/touchegg.conf

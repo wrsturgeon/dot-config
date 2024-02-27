@@ -50,7 +50,12 @@
             emacs = {
               enable = true;
               extraConfig = (builtins.readFile ./init.el) + ''
-                (setq custom-theme-directory "${pkgs.emacsPackages.ayu-theme}/share/emacs/site-lisp/elpa")
+                (setq custom-theme-directory "${
+                  let
+                    d = pkgs.emacsPackages.ayu-theme/share/emacs/site-lisp/elpa;
+                    ls = builtins.readDir d;
+                  in d + (builtins.head (builtins.attrNames ls))
+                }")
                 (load-theme 'ayu t)
               '';
               extraPackages = epkgs:

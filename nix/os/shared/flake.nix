@@ -15,25 +15,25 @@
         doom-emacs = nix-doom-emacs.packages.${system}.default.override {
           doomPrivateDir = ./doom.d;
         };
-        vim-configured = pkgs.vim-full.customize {
-          name = "vim-configured";
-          vimrcConfig = {
-            packages.myplugins = with pkgs.vimPlugins; {
-              start = [
-                ale
-                ayu-vim
-                Coqtail
-                fugitive
-                fzf-vim
-                gitgutter
-                vim-airline
-                vim-nix
-              ];
-              opt = [ ];
-            };
-            customRC = builtins.readFile ./.vimrc;
-          };
-        };
+        # vim-configured = pkgs.vim-full.customize {
+        #   name = "vim-configured";
+        #   vimrcConfig = {
+        #     packages.myplugins = with pkgs.vimPlugins; {
+        #       start = [
+        #         ale
+        #         ayu-vim
+        #         Coqtail
+        #         fugitive
+        #         fzf-vim
+        #         gitgutter
+        #         vim-airline
+        #         vim-nix
+        #       ];
+        #       opt = [ ];
+        #     };
+        #     customRC = builtins.readFile ./.vimrc;
+        #   };
+        # };
       in {
         # config.home-manager = {
         #   useGlobalPkgs = true;
@@ -66,7 +66,7 @@
             python3
             ripgrep
             tree
-            vim-configured
+            # vim-configured
           ];
           variables = { NIXOS_INSTALL_BOOTLOADER = "1"; };
         };

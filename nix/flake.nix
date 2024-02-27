@@ -30,7 +30,7 @@
           on-mac
         else
           throw "Unrecognized OS";
-      get-username = builtins.trace mac (linux-mac "will" "willsturgeon");
+      get-username = linux-mac "will" "willsturgeon";
       config-modules = system: modules: {
         inherit system;
         modules = builtins.map (config:
@@ -39,7 +39,7 @@
             username = get-username system;
           }) (shared ++ modules);
       };
-    in {
+    in builtins.trace mac {
       nixosConfigurations.mbp-nixos =
         nixpkgs.lib.nixosSystem (config-modules "x86_64-linux" [ linux ]);
       darwinConfigurations.macbook-macos =

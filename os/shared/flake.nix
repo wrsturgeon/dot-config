@@ -47,7 +47,7 @@
         programs.zsh.enable = true;
         services.emacs = {
           enable = true;
-          package = pkgs.emacs-nox;
+          package = pkgs.emacs;
         };
         time.timeZone = "America/New_York";
         users.users.${username} = {

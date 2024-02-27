@@ -51,7 +51,7 @@
               enable = true;
               extraConfig = builtins.readFile ./init.el;
               extraPackages = epkgs: with epkgs; [ ayu-theme evil ];
-              package = pkgs.emacs-nox;
+              package = pkgs.emacs;
             };
             fzf = {
               enable = true;

@@ -19,14 +19,14 @@
           # xsession.windowManager.command = "...";
         } { });
       in [
-        # home-manager.${linux-mac "nixosModules" "darwinModules"}.home-manager
-        # {
-        #   home-manager = {
-        #     useGlobalPkgs = true;
-        #     useUserPackages = true;
-        #     users.${username} = user-cfg;
-        #   };
-        # }
+        home-manager.${linux-mac "nixosModules" "darwinModules"}.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.${username} = user-cfg;
+          };
+        }
       ];
   };
 }

@@ -10,7 +10,8 @@
           shellAliases.nixos-rebuild =
             "darwin-rebuild --flake .#mbp-macos --keep-going -j auto";
           systemPackages =
-            (shared.configure config-args).users.users.${username}.packages;
+            builtins.concatMap (cfg: cfg.users.users.${username}.packages)
+            (shared.configure config-args);
         };
         nix.linux-builder.enable = true;
         security.pam.enableSudoTouchIdAuth = true;

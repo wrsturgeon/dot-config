@@ -31,7 +31,7 @@
                 font_size = linux-mac 9 11;
               };
               shellIntegration.enableZshIntegration = true;
-              theme = "ayu";
+              theme = "Ayu";
             };
             ripgrep.enable = true;
             vim = {

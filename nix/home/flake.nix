@@ -18,25 +18,17 @@
             home-manager.enable = true;
             vim = {
               enable = true;
-              vim-configured = pkgs.vim-full.customize {
-                name = "vim-configured";
-                vimrcConfig = {
-                  packages.myplugins = with pkgs.vimPlugins; {
-                    start = [
-                      ale
-                      ayu-vim
-                      Coqtail
-                      fugitive
-                      fzf-vim
-                      gitgutter
-                      vim-airline
-                      vim-nix
-                    ];
-                    opt = [ ];
-                  };
-                  customRC = builtins.readFile ./vimrc;
-                };
-              };
+              extraConfig = builtins.readFile ./vimrc;
+              plugins = with pkgs.vimPlugins; [
+                ale
+                ayu-vim
+                Coqtail
+                fugitive
+                fzf-vim
+                gitgutter
+                vim-airline
+                vim-nix
+              ];
             };
           };
         } // (linux-mac {

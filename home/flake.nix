@@ -49,22 +49,6 @@
             };
             emacs = {
               enable = true;
-              extraConfig = (builtins.readFile ./init.el) + ''
-                (setq custom-theme-directory "${
-                  let
-                    d =
-                      "${pkgs.emacsPackages.ayu-theme}/share/emacs/site-lisp/elpa";
-                    ls = builtins.readDir d;
-                    both = d + "/" + (builtins.head (builtins.attrNames ls));
-                  in builtins.trace both both
-                }")
-                (load-theme 'ayu t)
-              '';
-              extraPackages = epkgs:
-                with epkgs; [
-                  evil
-                  evil-terminal-cursor-changer
-                ];
               package = pkgs.emacs;
             };
             fzf = {

@@ -30,7 +30,7 @@
           on-mac
         else
           throw "Unrecognized OS";
-      get-username = linux-mac "will" "willsturgeon";
+      get-username = builtins.trace mac (linux-mac "will" "willsturgeon");
       config-modules = system: modules: {
         inherit system;
         modules = builtins.map (config:

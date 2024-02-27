@@ -1,7 +1,7 @@
 {
   description = "MacOS-specific config";
-  inputs = { };
-  outputs = { self }:
+  inputs = { nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; };
+  outputs = { nixpkgs, self }:
     { shared, system, username }: {
       environment = {
         shellAliases.nixos-rebuild =

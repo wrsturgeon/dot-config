@@ -31,14 +31,15 @@
         else
           throw "Unrecognized OS";
       get-username = linux-mac "will" "willsturgeon";
-      config-modules = system: modules: {
-        inherit system;
-        modules = builtins.map (flake:
-          flake.configure {
-            inherit shared system;
-            username = get-username system;
-          }) (shared ++ modules);
-      };
+      config-modules = system: modules:
+        builtins.trace { inherit system modules; } {
+          inherit system;
+          modules = builtins.map (flake:
+            flake.configure {
+              inherit shared system;
+              username = get-username system;
+            }) (shared ++ modules);
+        };
     in {
       nixosConfigurations.mbp-nixos =
         nixpkgs.lib.nixosSystem (config-modules "x86_64-linux" [ linux ]);

@@ -105,7 +105,7 @@
                 history = 1000;
                 ignorecase = false;
                 modeline = false;
-                mouse = "a";
+                mouse = "";
                 number = true;
                 relativenumber = false;
                 shiftwidth = 2;

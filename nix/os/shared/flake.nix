@@ -9,7 +9,7 @@
   };
   outputs = { nix-doom-emacs, nixpkgs, self }:
     { shared, system, username }:
-    let
+    builtins.trace { inherit shared system username; } (let
       pkgs = import nixpkgs {
         inherit system;
         config = {
@@ -145,5 +145,5 @@
         ];
         shell = pkgs.zsh;
       };
-    };
+    });
 }

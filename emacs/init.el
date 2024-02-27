@@ -46,9 +46,15 @@
 
 ; `vi` keymap
 (straight-use-package 'evil)
+(require 'evil)
 (evil-mode 1)
 
 ; line cursor on insert
+(straight-use-package 'evil-terminal-cursor-changer)
 (unless (display-graphic-p)
   (require 'evil-terminal-cursor-changer)
   (evil-terminal-cursor-changer-activate))
+
+; Nix mode
+(straight-use-package 'nix-mode)
+(add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))

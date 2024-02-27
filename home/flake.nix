@@ -49,10 +49,48 @@
             };
             emacs = {
               enable = true;
-              extraConfig = builtins.readFile ./init.el;
+              extraConfig = ''
+                ( setq
+                  auto-save-default nil
+                  line-move-visual nil
+                  make-backup-files nil
+                  scroll-conservatively 5
+                  scroll-step 1
+                  standard-indent 2
+                )
+
+                (setq-default
+                  c-basic-offset 2
+                  indent-tabs-mode nil
+                  show-trailing-whitespace t
+                  tab-width 2
+                )
+
+                (defalias 'yes-or-no-p 'y-or-n-p)
+
+                (line-number-mode)
+                (column-number-mode)
+
+                (transient-mark-mode 1)
+
+                (global-hl-line-mode 1)
+
+                (require 'evil)
+                (evil-mode 1)
+
+                (setq custom-theme-directory ${
+                  builtins.trace "${pkgs.emacsPackages.ayu-theme}"
+                  pkgs.emacsPackages.ayu-theme
+                })
+                (load-theme 'ayu t)
+
+                ; <https://github.com/7696122/evil-terminal-cursor-changer>
+                (unless (display-graphic-p)
+                  (require 'evil-terminal-cursor-changer)
+                  (evil-terminal-cursor-changer-activate))
+              '';
               extraPackages = epkgs:
                 with epkgs; [
-                  ayu-theme
                   evil
                   evil-terminal-cursor-changer
                 ];

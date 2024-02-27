@@ -12,9 +12,9 @@
               **/.DS_Store
             '';
           };
-          # extraInit = ''
-          #   # Run arbitrary code!
-          # '';
+          extraInit = ''
+            rm -fr ~/.emacs ~/.emacs.d
+          '';
           pathsToLink = [ "/share/zsh" ];
           shellAliases = {
             e = "emacsclient -nw";

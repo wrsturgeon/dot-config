@@ -5,7 +5,7 @@
     configure = { shared, system, username }: {
       environment = {
         shellAliases.nixos-rebuild =
-          "darwin-rebuild --flake .#macbook-macos --keep-going -j auto";
+          "darwin-rebuild --flake .#mbp-macos --keep-going -j auto";
         systemPackages = (shared.configure {
           inherit shared system username;
         }).users.users.${username}.packages;

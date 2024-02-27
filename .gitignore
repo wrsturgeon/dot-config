@@ -18,6 +18,9 @@
 !.gitignore
 !.gitmodules
 
+!emacs/
+!emacs/**
+
 !gh/
 gh/**
 !gh/hosts.yml

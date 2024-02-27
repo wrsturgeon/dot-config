@@ -38,11 +38,21 @@
           else
             throw "Unrecognized OS";
         username = linux-mac "will" "willsturgeon";
+        nixpkgs-config = system: {
+          inherit system;
+          config = {
+            allowBroken = true;
+            allowUnfree = true;
+            allowUnsupportedSystem = true;
+          };
+        };
         config-modules = modules: {
           inherit system;
-          modules = builtins.map
-            (flake: flake.configure { inherit username shared system; })
-            ([ shared ] ++ modules);
+          modules = builtins.map (flake:
+            flake.configure {
+              inherit shared system username;
+              nixpkgs-config = nixpkgs-config system;
+            }) ([ shared ] ++ modules);
         };
         laptop-name = "mbp-" + (linux-mac "nixos" "macos");
       in let

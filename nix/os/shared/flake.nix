@@ -8,16 +8,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
   };
   outputs = { nix-doom-emacs, nixpkgs, self }: {
-    configure = { shared, system, username }:
+    configure = { nixpkgs-config, shared, system, username }:
       let
-        pkgs = import nixpkgs {
-          inherit system;
-          config = {
-            allowBroken = true;
-            allowUnfree = true;
-            allowUnsupportedSystem = true;
-          };
-        };
+        pkgs = import nixpkgs nixpkgs-config;
         doom-emacs = nix-doom-emacs.packages.${system}.default.override {
           doomPrivateDir = ./doom.d;
         };

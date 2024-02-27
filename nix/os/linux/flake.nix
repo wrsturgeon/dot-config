@@ -16,16 +16,9 @@
     };
   };
   outputs = { apple-fonts, nixos-hardware, nixpkgs, sf-mono-liga-src, self }: {
-    configure = { shared, system, username }:
+    configure = { nixpkgs-config, shared, system, username }:
       let
-        pkgs = import nixpkgs {
-          inherit system;
-          config = {
-            allowBroken = true;
-            allowUnfree = true;
-            allowUnsupportedSystem = true;
-          };
-        };
+        pkgs = import nixpkgs nixpkgs-config;
         print-list = builtins.foldl' (acc: s: acc + " " + s) "";
         apple-font-packages = apple-fonts.packages.${system};
         apple-font-names = builtins.attrNames apple-font-packages;

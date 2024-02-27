@@ -118,7 +118,6 @@
             ${username} = {
               extraGroups = [ "networkmanager" "wheel" ];
               isNormalUser = true;
-              packages = with pkgs; [ firefox ];
             };
           };
         };

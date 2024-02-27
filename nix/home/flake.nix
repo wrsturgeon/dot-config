@@ -22,25 +22,26 @@
         user-cfg = {
           home = {
             inherit stateVersion username;
-            packages = [ doom-emacs ] ++ (with pkgs; [
-              cachix
-              cargo
-              coqPackages.coq
-              discord
-              fd
-              gcc
-              gnumake
-              logseq
-              nil
-              nixfmt
-              python3
-              rust-analyzer
-              rustfmt
-              slack
-              spotify
-              taplo
-              zoom-us
-            ]);
+            packages = [ doom-emacs ] ++ (with pkgs;
+              [
+                cachix
+                cargo
+                coqPackages.coq
+                discord
+                fd
+                gcc
+                gnumake
+                logseq
+                nil
+                nixfmt
+                python3
+                rust-analyzer
+                rustfmt
+                slack
+                spotify
+                taplo
+                zoom-us
+              ] ++ (linux-mac [ firefox ] [ ]));
           };
           programs = {
             direnv = {

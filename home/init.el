@@ -25,3 +25,5 @@
 
 (require 'evil)
 (evil-mode 1)
+
+(load-theme 'ayu t)

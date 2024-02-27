@@ -14,7 +14,8 @@
           };
           extraInit = ''
             rm -fr ~/emacs.el ~/.emacs ~/.emacs.d
-            emacsclient --eval '(load-file "~/.config/emacs/init.el")'
+            ln -s ~/.config/emacs ~/.emacs.d
+            # emacsclient --eval '(load-file "~/.config/emacs/init.el")'
           '';
           pathsToLink = [ "/share/zsh" ];
           shellAliases = {

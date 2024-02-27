@@ -6,7 +6,8 @@
   scroll-conservatively 5
   scroll-step 1
   standard-indent 2
-  ; straight-repository-branch "develop"
+  straight-repository-branch "develop"
+  straight-use-package-by-default t
 )
 
 ; That also, but different, for reasons I don't yet understand
@@ -44,6 +45,9 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+; use-package, cannibalized by straight.el
+(straight-use-package 'use-package)
+
 ; `vi` keymap
 (straight-use-package 'evil)
 (require 'evil)
@@ -58,3 +62,7 @@
 ; Nix mode
 (straight-use-package 'nix-mode)
 (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
+
+; ayu theme
+(use-package ayu-theme
+  :config (load-theme 'ayu-dark t))

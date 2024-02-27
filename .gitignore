@@ -28,9 +28,6 @@ gh/**
 !nix
 !nix/**
 
-!nvim/
-!nvim/**
-
 !Slack/
 Slack/**
 !Slack/Preferences

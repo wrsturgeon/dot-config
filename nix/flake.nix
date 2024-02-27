@@ -1,6 +1,10 @@
 {
   description = "System flakes";
   inputs = {
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     linux = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "path:./os/linux";
@@ -19,7 +23,7 @@
       url = "path:./os/shared";
     };
   };
-  outputs = { linux, mac, shared, nix-darwin, nixpkgs, self, }:
+  outputs = { home-manager, linux, mac, shared, nix-darwin, nixpkgs, self, }:
     let
       is-linux = nixpkgs.lib.strings.hasSuffix "linux";
       is-mac = nixpkgs.lib.strings.hasSuffix "darwin";
@@ -39,10 +43,13 @@
             username = get-username system;
           }) ([ shared ] ++ modules);
       };
+      laptop-name = "mbp-" + (linux-mac "nixos" "macos");
     in {
-      nixosConfigurations.mbp-nixos =
-        nixpkgs.lib.nixosSystem (config-modules "x86_64-linux" [ linux ]);
-      darwinConfigurations.macbook-macos =
+      darwinConfigurations.${laptop-name} =
         nix-darwin.lib.darwinSystem (config-modules "x86_64-darwin" [ mac ]);
+      homeConfigurations.${laptop-name} =
+        home-manager.lib.homeManagerConfiguration { };
+      nixosConfigurations.${laptop-name} =
+        nixpkgs.lib.nixosSystem (config-modules "x86_64-linux" [ linux ]);
     };
 }

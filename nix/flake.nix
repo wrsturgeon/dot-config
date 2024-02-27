@@ -34,7 +34,7 @@
       config-modules = system: modules: {
         inherit system;
         modules = builtins.map (flake:
-          flake.config {
+          flake.configure {
             inherit shared system;
             username = get-username system;
           }) (shared ++ modules);

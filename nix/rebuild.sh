@@ -27,18 +27,15 @@ git add -A
 git commit -m "${COMMIT_DATE}" || :
 git push
 
-# Code reuse, that's it
-export REBUILD_FLAGS='-j auto --show-trace'
-
 # Rebuild the Nix system
 if [ -d /etc/nixos ]; then
   cd /etc/nixos
   sudo git pull
-  sudo nixos-rebuild switch -v --upgrade-all --install-bootloader ${REBUILD_FLAGS}
+  sudo nixos-rebuild switch -v --upgrade-all --install-bootloader -j auto
   # nix shell nixpkgs#efibootmgr nixpkgs#refind -c refind-install
 else
   cd ~/.config/nix
-  darwin-rebuild switch --flake .#macbook-macos --keep-going ${REBUILD_FLAGS}
+  darwin-rebuild switch --flake .#macbook-macos --keep-going -j auto
 fi
 
 # Collect garbage

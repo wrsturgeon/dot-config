@@ -20,7 +20,7 @@
     };
   };
   outputs = { linux, mac, shared, nix-darwin, nixpkgs, self, }:
-    builtins.trace "${mac}" (let
+    let
       is-linux = nixpkgs.lib.strings.hasSuffix "linux";
       is-mac = nixpkgs.lib.strings.hasSuffix "darwin";
       linux-mac = on-linux: on-mac: system:
@@ -44,5 +44,5 @@
       #   nixpkgs.lib.nixosSystem (config-modules "x86_64-linux" [ linux ]);
       darwinConfigurations.macbook-macos = builtins.trace mac { };
       # nix-darwin.lib.darwinSystem (config-modules "x86_64-darwin" [ mac ]);
-    });
+    };
 }

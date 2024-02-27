@@ -1,8 +1,8 @@
 {
   description = "MacOS-specific config";
   inputs = { nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; };
-  outputs = { nixpkgs, self }:
-    { shared, system, username }: {
+  outputs = { nixpkgs, self }: {
+    config = { shared, system, username }: {
       environment = {
         shellAliases.nixos-rebuild =
           "darwin-rebuild --flake .#macbook-macos --keep-going -j auto";
@@ -14,4 +14,5 @@
       security.pam.enableSudoTouchIdAuth = true;
       services.nix-daemon.enable = true;
     };
+  };
 }

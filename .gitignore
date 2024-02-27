@@ -7,7 +7,6 @@
 
 !flake.lock
 !flake.nix
-!hardware-configuration.nix
 !home/
 !home/**
 !os/

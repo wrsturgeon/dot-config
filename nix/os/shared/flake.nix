@@ -8,7 +8,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
   };
   outputs = { nix-doom-emacs, nixpkgs, self }: {
-    configure = { nixpkgs-config, shared, system, username }:
+    configure =
+      { linux-mac, nixpkgs-config, shared, stateVersion, system, username }:
       let
         pkgs = import nixpkgs nixpkgs-config;
         doom-emacs = nix-doom-emacs.packages.${system}.default.override {

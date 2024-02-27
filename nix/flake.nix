@@ -46,7 +46,10 @@
             allowUnsupportedSystem = true;
           };
         };
-        config-args = { inherit nixpkgs-config shared system username; };
+        stateVersion = "23.05";
+        config-args = {
+          inherit linux-mac nixpkgs-config shared stateVersion system username;
+        };
         config-modules = modules: {
           inherit system;
           modules = builtins.map (flake: flake.configure config-args)

@@ -16,7 +16,8 @@
     };
   };
   outputs = { apple-fonts, nixos-hardware, nixpkgs, sf-mono-liga-src, self }: {
-    configure = { nixpkgs-config, shared, system, username }:
+    configure =
+      { linux-mac, nixpkgs-config, shared, stateVersion, system, username }:
       let
         pkgs = import nixpkgs nixpkgs-config;
         print-list = builtins.foldl' (acc: s: acc + " " + s) "";
@@ -110,7 +111,7 @@
             flags = [ "--update-input" "nixpkgs" ];
             allowReboot = true;
           };
-          stateVersion = "23.05";
+          inherit stateVersion;
         };
         users = {
           users = {

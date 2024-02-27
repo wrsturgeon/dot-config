@@ -13,14 +13,7 @@
       let
         homeDirectory = linux-mac "/home/${username}" "/Users/${username}";
         user-cfg = {
-          home = {
-            inherit homeDirectory stateVersion username;
-            user-info = {
-              inherit username;
-              fullName = "Will Sturgeon";
-              nixConfigDirectory = homeDirectory + "/.config/nix";
-            };
-          };
+          home = { inherit homeDirectory stateVersion username; };
           programs = { home-manager.enable = true; };
         } // (linux-mac {
           xsession.enable = true;

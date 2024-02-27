@@ -27,14 +27,13 @@
     let
       is-linux = nixpkgs.lib.strings.hasSuffix "linux";
       is-mac = nixpkgs.lib.strings.hasSuffix "darwin";
-      linux-mac = on-linux: on-mac: system:
+      linux-mac = system: on-linux: on-mac:
         if is-linux system then
           on-linux
         else if is-mac system then
           on-mac
         else
           throw "Unrecognized OS";
-      username = linux-mac "will" "willsturgeon";
       nixpkgs-config = system: {
         inherit system;
         config = {
@@ -46,9 +45,9 @@
       stateVersion = "23.05";
       config-args = system: {
         inherit shared stateVersion system;
-        linux-mac = a: b: linux-mac a b system;
+        linux-mac = linux-mac system;
         nixpkgs-config = nixpkgs-config system;
-        username = username system;
+        username = linux-mac system "will" "willsturgeon";
       };
       on = system: modules: {
         inherit system;

@@ -26,8 +26,8 @@
 (require 'evil)
 (evil-mode 1)
 
-(require 'ayu-theme)
-(load-theme 'ayu t)
+(use-package ayu-theme
+  :config (load-theme 'ayu t))
 
 ; <https://github.com/7696122/evil-terminal-cursor-changer>
 (unless (display-graphic-p)

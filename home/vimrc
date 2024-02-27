@@ -81,7 +81,7 @@ au!
 autocmd VimEnter * silent !echo -ne "\e[2 q"
 augroup END
 
-# vim-lsp servers
+" vim-lsp servers
 if executable('nil')
   au User lsp_setup call lsp#register_server({
     \ 'name': 'nil',
@@ -90,7 +90,7 @@ if executable('nil')
     \ })
 endif
 
-# vim-lsp keymap
+" vim-lsp keymap
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
@@ -114,7 +114,7 @@ function! s:on_lsp_buffer_enabled() abort
   " refer to doc to add more commands
 endfunction
 
-# vim-lsp ... something else
+" vim-lsp ... something else
 augroup lsp_install
   au!
   " call s:on_lsp_buffer_enabled only for languages that has the server registered.

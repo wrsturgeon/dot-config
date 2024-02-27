@@ -82,13 +82,16 @@ autocmd VimEnter * silent !echo -ne "\e[2 q"
 augroup END
 
 " vim-lsp servers
-if executable('nil')
-  au User lsp_setup call lsp#register_server({
-    \ 'name': 'nil',
-    \ 'cmd': {server_info->['nil']},
-    \ 'allowlist': ['nix'],
-    \ })
-endif
+function! s:register_lsp(name, langs)
+  if executable(name)
+    au User lsp_setup call lsp#register_server({
+      \ 'name': name,
+      \ 'cmd': {server_info->[name]},
+      \ 'allowlist': langs,
+      \ })
+endfunction
+call s:register_lsp('coq-lsp', ['coq'])
+call s:register_lsp('nil', ['nix'])
 
 " vim-lsp keymap
 function! s:on_lsp_buffer_enabled() abort

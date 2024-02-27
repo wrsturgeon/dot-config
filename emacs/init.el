@@ -6,8 +6,7 @@
   scroll-conservatively 5
   scroll-step 1
   standard-indent 2
-  straight-repository-branch "develop"
-  straight-use-package-by-default t
+  ; straight-repository-branch "develop"
 )
 
 ; That also, but different, for reasons I don't yet understand
@@ -35,7 +34,7 @@
     (expand-file-name
       "straight/repos/straight.el/bootstrap.el"
       (or (bound-and-true-p straight-base-dir) user-emacs-directory)))
-    (bootstrap version 6))
+    (bootstrap version 7))
   (unless
     (file-exists-p bootstrap-file)
     (with-current-buffer

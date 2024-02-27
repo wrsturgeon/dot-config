@@ -69,7 +69,12 @@
                 git_protocol = "https";
               };
             };
-            git.enable = true;
+            git = {
+              enable = true;
+              credential.helper = "${
+                  pkgs.git.override { withLibsecret = true; }
+                }/bin/git-credential-libsecret";
+            };
             helix.enable = true;
             home-manager.enable = true;
             kitty = {

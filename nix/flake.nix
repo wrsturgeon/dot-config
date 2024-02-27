@@ -2,9 +2,9 @@
   description = "System flakes";
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+    home = {
+      inputs.nixpkgs.follow = "nixpkgs";
+      url = "path:./home";
     };
     linux = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,8 +24,8 @@
       url = "path:./os/shared";
     };
   };
-  outputs = { flake-utils, home-manager, linux, mac, shared, nix-darwin, nixpkgs
-    , self, }:
+  outputs =
+    { flake-utils, home, linux, mac, shared, nix-darwin, nixpkgs, self, }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         is-linux = nixpkgs.lib.strings.hasSuffix "linux" system;
@@ -46,17 +46,16 @@
             allowUnsupportedSystem = true;
           };
         };
+        config-args = { inherit nixpkgs-config shared system username; };
         config-modules = modules: {
           inherit system;
-          modules = builtins.map (flake:
-            flake.configure { inherit nixpkgs-config shared system username; })
+          modules = builtins.map (flake: flake.configure config-args)
             ([ shared ] ++ modules);
         };
         laptop-name = "mbp-" + (linux-mac "nixos" "macos");
       in let
         common = {
-          homeConfigurations.${laptop-name} =
-            home-manager.lib.homeManagerConfiguration { };
+          homeConfigurations.${laptop-name} = home.configure config-args;
         };
         if-mac = {
           darwinConfigurations.${laptop-name} =

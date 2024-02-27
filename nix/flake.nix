@@ -3,7 +3,7 @@
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
     home = {
-      inputs.nixpkgs.follow = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "path:./home";
     };
     linux = {

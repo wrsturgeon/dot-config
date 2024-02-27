@@ -49,21 +49,22 @@
         nixpkgs-config = nixpkgs-config system;
         username = linux-mac system "will" "willsturgeon";
       };
-      on = system: modules: {
+      on = system: module: {
         inherit system;
         modules =
-          builtins.concatMap (flake: flake.configure (config-args system))
-          ([ home shared ] ++ modules);
+          builtins.concatMap (flake: flake.configure (config-args system)) ([
+            home
+            shared
+            module
+          ]);
       };
       laptop-name = system: "mbp-" + (linux-mac system "nixos" "macos");
     in {
       darwinConfigurations = let system = "x86_64-darwin";
       in {
-        ${laptop-name system} = nix-darwin.lib.darwinSystem (on system [ mac ]);
+        ${laptop-name system} = nix-darwin.lib.darwinSystem (on system mac);
       };
       nixosConfigurations = let system = "x86_64-linux";
-      in {
-        ${laptop-name system} = nixpkgs.lib.nixosSystem (on system [ linux ]);
-      };
+      in { ${laptop-name system} = nixpkgs.lib.nixosSystem (on system linux); };
     };
 }

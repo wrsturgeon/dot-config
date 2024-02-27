@@ -55,26 +55,6 @@
         users.users.${username} = {
           description = "Will";
           home = linux-mac "/home/${username}" "/Users/${username}";
-          packages = with pkgs; [
-            cargo
-            coqPackages.coq
-            direnv
-            discord
-            doom-emacs
-            fd
-            fzf
-            gcc
-            github-cli
-            gnumake
-            logseq
-            nix-direnv
-            rust-analyzer
-            rustfmt
-            slack
-            spotify
-            taplo
-            zoom-us
-          ];
           shell = pkgs.zsh;
         };
       }];

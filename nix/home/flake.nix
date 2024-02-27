@@ -15,9 +15,50 @@
         user-cfg = {
           home = {
             inherit stateVersion username;
-            packages = with pkgs; [ cachix ];
+            packages = with pkgs; [
+              cachix
+              cargo
+              coqPackages.coq
+              discord
+              doom-emacs
+              fd
+              gcc
+              gnumake
+              logseq
+              nil
+              nixfmt
+              python3
+              rust-analyzer
+              rustfmt
+              slack
+              spotify
+              taplo
+              zoom-us
+            ];
           };
           programs = {
+            direnv = {
+              enable = true;
+              enableZshIntegration = true;
+              nix-direnv.enable = true;
+            };
+            fzf = {
+              enable = true;
+              enableZshIntegration = true;
+            };
+            gh = {
+              enable = true;
+              settings = {
+                # Aliases allow you to create nicknames for gh commands
+                aliases = { co = "pr checkout"; };
+                # What editor gh should run when creating issues, pull requests, etc. If blank, will refer to environment.
+                editor = "";
+                # The current version of the config schema
+                version = 1;
+                # What protocol to use when performing git operations. Supported values: ssh, https
+                git_protocol = "https";
+              };
+            };
             git.enable = true;
             gpg.enable = true;
             helix.enable = true;
@@ -45,9 +86,6 @@
                 fugitive
                 fzf-vim
                 gitgutter
-                nil
-                nixfmt
-                python3
                 vim-airline
                 vim-nix
               ];

@@ -12,17 +12,20 @@
       { linux-mac, nixpkgs-config, shared, stateVersion, system, username }:
       let
         homeDirectory = linux-mac "/home/${username}" "/Users/${username}";
-        info.home = {
-          inherit homeDirectory stateVersion username;
-          user-info = {
-            inherit username;
-            fullName = "Will Sturgeon";
-            nixConfigDirectory = homeDirectory + "/.config/nix";
+        monomodule = {
+          home = {
+            inherit homeDirectory stateVersion username;
+            user-info = {
+              inherit username;
+              fullName = "Will Sturgeon";
+              nixConfigDirectory = homeDirectory + "/.config/nix";
+            };
           };
+          programs = { home-manager.enable = true; };
         };
       in home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs nixpkgs-config;
-        modules = [ info ];
+        modules = [ monomodule ];
       };
   };
 }

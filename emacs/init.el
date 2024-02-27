@@ -35,7 +35,7 @@
     (expand-file-name
       "straight/repos/straight.el/bootstrap.el"
       (or (bound-and-true-p straight-base-dir) user-emacs-directory)))
-    (bootstrap version 7))
+    (bootstrap version 6))
   (unless
     (file-exists-p bootstrap-file)
     (with-current-buffer

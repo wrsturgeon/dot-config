@@ -52,6 +52,7 @@
         users.users.${username} = {
           description = "Will";
           home = linux-mac "/home/${username}" "/Users/${username}";
+          name = username;
           shell = pkgs.zsh;
         };
       }];

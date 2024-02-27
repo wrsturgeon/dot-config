@@ -34,8 +34,7 @@ if [ -d /etc/nixos ]; then
   sudo nixos-rebuild switch -v --upgrade-all --install-bootloader -j auto
   # nix shell nixpkgs#efibootmgr nixpkgs#refind -c refind-install
 else
-  cd ~/.config/nix
-  darwin-rebuild switch --flake .#mbp-macos --keep-going -j auto
+  darwin-rebuild switch --flake ~/.config/nix --keep-going -j auto
 fi
 
 # Collect garbage

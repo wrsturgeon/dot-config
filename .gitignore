@@ -6,22 +6,12 @@
 !.gitignore
 !.gitmodules
 
-!.vimrc
-
-!direnv/
-direnv/**
-!direnv/direnvrc
-
 !gh/
 gh/**
-!gh/config.yml
 !gh/hosts.yml
 
 !helix/
 !helix/**
-
-!kitty/
-!kitty/**
 
 !mimeapps.list
 

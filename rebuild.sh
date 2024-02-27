@@ -8,6 +8,8 @@ export COMMIT_DATE="$(date '+%B %-d, %Y, at %H:%M:%S') on $(uname -s)"
 cd ~/.config
 git pull
 git add -A
+nix flake update
+git add -A
 git commit -m "${COMMIT_DATE}" || :
 git push || :
 

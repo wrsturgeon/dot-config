@@ -265,7 +265,7 @@
     "mac": {
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-MCCylLr7lFJsL1juuv3HcwkrLsGgA4S8uh9eypnskCQ=",
+        "narHash": "sha256-KhspyVVh8Ybl++PUZ3QBpl1OEBg1n3UpL4Xh9GflpXY=",
         "path": "./os/mac",
         "type": "path"
       },

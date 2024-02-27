@@ -1,3 +1,6 @@
 [submodule "nix"]
 	path = nix
 	url = https://github.com/wrsturgeon/nixos-mac
+[submodule "kitty/kitty-themes"]
+	path = kitty/kitty-themes
+	url = https://github.com/dexpota/kitty-themes.git

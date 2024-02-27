@@ -50,7 +50,7 @@
         nixpkgs-config = nixpkgs-config system;
         username = username system;
       };
-      config-modules = modules: system: {
+      config-modules = system: modules: {
         inherit system;
         modules = builtins.map (flake: flake.configure config-args)
           ([ shared ] ++ modules);

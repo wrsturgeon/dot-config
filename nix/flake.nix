@@ -42,7 +42,7 @@
     in {
       # nixosConfigurations.mbp-nixos =
       #   nixpkgs.lib.nixosSystem (config-modules "x86_64-linux" [ linux ]);
-      darwinConfigurations.macbook-macos = builtins.trace mac { };
+      darwinConfigurations.macbook-macos = { system = builtins.trace mac { }; };
       # nix-darwin.lib.darwinSystem (config-modules "x86_64-darwin" [ mac ]);
     });
 }

@@ -17,8 +17,7 @@
           # '';
           pathsToLink = [ "/share/zsh" ];
           shellAliases = {
-            e = "emacs";
-            emacs = "doom run -nw";
+            e = "emacs run -nw";
             vi = "vim";
           };
           systemPackages = with pkgs; [ coreutils gnugrep killall tree ];

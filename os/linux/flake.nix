@@ -75,15 +75,6 @@
         networking.networkmanager.enable = true;
         programs = {
           dconf.enable = true;
-          git = {
-            config = {
-              commit.gpgSign = true;
-              credential.helper = "libsecret";
-              user.signingKey = "5C775F8013C226F4";
-            };
-            enable = true;
-            package = pkgs.gitFull;
-          };
           mtr.enable = true;
           pantheon-tweaks.enable = true;
         };

@@ -9,24 +9,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
     };
-    nix-doom-emacs = {
-      # inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nix-community/nix-doom-emacs";
-    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
-  outputs = { firefox-addons, home-manager, nix-doom-emacs, nixpkgs, self }: {
+  outputs = { firefox-addons, home-manager, nixpkgs, self }: {
     configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
       , system, username }:
       let
         pkgs = import nixpkgs nixpkgs-config;
-        doom-emacs = nix-doom-emacs.packages.${system}.default.override {
-          doomPrivateDir = ./doom.d;
-        };
         user-cfg = {
           home = {
             inherit stateVersion username;
-            packages = [ doom-emacs ] ++ (with pkgs; [
+            packages = (with pkgs; [
               cachix
               cargo
               coqPackages.coq
@@ -52,6 +45,11 @@
               enable = true;
               enableZshIntegration = true;
               nix-direnv.enable = true;
+            };
+            emacs = {
+              enable = true;
+              extraConfig = builtins.readFile ./init.el;
+              extraPackages = epkgs: with epkgs; [ evil magit ];
             };
             fzf = {
               enable = true;

@@ -350,7 +350,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-xS+OgGUkJUo3u3rgA5WsawwBRFIOvJIGebaQLoSFYUg=",
+        "narHash": "sha256-qbU5mburB2b8p4Gw0ZymgzkHi5l6Xmlhs5Goo3uHnBQ=",
         "path": "./os/mac",
         "type": "path"
       },

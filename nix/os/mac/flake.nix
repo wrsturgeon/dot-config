@@ -3,7 +3,7 @@
   inputs = { nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; };
   outputs = { nixpkgs, self }: {
     configure =
-      { home, linux-mac, nixpkgs-config, stateVersion, system, username }@configure-args: [{
+      { home, linux-mac, nixpkgs-config, stateVersion, system, username }@configure-args: let pkgs = import nixpkgs nixpkgs-config; in [{
         environment = {
           shellAliases.nixos-rebuild =
             "darwin-rebuild --flake .#mbp-macos --keep-going -j auto";

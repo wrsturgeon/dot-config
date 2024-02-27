@@ -11,9 +11,8 @@
     configure =
       { linux-mac, nixpkgs-config, shared, stateVersion, system, username }:
       let
-        homeDirectory = linux-mac "/home/${username}" "/Users/${username}";
         user-cfg = {
-          home = { inherit homeDirectory stateVersion username; };
+          home = { inherit stateVersion username; };
           programs = { home-manager.enable = true; };
         } // (linux-mac {
           xsession.enable = true;

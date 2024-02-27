@@ -35,7 +35,7 @@ if [ -d /etc/nixos ]; then
   # nix shell nixpkgs#efibootmgr nixpkgs#refind -c refind-install
 else
   cd ~/.config/nix
-  darwin-rebuild switch --flake .#macbook-macos --keep-going -j auto
+  darwin-rebuild switch --flake .#mbp-macos --keep-going -j auto
 fi
 
 # Collect garbage

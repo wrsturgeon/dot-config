@@ -28,7 +28,7 @@ git commit -m "${COMMIT_DATE}" || :
 git push
 
 # Code reuse, that's it
-export REBUILD_FLAGS=-j auto --show-trace
+export REBUILD_FLAGS='-j auto --show-trace'
 
 # Rebuild the Nix system
 if [ -d /etc/nixos ]; then

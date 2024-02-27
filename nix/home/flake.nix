@@ -13,9 +13,27 @@
       let
         pkgs = import nixpkgs nixpkgs-config;
         user-cfg = {
-          home = { inherit stateVersion username; };
+          home = {
+            inherit stateVersion username;
+            packages = with pkgs; [ cachix ];
+          };
           programs = {
+            git.enable = true;
+            helix.enable = true;
             home-manager.enable = true;
+            kitty = {
+              enable = true;
+              settings = {
+                font_family = "IBM Plex Mono Light";
+                bold_font = "IBM Plex Mono Bold";
+                italic_font = "IBM Plex Mono Light Italic";
+                bold_italic_font = "IBM Plex Mono Bold Italic";
+                font_size = linux-mac 9 11;
+              };
+              shellIntegration.enableZshIntegration = true;
+              theme = "ayu";
+            };
+            ripgrep.enable = true;
             vim = {
               enable = true;
               extraConfig = builtins.readFile ./vimrc;

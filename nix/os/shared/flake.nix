@@ -31,17 +31,12 @@
             vi = "vim";
           };
           systemPackages = with pkgs; [
-            cachix
             coreutils
-            git
             gnugrep
-            helix
             killall
-            kitty
             nil
             nixfmt
             python3
-            ripgrep
             tree
           ];
           variables = { NIXOS_INSTALL_BOOTLOADER = "1"; };

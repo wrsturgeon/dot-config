@@ -251,7 +251,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-w75GT2zZp9//MezmRZPSkof0wwhWukhMwInIfch4xZs=",
+        "narHash": "sha256-vhCeXWEahoEurbgINvzYhysnIbyTPIq8j1mmdfTH9n0=",
         "path": "./home",
         "type": "path"
       },
@@ -666,7 +666,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-dg5fJrzHC4pGQ2+7Ae1YoC3Aave4RSoCxFSaf7Hnt3M=",
+        "narHash": "sha256-78/NNb5W9RqhoAWdztjPJX9TLy1uV3tVTw1j7AbCd+4=",
         "path": "./os/shared",
         "type": "path"
       },

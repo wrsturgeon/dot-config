@@ -47,6 +47,7 @@
           };
         };
         nixpkgs.hostPlatform = system;
+        programs.zsh.enable = true;
         time.timeZone = "America/New_York";
         users.users.${username} = {
           description = "Will";

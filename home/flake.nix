@@ -51,6 +51,7 @@
               enable = true;
               extraConfig = builtins.readFile ./init.el;
               extraPackages = epkgs: with epkgs; [ evil magit ];
+              packages = pkgs.emacs-nox;
             };
             fzf = {
               enable = true;

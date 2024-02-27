@@ -17,7 +17,7 @@
           # '';
           pathsToLink = [ "/share/zsh" ];
           shellAliases = {
-            e = "emacs run -nw";
+            e = "emacsclient -nw";
             vi = "vim";
           };
           systemPackages = with pkgs; [ coreutils gnugrep killall tree ];
@@ -47,7 +47,7 @@
         programs.zsh.enable = true;
         services.emacs = {
           enable = true;
-          package = pkgs.emacs;
+          package = pkgs.emacs-nox;
         };
         time.timeZone = "America/New_York";
         users.users.${username} = {

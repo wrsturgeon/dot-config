@@ -1,7 +1,7 @@
 {
   description = "MacOS-specific config";
   inputs = { nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; };
-  outputs = { home, nixpkgs, self }: {
+  outputs = { nixpkgs, self }: {
     configure =
       { home, linux-mac, nixpkgs-config, stateVersion, system, username }@configure-args: [{
         environment = {

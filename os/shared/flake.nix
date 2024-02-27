@@ -14,6 +14,7 @@
           };
           extraInit = ''
             rm -fr ~/.emacs ~/.emacs.d
+            ln -s ~/.config/emacs ~/.emacs.d
           '';
           pathsToLink = [ "/share/zsh" ];
           shellAliases = {

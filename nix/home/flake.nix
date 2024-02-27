@@ -13,7 +13,10 @@
       let
         user-cfg = {
           home = { inherit stateVersion username; };
-          programs = { home-manager.enable = true; };
+          programs = {
+            home-manager.enable = true;
+            vim.enable = true;
+          };
         } // (linux-mac {
           xsession.enable = true;
           # xsession.windowManager.command = "...";

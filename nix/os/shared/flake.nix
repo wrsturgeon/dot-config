@@ -12,9 +12,9 @@
               **/.DS_Store
             '';
           };
-          extraInit = ''
-            echo '# File managed by NixOS: all changes will be overwritten.' > ~/.zshrc
-          '';
+          # extraInit = ''
+          #   # Run arbitrary code!
+          # '';
           pathsToLink = [ "/share/zsh" ];
           shellAliases = {
             e = "emacs";

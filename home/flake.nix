@@ -50,7 +50,7 @@
             emacs = {
               enable = true;
               extraConfig = builtins.readFile ./init.el;
-              extraPackages = epkgs: with epkgs; [ evil magit ];
+              extraPackages = epkgs: with epkgs; [ ayu-theme evil ];
               package = pkgs.emacs-nox;
             };
             fzf = {

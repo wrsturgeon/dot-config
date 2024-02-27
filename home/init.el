@@ -26,4 +26,5 @@
 (require 'evil)
 (evil-mode 1)
 
+(require 'ayu-theme)
 (load-theme 'ayu t)

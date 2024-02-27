@@ -69,10 +69,7 @@
                 git_protocol = "https";
               };
             };
-            git = {
-              enable = true;
-              signing.signByDefault = false;
-            };
+            git.enable = true;
             helix.enable = true;
             home-manager.enable = true;
             kitty = {

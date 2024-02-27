@@ -30,20 +30,31 @@
               cachix
               cargo
               coqPackages.coq
+              direnv
               discord
               fd
+              fzf
               gcc
+              gh
+              git
               gnumake
+              gnupg
+              helix
+              kitty
               logseq
               nil
+              nix-direnv
               nixfmt
               python3
+              ripgrep
               rust-analyzer
               rustfmt
               slack
               spotify
               taplo
+              vim
               zoom-us
+              zsh
             ]);
           };
           programs = {

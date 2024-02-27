@@ -12,9 +12,11 @@
               **/.DS_Store
             '';
           };
-          # extraInit = ''
-          #   # Run arbitrary code!
-          # '';
+          extraInit = ''
+            if [ "${PATH}" != *"/run/current-system/sw/bin"* ]; then
+              export PATH="/run/current-system/sw/bin"
+            fi
+          '';
           pathsToLink = [ "/share/zsh" ];
           shellAliases = {
             e = "emacs";

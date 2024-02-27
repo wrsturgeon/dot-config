@@ -16,8 +16,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
   outputs = { firefox-addons, home-manager, nix-doom-emacs, nixpkgs, self }: {
-    configure =
-      { home, linux-mac, nixpkgs-config, stateVersion, system, username }:
+    configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
+      , system, username }:
       let
         pkgs = import nixpkgs nixpkgs-config;
         doom-emacs = nix-doom-emacs.packages.${system}.default.override {

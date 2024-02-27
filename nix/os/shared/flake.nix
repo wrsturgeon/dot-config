@@ -2,8 +2,8 @@
   description = "Cross-platform config";
   inputs = { nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; };
   outputs = { nixpkgs, self }: {
-    configure =
-      { home, linux-mac, nixpkgs-config, stateVersion, system, username }:
+    configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
+      , system, username }:
       let pkgs = import nixpkgs nixpkgs-config;
       in [{
         environment = {
@@ -24,7 +24,7 @@
           systemPackages = with pkgs; [ coreutils gnugrep killall tree ];
           variables = { NIXOS_INSTALL_BOOTLOADER = "1"; };
         };
-        networking.hostName = "mbp-nixos";
+        networking.hostName = laptop-name;
         nix = {
           package = pkgs.nixUnstable;
           settings = {

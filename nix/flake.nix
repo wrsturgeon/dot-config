@@ -43,11 +43,14 @@
         };
       };
       stateVersion = "23.05";
+      laptop-name = system: "mbp-" + (linux-mac system "nixos" "macos");
+      username = system: linux-mac system "will" "willsturgeon";
       config-args = system: {
         inherit home stateVersion system;
+        laptop-name = laptop-name system;
         linux-mac = linux-mac system;
         nixpkgs-config = nixpkgs-config system;
-        username = linux-mac system "will" "willsturgeon";
+        username = username system;
       };
       on = system: module: {
         inherit system;
@@ -58,7 +61,6 @@
             module
           ]);
       };
-      laptop-name = system: "mbp-" + (linux-mac system "nixos" "macos");
     in {
       darwinConfigurations = let system = "x86_64-darwin";
       in {

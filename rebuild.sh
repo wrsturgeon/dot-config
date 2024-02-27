@@ -25,7 +25,7 @@ git push
 if [ -d /etc/nixos ]; then
   cd /etc/nixos
   sudo git pull
-  sudo nixos-rebuild switch -v --install-bootloader -j auto
+  sudo nixos-rebuild switch -v -j auto # --install-bootloader
   # nix shell nixpkgs#efibootmgr nixpkgs#refind -c refind-install
 else
   darwin-rebuild switch --flake ~/.config --keep-going -j auto

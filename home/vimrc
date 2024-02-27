@@ -83,12 +83,13 @@ augroup END
 
 " vim-lsp servers
 function! s:register_lsp(name, langs)
-  if executable(name)
+  if executable(a:name)
     au User lsp_setup call lsp#register_server({
-      \ 'name': name,
-      \ 'cmd': {server_info->[name]},
-      \ 'allowlist': langs,
+      \ 'name': a:name,
+      \ 'cmd': {server_info->[a:name]},
+      \ 'allowlist': a:langs,
       \ })
+  endif
 endfunction
 call s:register_lsp('coq-lsp', ['coq'])
 call s:register_lsp('nil', ['nix'])

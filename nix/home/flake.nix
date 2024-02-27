@@ -29,6 +29,21 @@
                 vim-airline
                 vim-nix
               ];
+              settings = {
+                background = "dark";
+                copyindent = true;
+                expandtab = true;
+                hidden = true;
+                history = 1000;
+                ignorecase = false;
+                modeline = false;
+                mouse = "a";
+                number = true;
+                relativenumber = false;
+                shiftwidth = 2;
+                smartcase = true;
+                tabstop = 2;
+              };
             };
           };
         } // (linux-mac {

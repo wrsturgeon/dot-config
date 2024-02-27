@@ -9,9 +9,6 @@ set backspace=indent,eol,start
 " leader to space
 " let mapleader = "\<Space>"
 
-" safety
-set modelines=0
-
 " enable rich color
 set t_Co=256
 
@@ -19,22 +16,14 @@ set t_Co=256
 set list
 set listchars=tab:>-,trail:.,extends:#,nbsp:.
 
-" hide buffers instead of closing them
-set hidden
-
 " command history & undo history
-set history=100
 set undolevels=100
 
 " indenting
-set expandtab " change tabs to spaces--will this fuck with makefiles?
-set tabstop=2
 set softtabstop=2
-set shiftwidth=2
 set shiftround
 set smarttab
 set autoindent
-set copyindent
 set nowrap " controversial
 
 " do not fold (hide) regions of code
@@ -44,9 +33,6 @@ set nofoldenable
 set ruler
 " set colorcolumn=100 " imo better than 80
 
-" line numbers
-set nu
-
 " syntax highlighting
 syntax on
 filetype on
@@ -55,16 +41,6 @@ filetype indent on
 
 " search behavior
 set incsearch " match as you type
-" set ignorecase " ignore case
-" set smartcase " ...except when your search is capitalized
-
-" day/night coloring
-set background=dark
-" if strftime("%H") >= 5 && strftime("%H") < 18
-"   set background=light
-" else
-"   set background=dark
-" endif
 
 " keep 2 lines above/below the cursor when scrolling
 set scrolloff=8

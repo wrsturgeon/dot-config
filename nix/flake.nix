@@ -49,11 +49,13 @@
         };
         laptop-name = "mbp-" + (linux-mac "nixos" "macos");
       in {
-        darwinConfigurations.${laptop-name} =
-          nix-darwin.lib.darwinSystem (config-modules [ mac ]);
-        homeConfigurations.${laptop-name} =
-          home-manager.lib.homeManagerConfiguration { };
-        nixosConfigurations.${laptop-name} =
-          nixpkgs.lib.nixosSystem (config-modules [ linux ]);
+        packages = {
+          darwinConfigurations.${laptop-name} =
+            nix-darwin.lib.darwinSystem (config-modules [ mac ]);
+          homeConfigurations.${laptop-name} =
+            home-manager.lib.homeManagerConfiguration { };
+          nixosConfigurations.${laptop-name} =
+            nixpkgs.lib.nixosSystem (config-modules [ linux ]);
+        };
       });
 }

@@ -33,6 +33,9 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
+; don't blink at me
+(blink-cursor-mode 0)
+
 ; Use [y/n] instead of [yes/no]
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -65,7 +68,6 @@
 
 ; `vi` keymap
 (straight-use-package 'evil)
-(require 'evil)
 (evil-mode 1)
 
 ; line cursor on insert
@@ -75,8 +77,8 @@
   (evil-terminal-cursor-changer-activate))
 
 ; Nix mode
-(straight-use-package 'nix-mode)
-(add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
+(use-package nix-mode
+  :mode "\\.nix\\'")
 
 ; ayu theme
 (use-package ayu-theme

@@ -49,7 +49,7 @@
             };
             emacs = {
               enable = true;
-              extraConfig = (builtins.readFile ./init.el) ++ ''
+              extraConfig = (builtins.readFile ./init.el) + ''
                 (setq custom-theme-directory "${pkgs.emacsPackages.ayu-theme}/share/emacs/site-lisp/elpa")
                 (load-theme 'ayu t)
               '';

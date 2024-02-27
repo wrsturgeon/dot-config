@@ -1,10 +1,20 @@
+; unfuck backups
+(make-directory "~/.emacs_backups/" t)
+(make-directory "~/.emacs_autosave/" t)
+
 ; Name-value settings
 (setq
   auto-save-default nil
+  auto-save-file-name-transforms '((".*" "~/.emacs_autosave/" t))
+  backup-directory-alist '(("." . "~/.emacs_backups/"))
+  frame-inhibit-implied-resize t
   line-move-visual nil
   make-backup-files nil
+  pixel-scroll-precision-mode t
+  require-final-newline t
   scroll-conservatively 5
   scroll-step 1
+  sentence-end-double-space nil
   standard-indent 2
   straight-repository-branch "develop"
   straight-use-package-by-default t
@@ -17,6 +27,11 @@
   show-trailing-whitespace t
   tab-width 2
 )
+
+; Unbelievably ugly scrollbar & menu bar
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
 
 ; Use [y/n] instead of [yes/no]
 (defalias 'yes-or-no-p 'y-or-n-p)

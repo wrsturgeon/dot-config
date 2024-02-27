@@ -12,7 +12,7 @@
       { linux-mac, nixpkgs-config, shared, stateVersion, system, username }:
       let
         homeDirectory = linux-mac "/home/${username}" "/Users/${username}";
-        monomodule = {
+        user-cfg = {
           home = {
             inherit homeDirectory stateVersion username;
             user-info = {
@@ -23,9 +23,17 @@
           };
           programs = { home-manager.enable = true; };
         };
-      in home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs nixpkgs-config;
-        modules = [ monomodule ];
+      in home-manager.${linux-mac "nixosModules" "darwinModules"}.home-manager {
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          users.${username} = user-cfg;
+        };
       };
+
+    # in home-manager.lib.homeManagerConfiguration {
+    #   pkgs = import nixpkgs nixpkgs-config;
+    #   modules = [ monomodule ];
+    # };
   };
 }

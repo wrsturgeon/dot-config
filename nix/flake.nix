@@ -52,7 +52,7 @@
       on = system: modules: {
         inherit system;
         modules = builtins.map (flake: flake.configure (config-args system))
-          ([ shared ] ++ modules);
+          ([ home shared ] ++ modules);
       };
       laptop-name = system: "mbp-" + (linux-mac system "nixos" "macos");
     in {
@@ -60,7 +60,6 @@
       in {
         ${laptop-name system} = nix-darwin.lib.darwinSystem (on system [ mac ]);
       };
-      homeConfigurations.${laptop-name} = home.configure config-args;
       nixosConfigurations = let system = "x86_64-linux";
       in {
         ${laptop-name system} = nixpkgs.lib.nixosSystem (on system [ linux ]);

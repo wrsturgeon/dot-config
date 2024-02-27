@@ -54,7 +54,7 @@
         modules = builtins.map (flake: flake.configure (config-args system))
           ([ shared ] ++ modules);
       };
-      laptop-name = system: "mbp-" + (linux-mac "nixos" "macos" system);
+      laptop-name = system: "mbp-" + (linux-mac system "nixos" "macos");
     in {
       darwinConfigurations = let system = "x86_64-darwin";
       in {

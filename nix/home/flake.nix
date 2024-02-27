@@ -19,6 +19,7 @@
           };
           programs = {
             git.enable = true;
+            gpg.enable = true;
             helix.enable = true;
             home-manager.enable = true;
             kitty = {
@@ -44,6 +45,9 @@
                 fugitive
                 fzf-vim
                 gitgutter
+                nil
+                nixfmt
+                python3
                 vim-airline
                 vim-nix
               ];
@@ -61,6 +65,31 @@
                 shiftwidth = 2;
                 smartcase = true;
                 tabstop = 2;
+              };
+            };
+            zsh = {
+              enable = true;
+              enableAutosuggestions = true;
+              enableCompletion = true;
+              initExtra = ''
+                # p10k
+                source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+                # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+                # Initialization code that may require console input (password prompts, [y/n]
+                # confirmations, etc.) must go above this block; everything else may go below.
+                if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+                  source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+                fi
+                source ${./p10k.zsh}
+
+                # direnv
+                eval "$(direnv hook zsh)"
+              '';
+              syntaxHighlighting = {
+                enable = true;
+                styles = {
+                  # TODO: <https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.syntaxHighlighting.styles>
+                };
               };
             };
           };

@@ -25,20 +25,13 @@
           extraInit = ''
             echo '# File managed by NixOS: all changes will be overwritten.' > ~/.zshrc
           '';
+          pathsToLink = [ "/share/zsh" ];
           shellAliases = {
             e = "emacs";
             emacs = "doom run -nw";
             vi = "vim";
           };
-          systemPackages = with pkgs; [
-            coreutils
-            gnugrep
-            killall
-            nil
-            nixfmt
-            python3
-            tree
-          ];
+          systemPackages = with pkgs; [ coreutils gnugrep killall tree ];
           variables = { NIXOS_INSTALL_BOOTLOADER = "1"; };
         };
         networking.hostName = "mbp-nixos";
@@ -58,29 +51,6 @@
           };
         };
         nixpkgs.hostPlatform = system;
-        programs = {
-          gnupg.agent = {
-            enable = true;
-            enableSSHSupport = true;
-          };
-          zsh = {
-            enable = true;
-            promptInit = ''
-              # p10k
-              source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-              # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-              # Initialization code that may require console input (password prompts, [y/n]
-              # confirmations, etc.) must go above this block; everything else may go below.
-              if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-                source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-              fi
-              source ${./p10k.zsh}
-
-              # direnv
-              eval "$(direnv hook zsh)"
-            '';
-          };
-        };
         time.timeZone = "America/New_York";
         users.users.${username} = {
           description = "Will";

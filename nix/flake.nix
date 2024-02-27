@@ -3,11 +3,11 @@
   inputs = {
     linux = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "git+file:nix/os/linux";
+      url = "path:./os/linux";
     };
     mac = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "git+file:nix/os/mac";
+      url = "path:./os/mac";
     };
     nix-darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,7 +16,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     shared = {
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "git+file:nix/os/shared";
+      url = "path:./os/shared";
     };
   };
   outputs = { linux, mac, shared, nix-darwin, nixpkgs, self, }:

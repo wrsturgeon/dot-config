@@ -170,7 +170,7 @@
                     ];
                   }
                 ];
-                extensions = with nur.repos.rycee.firefox-addons; [ adblock ];
+                # extensions = with nur.repos.rycee.firefox-addons; [ adblock ];
               };
             };
           });

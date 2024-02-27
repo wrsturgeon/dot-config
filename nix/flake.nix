@@ -1,17 +1,23 @@
 {
   description = "System flakes";
-  inputs = let
-    pin-pkgs = name: value:
-      if name == "nixpkgs" || ((value ? flake) && (value.flake == false)) then
-        value
-      else
-        (value // { inputs.nixpkgs.follows = "nixpkgs"; });
-  in builtins.mapAttrs pin-pkgs {
-    linux.url = "git+file:nix/os/linux";
-    mac.url = "git+file:nix/os/mac";
-    nix-darwin.url = "github:LnL7/nix-darwin";
+  inputs = {
+    linux = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "git+file:nix/os/linux";
+    };
+    mac = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "git+file:nix/os/mac";
+    };
+    nix-darwin = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:LnL7/nix-darwin";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    shared.url = "git+file:nix/os/shared";
+    shared = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "git+file:nix/os/shared";
+    };
   };
   outputs = { linux, mac, shared, nix-darwin, nixpkgs, self, }:
     let

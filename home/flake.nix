@@ -174,7 +174,8 @@
                     ];
                   }
                 ];
-                extensions = with firefox-addons; [ ublock-origin ];
+                extensions = let plugins = firefox-addons.packages.${system};
+                in with (builtins.trace plugins plugins); [ ublock-origin ];
               };
             };
           } { });

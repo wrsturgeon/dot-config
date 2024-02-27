@@ -32,7 +32,7 @@
           throw "Unrecognized OS";
       get-username = linux-mac "will" "willsturgeon";
       config-modules = system: modules:
-        builtins.trace { inherit system modules; } {
+        builtins.trace (builtins.typeOf modules) {
           inherit system;
           modules = builtins.map (flake:
             flake.configure {

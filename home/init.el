@@ -22,3 +22,6 @@
 (transient-mark-mode 1)
 
 (global-hl-line-mode 1)
+
+(require 'evil)
+(evil-mode 1)

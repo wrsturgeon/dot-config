@@ -45,14 +45,20 @@
             ([ shared ] ++ modules);
         };
         laptop-name = "mbp-" + (linux-mac "nixos" "macos");
-      in {
-        packages = {
-          darwinConfigurations.${laptop-name} =
-            nix-darwin.lib.darwinSystem (config-modules [ mac ]);
+      in let
+        common = {
           homeConfigurations.${laptop-name} =
             home-manager.lib.homeManagerConfiguration { };
+        };
+        if-mac = if is-mac system then {
+          darwinConfigurations.${laptop-name} =
+            nix-darwin.lib.darwinSystem (config-modules [ mac ]);
+        } else
+          { };
+        if-linux = if is-linux system then {
           nixosConfigurations.${laptop-name} =
             nixpkgs.lib.nixosSystem (config-modules [ linux ]);
-        };
-      });
+        } else
+          { };
+      in { packages = common // if-mac // if-linux; });
 }

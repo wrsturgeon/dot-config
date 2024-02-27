@@ -13,7 +13,7 @@
             '';
           };
           extraInit = ''
-            rm -fr ~/.emacs ~/.emacs.d
+            rm -fr ~/emacs.el ~/.emacs ~/.emacs.d
             ln -s ~/.config/emacs ~/.emacs.d
           '';
           pathsToLink = [ "/share/zsh" ];
@@ -22,7 +22,10 @@
             vi = "vim";
           };
           systemPackages = with pkgs; [ coreutils gnugrep killall tree ];
-          variables = { NIXOS_INSTALL_BOOTLOADER = "1"; };
+          variables = {
+            NIXOS_INSTALL_BOOTLOADER = "1";
+            XDG_CONFIG_HOME = "~/.config";
+          };
         };
         networking.hostName = laptop-name;
         nix = {

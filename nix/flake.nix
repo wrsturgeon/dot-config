@@ -45,7 +45,8 @@
       };
       stateVersion = "23.05";
       config-args = system: {
-        inherit linux-mac shared stateVersion system;
+        inherit shared stateVersion system;
+        linux-mac = linux-mac system;
         nixpkgs-config = nixpkgs-config system;
         username = username system;
       };

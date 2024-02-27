@@ -35,7 +35,7 @@
         inherit system;
         modules = builtins.map (config:
           config {
-            inherit system;
+            inherit shared system;
             username = get-username system;
           }) (shared ++ modules);
       };

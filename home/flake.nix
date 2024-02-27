@@ -31,6 +31,7 @@
               nil
               nix-direnv
               nixfmt
+              pinentry
               python3
               rust-analyzer
               rustfmt
@@ -68,8 +69,10 @@
                 git_protocol = "https";
               };
             };
-            git.enable = true;
-            gpg.enable = true;
+            git = {
+              enable = true;
+              signing.signByDefault = false;
+            };
             helix.enable = true;
             home-manager.enable = true;
             kitty = {

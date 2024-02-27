@@ -16,7 +16,7 @@
     };
   };
   outputs = { apple-fonts, nixos-hardware, nixpkgs, sf-mono-liga-src, self }:
-    { system, username }:
+    { shared, system, username }:
     let
       pkgs = import nixpkgs {
         inherit system;

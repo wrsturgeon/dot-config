@@ -8,7 +8,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
   };
   outputs = { nix-doom-emacs, nixpkgs, self }:
-    { system, username }:
+    { shared, system, username }:
     let
       pkgs = import nixpkgs {
         inherit system;

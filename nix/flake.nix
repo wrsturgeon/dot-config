@@ -31,18 +31,18 @@
         else
           throw "Unrecognized OS";
       get-username = linux-mac "will" "willsturgeon";
-      # config-modules = system: modules: {
-      #   inherit system;
-      #   modules = builtins.map (config:
-      #     config {
-      #       inherit shared system;
-      #       username = get-username system;
-      #     }) (shared ++ modules);
-      # };
+      config-modules = system: modules: {
+        inherit system;
+        modules = builtins.map (flake:
+          flake.config {
+            inherit shared system;
+            username = get-username system;
+          }) (shared ++ modules);
+      };
     in {
-      # nixosConfigurations.mbp-nixos =
-      #   nixpkgs.lib.nixosSystem (config-modules "x86_64-linux" [ linux ]);
-      darwinConfigurations.macbook-macos = builtins.trace mac { };
-      # nix-darwin.lib.darwinSystem (config-modules "x86_64-darwin" [ mac ]);
+      nixosConfigurations.mbp-nixos =
+        nixpkgs.lib.nixosSystem (config-modules "x86_64-linux" [ linux ]);
+      darwinConfigurations.macbook-macos =
+        nix-darwin.lib.darwinSystem (config-modules "x86_64-darwin" [ mac ]);
     };
 }

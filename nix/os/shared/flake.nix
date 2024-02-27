@@ -30,7 +30,8 @@
           package = pkgs.nixUnstable;
           settings = {
             auto-optimise-store = true;
-            experimental-features = [ "flakes" "nix-command" ];
+            experimental-features =
+              [ "auto-allocate-uids" "flakes" "impure-env" "nix-command" ];
             log-lines = 32;
             nix-path = [ "nixpkgs=flake:nixpkgs" ];
             substituters = [ "https://cache.nixos.org" ];

@@ -17,7 +17,7 @@
   };
   outputs = { firefox-addons, home-manager, nix-doom-emacs, nixpkgs, self }: {
     configure =
-      { linux-mac, nixpkgs-config, shared, stateVersion, system, username }:
+      { home, linux-mac, nixpkgs-config, stateVersion, system, username }:
       let
         pkgs = import nixpkgs nixpkgs-config;
         doom-emacs = nix-doom-emacs.packages.${system}.default.override {

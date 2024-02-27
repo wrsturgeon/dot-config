@@ -17,7 +17,7 @@
   };
   outputs = { apple-fonts, nixos-hardware, nixpkgs, sf-mono-liga-src, self }: {
     configure =
-      { linux-mac, nixpkgs-config, shared, stateVersion, system, username }:
+      { home, linux-mac, nixpkgs-config, stateVersion, system, username }:
       let
         pkgs = import nixpkgs nixpkgs-config;
         print-list = builtins.foldl' (acc: s: acc + " " + s) "";

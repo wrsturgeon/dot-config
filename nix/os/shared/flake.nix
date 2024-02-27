@@ -3,7 +3,7 @@
   inputs = { nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; };
   outputs = { nixpkgs, self }: {
     configure =
-      { linux-mac, nixpkgs-config, shared, stateVersion, system, username }:
+      { home, linux-mac, nixpkgs-config, stateVersion, system, username }:
       let pkgs = import nixpkgs nixpkgs-config;
       in [{
         environment = {

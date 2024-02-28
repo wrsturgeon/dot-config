@@ -90,7 +90,17 @@
             neovim = {
               enable = true;
               extraLuaConfig = builtins.readFile ./init.lua;
-              plugins = with pkgs.vimPlugins; [ neovim-ayu ];
+              plugins = with pkgs.vimPlugins; [
+                cmp-buffer
+                cmp-cmdline
+                cmp_luasnip
+                cmp-nvim-lsp
+                cmp-path
+                luasnip
+                neovim-ayu
+                nvim-cmp
+                nvim-lspconfig
+              ];
               viAlias = true;
               vimAlias = true;
               vimdiffAlias = true;

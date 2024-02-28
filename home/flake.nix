@@ -123,6 +123,11 @@
                 tabstop = 2;
               };
             };
+            wezterm = {
+              enable = true;
+              enableZshIntegration = true;
+              extraConfig = builtins.readFile ./wezterm.lua;
+            };
             zsh = {
               enable = true;
               enableAutosuggestions = true;

@@ -97,7 +97,7 @@
                   src = jupyter-vim-src;
                 };
               in (with pkgs.vimPlugins; [
-                ayu-vim
+                catppuccin-vim
                 Coqtail
                 fugitive
                 fzf-vim
@@ -119,9 +119,9 @@
                 mouse = null;
                 number = true;
                 relativenumber = false;
-                shiftwidth = 2;
+                shiftwidth = 4;
                 smartcase = true;
-                tabstop = 2;
+                tabstop = 4;
               };
             };
             zsh = {

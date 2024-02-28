@@ -20,10 +20,10 @@ set listchars=tab:>-,trail:.,extends:#,nbsp:.
 set undolevels=100
 
 " indenting
-set softtabstop=2
+set autoindent
+set softtabstop=4
 set shiftround
 set smarttab
-set autoindent
 set nowrap " controversial
 
 " do not fold (hide) regions of code
@@ -70,8 +70,9 @@ set wildmode=list:longest
 set updatetime=250
 
 " unfuck various colors
-let ayucolor = "light"
-colorscheme ayu
+# let ayucolor = "light"
+# colorscheme ayu
+colorscheme catppuccin
 highlight clear LspErrorText
 highlight clear SignColumn
 

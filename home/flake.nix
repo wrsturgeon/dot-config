@@ -96,6 +96,8 @@
                 cmp_luasnip
                 cmp-nvim-lsp
                 cmp-path
+                comment-nvim
+                crates-nvim
                 luasnip
                 neovim-ayu
                 nvim-cmp

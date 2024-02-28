@@ -220,6 +220,7 @@ lspconfig.lua_ls.setup({
         }
     }
 })
+lspconfig.nil_ls.setup({ on_attach = on_attach })
 lspconfig.ocamllsp.setup({ on_attach = on_attach })
 lspconfig.pylsp.setup({ on_attach = on_attach })
 lspconfig.rust_analyzer.setup({
@@ -257,3 +258,13 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'Buf
         vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
     end
 })
+
+
+
+--%%%%%%%%%%%%%%%%%--
+--  P L U G I N S  --
+--%%%%%%%%%%%%%%%%%--
+
+-- Comment.nvim
+require('Comment').setup()
+

@@ -105,8 +105,8 @@
                 vim-lsp
                 vim-nix
               ]) ++ [ jupyter-vim ];
-              package =
-                pkgs.vim_configurable.override { python = pkgs.python3; };
+              # package =
+              #   pkgs.vim_configurable.override { python = pkgs.python3; };
               settings = {
                 background = "dark";
                 copyindent = true;

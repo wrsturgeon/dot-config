@@ -20,8 +20,8 @@ end
 --%%%%%%%%%%%%%%%--
 
 local opts = {
-    noremap = true,      -- non-recursive
-    silent = true,       -- do not show message
+    noremap = true, -- non-recursive
+    silent = true,  -- do not show message
 }
 
 -----------------
@@ -54,16 +54,16 @@ vim.keymap.set('v', '>', '>gv', opts)
 --  O P T I O N S  --
 --%%%%%%%%%%%%%%%%%--
 
-vim.opt.clipboard = 'unnamedplus' -- system clipboard
-vim.opt.completeopt = {'menu', 'menuone', 'noselect'} -- completion?
+vim.opt.clipboard = 'unnamedplus'                       -- system clipboard
+vim.opt.completeopt = { 'menu', 'menuone', 'noselect' } -- completion?
 vim.opt.cursorline = true
 vim.opt.expandtab = true
 vim.opt.foldenable = false
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true -- but... (see smartcase)
-vim.opt.incsearch = true -- show search results while typing
-vim.opt.mouse = nil -- disable mouse input
-vim.opt.number = true -- line numbers
+vim.opt.incsearch = true  -- show search results while typing
+vim.opt.mouse = nil       -- disable mouse input
+vim.opt.number = true     -- line numbers
 vim.opt.relativenumber = false
 vim.opt.shiftwidth = 4
 vim.opt.showmode = true
@@ -97,7 +97,7 @@ cmp.setup({
     },
     mapping = cmp.mapping.preset.insert({
         -- Use <C-b/f> to scroll the docs
-        ['<C-b>'] = cmp.mapping.scroll_docs( -4),
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         -- Use <C-k/j> to switch in items
         ['<C-k>'] = cmp.mapping.select_prev_item(),
@@ -121,42 +121,42 @@ cmp.setup({
         ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif luasnip.jumpable( -1) then
-                luasnip.jump( -1)
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
             else
                 fallback()
             end
         end, { 'i', 's' }),
     }),
 
-  -- Let's configure the item's appearance
-  -- source: https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance
-  formatting = {
-      -- Set order from left to right
-      -- kind: single letter indicating the type of completion
-      -- abbr: abbreviation of 'word'; when not empty it is used in the menu instead of 'word'
-      -- menu: extra text for the popup menu, displayed after 'word' or 'abbr'
-      fields = { 'abbr', 'menu' },
+    -- Let's configure the item's appearance
+    -- source: https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance
+    formatting = {
+        -- Set order from left to right
+        -- kind: single letter indicating the type of completion
+        -- abbr: abbreviation of 'word'; when not empty it is used in the menu instead of 'word'
+        -- menu: extra text for the popup menu, displayed after 'word' or 'abbr'
+        fields = { 'abbr', 'menu' },
 
-      -- customize the appearance of the completion menu
-      format = function(entry, vim_item)
-          vim_item.menu = ({
-              nvim_lsp = '[Lsp]',
-              luasnip = '[Luasnip]',
-              buffer = '[File]',
-              path = '[Path]',
-          })[entry.source.name]
-          return vim_item
-      end,
-  },
+        -- customize the appearance of the completion menu
+        format = function(entry, vim_item)
+            vim_item.menu = ({
+                nvim_lsp = '[Lsp]',
+                luasnip = '[Luasnip]',
+                buffer = '[File]',
+                path = '[Path]',
+            })[entry.source.name]
+            return vim_item
+        end,
+    },
 
-  -- Set source precedence
-  sources = cmp.config.sources({
-      { name = 'nvim_lsp' },    -- For nvim-lsp
-      { name = 'luasnip' },     -- For luasnip user
-      { name = 'buffer' },      -- For buffer word completion
-      { name = 'path' },        -- For path completion
-  })
+    -- Set source precedence
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' }, -- For nvim-lsp
+        { name = 'luasnip' },  -- For luasnip user
+        { name = 'buffer' },   -- For buffer word completion
+        { name = 'path' },     -- For path completion
+    })
 })
 
 
@@ -209,24 +209,39 @@ end
 -- LSP binaries:
 lspconfig.bashls.setup({ on_attach = on_attach })
 lspconfig.clangd.setup({ on_attach = on_attach })
-lspconfig.lua_ls.setup({ on_attach = on_attach, settings = { Lua = {
-    diagnostics = { globals = "vim" },
-    runtime = { version = "LuaJIT" },
-    telemetry = { enable = false },
-    workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-}}})
+lspconfig.lua_ls.setup({
+    on_attach = on_attach,
+    settings = {
+        Lua = {
+            diagnostics = { globals = "vim" },
+            runtime = { version = "LuaJIT" },
+            telemetry = { enable = false },
+            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+        }
+    }
+})
 lspconfig.ocamllsp.setup({ on_attach = on_attach })
 lspconfig.pylsp.setup({ on_attach = on_attach })
-lspconfig.rust_analyzer.setup({ on_attach = on_attach, settings = { ["rust-analyzer"] = {
-    -- <https://rust-analyzer.github.io/manual.html#nvim-lsp>
-    cargo = { buildScripts = { enable = true } },
-    imports = { granularity = { group = "module" }, prefix = "self" },
-    inlayHints = { closingBraceHints = true },
-    procMacro = { enable = true },
-}}})
+lspconfig.rust_analyzer.setup({
+    on_attach = on_attach,
+    settings = {
+        ["rust-analyzer"] = {
+            -- <https://rust-analyzer.github.io/manual.html#nvim-lsp>
+            cargo = { buildScripts = { enable = true } },
+            imports = { granularity = { group = "module" }, prefix = "self" },
+            inlayHints = { closingBraceHints = true },
+            procMacro = { enable = true },
+        }
+    }
+})
 
 -- Format on save!
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+vim.api.nvim_create_autocmd('BufWritePre', {
+    buffer = vim.fn.bufnr(),
+    callback = function()
+        vim.lsp.buf.format({ timeout_ms = 3000 })
+    end,
+})
 
 
 
@@ -235,11 +250,10 @@ vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 --%%%%%%%%%%%%%%%%%%%%%%%--
 
 -- <https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim>
-vim.api.nvim_create_autocmd({'BufEnter','BufAdd','BufNew','BufNewFile','BufWinEnter'}, {
-  group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
-  callback = function()
-    vim.opt.foldmethod = 'expr'
-    vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
-  end
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {
+    group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
+    callback = function()
+        vim.opt.foldmethod = 'expr'
+        vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'
+    end
 })
-

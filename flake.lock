@@ -88,13 +88,14 @@
       "inputs": {
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
+        "jupyter-vim-src": "jupyter-vim-src",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-TKSnxBuDZxU2dz5TyPImwI7DeZxxw/S0ustmAfDMHCc=",
+        "narHash": "sha256-WD4fJg2KoSzjGymHpx+D3BLJ/qcl8/+kbqR3XkfHQzk=",
         "path": "./home",
         "type": "path"
       },
@@ -121,6 +122,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "jupyter-vim-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1707721307,
+        "narHash": "sha256-hUogj5OraLVwk6z9pOAmxaRcF+DtUxGW+LX4YD1bzJc=",
+        "owner": "jupyter-vim",
+        "repo": "jupyter-vim",
+        "rev": "fd2a2e1a3df7c747be4f5aabc7b8fe37fc5957c1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jupyter-vim",
+        "repo": "jupyter-vim",
         "type": "github"
       }
     },
@@ -199,11 +216,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1709038661,
-        "narHash": "sha256-Ys611iT6pChGv954aa4f8oKoDKJG3IXjJjPhnj6uaLY=",
+        "lastModified": 1709069307,
+        "narHash": "sha256-ER6N232jucnqu4+AK80RdmgBDuk61FAqmp36EMqkQns=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "8520c158aee718c6e87b56881105fc4223c3c723",
+        "rev": "9c1ea5e3a2a2578792438cba233f2763593e19c5",
         "type": "github"
       },
       "original": {

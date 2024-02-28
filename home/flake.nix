@@ -9,9 +9,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
     };
+    jupyter-vim-src = {
+      flake = false;
+      url = "github:jupyter-vim/jupyter-vim";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
-  outputs = { firefox-addons, home-manager, nixpkgs, self }: {
+  outputs = { firefox-addons, home-manager, jupyter-vim-src, nixpkgs, self }: {
     configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
       , system, username }:
       let
@@ -87,7 +91,12 @@
             vim = {
               enable = true;
               extraConfig = builtins.readFile ./vimrc;
-              plugins = with pkgs.vimPlugins; [
+              plugins = let
+                jupyter-vim = pkgs.vimUtils.buildVimPlugin {
+                  name = "jupyter-vim";
+                  src = jupyter-vim-src;
+                };
+              in (with pkgs.vimPlugins; [
                 ayu-vim
                 Coqtail
                 fugitive
@@ -96,7 +105,7 @@
                 vim-airline
                 vim-lsp
                 vim-nix
-              ];
+              ]) ++ [ jupyter-vim ];
               settings = {
                 background = "dark";
                 copyindent = true;

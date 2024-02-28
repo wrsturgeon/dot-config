@@ -95,6 +95,7 @@ function s:register_lsp(name, langs)
 endfunction
 call s:register_lsp('coq-lsp', ['coq'])
 call s:register_lsp('nil', ['nix'])
+call s:register_lsp('pylsp', ['python'])
 
 " vim-lsp keymap
 function! s:on_lsp_buffer_enabled() abort

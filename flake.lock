@@ -91,11 +91,12 @@
         "jupyter-vim-src": "jupyter-vim-src",
         "nixpkgs": [
           "nixpkgs"
-        ]
+        ],
+        "wezterm-src": "wezterm-src"
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-FjENa3wHEqSdzdqeNEYiaky8UhwmrFdmB9EGI4Cei8A=",
+        "narHash": "sha256-Av6Hum0ssw+P1RvN0O+T+K+OcHtEsbxHvFgXqlAbtqQ=",
         "path": "./home",
         "type": "path"
       },
@@ -345,6 +346,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "wezterm-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1708994725,
+        "narHash": "sha256-t/owVTFmpudRe0kFngQMiVCXmN9DjvqECeoe/sg5zxU=",
+        "owner": "wez",
+        "repo": "wezterm",
+        "rev": "22424c3280cb21af43317cb58ef7bc34a8cbcc91",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wez",
+        "repo": "wezterm",
         "type": "github"
       }
     }

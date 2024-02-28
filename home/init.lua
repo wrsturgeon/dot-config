@@ -181,7 +181,7 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+local gn_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -201,16 +201,42 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set("n", "<space>f", function()
+    vim.keymap.set('n', '<space>f', function()
         vim.lsp.buf.format({ async = true })
     end, bufopts)
 end
 
--- Configure each language
--- How to add LSP for a specific language?
--- 1. use `:Mason` to install corresponding LSP
--- 2. add configuration below
-lspconfig.pylsp.setup({
-	on_attach = on_attach,
+-- LSP binaries:
+lspconfig.bashls.setup({ on_attach = on_attach })
+lspconfig.clangd.setup({ on_attach = on_attach })
+lspconfig.lua_ls.setup({ on_attach = on_attach, settings = { Lua = {
+    diagnostics = { globals = "vim" },
+    runtime = { version = "LuaJIT" },
+    telemetry = { enable = false },
+    workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+}}})
+lspconfig.ocamllsp.setup({ on_attach = on_attach })
+lspconfig.pylsp.setup({ on_attach = on_attach })
+lspconfig.rust_analyzer.setup({ on_attach = on_attach, settings = { ["rust-analyzer"] = {
+    -- <https://rust-analyzer.github.io/manual.html#nvim-lsp>
+    cargo = { buildScripts = { enable = true } },
+    imports = { granularity = { group = "module" }, prefix = "self" },
+    inlayHints = { closingBraceHints = true },
+    procMacro = { enable = true },
+}}})
+
+
+
+--%%%%%%%%%%%%%%%%%%%%%%%--
+--  T R E E S I T T E R  --
+--%%%%%%%%%%%%%%%%%%%%%%%--
+
+-- <https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim>
+vim.api.nvim_create_autocmd({'BufEnter','BufAdd','BufNew','BufNewFile','BufWinEnter'}, {
+  group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
+  callback = function()
+    vim.opt.foldmethod     = 'expr'
+    vim.opt.foldexpr       = 'nvim_treesitter#foldexpr()'
+  end
 })
 

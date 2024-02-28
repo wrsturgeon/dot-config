@@ -67,7 +67,10 @@ set wildmenu
 set wildmode=list:longest
 
 " update more often
-" set updatetime=250
+set updatetime=250
+
+" unfuck gitgutter colors
+highlight clear SignColumn
 
 set cot+=preview
 

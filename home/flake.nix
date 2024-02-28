@@ -51,7 +51,7 @@
                 spotify
                 taplo
                 zoom-us
-              ]) ++ [ wezterm ];
+              ]) ++ [ wezterm.packages.${system}.default ];
             };
             programs = {
               direnv = {

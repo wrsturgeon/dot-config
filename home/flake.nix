@@ -36,7 +36,6 @@
               nix-direnv
               nixfmt
               pinentry
-              python3
               rust-analyzer
               rustfmt
               slack
@@ -106,6 +105,8 @@
                 vim-lsp
                 vim-nix
               ]) ++ [ jupyter-vim ];
+              package =
+                pkgs.vim_configurable.override { python = pkgs.python3; };
               settings = {
                 background = "dark";
                 copyindent = true;

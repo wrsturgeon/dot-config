@@ -97,7 +97,6 @@
                   src = jupyter-vim-src;
                 };
               in (with pkgs.vimPlugins; [
-                catppuccin-vim
                 Coqtail
                 fugitive
                 fzf-vim

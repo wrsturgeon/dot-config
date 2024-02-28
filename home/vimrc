@@ -70,10 +70,8 @@ set wildmode=list:longest
 set updatetime=250
 
 " unfuck various colors
-# let ayucolor = "light"
-# colorscheme ayu
-colorscheme catppuccin
-highlight clear LspErrorText
+colorscheme slate
+highlight LspErrorText ctermbg=darkred
 highlight clear SignColumn
 
 set cot+=preview

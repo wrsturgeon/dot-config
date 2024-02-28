@@ -25,6 +25,7 @@
   };
   outputs = { home, linux, mac, shared, nix-darwin, nixpkgs, self, }:
     let
+      systems = [ "x86_64-darwin" "x86_64-linux" ];
       is-linux = nixpkgs.lib.strings.hasSuffix "linux";
       is-mac = nixpkgs.lib.strings.hasSuffix "darwin";
       linux-mac = system: on-linux: on-mac:
@@ -66,6 +67,17 @@
       in {
         ${laptop-name system} = nix-darwin.lib.darwinSystem (on system mac);
       };
+      devShells = let
+        shell-on = system:
+          let pkgs = (import nixpkgs (nixpkgs-config system));
+          in {
+            default =
+              pkgs.mkShell { packages = with pkgs; [ lua-language-server ]; };
+          };
+      in builtins.listToAttrs (builtins.map (name: {
+        inherit name;
+        value = shell-on name;
+      }) systems);
       nixosConfigurations = let system = "x86_64-linux";
       in { ${laptop-name system} = nixpkgs.lib.nixosSystem (on system linux); };
     };

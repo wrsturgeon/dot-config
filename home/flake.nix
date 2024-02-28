@@ -14,21 +14,21 @@
       url = "github:jupyter-vim/jupyter-vim";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    wezterm-src = {
-      flake = false;
-      url = "github:wez/wezterm";
+    wezterm = {
+      # flake = false;
+      url = "github:wez/wezterm?dir=nix";
     };
   };
-  outputs = { firefox-addons, home-manager, jupyter-vim-src, nixpkgs, self
-    , wezterm-src }: {
+  outputs =
+    { firefox-addons, home-manager, jupyter-vim-src, nixpkgs, self, wezterm }: {
       configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
         , system, username }:
         let
           pkgs = import nixpkgs nixpkgs-config;
-          wezterm = pkgs.rustPlatform.buildRustPackage {
-            name = "wezterm";
-            src = wezterm-src;
-          };
+          # wezterm = pkgs.rustPlatform.buildRustPackage {
+          #   name = "wezterm";
+          #   src = wezterm-src;
+          # };
           user-cfg = {
             home = {
               inherit stateVersion username;

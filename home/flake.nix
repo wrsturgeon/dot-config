@@ -15,7 +15,7 @@
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     wezterm = {
-      # flake = false;
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:wez/wezterm?dir=nix";
     };
   };

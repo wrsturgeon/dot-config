@@ -225,6 +225,9 @@ lspconfig.rust_analyzer.setup({ on_attach = on_attach, settings = { ["rust-analy
     procMacro = { enable = true },
 }}})
 
+-- Format on save!
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+
 
 
 --%%%%%%%%%%%%%%%%%%%%%%%--

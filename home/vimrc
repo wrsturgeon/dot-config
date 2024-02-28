@@ -70,6 +70,8 @@ set wildmode=list:longest
 set updatetime=250
 
 " unfuck various colors
+let ayucolor = "light"
+colorscheme ayu
 highlight clear LspErrorText
 highlight clear SignColumn
 

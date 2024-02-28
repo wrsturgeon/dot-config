@@ -97,6 +97,7 @@
                 cmp-nvim-lsp
                 cmp-path
                 comment-nvim
+                Coqtail
                 crates-nvim
                 luasnip
                 neovim-ayu

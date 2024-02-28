@@ -89,7 +89,7 @@
             };
             neovim = {
               enable = true;
-              extraLuaConfig = builtins.readFile ./nvim/init.lua;
+              extraLuaConfig = builtins.readFile ./init.lua;
               plugins = with pkgs.vimPlugins; [ neovim-ayu ];
               viAlias = true;
               vimAlias = true;

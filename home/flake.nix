@@ -94,7 +94,7 @@
             neovim = {
               enable = true;
               extraLuaConfig = builtins.readFile ./init.lua;
-              plugins = [ magma ] ++ (with pkgs.vimPlugins; [
+              plugins = (with pkgs.vimPlugins; [
                 cmp-buffer
                 cmp-cmdline
                 cmp_luasnip
@@ -112,7 +112,7 @@
                 nvim-notify
                 sniprun
                 telescope-nvim
-              ]);
+              ]); # ++ [ magma ];
               viAlias = true;
               vimAlias = true;
               vimdiffAlias = true;

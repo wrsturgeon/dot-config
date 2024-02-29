@@ -100,7 +100,7 @@
                 Coqtail
                 crates-nvim
                 gitsigns-nvim
-                lualine
+                lualine-nvim
                 luasnip
                 neovim-ayu
                 nvim-cmp

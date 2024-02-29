@@ -224,11 +224,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1709179476,
-        "narHash": "sha256-qoVKvwKsq6SqR6Xi3DG18+T9ay36mgP1d4RG44AKvms=",
+        "lastModified": 1709201646,
+        "narHash": "sha256-h4RB+Mm+zISKrUwOXqYng21pZkv7ee9+J3rW5RXRFM0=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "0b5d2c18a99dcb28ec965fdfb385267ab2f8240e",
+        "rev": "2dacb92d25f3e0c9d01ab66b10c7dd64189a0ef7",
         "type": "gitlab"
       },
       "original": {
@@ -579,6 +579,7 @@
       "inputs": {
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
+        "magma-src": "magma-src",
         "nil": "nil",
         "nixfmt": "nixfmt",
         "nixpkgs": [
@@ -587,7 +588,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-N1XkdsIpUWrbsxXChkxVqmDcSJqtPIAcifCKkDx1a5Q=",
+        "narHash": "sha256-qvR7zlowdcat9o5t9xSZBnk38FqDemr9zCFtGr09kJ8=",
         "path": "./home",
         "type": "path"
       },
@@ -604,11 +605,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1708988456,
-        "narHash": "sha256-RCz7Xe64tN2zgWk+MVHkzg224znwqknJ1RnB7rVqUWw=",
+        "lastModified": 1709204054,
+        "narHash": "sha256-U1idK0JHs1XOfSI1APYuXi4AEADf+B+ZU4Wifc0pBHk=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "1d085ea4444d26aa52297758b333b449b2aa6fca",
+        "rev": "2f3367769a93b226c467551315e9e270c3f78b15",
         "type": "github"
       },
       "original": {
@@ -769,6 +770,22 @@
       "original": {
         "path": "./os/mac",
         "type": "path"
+      }
+    },
+    "magma-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1688797521,
+        "narHash": "sha256-IrMR57gk9iCk73esHO24KZeep9VrlkV5sOC4PzGexyo=",
+        "owner": "dccsillag",
+        "repo": "magma-nvim",
+        "rev": "ff3deba8a879806a51c005e50782130246143d06",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dccsillag",
+        "repo": "magma-nvim",
+        "type": "github"
       }
     },
     "n2c": {
@@ -1260,11 +1277,11 @@
     },
     "nixpkgs_7": {
       "locked": {
-        "lastModified": 1709136964,
-        "narHash": "sha256-XD6GfVgSfWjqqWAuybkvaxS1/xrwTrh3V1dSkoYJW3Q=",
+        "lastModified": 1709200309,
+        "narHash": "sha256-lKdtMbhnBNU1lr978T+wEYet3sfIXXgyiDZNEgx8CV8=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "96990c69fd59e807cee8ff874d0526c70dffdf8f",
+        "rev": "ebe6e807793e7c9cc59cf81225fdee1a03413811",
         "type": "github"
       },
       "original": {

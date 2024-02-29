@@ -305,8 +305,8 @@ require('Comment').setup()
 -- <https://github.com/lewis6991/gitsigns.nvim#installation--usage>
 require('gitsigns').setup {
     signs = {
-        add = { text = '+' }, -- { text = '│' },
-        change = { text = '~' }, -- { text = '│' },
+        add = { text = '│' },
+        change = { text = '│' },
         delete = { text = '_' },
         topdelete = { text = '‾' },
         changedelete = { text = '~' },

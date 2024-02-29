@@ -37,7 +37,6 @@
                 gcc
                 gnumake
                 logseq
-                nixfmt
                 pinentry
                 rust-analyzer
                 rustfmt

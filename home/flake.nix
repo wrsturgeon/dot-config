@@ -9,43 +9,44 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
     };
-    nil-src = {
+    nil = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:oxalica/nil";
     };
-    # nixfmt = {
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   url = "github:serokell/nixfmt";
-    # };
+    nixfmt = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:serokell/nixfmt";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
-  outputs = { firefox-addons, home-manager, nil-src, nixpkgs, self }: {
+  outputs = { firefox-addons, home-manager, nil, nixfmt, nixpkgs, self }: {
     configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
       , system, username }:
       let
         pkgs = import nixpkgs nixpkgs-config;
-        nil = nil-src.packages.${system}.default;
         user-cfg = {
           home = {
             inherit stateVersion username;
-            packages = [ nil ] ++ (with pkgs; [
-              cargo
-              coqPackages.coq
-              discord
-              fd
-              gcc
-              gnumake
-              logseq
-              nixfmt
-              pinentry
-              rust-analyzer
-              rustfmt
-              slack
-              spotify
-              taplo
-              # wezterm
-              zoom-us
-            ]);
+            packages =
+              (builtins.map (f: f.packages.${system}.default) [ nil nixfmt ])
+              ++ (with pkgs; [
+                cargo
+                coqPackages.coq
+                discord
+                fd
+                gcc
+                gnumake
+                logseq
+                nixfmt
+                pinentry
+                rust-analyzer
+                rustfmt
+                slack
+                spotify
+                taplo
+                # wezterm
+                zoom-us
+              ]);
             shellAliases = { vi = "nvim -u ~/.config/home/init.lua"; };
           };
           programs = {

@@ -88,14 +88,14 @@
       "inputs": {
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
-        "jupyter-vim-src": "jupyter-vim-src",
+        "magma-src": "magma-src",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-HeYHgNjB0inZHTetnuoGWAVz2zcjQLniOpz/xGK85Gw=",
+        "narHash": "sha256-cmjEZDhOm0ZfatUG+0vjrFB9qMn+qqxamWeljZIBaUM=",
         "path": "./home",
         "type": "path"
       },
@@ -122,22 +122,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "jupyter-vim-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1707721307,
-        "narHash": "sha256-hUogj5OraLVwk6z9pOAmxaRcF+DtUxGW+LX4YD1bzJc=",
-        "owner": "jupyter-vim",
-        "repo": "jupyter-vim",
-        "rev": "fd2a2e1a3df7c747be4f5aabc7b8fe37fc5957c1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "jupyter-vim",
-        "repo": "jupyter-vim",
         "type": "github"
       }
     },
@@ -176,6 +160,22 @@
       "original": {
         "path": "./os/mac",
         "type": "path"
+      }
+    },
+    "magma-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1688797521,
+        "narHash": "sha256-IrMR57gk9iCk73esHO24KZeep9VrlkV5sOC4PzGexyo=",
+        "owner": "dccsillag",
+        "repo": "magma-nvim",
+        "rev": "ff3deba8a879806a51c005e50782130246143d06",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dccsillag",
+        "repo": "magma-nvim",
+        "type": "github"
       }
     },
     "nix-darwin": {

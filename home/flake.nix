@@ -9,20 +9,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
     };
-    jupyter-vim-src = {
+    magma-src = {
       flake = false;
-      url = "github:jupyter-vim/jupyter-vim";
+      url = "github:dccsillag/magma-nvim";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
-  outputs = { firefox-addons, home-manager, jupyter-vim-src, nixpkgs, self }: {
+  outputs = { firefox-addons, home-manager, magma-src, nixpkgs, self }: {
     configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
       , system, username }:
       let
         pkgs = import nixpkgs nixpkgs-config;
-        jupyter-vim = pkgs.vimUtils.buildVimPlugin {
-          name = "jupyter-vim";
-          src = jupyter-vim-src;
+        magma = pkgs.vimUtils.buildVimPlugin {
+          name = "magma";
+          src = magma-src;
         };
         user-cfg = {
           home = {
@@ -94,7 +94,7 @@
             neovim = {
               enable = true;
               extraLuaConfig = builtins.readFile ./init.lua;
-              plugins = [ jupyter-vim ] ++ (with pkgs.vimPlugins; [
+              plugins = [ magma ] ++ (with pkgs.vimPlugins; [
                 cmp-buffer
                 cmp-cmdline
                 cmp_luasnip

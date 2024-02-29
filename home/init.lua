@@ -20,7 +20,7 @@ end
 -- open a (very small) terminal
 vim.keymap.set('n', '<leader>t', function()
     local buffer = vim.api.nvim_create_buf(false, false)
-    vim.api.nvim_open_win(buffer, true, { split = 'below', height = 10 })
+    vim.api.nvim_open_win(buffer, true, { height = 10, split = 'below', win = 0 })
     vim.api.nvim_open_term(buffer, {})
 end, {})
 

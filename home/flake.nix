@@ -9,9 +9,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
     };
-    magma-src = {
+    hydrogen-textobjects-src = {
       flake = false;
-      url = "github:dccsillag/magma-nvim";
+      url = "github:gcballesteros/vim-textobj-hydrogen";
+    };
+    jupytext-src = {
+      flake = false;
+      url = "github:gcballesteros/jupytext.nvim";
     };
     nil = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,15 +27,19 @@
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
-  outputs =
-    { firefox-addons, home-manager, magma-src, nil, nixfmt, nixpkgs, self }: {
+  outputs = { firefox-addons, home-manager, hydrogen-textobjects-src
+    , jupytext-src, nil, nixfmt, nixpkgs, self }: {
       configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
         , system, username }:
         let
           pkgs = import nixpkgs nixpkgs-config;
-          magma = pkgs.vimUtils.buildVimPlugin {
-            name = "magma";
-            src = magma-src;
+          jupytext = pkgs.vimUtils.buildVimPlugin {
+            name = "jupytext";
+            src = jupytext-src;
+          };
+          hydrogen-textobjects = pkgs.vimUtils.buildVimPlugin {
+            name = "hydrogen-textobjects";
+            src = hydrogen-textobjects-src;
           };
           user-cfg = {
             home = {
@@ -102,7 +110,7 @@
               neovim = {
                 enable = true;
                 extraLuaConfig = builtins.readFile ./init.lua;
-                plugins = [ magma ] ++ (with pkgs.vimPlugins; [
+                plugins = (with pkgs.vimPlugins; [
                   cmp-buffer
                   cmp-cmdline
                   cmp_luasnip
@@ -118,9 +126,15 @@
                   nvim-cmp
                   nvim-lspconfig
                   nvim-notify
+                  nvim-treesitter-textobjects
                   sniprun
                   telescope-nvim
-                ]);
+                ]) ++ [
+                  # <https://maxwellrules.com/misc/nvim_jupyter.html>
+                  hydrogen-textobjects
+                  jupytext
+                  pkgs.vimPlugins.iron-nvim
+                ];
                 withPython3 = true;
               };
               ripgrep.enable = true;

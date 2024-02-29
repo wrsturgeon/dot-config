@@ -579,7 +579,8 @@
       "inputs": {
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
-        "magma-src": "magma-src",
+        "hydrogen-textobjects-src": "hydrogen-textobjects-src",
+        "jupytext-src": "jupytext-src",
         "nil": "nil",
         "nixfmt": "nixfmt",
         "nixpkgs": [
@@ -588,7 +589,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-kysM8sons4bQPoZfuW7xGLP/WU03v0bQKGUeIHfyv5E=",
+        "narHash": "sha256-dJ8jpynm91wHY53C8uWWu62kVdTp+ul9sj1pyRYvoZw=",
         "path": "./home",
         "type": "path"
       },
@@ -660,6 +661,22 @@
         "type": "indirect"
       }
     },
+    "hydrogen-textobjects-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1601364767,
+        "narHash": "sha256-uYsgVhCjF/AyUO/sfnUDYaAbB1Fm3u+5O60v2bN6Fs4=",
+        "owner": "gcballesteros",
+        "repo": "vim-textobj-hydrogen",
+        "rev": "e6f9a6b26a3524615bac347503c35327636fab72",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gcballesteros",
+        "repo": "vim-textobj-hydrogen",
+        "type": "github"
+      }
+    },
     "incl": {
       "inputs": {
         "nixlib": [
@@ -701,6 +718,22 @@
         "ref": "hkm/remote-iserv",
         "type": "git",
         "url": "https://gitlab.haskell.org/hamishmack/iserv-proxy.git"
+      }
+    },
+    "jupytext-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1706080485,
+        "narHash": "sha256-x5emW+qfUTUDR72B9QdDgVdrb8wGH9D7AdtRrQm80sI=",
+        "owner": "gcballesteros",
+        "repo": "jupytext.nvim",
+        "rev": "68fddf28119dbaddfaea6b71f3d6aa1e081afb93",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gcballesteros",
+        "repo": "jupytext.nvim",
+        "type": "github"
       }
     },
     "linux": {
@@ -770,22 +803,6 @@
       "original": {
         "path": "./os/mac",
         "type": "path"
-      }
-    },
-    "magma-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1688797521,
-        "narHash": "sha256-IrMR57gk9iCk73esHO24KZeep9VrlkV5sOC4PzGexyo=",
-        "owner": "dccsillag",
-        "repo": "magma-nvim",
-        "rev": "ff3deba8a879806a51c005e50782130246143d06",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dccsillag",
-        "repo": "magma-nvim",
-        "type": "github"
       }
     },
     "n2c": {

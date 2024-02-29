@@ -69,6 +69,7 @@ vim.opt.number = true -- line numbers
 vim.opt.relativenumber = false
 vim.opt.shiftwidth = 4
 vim.opt.showmode = true
+vim.opt.signcolumn = true
 vim.opt.smartcase = true
 vim.opt.softtabstop = 4
 vim.opt.splitbelow = true

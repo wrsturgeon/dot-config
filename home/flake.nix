@@ -106,7 +106,6 @@
                 nvim-cmp
                 nvim-lspconfig
                 telescope-nvim
-                vim-visual-multi
               ];
               viAlias = true;
               vimAlias = true;

@@ -102,7 +102,7 @@
                 cmp-path
                 comment-nvim
                 Coqtail
-                crates-nvim
+                # crates-nvim
                 gitsigns-nvim
                 lualine-nvim
                 luasnip

@@ -269,7 +269,7 @@ local formatter = function(pattern, command)
 	})
 end
 
-formatter("*.lua", "stylua %")
+formatter("*.lua", "stylua --indent-type=Spaces %")
 formatter("*.nix", "nixfmt %")
 formatter("*.py", "black %")
 formatter("*.rs", "rustfmt %")

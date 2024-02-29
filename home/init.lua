@@ -54,7 +54,9 @@ local sniprun = require 'sniprun'
 vim.keymap.set('n', '<leader>r', function()
     vim.cmd '1,.SnipRun' -- see `:h cmdline-ranges`
 end)
-vim.keymap.set('v', '<leader>r', sniprun.run 'v')
+vim.keymap.set('v', '<leader>r', function()
+    sniprun.run 'v'
+end)
 vim.keymap.set('n', '<leader>R', function()
     vim.cmd '%SnipRun'
 end)

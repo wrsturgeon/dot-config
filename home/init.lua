@@ -101,8 +101,8 @@ cmp.setup({
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         -- Use <C-k/j> to switch in items
-        -- ["<C-k>"] = cmp.mapping.select_prev_item(),
-        -- ["<C-j>"] = cmp.mapping.select_next_item(),
+        ["<C-k>"] = cmp.mapping.select_prev_item(),
+        ["<C-j>"] = cmp.mapping.select_next_item(),
         -- Use <CR>(Enter) to confirm selection
         -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
@@ -190,7 +190,7 @@ local on_attach = function(_, bufnr)
         -- silent = true,
         buffer = bufnr,
     }
-    -- vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
     vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set("n", "<space>f", function()

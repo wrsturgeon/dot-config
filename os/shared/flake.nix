@@ -22,7 +22,7 @@
             e = "emacsclient -nw";
             vi = "vim";
           };
-          systemPackages = with pkgs; [ coreutils gnugrep killall tree ];
+          systemPackages = with pkgs; [ coreutils gnugrep gnused killall tree ];
           variables = {
             EDITOR = "vi";
             NIXOS_INSTALL_BOOTLOADER = "1";

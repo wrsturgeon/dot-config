@@ -60,6 +60,7 @@
                   slack
                   spotify
                   taplo
+                  tor
                   # wezterm
                   zoom-us
                 ]);

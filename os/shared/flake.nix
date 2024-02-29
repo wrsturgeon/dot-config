@@ -24,9 +24,7 @@
           };
           systemPackages = with pkgs; [ coreutils gnugrep gnused killall tree ];
           variables = {
-            EDITOR = "vi";
-            NIXOS_INSTALL_BOOTLOADER = "1";
-            XDG_CONFIG_HOME = "~/.config";
+            # TODO
           };
         };
         networking.hostName = laptop-name;

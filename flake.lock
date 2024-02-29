@@ -88,14 +88,13 @@
       "inputs": {
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
-        "magma-src": "magma-src",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-oPQL5oowccrm/05a3KRcEgS2h+blLqtJc6tErzn3r7I=",
+        "narHash": "sha256-u6Os1B7eBy9pj8myPdX2I5t9fCM6ycSZcIc4XqctCpE=",
         "path": "./home",
         "type": "path"
       },
@@ -160,22 +159,6 @@
       "original": {
         "path": "./os/mac",
         "type": "path"
-      }
-    },
-    "magma-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1688797521,
-        "narHash": "sha256-IrMR57gk9iCk73esHO24KZeep9VrlkV5sOC4PzGexyo=",
-        "owner": "dccsillag",
-        "repo": "magma-nvim",
-        "rev": "ff3deba8a879806a51c005e50782130246143d06",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dccsillag",
-        "repo": "magma-nvim",
-        "type": "github"
       }
     },
     "nix-darwin": {

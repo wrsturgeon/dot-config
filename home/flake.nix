@@ -9,21 +9,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
     };
-    magma-src = {
-      flake = false;
-      url = "github:dccsillag/magma-nvim";
-    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
-  outputs = { firefox-addons, home-manager, magma-src, nixpkgs, self }: {
+  outputs = { firefox-addons, home-manager, nixpkgs, self }: {
     configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
       , system, username }:
       let
         pkgs = import nixpkgs nixpkgs-config;
-        magma = pkgs.vimUtils.buildVimPlugin {
-          name = "magma";
-          src = magma-src;
-        };
         user-cfg = {
           home = {
             inherit stateVersion username;
@@ -94,7 +86,7 @@
             neovim = {
               enable = true;
               extraLuaConfig = builtins.readFile ./init.lua;
-              plugins = (with pkgs.vimPlugins; [
+              plugins = with pkgs.vimPlugins; [
                 cmp-buffer
                 cmp-cmdline
                 cmp_luasnip
@@ -102,7 +94,7 @@
                 cmp-path
                 comment-nvim
                 Coqtail
-                # crates-nvim
+                crates-nvim
                 gitsigns-nvim
                 lualine-nvim
                 luasnip
@@ -112,7 +104,7 @@
                 nvim-notify
                 sniprun
                 telescope-nvim
-              ]); # ++ [ magma ];
+              ];
               viAlias = true;
               vimAlias = true;
               vimdiffAlias = true;

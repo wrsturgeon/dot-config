@@ -24,7 +24,7 @@
       , system, username }:
       let
         pkgs = import nixpkgs nixpkgs-config;
-        nil = nil.packages.${system}.default;
+        nil = nil-src.packages.${system}.default;
         user-cfg = {
           home = {
             inherit stateVersion username;

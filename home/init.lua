@@ -398,4 +398,4 @@ require('sniprun').setup { display = { 'NvimNotify' } }
 --  W O O H O O  --
 --%%%%%%%%%%%%%%%--
 
-require 'notify' '`init.vim` loaded successfully.'
+require 'notify' '`init.lua` loaded successfully.'

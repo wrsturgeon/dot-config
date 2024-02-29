@@ -13,13 +13,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:oxalica/nil";
     };
-    nixfmt = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:serokell/nixfmt";
-    };
+    # nixfmt = {
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   url = "github:serokell/nixfmt";
+    # };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
-  outputs = { firefox-addons, home-manager, nil, nixfmt, nixpkgs, self }: {
+  outputs = { firefox-addons, home-manager, nil, nixpkgs, self }: {
     configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
       , system, username }:
       let
@@ -27,7 +27,7 @@
         user-cfg = {
           home = {
             inherit stateVersion username;
-            packages = [ nil nixfmt ] ++ (with pkgs; [
+            packages = [ nil ] ++ (with pkgs; [
               cargo
               coqPackages.coq
               discord
@@ -35,6 +35,7 @@
               gcc
               gnumake
               logseq
+              nixfmt
               pinentry
               rust-analyzer
               rustfmt

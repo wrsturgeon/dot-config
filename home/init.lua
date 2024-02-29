@@ -52,7 +52,9 @@ vim.keymap.set('n', 'gw', telescope_builtin.lsp_dynamic_workspace_symbols, {})
 -- sniprun
 local sniprun = require 'sniprun'
 vim.keymap.set('n', '<leader>r', function()
-    vim.cmd '1,.SnipRun' -- see `:h cmdline-ranges`
+    -- vim.cmd '1,.SnipRun' -- see `:h cmdline-ranges`
+    local row, _ = unpack(vim.api.nvim_win_get_cursor(0))
+    require('sniprun.api').run_range(1, row)
 end)
 vim.keymap.set('v', '<leader>r', function()
     sniprun.run 'v'

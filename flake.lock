@@ -106,14 +106,14 @@
       "inputs": {
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
-        "nil": "nil",
+        "nil-src": "nil-src",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-WG328Aewj1ahyCYDM5X6tNceaR/Dyu62QzvcHJc4fgA=",
+        "narHash": "sha256-K4VjzW30SLgidvw18/72EL6j8769ebTsXMSXdCVso1o=",
         "path": "./home",
         "type": "path"
       },
@@ -180,7 +180,7 @@
         "type": "path"
       }
     },
-    "nil": {
+    "nil-src": {
       "inputs": {
         "flake-utils": "flake-utils_2",
         "nixpkgs": [
@@ -281,12 +281,12 @@
       "inputs": {
         "flake-utils": [
           "home",
-          "nil",
+          "nil-src",
           "flake-utils"
         ],
         "nixpkgs": [
           "home",
-          "nil",
+          "nil-src",
           "nixpkgs"
         ]
       },

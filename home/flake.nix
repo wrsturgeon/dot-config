@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
     };
-    nil = {
+    nil-src = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:oxalica/nil";
     };
@@ -19,11 +19,12 @@
     # };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
-  outputs = { firefox-addons, home-manager, nil, nixpkgs, self }: {
+  outputs = { firefox-addons, home-manager, nil-src, nixpkgs, self }: {
     configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
       , system, username }:
       let
         pkgs = import nixpkgs nixpkgs-config;
+        nil = nil.packages.${system}.default;
         user-cfg = {
           home = {
             inherit stateVersion username;

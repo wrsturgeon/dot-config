@@ -19,7 +19,6 @@
         user-cfg = {
           home = {
             inherit stateVersion username;
-            aliases = { vi = "nvim -u ~/.config/home/init.lua"; };
             packages = (with pkgs; [
               cachix
               cargo
@@ -41,6 +40,7 @@
               # wezterm
               zoom-us
             ]);
+            shellAliases = { vi = "nvim -u ~/.config/home/init.lua"; };
           };
           programs = {
             direnv = {

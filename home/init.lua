@@ -75,6 +75,7 @@ vim.opt.softtabstop = 4
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.tabstop = 4
+vim.opt.termguicolors = true
 
 --%%%%%%%%%%%%%%%%%%%%%%%--
 --  C O M P L E T I O N  --
@@ -282,49 +283,6 @@ formatter('*.rs', 'rustfmt %')
 -- Comment.nvim
 require('Comment').setup()
 
--- lualine
--- <https://github.com/nvim-lualine/lualine.nvim#default-configuration>
-require('lualine').setup {
-    options = {
-        icons_enabled = true,
-        theme = 'auto',
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
-        disabled_filetypes = {
-            statusline = {},
-            winbar = {},
-        },
-        ignore_focus = {},
-        always_divide_middle = true,
-        globalstatus = false,
-        refresh = {
-            statusline = 1000,
-            tabline = 1000,
-            winbar = 1000,
-        },
-    },
-    sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff', 'diagnostics' },
-        lualine_c = { 'filename' },
-        lualine_x = { 'encoding', 'fileformat', 'filetype' },
-        lualine_y = { 'progress' },
-        lualine_z = { 'location' },
-    },
-    inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = { 'filename' },
-        lualine_x = { 'location' },
-        lualine_y = {},
-        lualine_z = {},
-    },
-    tabline = {},
-    winbar = {},
-    inactive_winbar = {},
-    extensions = {},
-}
-
 -- gitsigns
 -- <https://github.com/lewis6991/gitsigns.nvim#installation--usage>
 require('gitsigns').setup {
@@ -370,3 +328,131 @@ require('gitsigns').setup {
         enable = false,
     },
 }
+
+-- lsp-notify
+-- <https://github.com/mrded/nvim-lsp-notify#installation>
+require('lsp-notify').setup {
+    notify = require 'notify',
+}
+
+-- lualine
+-- <https://github.com/nvim-lualine/lualine.nvim#default-configuration>
+require('lualine').setup {
+    options = {
+        icons_enabled = true,
+        theme = 'auto',
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
+        disabled_filetypes = {
+            statusline = {},
+            winbar = {},
+        },
+        ignore_focus = {},
+        always_divide_middle = true,
+        globalstatus = false,
+        refresh = {
+            statusline = 1000,
+            tabline = 1000,
+            winbar = 1000,
+        },
+    },
+    sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', 'diff', 'diagnostics' },
+        lualine_c = { 'filename' },
+        lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' },
+    },
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { 'filename' },
+        lualine_x = { 'location' },
+        lualine_y = {},
+        lualine_z = {},
+    },
+    tabline = {},
+    winbar = {},
+    inactive_winbar = {},
+    extensions = {},
+}
+
+-- sniprun
+-- <https://michaelb.github.io/sniprun/sources/README.html#configuration>
+require('sniprun').setup {
+    selected_interpreters = {}, --# use those instead of the default for the current filetype
+    repl_enable = {}, --# enable REPL-like behavior for the given interpreters
+    repl_disable = {}, --# disable REPL-like behavior for the given interpreters
+
+    interpreter_options = { --# interpreter-specific options, see doc / :SnipInfo <name>
+
+        --# use the interpreter name as key
+        GFM_original = {
+            use_on_filetypes = { 'markdown.pandoc' }, --# the 'use_on_filetypes' configuration key is
+            --# available for every interpreter
+        },
+        Python3_original = {
+            error_truncate = 'auto', --# Truncate runtime errors 'long', 'short' or 'auto'
+            --# the hint is available for every interpreter
+            --# but may not be always respected
+        },
+    },
+
+    --# you can combo different display modes as desired and with the 'Ok' or 'Err' suffix
+    --# to filter only sucessful runs (or errored-out runs respectively)
+    display = {
+        'Classic', --# display results in the command-line  area
+        'VirtualTextOk', --# display ok results as virtual text (multiline is shortened)
+
+        -- "VirtualText",             --# display results as virtual text
+        -- "TempFloatingWindow",      --# display results in a floating window
+        -- "LongTempFloatingWindow",  --# same as above, but only long results. To use with VirtualText[Ok/Err]
+        -- "Terminal",                --# display results in a vertical split
+        -- "TerminalWithCode",        --# display results and code history in a vertical split
+        -- "NvimNotify",              --# display with the nvim-notify plugin
+        -- "Api"                      --# return output to a programming interface
+    },
+
+    live_display = { 'VirtualTextOk' }, --# display mode used in live_mode
+
+    display_options = {
+        terminal_scrollback = vim.o.scrollback, --# change terminal display scrollback lines
+        terminal_line_number = false, --# whether show line number in terminal window
+        terminal_signcolumn = false, --# whether show signcolumn in terminal window
+        terminal_position = 'vertical', --# or "horizontal", to open as horizontal split instead of vertical split
+        terminal_width = 45, --# change the terminal display option width (if vertical)
+        terminal_height = 20, --# change the terminal display option height (if horizontal)
+        notification_timeout = 5, --# timeout for nvim_notify output
+    },
+
+    --# You can use the same keys to customize whether a sniprun producing
+    --# no output should display nothing or '(no output)'
+    show_no_output = {
+        'Classic',
+        'TempFloatingWindow', --# implies LongTempFloatingWindow, which has no effect on its own
+    },
+
+    --# customize highlight groups (setting this overrides colorscheme)
+    snipruncolors = {
+        SniprunVirtualTextOk = { bg = '#66eeff', fg = '#000000', ctermbg = 'Cyan', cterfg = 'Black' },
+        SniprunFloatingWinOk = { fg = '#66eeff', ctermfg = 'Cyan' },
+        SniprunVirtualTextErr = { bg = '#881515', fg = '#000000', ctermbg = 'DarkRed', cterfg = 'Black' },
+        SniprunFloatingWinErr = { fg = '#881515', ctermfg = 'DarkRed' },
+    },
+
+    live_mode_toggle = 'off', --# live mode toggle, see Usage - Running for more info
+
+    --# miscellaneous compatibility/adjustement settings
+    inline_messages = false, --# boolean toggle for a one-line way to display messages
+    --# to workaround sniprun not being able to display anything
+
+    borders = 'single', --# display borders around floating windows
+    --# possible values are 'none', 'single', 'double', or 'shadow'
+}
+
+--%%%%%%%%%%%%%%%--
+--  W O O H O O  --
+--%%%%%%%%%%%%%%%--
+
+require 'notify' '`init.vim` loaded successfully.'

@@ -104,7 +104,9 @@
                 luasnip
                 neovim-ayu
                 nvim-cmp
+                nvim-lsp-notify
                 nvim-lspconfig
+                nvim-notify
                 sniprun
                 telescope-nvim
               ];

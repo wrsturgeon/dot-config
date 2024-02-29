@@ -105,6 +105,7 @@
                 neovim-ayu
                 nvim-cmp
                 nvim-lspconfig
+                sniprun
                 telescope-nvim
               ];
               viAlias = true;

@@ -40,6 +40,42 @@ vim.keymap.set('n', '<C-Down>', ':resize +2<CR>', opts)
 vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>', opts)
 vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>', opts)
 
+-- telescope import
+local telescope_builtin = require('telescope.builtin')
+
+-- telescope filesystem (<leader>f...)
+vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, {})
+vim.keymap.set('n', '<leader>fc', telescope_builtin.commands, {})
+vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, {})
+vim.keymap.set('n', '<leader>fg', telescope_builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, {})
+vim.keymap.set('n', '<leader>fk', telescope_builtin.keymaps, {})
+vim.keymap.set('n', '<leader>fo', telescope_builtin.vim_options, {})
+vim.keymap.set('n', '<leader>fr', telescope_builtin.registers, {})
+
+-- telescope git (<leader>g...)
+vim.keymap.set('n', '<leader>gb', telescope_builtin.git_branches, {})
+vim.keymap.set('n', '<leader>gc', telescope_builtin.git_commits, {})
+vim.keymap.set('n', '<leader>gr', telescope_builtin.git_bcommits_range, {})
+vim.keymap.set('n', '<leader>gR', telescope_builtin.git_bcommits, {})
+vim.keymap.set('n', '<leader>gs', telescope_builtin.git_status, {})
+vim.keymap.set('n', '<leader>gS', telescope_builtin.git_stash, {})
+
+-- telescope lsp (g...)
+-- NOTE: don't overwrite `ge`, since that's "go to end of last word"
+vim.keymap.set('n', 'gb', telescope_builtin.diagnostics, {})
+vim.keymap.set('n', 'gc', telescope_builtin.lsp_incoming_calls, {})
+vim.keymap.set('n', 'gC', telescope_builtin.lsp_outgoing_calls, {})
+vim.keymap.set('n', 'gi', telescope_builtin.lsp_implementations, {})
+vim.keymap.set('n', 'gr', telescope_builtin.lsp_references, {})
+vim.keymap.set('n', 'gs', telescope_builtin.lsp_document_symbols, {})
+vim.keymap.set('n', 'gS', telescope_builtin.lsp_workspace_symbols, {})
+vim.keymap.set('n', 'gt', telescope_builtin.lsp_type_definitions, {})
+vim.keymap.set('n', 'gw', telescope_builtin.lsp_dynamic_workspace_symbols, {})
+
+-- what the fuck does this do? (TODO: find out)
+vim.keymap.set('n', '<leader>fT', telescope_builtin.treesitter, {})
+
 -----------------
 -- Visual mode --
 -----------------
@@ -63,6 +99,7 @@ vim.opt.hlsearch = false
 vim.opt.ignorecase = true -- but... (see smartcase)
 vim.opt.incsearch = true  -- show search results while typing
 vim.opt.mouse = nil       -- disable mouse input
+vim.opt.wrap = false
 vim.opt.number = true     -- line numbers
 vim.opt.relativenumber = false
 vim.opt.shiftwidth = 4
@@ -186,24 +223,27 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', '<space>k', vim.lsp.buf.hover, bufopts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+    local bufopts = {
+        noremap = true,
+        -- silent = true,
+        buffer = bufnr
+    }
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-    vim.keymap.set('n', '<space>wl', function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
     vim.keymap.set('n', '<space>f', function()
         vim.lsp.buf.format({ async = true })
     end, bufopts)
+    vim.keymap.set('n', '<space>k', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+    vim.keymap.set('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, bufopts)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    -- Covered by Telescope:
+    -- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    -- vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, telescope_builtin.lsp_implementations, bufopts)
+    -- vim.keymap.set('n', 'gr', vim.lsp.buf.references, telescope_builtin.lsp_references, bufopts)
 end
 
 -- LSP binaries:
@@ -237,12 +277,13 @@ lspconfig.rust_analyzer.setup({
 })
 
 -- Format on save!
-vim.api.nvim_create_autocmd('BufWritePre', {
-    buffer = vim.fn.bufnr(),
-    callback = function()
-        vim.lsp.buf.format({ timeout_ms = 3000 })
-    end,
-})
+TODO
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--     buffer = vim.fn.bufnr(),
+--     callback = function()
+--         vim.lsp.buf.format({ timeout_ms = 3000 })
+--     end,
+-- })
 
 
 
@@ -261,6 +302,33 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'Buf
 
 
 
+--%%%%%%%%%%%%%%%%%%%%%%%--
+--  A U T O F O R M A T  --
+--%%%%%%%%%%%%%%%%%%%%%%%--
+
+vim.api.nvim_create_augroup("AutoFormat", {})
+
+local formatter = function(pattern, command)
+    vim.api.nvim_create_autocmd(
+        "BufWritePost",
+        {
+            pattern = pattern,
+            group = "AutoFormat",
+            callback = function()
+                vim.cmd(command)
+                vim.cmd("edit")
+            end,
+        }
+    )
+end
+
+formatter('*.lua', '!stylua %')
+formatter('*.nix', '!nixfmt %')
+formatter('*.py', '!black %')
+formatter('*.rs', '!rustfmt %')
+
+
+
 --%%%%%%%%%%%%%%%%%--
 --  P L U G I N S  --
 --%%%%%%%%%%%%%%%%%--
@@ -268,3 +336,91 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'Buf
 -- Comment.nvim
 require('Comment').setup()
 
+-- lualine
+-- <https://github.com/nvim-lualine/lualine.nvim#default-configuration>
+require('lualine').setup {
+    options = {
+        icons_enabled = true,
+        theme = 'auto',
+        component_separators = { left = '', right = '' },
+        section_separators = { left = '', right = '' },
+        disabled_filetypes = {
+            statusline = {},
+            winbar = {},
+        },
+        ignore_focus = {},
+        always_divide_middle = true,
+        globalstatus = false,
+        refresh = {
+            statusline = 1000,
+            tabline = 1000,
+            winbar = 1000,
+        }
+    },
+    sections = {
+        lualine_a = { 'mode' },
+        lualine_b = { 'branch', 'diff', 'diagnostics' },
+        lualine_c = { 'filename' },
+        lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_y = { 'progress' },
+        lualine_z = { 'location' }
+    },
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { 'filename' },
+        lualine_x = { 'location' },
+        lualine_y = {},
+        lualine_z = {}
+    },
+    tabline = {},
+    winbar = {},
+    inactive_winbar = {},
+    extensions = {}
+}
+
+-- gitsigns
+-- <https://github.com/lewis6991/gitsigns.nvim#installation--usage>
+require('gitsigns').setup {
+    signs                        = {
+        add          = { text = '│' },
+        change       = { text = '│' },
+        delete       = { text = '_' },
+        topdelete    = { text = '‾' },
+        changedelete = { text = '~' },
+        untracked    = { text = '┆' },
+    },
+    signcolumn                   = true,  -- Toggle with `:Gitsigns toggle_signs`
+    numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
+    linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
+    word_diff                    = false, -- Toggle with `:Gitsigns toggle_word_diff`
+    watch_gitdir                 = {
+        follow_files = true
+    },
+    auto_attach                  = true,
+    attach_to_untracked          = false,
+    current_line_blame           = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+    current_line_blame_opts      = {
+        virt_text = true,
+        virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+        delay = 1000,
+        ignore_whitespace = false,
+        virt_text_priority = 100,
+    },
+    current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+    sign_priority                = 6,
+    update_debounce              = 100,
+    status_formatter             = nil,   -- Use default
+    max_file_length              = 40000, -- Disable if file is longer than this (in lines)
+    preview_config               = {
+        -- Options passed to nvim_open_win
+        border = 'single',
+        style = 'minimal',
+        relative = 'cursor',
+        row = 0,
+        col = 1
+    },
+    yadm                         = {
+        enable = false
+    },
+}

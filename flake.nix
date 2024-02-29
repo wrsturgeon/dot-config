@@ -72,7 +72,7 @@
           let pkgs = (import nixpkgs (nixpkgs-config system));
           in {
             default =
-              pkgs.mkShell { packages = with pkgs; [ lua-language-server ]; };
+              pkgs.mkShell { packages = with pkgs; [ lua-language-server stylua]; };
           };
       in builtins.listToAttrs (builtins.map (name: {
         inherit name;

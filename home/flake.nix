@@ -99,10 +99,14 @@
                 comment-nvim
                 Coqtail
                 crates-nvim
+                gitsigns-nvim
+                lualine
                 luasnip
                 neovim-ayu
                 nvim-cmp
                 nvim-lspconfig
+                telescope-nvim
+                vim-visual-multi
               ];
               viAlias = true;
               vimAlias = true;
@@ -110,41 +114,6 @@
               withPython3 = true;
             };
             ripgrep.enable = true;
-            # vim = {
-            #   enable = true;
-            #   extraConfig = builtins.readFile ./vimrc;
-            #   plugins = let
-            #     jupyter-vim = pkgs.vimUtils.buildVimPlugin {
-            #       name = "jupyter-vim";
-            #       src = jupyter-vim-src;
-            #     };
-            #   in (with pkgs.vimPlugins; [
-            #     Coqtail
-            #     fugitive
-            #     fzf-vim
-            #     gitgutter
-            #     vim-airline
-            #     vim-lsp
-            #     vim-nix
-            #   ]) ++ [ jupyter-vim ];
-            #   # package =
-            #   #   pkgs.vim_configurable.override { python = pkgs.python3; };
-            #   settings = {
-            #     background = "dark";
-            #     copyindent = true;
-            #     expandtab = true;
-            #     hidden = true;
-            #     history = 1000;
-            #     ignorecase = false;
-            #     modeline = false;
-            #     mouse = null;
-            #     number = true;
-            #     relativenumber = false;
-            #     shiftwidth = 4;
-            #     smartcase = true;
-            #     tabstop = 4;
-            #   };
-            # };
             zsh = {
               enable = true;
               enableAutosuggestions = true;

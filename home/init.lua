@@ -17,10 +17,18 @@ end
 --  K E Y M A P  --
 --%%%%%%%%%%%%%%%--
 
--- open a (very small) terminal
+-- open a (very small) terminal with `<leader>t`
 vim.keymap.set('n', '<leader>t', function()
     vim.cmd 'split | resize 10 | term'
 end, {})
+
+-- jupyter (from <https://maxwellrules.com/misc/nvim_jupyter.html>)
+-- explanation: `]x` triggers, in order,
+--   - `ctr` (iron.nvim visual selection),
+--   - `ih` (select internals of this hydrogen cell),
+--   - `/^# %%` (move the cursor to the next hydrogen cell),
+--   - `<CR><CR>` (turns off highlighting, ostensibly--not sure what this means)
+vim.cmd [[nmap ]x ctrih/^# %%<CR><CR>]]
 
 -- telescope filesystem (<leader>f...)
 local telescope_builtin = require 'telescope.builtin'

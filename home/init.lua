@@ -5,7 +5,7 @@
 --%%%%%%%%%%%%%%%--
 
 local colorscheme = "ayu"
-local is_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
+local is_ok, _ = vim.cmd("colorscheme " .. colorscheme)
 if not is_ok then
 	vim.notify("colorscheme `" .. colorscheme .. "` not found!")
 	return
@@ -14,27 +14,6 @@ end
 --%%%%%%%%%%%%%%%--
 --  K E Y M A P  --
 --%%%%%%%%%%%%%%%--
-
-local opts = {
-	noremap = true, -- non-recursive
-	silent = true, -- do not show message
-}
-
------------------
--- Normal mode --
------------------
-
--- switch windows without the extra `C-w`
-vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
-vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
-vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
-vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
-
--- resize windows with `C-[arrow keys]`
-vim.keymap.set("n", "<C-Up>", ":resize -2<CR>", opts)
-vim.keymap.set("n", "<C-Down>", ":resize +2<CR>", opts)
-vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts)
-vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 -- telescope import
 local telescope_builtin = require("telescope.builtin")
@@ -71,14 +50,6 @@ vim.keymap.set("n", "gw", telescope_builtin.lsp_dynamic_workspace_symbols, {})
 
 -- what the fuck does this do? (TODO: find out)
 vim.keymap.set("n", "<leader>fT", telescope_builtin.treesitter, {})
-
------------------
--- Visual mode --
------------------
-
--- Hint: start visual mode with the same area as the previous area and the same mode
-vim.keymap.set("v", "<", "<gv", opts)
-vim.keymap.set("v", ">", ">gv", opts)
 
 --%%%%%%%%%%%%%%%%%--
 --  O P T I O N S  --
@@ -201,14 +172,14 @@ local lspconfig = require("lspconfig")
 
 -- Customized on_attach function
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
+vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, {})
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, {})
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, {})
+vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, {})
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
+local on_attach = function(_, bufnr)
 	-- Enable completion triggered by <c-x><c-o>
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 

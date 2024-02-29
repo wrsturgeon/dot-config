@@ -129,12 +129,10 @@
                   nvim-treesitter-textobjects
                   sniprun
                   telescope-nvim
-                ]) ++ [
+                ]) ++ (
                   # <https://maxwellrules.com/misc/nvim_jupyter.html>
-                  hydrogen-textobjects
-                  jupytext
-                  pkgs.vimPlugins.iron-nvim
-                ];
+                  [ hydrogen-textobjects jupytext ]
+                  ++ (with pkgs.vimPlugins; [ iron-nvim vim-textobj-user ]));
                 withPython3 = true;
               };
               ripgrep.enable = true;

@@ -36,11 +36,9 @@
           user-cfg = {
             home = {
               inherit stateVersion username;
-              packages = [ magma ]
-                ++ (builtins.map (f: f.packages.${system}.default) [
-                  nil
-                  nixfmt
-                ]) ++ (with pkgs; [
+              packages =
+                (builtins.map (f: f.packages.${system}.default) [ nil nixfmt ])
+                ++ (with pkgs; [
                   cargo
                   coqPackages.coq
                   discord
@@ -104,7 +102,7 @@
               neovim = {
                 enable = true;
                 extraLuaConfig = builtins.readFile ./init.lua;
-                plugins = with pkgs.vimPlugins; [
+                plugins = [ magma ] ++ (with pkgs.vimPlugins; [
                   cmp-buffer
                   cmp-cmdline
                   cmp_luasnip
@@ -122,7 +120,7 @@
                   nvim-notify
                   sniprun
                   telescope-nvim
-                ];
+                ]);
                 withPython3 = true;
               };
               ripgrep.enable = true;

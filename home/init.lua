@@ -17,6 +17,13 @@ end
 --  K E Y M A P  --
 --%%%%%%%%%%%%%%%--
 
+-- open a (very small) terminal
+vim.keymap.set('n', '<leader>t', function()
+    local buffer = vim.api.nvim_create_buf()
+    vim.api.nvim_open_win(buffer, true, { split = 'below', height = 10 })
+    vim.api.nvim_open_term(buffer, {})
+end, {})
+
 -- telescope filesystem (<leader>f...)
 local telescope_builtin = require 'telescope.builtin'
 vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, {})
@@ -75,7 +82,8 @@ vim.opt.foldenable = false
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true -- but... (see smartcase)
 vim.opt.incsearch = true -- show search results while typing
-vim.opt.mouse = nil -- disable mouse input
+-- vim.opt.mouse = nil -- disable mouse input
+vim.opt.mouse = 'a'
 vim.opt.wrap = false
 vim.opt.number = true -- line numbers
 vim.opt.relativenumber = false

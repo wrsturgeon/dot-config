@@ -19,6 +19,7 @@
         user-cfg = {
           home = {
             inherit stateVersion username;
+            aliases = { vi = "nvim -u ~/.config/home/init.lua"; };
             packages = (with pkgs; [
               cachix
               cargo
@@ -105,9 +106,6 @@
                 sniprun
                 telescope-nvim
               ];
-              viAlias = true;
-              vimAlias = true;
-              vimdiffAlias = true;
               withPython3 = true;
             };
             ripgrep.enable = true;

@@ -18,14 +18,7 @@
             # emacsclient --eval '(load-file "~/.config/emacs/init.el")'
           '';
           pathsToLink = [ "/share/zsh" ];
-          shellAliases = {
-            e = "emacsclient -nw";
-            vi = "vim";
-          };
           systemPackages = with pkgs; [ coreutils gnugrep gnused killall tree ];
-          variables = {
-            # TODO
-          };
         };
         networking.hostName = laptop-name;
         nix = {

@@ -28,7 +28,7 @@ end, {})
 --   - `ih` (select internals of this hydrogen cell),
 --   - `/^# %%` (move the cursor to the next hydrogen cell),
 --   - `<CR><CR>` (turns off highlighting, ostensibly--not sure what this means)
-vim.cmd [[nmap ]x ctrih/^# %%<CR><CR>]]
+vim.cmd [[nmap ]x <space>scih/^#<space>%%<CR><CR>]]
 
 -- telescope filesystem (<leader>f...)
 local telescope_builtin = require 'telescope.builtin'

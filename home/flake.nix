@@ -20,6 +20,10 @@
       , system, username }:
       let
         pkgs = import nixpkgs nixpkgs-config;
+        jupyter-vim = pkgs.vimUtils.buildVimPlugin {
+          name = "jupyter-vim";
+          src = jupyter-vim-src;
+        };
         user-cfg = {
           home = {
             inherit stateVersion username;
@@ -90,7 +94,7 @@
             neovim = {
               enable = true;
               extraLuaConfig = builtins.readFile ./init.lua;
-              plugins = with pkgs.vimPlugins; [
+              plugins = [ jupyter-vim ] ++ (with pkgs.vimPlugins; [
                 cmp-buffer
                 cmp-cmdline
                 cmp_luasnip
@@ -108,7 +112,7 @@
                 nvim-notify
                 sniprun
                 telescope-nvim
-              ];
+              ]);
               viAlias = true;
               vimAlias = true;
               vimdiffAlias = true;

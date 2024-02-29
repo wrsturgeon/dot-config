@@ -45,7 +45,7 @@ vim.keymap.set('n', '<leader>gS', telescope_builtin.git_stash, {})
 -- telescope lsp (g...)
 -- NOTE: don't overwrite `ge`, since that's 'go to end of last word'
 vim.keymap.set('n', 'gb', telescope_builtin.diagnostics, {})
-vim.keymap.set('n', 'gc', telescope_builtin.lsp_incoming_calls, {})
+-- vim.keymap.set('n', 'gc', telescope_builtin.lsp_incoming_calls, {}) -- conflicts with `gcc` for commenting
 vim.keymap.set('n', 'gC', telescope_builtin.lsp_outgoing_calls, {})
 vim.keymap.set('n', 'gi', telescope_builtin.lsp_implementations, {})
 vim.keymap.set('n', 'gr', telescope_builtin.lsp_references, {})

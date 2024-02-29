@@ -28,7 +28,7 @@
         user-cfg = {
           home = {
             inherit stateVersion username;
-            packages = [ nil ] ++ (with pkgs; [
+            packages = [ (builtins.trace nil nil) ] ++ (with pkgs; [
               cargo
               coqPackages.coq
               discord

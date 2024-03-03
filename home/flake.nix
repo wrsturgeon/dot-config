@@ -140,14 +140,14 @@
                 settings = let
                   family =
                     "Iosevka"; # "Rec Mono Linear"; # "Monaspace Argon"; # "IBM Plex";
-                  regular = " Regular";
-                  bold = " Bold";
-                  italic = " Italic";
+                  regular = "Regular";
+                  bold = "Bold";
+                  italic = "Italic";
                 in {
-                  font_family = family + regular;
-                  bold_font = family + bold;
-                  italic_font = family + regular + italic;
-                  bold_italic_font = family + bold + italic;
+                  font_family = family + " " + regular;
+                  bold_font = family + " " + bold;
+                  italic_font = family + " " + regular + " " + italic;
+                  bold_italic_font = family + " " + bold + " " + italic;
                   font_size = linux-mac 9 11;
                 };
                 shellIntegration.enableZshIntegration = true;

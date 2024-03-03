@@ -30,14 +30,9 @@
       url = "github:serokell/nixfmt";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    sf-mono-liga-src = {
-      flake = false;
-      url = "github:shaunsingh/sfmono-nerd-font-ligaturized";
-    };
   };
   outputs = { apple-fonts, firefox-addons, home-manager
-    , hydrogen-textobjects-src, jupytext-src, nil, nixfmt, nixpkgs, self
-    , sf-mono-liga-src }: {
+    , hydrogen-textobjects-src, jupytext-src, nil, nixfmt, nixpkgs, self }: {
       configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
         , system, username }:
         let
@@ -60,17 +55,6 @@
             (builtins.trace
               "Apple fonts:${print-list nerdless-apple-font-names}"
               nerdless-apple-font-names);
-          sf-mono-liga-bin = pkgs.stdenvNoCC.mkDerivation {
-            pname = "sf-mono-liga-bin";
-            version = "dev";
-            src = sf-mono-liga-src;
-            dontConfigure = true;
-            installPhase = ''
-              mkdir -p $out/share/fonts/opentype
-              cp -R $src/*.otf $out/share/fonts/opentype/
-            '';
-          };
-          input-fonts = pkgs.input-fonts.override { acceptLicense = true; };
           iosevka = pkgs.iosevka.override {
             # <https://github.com/be5invis/Iosevka/blob/main/doc/language-specific-ligation-sets.md>
             privateBuildPlan = {
@@ -88,14 +72,7 @@
             };
             set = "fuck";
           };
-          font-packages = nerdless-apple-fonts
-            ++ [ input-fonts iosevka sf-mono-liga-bin ] ++ (with pkgs; [
-              cascadia-code
-              fira-code
-              ibm-plex
-              # monaspace
-              recursive
-            ]);
+          font-packages = nerdless-apple-fonts ++ [ iosevka ];
           user-cfg = {
             fonts.fontconfig.enable = true;
             home = {
@@ -142,15 +119,9 @@
               kitty = {
                 enable = true;
                 settings = let
-                  # family =
-                  #   "Iosevka Fuck";
-                  # weight = "Extralight";
-                  # bold = "Extrabold";
-                  # italic = "Italic";
-                  family =
-                    "Input Mono Compressed"; # "Rec Mono Linear"; # "Monaspace Argon"; # "IBM Plex";
-                  weight = "Thin";
-                  bold = "Black";
+                  family = "Iosevka Fuck";
+                  weight = "Extralight";
+                  bold = "Extrabold";
                   italic = "Italic";
                 in {
                   font_family = family + " " + weight;
@@ -253,13 +224,11 @@
                     [ ublock-origin ];
                 };
               };
+              xsession.enable = true;
             } { });
-          } // (linux-mac {
-            xsession.enable = true;
-            # xsession.windowManager.command = "...";
-          } { });
+          };
         in [
-          home-manager.${linux-mac "nixosModules" "darwinModules"}.home-manager
+          home-manager.${(linux-mac "nixos" "darwin") + "Modules"}.home-manager
           {
             home-manager = {
               useGlobalPkgs = true;

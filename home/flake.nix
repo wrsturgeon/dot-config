@@ -1,6 +1,10 @@
 {
   description = "Home Manager config";
   inputs = {
+    apple-fonts = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:lyndeno/apple-fonts.nix";
+    };
     firefox-addons = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -26,9 +30,14 @@
       url = "github:serokell/nixfmt";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    sf-mono-liga-src = {
+      flake = false;
+      url = "github:shaunsingh/sfmono-nerd-font-ligaturized";
+    };
   };
-  outputs = { firefox-addons, home-manager, hydrogen-textobjects-src
-    , jupytext-src, nil, nixfmt, nixpkgs, self }: {
+  outputs = { apple-fonts, firefox-addons, home-manager
+    , hydrogen-textobjects-src, jupytext-src, nil, nixfmt, nixpkgs, self
+    , sf-mono-liga-src }: {
       configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
         , system, username }:
         let
@@ -41,12 +50,41 @@
             name = "hydrogen-textobjects";
             src = hydrogen-textobjects-src;
           };
+          print-list = builtins.foldl' (acc: s: acc + " " + s) "";
+          apple-font-packages = apple-fonts.packages.${system};
+          apple-font-names = builtins.attrNames apple-font-packages;
+          nerdless-apple-font-names =
+            builtins.filter (s: !(pkgs.lib.strings.hasSuffix "nerd" s))
+            apple-font-names;
+          nerdless-apple-fonts = map (s: apple-font-packages.${s})
+            (builtins.trace
+              "Apple fonts:${print-list nerdless-apple-font-names}"
+              nerdless-apple-font-names);
+          sf-mono-liga-bin = pkgs.stdenvNoCC.mkDerivation {
+            pname = "sf-mono-liga-bin";
+            version = "dev";
+            src = sf-mono-liga-src;
+            dontConfigure = true;
+            installPhase = ''
+              mkdir -p $out/share/fonts/opentype
+              cp -R $src/*.otf $out/share/fonts/opentype/
+            '';
+          };
+          font-packages = nerdless-apple-fonts ++ [ sf-mono-liga-bin ]
+            ++ (with pkgs; [
+              cascadia-code
+              fira-code
+              ibm-plex
+              iosevka
+              recursive
+            ]);
           user-cfg = {
+            fonts.fontconfig.enable = true;
             home = {
               inherit stateVersion username;
               packages =
                 (builtins.map (f: f.packages.${system}.default) [ nil nixfmt ])
-                ++ (with pkgs;
+                ++ font-packages ++ (with pkgs;
                   ([
                     cargo
                     coqPackages.coq

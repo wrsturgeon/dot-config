@@ -70,6 +70,7 @@
               cp -R $src/*.otf $out/share/fonts/opentype/
             '';
           };
+          input-fonts = pkgs.input-fonts.override { acceptLicense = true; };
           iosevka = pkgs.iosevka.override {
             # <https://github.com/be5invis/Iosevka/blob/main/doc/language-specific-ligation-sets.md>
             privateBuildPlan = {
@@ -87,8 +88,8 @@
             };
             set = "fuck";
           };
-          font-packages = nerdless-apple-fonts ++ [ iosevka sf-mono-liga-bin ]
-            ++ (with pkgs; [
+          font-packages = nerdless-apple-fonts
+            ++ [ input-fonts iosevka sf-mono-liga-bin ] ++ (with pkgs; [
               cascadia-code
               fira-code
               ibm-plex

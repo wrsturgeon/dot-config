@@ -144,7 +144,7 @@
                 settings = let
                   family =
                     "Iosevka"; # "Rec Mono Linear"; # "Monaspace Argon"; # "IBM Plex";
-                  weight = "Light";
+                  weight = "Extralight";
                   bold = "Bold";
                   italic = "Italic";
                 in {

@@ -135,11 +135,12 @@
               home-manager.enable = true;
               kitty = {
                 enable = true;
+                font.package = font-packages.iosevka;
                 settings = {
-                  font_family = "IBM Plex Mono Light";
-                  bold_font = "IBM Plex Mono Bold";
-                  italic_font = "IBM Plex Mono Light Italic";
-                  bold_italic_font = "IBM Plex Mono Bold Italic";
+                  # font_family = "IBM Plex Mono Light";
+                  # bold_font = "IBM Plex Mono Bold";
+                  # italic_font = "IBM Plex Mono Light Italic";
+                  # bold_italic_font = "IBM Plex Mono Bold Italic";
                   font_size = linux-mac 9 11;
                 };
                 shellIntegration.enableZshIntegration = true;

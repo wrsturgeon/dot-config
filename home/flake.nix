@@ -138,7 +138,8 @@
                 enable = true;
                 # font.package = font-packages.iosevka;
                 settings = let
-                  family = "Rec Mono Linear"; # "Monaspace Argon"; # "IBM Plex";
+                  family =
+                    "Iosevka"; # "Rec Mono Linear"; # "Monaspace Argon"; # "IBM Plex";
                   regular = " Regular";
                   bold = " Bold";
                   italic = " Italic";

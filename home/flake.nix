@@ -60,6 +60,7 @@
                   slack
                   spotify
                   taplo
+                  tor-browser
                   # wezterm
                   zoom-us
                 ]);
@@ -93,7 +94,6 @@
                 };
               };
               git.enable = true;
-              helix.enable = true;
               home-manager.enable = true;
               kitty = {
                 enable = true;

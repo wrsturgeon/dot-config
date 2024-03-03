@@ -589,7 +589,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-S119sjP6JnFkIa9TQqZW5lokdn4qTWZ4+WViq4CsWO0=",
+        "narHash": "sha256-x8cxQcKWfo2KLLQLyHFU0g91XRYifs4FTsbjy3kw7Fo=",
         "path": "./home",
         "type": "path"
       },

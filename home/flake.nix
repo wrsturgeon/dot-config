@@ -142,10 +142,15 @@
               kitty = {
                 enable = true;
                 settings = let
+                  # family =
+                  #   "Iosevka Fuck";
+                  # weight = "Extralight";
+                  # bold = "Extrabold";
+                  # italic = "Italic";
                   family =
-                    "Iosevka Fuck"; # "Rec Mono Linear"; # "Monaspace Argon"; # "IBM Plex";
-                  weight = "Extralight";
-                  bold = "Bold";
+                    "Input Mono Compressed"; # "Rec Mono Linear"; # "Monaspace Argon"; # "IBM Plex";
+                  weight = "Thin";
+                  bold = "Black";
                   italic = "Italic";
                 in {
                   font_family = family + " " + weight;

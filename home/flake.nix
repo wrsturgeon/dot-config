@@ -76,7 +76,7 @@
               fira-code
               ibm-plex
               iosevka
-              monaspace
+              # monaspace
               recursive
             ]);
           user-cfg = {
@@ -138,8 +138,8 @@
                 enable = true;
                 # font.package = font-packages.iosevka;
                 settings = let
-                  family = "Monaspace Argon"; # "IBM Plex";
-                  regular = " Light";
+                  family = "Rec Mono Linear"; # "Monaspace Argon"; # "IBM Plex";
+                  regular = " Regular";
                   bold = " Bold";
                   italic = " Italic";
                 in {

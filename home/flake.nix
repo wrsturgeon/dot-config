@@ -55,11 +55,12 @@
             (builtins.trace
               "Apple fonts:${print-list nerdless-apple-font-names}"
               nerdless-apple-font-names);
+          iosevka-name = "Iosevka Custom";
           iosevka = pkgs.iosevka.override {
             # <https://github.com/be5invis/Iosevka/blob/main/doc/language-specific-ligation-sets.md>
             privateBuildPlan = {
               exportGlyphNames = true;
-              family = "Iosevka Fuck";
+              family = iosevka-name;
               # <https://github.com/be5invis/Iosevka?tab=readme-ov-file#ligations>
               ligatures = {
                 # enable all those not enabled by `dlig` below
@@ -119,7 +120,7 @@
               kitty = {
                 enable = true;
                 settings = let
-                  family = "Iosevka Fuck";
+                  family = iosevka-name;
                   weight = "Light"; # "Extralight";
                   bold = "Extrabold";
                   italic = "Italic";

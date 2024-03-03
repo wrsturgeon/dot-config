@@ -135,7 +135,7 @@
                   bold_font = family + " " + bold;
                   italic_font = family + " " + weight + " " + italic;
                   bold_italic_font = family + " " + bold + " " + italic;
-                  font_size = linux-mac 10 11;
+                  font_size = linux-mac 9 12;
                 };
                 shellIntegration.enableZshIntegration = true;
                 theme = "Ayu";

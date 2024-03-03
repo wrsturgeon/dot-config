@@ -91,7 +91,7 @@
           };
           font-packages = nerdless-apple-fonts
             ++ [ input-fonts iosevka sf-mono-liga ]
-            ++ (with pkgs; [ cascadia-code ibm-plex monaspace recursive ]);
+            ++ (with pkgs; [ cascadia-code ibm-plex monaspace ]);
           user-cfg = {
             fonts.fontconfig.enable = true;
             home = {
@@ -138,9 +138,9 @@
               kitty = {
                 enable = true;
                 settings = let
-                  family = "Recursive Mono Linear Static"; # iosevka-name;
+                  family = "Liga SFMono Nerd Font"; # iosevka-name;
                   weight = "Light"; # "Extralight";
-                  bold = "Black"; # "Extrabold";
+                  bold = "Heavy"; # "Extrabold";
                   italic = "Italic";
                 in {
                   font_family = family + " " + weight;

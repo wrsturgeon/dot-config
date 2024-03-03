@@ -116,7 +116,6 @@
                     # wezterm
                     zoom-us
                   ]) ++ (linux-mac [ tor-browser ] [ ]));
-              shellAliases = { vi = "nvim -u ~/.config/home/init.lua"; };
             };
             programs = {
               direnv = {
@@ -157,6 +156,7 @@
                 theme = "Ayu";
               };
               neovim = {
+                defaultEditor = true;
                 enable = true;
                 extraLuaConfig = builtins.readFile ./init.lua;
                 plugins = (with pkgs.vimPlugins; [
@@ -182,6 +182,8 @@
                   # <https://maxwellrules.com/misc/nvim_jupyter.html>
                   [ hydrogen-textobjects jupytext ]
                   ++ (with pkgs.vimPlugins; [ iron-nvim vim-textobj-user ]));
+                viAlias = true;
+                vimAlias = true;
                 withPython3 = true;
               };
               ripgrep.enable = true;

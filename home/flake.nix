@@ -139,7 +139,7 @@
                 enable = true;
                 settings = let
                   family = iosevka-name;
-                  weight = "Extralight";
+                  weight = "Light";
                   bold = "Extrabold";
                   italic = "Italic";
                   # family = "Liga SFMono Nerd Font";

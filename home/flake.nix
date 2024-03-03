@@ -120,7 +120,7 @@
                 enable = true;
                 settings = let
                   family = "Iosevka Fuck";
-                  weight = "Extralight";
+                  weight = "Light"; # "Extralight";
                   bold = "Extrabold";
                   italic = "Italic";
                 in {

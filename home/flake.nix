@@ -70,18 +70,28 @@
               cp -R $src/*.otf $out/share/fonts/opentype/
             '';
           };
-          font-packages = nerdless-apple-fonts ++ [ sf-mono-liga-bin ]
+          iosevka = pkgs.iosevka.override {
+            # <https://github.com/be5invis/Iosevka/blob/main/doc/language-specific-ligation-sets.md>
+            privateBuildPlan = {
+              exportGlyphNames = true;
+              family = "Iosevka Fuck";
+              # <https://github.com/be5invis/Iosevka?tab=readme-ov-file#ligations>
+              ligatures = {
+                # enable all those not enabled by `dlig` below
+                # (see the above link for a visual depiction of which):
+                enables = [ "eqexeq" "eqslasheq" "slasheq" "tildeeq" ];
+                inherits = "dlig";
+              };
+              spacing = "fontconfig-mono"; # "term";
+              webfontFormats = [ ]; # i.e. none
+            };
+            set = "fuck";
+          };
+          font-packages = nerdless-apple-fonts ++ [ iosevka sf-mono-liga-bin ]
             ++ (with pkgs; [
               cascadia-code
               fira-code
               ibm-plex
-              (iosevka.override (prev: {
-                privateBuildPlan = {
-                  family = "Iosevka Fuck";
-                  ligatures.inherits = "haskell";
-                };
-                set = "fuck";
-              }))
               # monaspace
               recursive
             ]);

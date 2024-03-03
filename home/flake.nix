@@ -68,13 +68,15 @@
               exportGlyphNames = true;
               family = iosevka-name;
               # <https://github.com/be5invis/Iosevka?tab=readme-ov-file#ligations>
-              ligatures = {
+              ligations = {
                 # enable all those not enabled by `dlig` below
                 # (see the above link for a visual depiction of which):
                 enables = [ "eqexeq" "eqslasheq" "slasheq" "tildeeq" ];
                 inherits = "dlig";
               };
-              spacing = "term";
+              noLigation = false;
+              spacing = "fontconfig-mono";
+              variants.inherits = "ss08";
               webfontFormats = [ ]; # i.e. none
             };
             set = "custom";
@@ -136,6 +138,9 @@
               home-manager.enable = true;
               kitty = {
                 enable = true;
+                extraConfig = ''
+                  disable_ligatures cursor
+                '';
                 settings = let
                   family = iosevka-name;
                   weight = "Light";

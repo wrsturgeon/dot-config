@@ -70,10 +70,11 @@
               # <https://github.com/be5invis/Iosevka?tab=readme-ov-file#ligations>
               ligations = {
                 # enable all those not enabled by `dlig` below
-                # (see the above link for a visual depiction of which):
+                # (see the above link for a visual depiction):
                 enables = [ "eqexeq" "eqslasheq" "slasheq" "tildeeq" ];
                 inherits = "dlig";
               };
+              noCvSs = false;
               noLigation = false;
               spacing = "fontconfig-mono";
               variants.inherits = "ss08";
@@ -140,6 +141,7 @@
                 enable = true;
                 extraConfig = ''
                   disable_ligatures cursor
+                  font_features Iosevka +dlig cv93=3
                 '';
                 settings = let
                   family = iosevka-name;

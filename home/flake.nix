@@ -140,13 +140,13 @@
                 settings = let
                   family =
                     "Iosevka"; # "Rec Mono Linear"; # "Monaspace Argon"; # "IBM Plex";
-                  regular = "Regular";
+                  weight = "Light";
                   bold = "Bold";
                   italic = "Italic";
                 in {
-                  font_family = family + " " + regular;
+                  font_family = family + " " + weight;
                   bold_font = family + " " + bold;
-                  italic_font = family + " " + regular + " " + italic;
+                  italic_font = family + " " + weight + " " + italic;
                   bold_italic_font = family + " " + bold + " " + italic;
                   font_size = linux-mac 9 11;
                 };

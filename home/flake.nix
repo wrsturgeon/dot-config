@@ -75,8 +75,10 @@
               cascadia-code
               fira-code
               ibm-plex
-              (iosevka.override
-                (prev: { privateBuildPlan.ligatures.inherits = "haskell"; }))
+              (iosevka.override (prev: {
+                privateBuildPlan.ligatures.inherits = "haskell";
+                set = "Fuck";
+              }))
               # monaspace
               recursive
             ]);

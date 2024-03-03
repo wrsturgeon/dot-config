@@ -46,24 +46,24 @@
               inherit stateVersion username;
               packages =
                 (builtins.map (f: f.packages.${system}.default) [ nil nixfmt ])
-                ++ (with pkgs; [
-                  cargo
-                  coqPackages.coq
-                  discord
-                  fd
-                  gcc
-                  gnumake
-                  logseq
-                  pinentry
-                  rust-analyzer
-                  rustfmt
-                  slack
-                  spotify
-                  taplo
-                  tor-browser
-                  # wezterm
-                  zoom-us
-                ]);
+                ++ (with pkgs;
+                  ([
+                    cargo
+                    coqPackages.coq
+                    discord
+                    fd
+                    gcc
+                    gnumake
+                    logseq
+                    pinentry
+                    rust-analyzer
+                    rustfmt
+                    slack
+                    spotify
+                    taplo
+                    # wezterm
+                    zoom-us
+                  ]) ++ (linux-mac [ tor-browser ] [ ]));
               shellAliases = { vi = "nvim -u ~/.config/home/init.lua"; };
             };
             programs = {

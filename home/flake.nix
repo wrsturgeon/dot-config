@@ -71,7 +71,7 @@
               spacing = "fontconfig-mono"; # "term";
               webfontFormats = [ ]; # i.e. none
             };
-            set = "fuck";
+            set = "custom";
           };
           font-packages = nerdless-apple-fonts ++ [ iosevka ];
           user-cfg = {

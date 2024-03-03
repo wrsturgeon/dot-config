@@ -143,7 +143,7 @@
                 enable = true;
                 settings = let
                   family =
-                    "Iosevka"; # "Rec Mono Linear"; # "Monaspace Argon"; # "IBM Plex";
+                    "Iosevka Fuck"; # "Rec Mono Linear"; # "Monaspace Argon"; # "IBM Plex";
                   weight = "Extralight";
                   bold = "Bold";
                   italic = "Italic";

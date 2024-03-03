@@ -74,7 +74,7 @@
                 enables = [ "eqexeq" "eqslasheq" "slasheq" "tildeeq" ];
                 inherits = "dlig";
               };
-              spacing = "fontconfig-mono";
+              spacing = "term";
               webfontFormats = [ ]; # i.e. none
             };
             set = "custom";

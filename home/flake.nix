@@ -119,24 +119,11 @@
                 enable = true;
                 enableZshIntegration = true;
               };
-              gh = {
-                enable = true;
-                settings = {
-                  # Aliases allow you to create nicknames for gh commands
-                  aliases = { co = "pr checkout"; };
-                  # What editor gh should run when creating issues, pull requests, etc. If blank, will refer to environment.
-                  editor = "";
-                  # The current version of the config schema
-                  version = 1;
-                  # What protocol to use when performing git operations. Supported values: ssh, https
-                  git_protocol = "https";
-                };
-              };
+              gh.enable = true;
               git.enable = true;
               home-manager.enable = true;
               kitty = {
                 enable = true;
-                # font.package = font-packages.iosevka;
                 settings = let
                   family =
                     "Iosevka"; # "Rec Mono Linear"; # "Monaspace Argon"; # "IBM Plex";
@@ -148,7 +135,7 @@
                   bold_font = family + " " + bold;
                   italic_font = family + " " + weight + " " + italic;
                   bold_italic_font = family + " " + bold + " " + italic;
-                  font_size = linux-mac 9 11;
+                  font_size = linux-mac 10 11;
                 };
                 shellIntegration.enableZshIntegration = true;
                 theme = "Ayu";

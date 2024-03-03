@@ -30,9 +30,14 @@
       url = "github:serokell/nixfmt";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    sf-mono-liga-src = {
+      flake = false;
+      url = "github:shaunsingh/sfmono-nerd-font-ligaturized";
+    };
   };
   outputs = { apple-fonts, firefox-addons, home-manager
-    , hydrogen-textobjects-src, jupytext-src, nil, nixfmt, nixpkgs, self }: {
+    , hydrogen-textobjects-src, jupytext-src, nil, nixfmt, nixpkgs, self
+    , sf-mono-liga-src }: {
       configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
         , system, username }:
         let
@@ -55,6 +60,7 @@
             (builtins.trace
               "Apple fonts:${print-list nerdless-apple-font-names}"
               nerdless-apple-font-names);
+          input-fonts = pkgs.input-fonts.override { acceptLicense = true; };
           iosevka-name = "Iosevka Custom";
           iosevka = pkgs.iosevka.override {
             # <https://github.com/be5invis/Iosevka/blob/main/doc/language-specific-ligation-sets.md>
@@ -68,12 +74,24 @@
                 enables = [ "eqexeq" "eqslasheq" "slasheq" "tildeeq" ];
                 inherits = "dlig";
               };
-              spacing = "fontconfig-mono"; # "term";
+              spacing = "fontconfig-mono";
               webfontFormats = [ ]; # i.e. none
             };
             set = "custom";
           };
-          font-packages = nerdless-apple-fonts ++ [ iosevka ];
+          sf-mono-liga = pkgs.stdenvNoCC.mkDerivation {
+            pname = "sf-mono-liga-bin";
+            version = "dev";
+            src = sf-mono-liga-src;
+            dontConfigure = true;
+            installPhase = ''
+              mkdir -p $out/share/fonts/opentype
+              cp -R $src/*.otf $out/share/fonts/opentype/
+            '';
+          };
+          font-packages = nerdless-apple-fonts
+            ++ [ input-fonts iosevka sf-mono-liga ]
+            ++ (with pkgs; [ cascadia-code ibm-plex monaspace recursive ]);
           user-cfg = {
             fonts.fontconfig.enable = true;
             home = {

@@ -586,11 +586,12 @@
         "nixfmt": "nixfmt",
         "nixpkgs": [
           "nixpkgs"
-        ]
+        ],
+        "sf-mono-liga-src": "sf-mono-liga-src"
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-57iY9uHf+uMIFNIuLmLVHlFeYs/osY2ALFOX3D0K2/g=",
+        "narHash": "sha256-veNgppciokJWZVd3c6GTK39l+WfeHuVyC3P40AXODsI=",
         "path": "./home",
         "type": "path"
       },
@@ -607,11 +608,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1709445365,
-        "narHash": "sha256-DVv6nd9FQBbMWbOmhq0KVqmlc3y3FMSYl49UXmMcO+0=",
+        "lastModified": 1709485962,
+        "narHash": "sha256-rmFB4uE10+LJbcVE4ePgiuHOBlUIjQOeZt4VQVJTU8M=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "4de84265d7ec7634a69ba75028696d74de9a44a7",
+        "rev": "d579633ff9915a8f4058d5c439281097e92380a8",
         "type": "github"
       },
       "original": {
@@ -1451,6 +1452,22 @@
       "original": {
         "type": "file",
         "url": "https://devimages-cdn.apple.com/design/resources/download/SF-Mono.dmg"
+      }
+    },
+    "sf-mono-liga-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1688258025,
+        "narHash": "sha256-AYjKrVLISsJWXN6Cj74wXmbJtREkFDYOCRw1t2nVH2w=",
+        "owner": "shaunsingh",
+        "repo": "sfmono-nerd-font-ligaturized",
+        "rev": "dc5a3e6fcc2e16ad476b7be3c3c17c2273b260ea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "shaunsingh",
+        "repo": "sfmono-nerd-font-ligaturized",
+        "type": "github"
       }
     },
     "sf-pro": {

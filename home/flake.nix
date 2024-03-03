@@ -76,6 +76,7 @@
               fira-code
               ibm-plex
               iosevka
+              monaspace
               recursive
             ]);
           user-cfg = {
@@ -135,12 +136,17 @@
               home-manager.enable = true;
               kitty = {
                 enable = true;
-                font.package = font-packages.iosevka;
-                settings = {
-                  # font_family = "IBM Plex Mono Light";
-                  # bold_font = "IBM Plex Mono Bold";
-                  # italic_font = "IBM Plex Mono Light Italic";
-                  # bold_italic_font = "IBM Plex Mono Bold Italic";
+                # font.package = font-packages.iosevka;
+                settings = let
+                  family = "Monaspace Argon"; # "IBM Plex";
+                  regular = " Light";
+                  bold = " Bold";
+                  italic = " Italic";
+                in {
+                  font_family = family + regular;
+                  bold_font = family + bold;
+                  italic_font = family + regular + italic;
+                  bold_italic_font = family + bold + italic;
                   font_size = linux-mac 9 11;
                 };
                 shellIntegration.enableZshIntegration = true;

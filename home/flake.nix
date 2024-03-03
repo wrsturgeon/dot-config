@@ -115,7 +115,7 @@
                     slack
                     spotify
                     taplo
-                    wezterm
+                    # wezterm
                     zoom-us
                   ]) ++ (linux-mac [ tor-browser ] [ ]));
             };

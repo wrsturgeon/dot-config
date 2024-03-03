@@ -138,9 +138,9 @@
               kitty = {
                 enable = true;
                 settings = let
-                  family = iosevka-name;
+                  family = "Recursive Mono Linear Static"; # iosevka-name;
                   weight = "Light"; # "Extralight";
-                  bold = "Extrabold";
+                  bold = "Black"; # "Extrabold";
                   italic = "Italic";
                 in {
                   font_family = family + " " + weight;

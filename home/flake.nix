@@ -91,7 +91,7 @@
           };
           font-packages = nerdless-apple-fonts
             ++ [ input-fonts iosevka sf-mono-liga ]
-            ++ (with pkgs; [ cascadia-code ibm-plex monaspace ]);
+            ++ (with pkgs; [ cascadia-code ibm-plex ]);
           user-cfg = {
             fonts.fontconfig.enable = true;
             home = {
@@ -138,10 +138,14 @@
               kitty = {
                 enable = true;
                 settings = let
-                  family = "Liga SFMono Nerd Font"; # iosevka-name;
-                  weight = "Light"; # "Extralight";
-                  bold = "Heavy"; # "Extrabold";
+                  family = iosevka-name;
+                  weight = "Extralight";
+                  bold = "Extrabold";
                   italic = "Italic";
+                  # family = "Liga SFMono Nerd Font";
+                  # weight = "Light";
+                  # bold = "Heavy";
+                  # italic = "Italic";
                 in {
                   font_family = family + " " + weight;
                   bold_font = family + " " + bold;

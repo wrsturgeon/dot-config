@@ -76,8 +76,9 @@
               fira-code
               ibm-plex
               (iosevka.override (prev: {
+                family = "Iosevka Fuck";
                 privateBuildPlan.ligatures.inherits = "haskell";
-                set = "Fuck";
+                set = "fuck";
               }))
               # monaspace
               recursive

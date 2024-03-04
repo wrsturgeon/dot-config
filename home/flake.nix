@@ -139,9 +139,11 @@
               home-manager.enable = true;
               kitty = {
                 enable = true;
+                # extraConfig = ''
+                #   disable_ligatures cursor
+                # '';
                 extraConfig = ''
-                  disable_ligatures cursor
-                  font_features Iosevka +dlig cv93=3
+                  disable_ligatures always
                 '';
                 settings = let
                   family = iosevka-name;

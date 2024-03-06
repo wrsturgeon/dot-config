@@ -2,8 +2,8 @@
   description = "Cross-platform config";
   inputs = { nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; };
   outputs = { nixpkgs, self }: {
-    configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
-      , system, username }:
+    configure = { home, laptop-name, linux-mac, locale, nixpkgs-config
+      , stateVersion, system, username }:
       let pkgs = import nixpkgs nixpkgs-config;
       in [{
         environment = {
@@ -19,7 +19,7 @@
           '';
           pathsToLink = [ "/share/zsh" ];
           systemPackages = with pkgs; [ coreutils gnugrep gnused killall tree ];
-          variables = { LANG = "fr_FR.UTF-8"; };
+          variables = { LANG = locale; };
         };
         networking.hostName = laptop-name;
         nix = {

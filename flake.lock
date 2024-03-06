@@ -747,7 +747,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-FiTgWRYA/mA/592zepyW7O4a7K6+n9PzYS/rv0OAAxI=",
+        "narHash": "sha256-tAMH7uoxNOPYvNgtS0vrVoAGMIRaTyQiHYH61C/eGJc=",
         "path": "./os/linux",
         "type": "path"
       },
@@ -789,14 +789,9 @@
       }
     },
     "mac": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-8vVjtU+iACC7GXRvOT9LsSzpAWNr6uIJheKzisE13iw=",
+        "narHash": "sha256-Wi+iFgFQeAHOhAzxdjN10TOok7un7H/tho9XK1c5qcg=",
         "path": "./os/mac",
         "type": "path"
       },
@@ -1490,7 +1485,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-yCEcdy4KW7T5/NySqEVUEVSAHOWA1F1H1i02UZsSFfM=",
+        "narHash": "sha256-BFlLb1CBHrsVt22Y0gfx1EbyeqUigjvoCe3t2P0Zc1s=",
         "path": "./os/shared",
         "type": "path"
       },

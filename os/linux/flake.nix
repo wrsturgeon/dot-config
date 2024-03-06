@@ -8,8 +8,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
   };
   outputs = { nixos-hardware, nixpkgs, self }: {
-    configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
-      , system, username }:
+    configure = { home, laptop-name, linux-mac, locale, nixpkgs-config
+      , stateVersion, system, username }:
       let pkgs = import nixpkgs nixpkgs-config;
       in [{
         boot = {
@@ -35,8 +35,9 @@
           })
         ];
         i18n = {
-          defaultLocale = "fr_FR.UTF-8";
-          supportedLocales = [ "en_us.UTF-8" "fr_FR.UTF-8" ];
+          defaultLocale = locale;
+          supportedLocales = let locales = [ "en_us.UTF-8" "fr_FR.UTF-8" ];
+          in assert builtins.elem locale locales; locales;
         };
         imports = [ ./hardware-configuration.nix "${nixos-hardware}/apple/t2" ];
         networking.networkmanager.enable = true;

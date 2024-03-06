@@ -50,6 +50,7 @@
         inherit home stateVersion system;
         laptop-name = laptop-name system;
         linux-mac = linux-mac system;
+        locale = "fr_FR.UTF-8";
         nixpkgs-config = nixpkgs-config system;
         username = username system;
       };
@@ -71,8 +72,9 @@
         shell-on = system:
           let pkgs = (import nixpkgs (nixpkgs-config system));
           in {
-            default =
-              pkgs.mkShell { packages = with pkgs; [ lua-language-server stylua]; };
+            default = pkgs.mkShell {
+              packages = with pkgs; [ lua-language-server stylua ];
+            };
           };
       in builtins.listToAttrs (builtins.map (name: {
         inherit name;

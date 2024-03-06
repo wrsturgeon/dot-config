@@ -19,6 +19,7 @@
           '';
           pathsToLink = [ "/share/zsh" ];
           systemPackages = with pkgs; [ coreutils gnugrep gnused killall tree ];
+          variables = { LANG = "fr_FR.UTF-8"; };
         };
         networking.hostName = laptop-name;
         nix = {
@@ -46,7 +47,7 @@
         #   enable = true;
         #   package = pkgs.emacs;
         # };
-        time.timeZone = "America/New_York";
+        time.timeZone = "CET"; # "America/New_York";
         users.users.${username} = {
           description = "Will";
           home = linux-mac "/home/${username}" "/Users/${username}";

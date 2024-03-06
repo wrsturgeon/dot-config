@@ -38,8 +38,8 @@
   outputs = { apple-fonts, firefox-addons, home-manager
     , hydrogen-textobjects-src, jupytext-src, nil, nixfmt, nixpkgs, self
     , sf-mono-liga-src }: {
-      configure = { home, laptop-name, linux-mac, nixpkgs-config, stateVersion
-        , system, username }:
+      configure = { home, laptop-name, linux-mac, locale, nixpkgs-config
+        , stateVersion, system, username }:
         let
           pkgs = import nixpkgs nixpkgs-config;
           jupytext = pkgs.vimUtils.buildVimPlugin {

@@ -47,7 +47,7 @@
         #   enable = true;
         #   package = pkgs.emacs;
         # };
-        time.timeZone = "CET"; # "America/New_York";
+        time.timeZone = "Europe/Paris"; # "America/New_York";
         users.users.${username} = {
           description = "Will";
           home = linux-mac "/home/${username}" "/Users/${username}";

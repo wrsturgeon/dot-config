@@ -9,10 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "path:./os/linux";
     };
-    mac = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "path:./os/mac";
-    };
+    mac.url = "path:./os/mac";
     nix-darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:LnL7/nix-darwin";

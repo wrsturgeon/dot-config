@@ -258,7 +258,7 @@
                     [ ublock-origin ];
                 };
               };
-              xsession.enable = true;
+              # xsession.enable = true;
             } { });
           };
         in [

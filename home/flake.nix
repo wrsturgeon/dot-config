@@ -25,10 +25,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:oxalica/nil";
     };
-    nixfmt = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:serokell/nixfmt";
-    };
+    nixfmt.url = "github:serokell/nixfmt";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     sf-mono-liga-src = {
       flake = false;
@@ -159,7 +156,7 @@
                   bold_font = family + " " + bold;
                   italic_font = family + " " + weight + " " + italic;
                   bold_italic_font = family + " " + bold + " " + italic;
-                  font_size = linux-mac 9 12;
+                  font_size = linux-mac 9 13; # 12;
                 };
                 shellIntegration.enableZshIntegration = true;
                 theme = "Ayu";

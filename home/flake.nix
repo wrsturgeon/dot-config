@@ -107,7 +107,6 @@
                     gcc
                     gnumake
                     logseq
-                    pinentry
                     rust-analyzer
                     rustfmt
                     slack
@@ -115,7 +114,7 @@
                     taplo
                     # wezterm
                     zoom-us
-                  ]) ++ (linux-mac [ tor-browser ] [ ]));
+                  ]) ++ (linux-mac [ pinentry tor-browser ] [ ]));
             };
             programs = {
               direnv = {

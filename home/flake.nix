@@ -194,8 +194,8 @@
               };
               ripgrep.enable = true;
               zsh = {
+                autosuggestion.enable = true;
                 enable = true;
-                autosuggestions.enable = true;
                 enableCompletion = true;
                 initExtra = ''
                   # p10k

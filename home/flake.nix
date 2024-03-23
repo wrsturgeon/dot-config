@@ -32,11 +32,31 @@
       url = "github:shaunsingh/sfmono-nerd-font-ligaturized";
     };
   };
-  outputs = { apple-fonts, firefox-addons, home-manager
-    , hydrogen-textobjects-src, jupytext-src, nil, nixfmt, nixpkgs, self
-    , sf-mono-liga-src }: {
-      configure = { home, laptop-name, linux-mac, locale, nixpkgs-config
-        , stateVersion, system, username }:
+  outputs =
+    {
+      apple-fonts,
+      firefox-addons,
+      home-manager,
+      hydrogen-textobjects-src,
+      jupytext-src,
+      nil,
+      nixfmt,
+      nixpkgs,
+      self,
+      sf-mono-liga-src,
+    }:
+    {
+      configure =
+        {
+          home,
+          laptop-name,
+          linux-mac,
+          locale,
+          nixpkgs-config,
+          stateVersion,
+          system,
+          username,
+        }:
         let
           pkgs = import nixpkgs nixpkgs-config;
           jupytext = pkgs.vimUtils.buildVimPlugin {
@@ -50,13 +70,12 @@
           print-list = builtins.foldl' (acc: s: acc + " " + s) "";
           apple-font-packages = apple-fonts.packages.${system};
           apple-font-names = builtins.attrNames apple-font-packages;
-          nerdless-apple-font-names =
-            builtins.filter (s: !(pkgs.lib.strings.hasSuffix "nerd" s))
-            apple-font-names;
-          nerdless-apple-fonts = map (s: apple-font-packages.${s})
-            (builtins.trace
-              "Apple fonts:${print-list nerdless-apple-font-names}"
-              nerdless-apple-font-names);
+          nerdless-apple-font-names = builtins.filter (
+            s: !(pkgs.lib.strings.hasSuffix "nerd" s)
+          ) apple-font-names;
+          nerdless-apple-fonts = map (s: apple-font-packages.${s}) (
+            builtins.trace "Apple fonts:${print-list nerdless-apple-font-names}" nerdless-apple-font-names
+          );
           input-fonts = pkgs.input-fonts.override { acceptLicense = true; };
           iosevka-name = "Iosevka Custom";
           iosevka = pkgs.iosevka.override {
@@ -68,7 +87,12 @@
               ligations = {
                 # enable all those not enabled by `dlig` below
                 # (see the above link for a visual depiction):
-                enables = [ "eqexeq" "eqslasheq" "slasheq" "tildeeq" ];
+                enables = [
+                  "eqexeq"
+                  "eqslasheq"
+                  "slasheq"
+                  "tildeeq"
+                ];
                 inherits = "dlig";
               };
               noCvSs = false;
@@ -89,16 +113,29 @@
               cp -R $src/*.otf $out/share/fonts/opentype/
             '';
           };
-          font-packages = nerdless-apple-fonts
-            ++ [ input-fonts iosevka sf-mono-liga ]
-            ++ (with pkgs; [ cascadia-code ibm-plex ]);
+          font-packages =
+            nerdless-apple-fonts
+            ++ [
+              input-fonts
+              iosevka
+              sf-mono-liga
+            ]
+            ++ (with pkgs; [
+              cascadia-code
+              ibm-plex
+            ]);
           user-cfg = {
             fonts.fontconfig.enable = true;
             home = {
               inherit stateVersion username;
               packages =
-                (builtins.map (f: f.packages.${system}.default) [ nil nixfmt ])
-                ++ font-packages ++ (with pkgs;
+                (builtins.map (f: f.packages.${system}.default) [
+                  nil
+                  nixfmt
+                ])
+                ++ font-packages
+                ++ (
+                  with pkgs;
                   ([
                     cargo
                     coqPackages.coq
@@ -106,7 +143,6 @@
                     fd
                     gcc
                     gnumake
-                    logseq
                     rust-analyzer
                     rustfmt
                     slack
@@ -114,150 +150,171 @@
                     taplo
                     # wezterm
                     zoom-us
-                  ]) ++ (linux-mac [ pinentry tor-browser ] [ ]));
+                  ])
+                  ++ (linux-mac [
+                    logseq
+                    pinentry
+                    tor-browser
+                  ] [ ])
+                );
             };
-            programs = {
-              direnv = {
-                enable = true;
-                enableZshIntegration = true;
-                nix-direnv.enable = true;
-              };
-              emacs = {
-                enable = true;
-                package = pkgs.emacs;
-              };
-              fzf = {
-                enable = true;
-                enableZshIntegration = true;
-              };
-              gh.enable = true;
-              git.enable = true;
-              home-manager.enable = true;
-              kitty = {
-                enable = true;
-                # extraConfig = ''
-                #   disable_ligatures cursor
-                # '';
-                extraConfig = ''
-                  disable_ligatures always
-                '';
-                settings = let
-                  family = iosevka-name;
-                  weight = "Light";
-                  bold = "Extrabold";
-                  italic = "Italic";
-                  # family = "Liga SFMono Nerd Font";
-                  # weight = "Light";
-                  # bold = "Heavy";
-                  # italic = "Italic";
-                in {
-                  font_family = family + " " + weight;
-                  bold_font = family + " " + bold;
-                  italic_font = family + " " + weight + " " + italic;
-                  bold_italic_font = family + " " + bold + " " + italic;
-                  font_size = linux-mac 9 13; # 12;
-                };
-                shellIntegration.enableZshIntegration = true;
-                theme = "Ayu";
-              };
-              neovim = {
-                defaultEditor = true;
-                enable = true;
-                extraLuaConfig = builtins.readFile ./init.lua;
-                plugins = (with pkgs.vimPlugins; [
-                  cmp-buffer
-                  cmp-cmdline
-                  cmp_luasnip
-                  cmp-nvim-lsp
-                  cmp-path
-                  comment-nvim
-                  Coqtail
-                  crates-nvim
-                  gitsigns-nvim
-                  lualine-nvim
-                  luasnip
-                  neovim-ayu
-                  nvim-cmp
-                  nvim-lspconfig
-                  nvim-notify
-                  nvim-treesitter-textobjects
-                  sniprun
-                  telescope-nvim
-                ]) ++ (
-                  # <https://maxwellrules.com/misc/nvim_jupyter.html>
-                  [ hydrogen-textobjects jupytext ]
-                  ++ (with pkgs.vimPlugins; [ iron-nvim vim-textobj-user ]));
-                viAlias = true;
-                vimAlias = true;
-                withPython3 = true;
-              };
-              ripgrep.enable = true;
-              zsh = {
-                autosuggestion.enable = true;
-                enable = true;
-                enableCompletion = true;
-                initExtra = ''
-                  # p10k
-                  source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
-                  # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-                  # Initialization code that may require console input (password prompts, [y/n]
-                  # confirmations, etc.) must go above this block; everything else may go below.
-                  if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
-                    source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
-                  fi
-                  source ${./p10k.zsh}
-
-                  # direnv
-                  eval "$(direnv hook zsh)"
-                '';
-                syntaxHighlighting = {
+            programs =
+              {
+                direnv = {
                   enable = true;
-                  styles = {
-                    # TODO: <https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.syntaxHighlighting.styles>
+                  enableZshIntegration = true;
+                  nix-direnv.enable = true;
+                };
+                emacs = {
+                  enable = true;
+                  package = pkgs.emacs;
+                };
+                fzf = {
+                  enable = true;
+                  enableZshIntegration = true;
+                };
+                gh.enable = true;
+                git.enable = true;
+                home-manager.enable = true;
+                kitty = {
+                  enable = true;
+                  # extraConfig = ''
+                  #   disable_ligatures cursor
+                  # '';
+                  extraConfig = ''
+                    disable_ligatures always
+                  '';
+                  settings =
+                    let
+                      family = iosevka-name;
+                      weight = "Light";
+                      bold = "Extrabold";
+                      italic = "Italic";
+                    in
+                    # family = "Liga SFMono Nerd Font";
+                    # weight = "Light";
+                    # bold = "Heavy";
+                    # italic = "Italic";
+                    {
+                      font_family = family + " " + weight;
+                      bold_font = family + " " + bold;
+                      italic_font = family + " " + weight + " " + italic;
+                      bold_italic_font = family + " " + bold + " " + italic;
+                      font_size = linux-mac 9 13; # 12;
+                    };
+                  shellIntegration.enableZshIntegration = true;
+                  theme = "Ayu";
+                };
+                neovim = {
+                  defaultEditor = true;
+                  enable = true;
+                  extraLuaConfig = builtins.readFile ./init.lua;
+                  plugins =
+                    (with pkgs.vimPlugins; [
+                      cmp-buffer
+                      cmp-cmdline
+                      cmp_luasnip
+                      cmp-nvim-lsp
+                      cmp-path
+                      comment-nvim
+                      Coqtail
+                      crates-nvim
+                      gitsigns-nvim
+                      lualine-nvim
+                      luasnip
+                      neovim-ayu
+                      nvim-cmp
+                      nvim-lspconfig
+                      nvim-notify
+                      nvim-treesitter-textobjects
+                      sniprun
+                      telescope-nvim
+                    ])
+                    ++ (
+                      # <https://maxwellrules.com/misc/nvim_jupyter.html>
+                      [
+                        hydrogen-textobjects
+                        jupytext
+                      ]
+                      ++ (with pkgs.vimPlugins; [
+                        iron-nvim
+                        vim-textobj-user
+                      ])
+                    );
+                  viAlias = true;
+                  vimAlias = true;
+                  withPython3 = true;
+                };
+                ripgrep.enable = true;
+                zsh = {
+                  autosuggestion.enable = true;
+                  enable = true;
+                  enableCompletion = true;
+                  initExtra = ''
+                    # p10k
+                    source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+                    # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+                    # Initialization code that may require console input (password prompts, [y/n]
+                    # confirmations, etc.) must go above this block; everything else may go below.
+                    if [[ -r "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+                      source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+                    fi
+                    source ${./p10k.zsh}
+
+                    # direnv
+                    eval "$(direnv hook zsh)"
+                  '';
+                  syntaxHighlighting = {
+                    enable = true;
+                    styles = {
+                      # TODO: <https://nix-community.github.io/home-manager/options.xhtml#opt-programs.zsh.syntaxHighlighting.styles>
+                    };
                   };
                 };
-              };
-            } // (linux-mac {
-              firefox = {
-                enable = true;
-                profiles.will = {
-                  # bookmarks directly from <https://nix-community.github.io/home-manager/options.xhtml#opt-programs.firefox.profiles._name_.bookmarks>:
-                  bookmarks = [
-                    {
-                      name = "wikipedia";
-                      tags = [ "wiki" ];
-                      keyword = "wiki";
-                      url =
-                        "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
-                    }
-                    {
-                      name = "kernel.org";
-                      url = "https://www.kernel.org";
-                    }
-                    {
-                      name = "Nix sites";
-                      toolbar = true;
-                      bookmarks = [
-                        {
-                          name = "homepage";
-                          url = "https://nixos.org/";
-                        }
-                        {
-                          name = "wiki";
-                          tags = [ "wiki" "nix" ];
-                          url = "https://nixos.wiki/";
-                        }
-                      ];
-                    }
-                  ];
-                  extensions = with firefox-addons.packages.${system};
-                    [ ublock-origin ];
+              }
+              // (linux-mac {
+                firefox = {
+                  enable = true;
+                  profiles.will = {
+                    # bookmarks directly from <https://nix-community.github.io/home-manager/options.xhtml#opt-programs.firefox.profiles._name_.bookmarks>:
+                    bookmarks = [
+                      {
+                        name = "wikipedia";
+                        tags = [ "wiki" ];
+                        keyword = "wiki";
+                        url = "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
+                      }
+                      {
+                        name = "kernel.org";
+                        url = "https://www.kernel.org";
+                      }
+                      {
+                        name = "Nix sites";
+                        toolbar = true;
+                        bookmarks = [
+                          {
+                            name = "homepage";
+                            url = "https://nixos.org/";
+                          }
+                          {
+                            name = "wiki";
+                            tags = [
+                              "wiki"
+                              "nix"
+                            ];
+                            url = "https://nixos.wiki/";
+                          }
+                        ];
+                      }
+                    ];
+                    extensions = with firefox-addons.packages.${system}; [ ublock-origin ];
+                  };
                 };
-              };
-              # xsession.enable = true;
-            } { });
+                # xsession.enable = true;
+              } { });
           };
-        in [
+        in
+        [
           home-manager.${(linux-mac "nixos" "darwin") + "Modules"}.home-manager
           {
             home-manager = {

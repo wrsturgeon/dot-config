@@ -253,7 +253,7 @@
                   enableCompletion = true;
                   initExtra = ''
                     # RSS email update
-                    r2e run
+                    (r2e run &) > /dev/null 2>&1
 
                     # p10k
                     source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme

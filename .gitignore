@@ -26,10 +26,10 @@
 gh/**
 !gh/hosts.yml
 
-!helix/
-!helix/**
-
 !mimeapps.list
+
+!rss2email.cfg
+# who cares if you know my spam email <3
 
 !touchegg/
 touchegg/**

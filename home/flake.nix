@@ -252,6 +252,9 @@
                   enable = true;
                   enableCompletion = true;
                   initExtra = ''
+                    # RSS email update
+                    r2e run
+
                     # p10k
                     source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
                     # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.

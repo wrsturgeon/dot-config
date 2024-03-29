@@ -159,7 +159,7 @@
                   ] [ ])
                 );
             };
-            programs = builtins.mapAttrs (k: v: v // { enable = true; }) (
+            programs = let enabled = (builtins.mapAttrs (k: v: v // { enable = true; }) (
               {
                 direnv = {
                   enableZshIntegration = true;
@@ -235,6 +235,9 @@
                   autosuggestion.enable = true;
                   enableCompletion = true;
                   initExtra = ''
+                    # Next time I inevitably fuck up my ''${PATH}
+                    export BACKUP_NIX='${pkgs.nix}/bin/nix'
+
                     # RSS email update
                     (r2e run &) > /dev/null 2>&1
 
@@ -249,7 +252,7 @@
                     source ${./p10k.zsh}
 
                     # direnv
-                    eval "$(direnv hook zsh)"
+                    eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
                   '';
                   syntaxHighlighting = {
                     enable = true;
@@ -295,7 +298,7 @@
                   extensions = with firefox-addons.packages.${system}; [ ublock-origin ];
                 };
               } { })
-            );
+            ));in builtins.trace enabled enabled;
           };
         in
         [

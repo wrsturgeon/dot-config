@@ -77,7 +77,7 @@
       apps = let rebuild-on = system: let pkgs = import nixpkgs (nixpkgs-config system); in {
         type = "app";
         program = "${
-          let git = "${pkgs.git}/bin/git"; nix = "${pkgs.nix}/bin/nix"; rebuild-script = ''
+          let rebuild-script = ''
             #!${pkgs.bash}/bin/bash
 
             set -eux
@@ -86,33 +86,33 @@
             
             # Push ~/.config changes
             cd ~/.config
-            ${git} pull
-            ${git} add -A
-            ${nix} flake update
-            ${git} add -A
-            ${git} commit -m "''${COMMIT_DATE}" || :
-            ${git} push || :
+            git pull
+            git add -A
+            nix flake update
+            git add -A
+            git commit -m "''${COMMIT_DATE}" || :
+            git push || :
             
             # Synchronize Logseq notes
             cd ~/Desktop/logseq
-            ${git} pull
-            ${git} submodule update --init --recursive --remote
-            ${git} add -A
-            ${git} commit -m "''${COMMIT_DATE}" || :
-            ${git} push
+            git pull
+            git submodule update --init --recursive --remote
+            git add -A
+            git commit -m "''${COMMIT_DATE}" || :
+            git push
             
             # Rebuild the Nix system
             if [ -d /etc/nixos ]; then
               cd /etc/nixos
-              sudo ${git} pull
+              sudo git pull
               sudo nixos-rebuild switch -v -j auto # --install-bootloader
               # nix shell nixpkgs#efibootmgr nixpkgs#refind -c refind-install
             else
-              ${nix-darwin}/bin/darwin-rebuild switch --flake ~/.config --keep-going -j auto
+              darwin-rebuild switch --flake ~/.config --keep-going -j auto
             fi
             
             # Collect garbage
-            ${pkgs.nix}/bin/nix-collect-garbage -j auto --delete-older-than 14d > /dev/null 2>&1 &
+            nix-collect-garbage -j auto --delete-older-than 14d > /dev/null 2>&1 &
           ''; in pkgs.stdenv.mkDerivation {
             name = "reload";
             src = ./.;
@@ -122,9 +122,10 @@
               echo '${rebuild-script}' > $out/bin/rebuild
               chmod +x $out/bin/rebuild
             '';
+            propagatedBuildInputs = with pkgs; ([ git nix ] ++ (linux-mac system [] [ nix-darwin.packages.${system}.default ]));
           }
         }/bin/rebuild";
-      }; in builtins.foldl' (acc: system: acc // { ${system}.rebuild = rebuild-on system; }) {} systems;
+      }; in builtins.foldl' (acc: system: acc // { ${system} = { rebuild = rebuild-on system; default = self.apps.${system}.rebuild; }; }) {} systems;
       darwinConfigurations =
         let
           system = "x86_64-darwin";

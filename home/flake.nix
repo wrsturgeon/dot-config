@@ -250,9 +250,6 @@
                       source "''${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
                     fi
                     source ${./p10k.zsh}
-
-                    # direnv
-                    eval "$(${pkgs.direnv}/bin/direnv hook zsh)"
                   '';
                   syntaxHighlighting = {
                     enable = true;

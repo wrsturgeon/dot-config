@@ -20,12 +20,25 @@
       url = "path:./os/shared";
     };
   };
-  outputs = { home, linux, mac, shared, nix-darwin, nixpkgs, self, }:
+  outputs =
+    {
+      home,
+      linux,
+      mac,
+      shared,
+      nix-darwin,
+      nixpkgs,
+      self,
+    }:
     let
-      systems = [ "x86_64-darwin" "x86_64-linux" ];
+      systems = [
+        "x86_64-darwin"
+        "x86_64-linux"
+      ];
       is-linux = nixpkgs.lib.strings.hasSuffix "linux";
       is-mac = nixpkgs.lib.strings.hasSuffix "darwin";
-      linux-mac = system: on-linux: on-mac:
+      linux-mac =
+        system: on-linux: on-mac:
         if is-linux system then
           on-linux
         else if is-mac system then
@@ -53,31 +66,49 @@
       };
       on = system: module: {
         inherit system;
-        modules =
-          builtins.concatMap (flake: flake.configure (config-args system)) ([
-            home
-            shared
-            module
-          ]);
+        modules = builtins.concatMap (flake: flake.configure (config-args system)) ([
+          home
+          shared
+          module
+        ]);
       };
-    in {
-      darwinConfigurations = let system = "x86_64-darwin";
-      in {
-        ${laptop-name system} = nix-darwin.lib.darwinSystem (on system mac);
-      };
-      devShells = let
-        shell-on = system:
-          let pkgs = (import nixpkgs (nixpkgs-config system));
-          in {
-            default = pkgs.mkShell {
-              packages = with pkgs; [ lua-language-server stylua ];
+    in
+    {
+      darwinConfigurations =
+        let
+          system = "x86_64-darwin";
+        in
+        {
+          ${laptop-name system} = nix-darwin.lib.darwinSystem (on system mac);
+        };
+      devShells =
+        let
+          shell-on =
+            system:
+            let
+              pkgs = (import nixpkgs (nixpkgs-config system));
+            in
+            {
+              default = pkgs.mkShell {
+                packages = with pkgs; [
+                  lua-language-server
+                  stylua
+                ];
+              };
             };
-          };
-      in builtins.listToAttrs (builtins.map (name: {
-        inherit name;
-        value = shell-on name;
-      }) systems);
-      nixosConfigurations = let system = "x86_64-linux";
-      in { ${laptop-name system} = nixpkgs.lib.nixosSystem (on system linux); };
+        in
+        builtins.listToAttrs (
+          builtins.map (name: {
+            inherit name;
+            value = shell-on name;
+          }) systems
+        );
+      nixosConfigurations =
+        let
+          system = "x86_64-linux";
+        in
+        {
+          ${laptop-name system} = nixpkgs.lib.nixosSystem (on system linux);
+        };
     };
 }

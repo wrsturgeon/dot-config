@@ -159,29 +159,18 @@
                   ] [ ])
                 );
             };
-            programs =
+            programs = builtins.mapAttrs (k: v: v // { enable = true; }) (
               {
                 direnv = {
-                  enable = true;
                   enableZshIntegration = true;
                   nix-direnv.enable = true;
                 };
-                emacs = {
-                  enable = true;
-                  package = pkgs.emacs;
-                };
-                fzf = {
-                  enable = true;
-                  enableZshIntegration = true;
-                };
-                gh.enable = true;
-                git.enable = true;
-                home-manager.enable = true;
+                emacs.package = pkgs.emacs;
+                fzf.enableZshIntegration = true;
+                gh = { };
+                git = { };
+                home-manager = { };
                 kitty = {
-                  enable = true;
-                  # extraConfig = ''
-                  #   disable_ligatures cursor
-                  # '';
                   extraConfig = ''
                     disable_ligatures always
                   '';
@@ -192,10 +181,6 @@
                       bold = "Extrabold";
                       italic = "Italic";
                     in
-                    # family = "Liga SFMono Nerd Font";
-                    # weight = "Light";
-                    # bold = "Heavy";
-                    # italic = "Italic";
                     {
                       font_family = family + " " + weight;
                       bold_font = family + " " + bold;
@@ -208,7 +193,6 @@
                 };
                 neovim = {
                   defaultEditor = true;
-                  enable = true;
                   extraLuaConfig = builtins.readFile ./init.lua;
                   plugins =
                     (with pkgs.vimPlugins; [
@@ -246,10 +230,9 @@
                   vimAlias = true;
                   withPython3 = true;
                 };
-                ripgrep.enable = true;
+                ripgrep = { };
                 zsh = {
                   autosuggestion.enable = true;
-                  enable = true;
                   enableCompletion = true;
                   initExtra = ''
                     # RSS email update
@@ -277,45 +260,42 @@
                 };
               }
               // (linux-mac {
-                firefox = {
-                  enable = true;
-                  profiles.will = {
-                    # bookmarks directly from <https://nix-community.github.io/home-manager/options.xhtml#opt-programs.firefox.profiles._name_.bookmarks>:
-                    bookmarks = [
-                      {
-                        name = "wikipedia";
-                        tags = [ "wiki" ];
-                        keyword = "wiki";
-                        url = "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
-                      }
-                      {
-                        name = "kernel.org";
-                        url = "https://www.kernel.org";
-                      }
-                      {
-                        name = "Nix sites";
-                        toolbar = true;
-                        bookmarks = [
-                          {
-                            name = "homepage";
-                            url = "https://nixos.org/";
-                          }
-                          {
-                            name = "wiki";
-                            tags = [
-                              "wiki"
-                              "nix"
-                            ];
-                            url = "https://nixos.wiki/";
-                          }
-                        ];
-                      }
-                    ];
-                    extensions = with firefox-addons.packages.${system}; [ ublock-origin ];
-                  };
+                firefox.profiles.will = {
+                  # bookmarks directly from <https://nix-community.github.io/home-manager/options.xhtml#opt-programs.firefox.profiles._name_.bookmarks>:
+                  bookmarks = [
+                    {
+                      name = "wikipedia";
+                      tags = [ "wiki" ];
+                      keyword = "wiki";
+                      url = "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
+                    }
+                    {
+                      name = "kernel.org";
+                      url = "https://www.kernel.org";
+                    }
+                    {
+                      name = "Nix sites";
+                      toolbar = true;
+                      bookmarks = [
+                        {
+                          name = "homepage";
+                          url = "https://nixos.org/";
+                        }
+                        {
+                          name = "wiki";
+                          tags = [
+                            "wiki"
+                            "nix"
+                          ];
+                          url = "https://nixos.wiki/";
+                        }
+                      ];
+                    }
+                  ];
+                  extensions = with firefox-addons.packages.${system}; [ ublock-origin ];
                 };
-                # xsession.enable = true;
-              } { });
+              } { })
+            );
           };
         in
         [

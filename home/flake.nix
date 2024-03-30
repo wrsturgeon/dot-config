@@ -297,7 +297,9 @@
               } { })
             ));in builtins.trace enabled enabled;
           };
-        in
+        in {
+        inherit user-cfg;
+        shit=
         [
           home-manager.${(linux-mac "nixos" "darwin") + "Modules"}.home-manager
           {
@@ -307,6 +309,6 @@
               users.${username} = user-cfg;
             };
           }
-        ];
+        ]; };
     };
 }

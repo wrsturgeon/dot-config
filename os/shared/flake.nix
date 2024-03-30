@@ -19,7 +19,7 @@
         }:
         let
           pkgs = import nixpkgs nixpkgs-config;
-        in
+        in { out =
         [
           {
             environment = {
@@ -73,6 +73,6 @@
               shell = pkgs.zsh;
             };
           }
-        ];
+        ]; };
     };
 }

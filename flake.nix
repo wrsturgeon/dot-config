@@ -66,7 +66,7 @@
       };
       on = system: module: {
         inherit system;
-        modules = builtins.concatMap (flake: flake.configure (config-args system)) ([
+        modules = builtins.concatMap (flake: (flake.configure (config-args system)).out) ([
           home
           shared
           module
@@ -108,7 +108,8 @@
               sudo nixos-rebuild switch -v -j auto # --install-bootloader
               # nix shell nixpkgs#efibootmgr nixpkgs#refind -c refind-install
             else
-              darwin-rebuild switch --flake ~/.config --keep-going -j auto
+              # darwin-rebuild switch --flake ~/.config --keep-going -j auto
+              nix-darwin switch --flake . --keep-going -j auto
             fi
             
             # Collect garbage
@@ -138,7 +139,7 @@
           shell-on =
             system:
             let
-              pkgs = (import nixpkgs (nixpkgs-config system));
+              pkgs = import nixpkgs (nixpkgs-config system);
             in
             {
               default = pkgs.mkShell {

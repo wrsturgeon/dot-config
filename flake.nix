@@ -93,15 +93,15 @@
                     git push
 
                     # Rebuild the Nix system
-                    if [ -d /etc/nixos ]; then
-                      cd /etc/nixos
-                      sudo git pull
-                      sudo nixos-rebuild switch -v -j auto # --install-bootloader
-                      # nix shell nixpkgs#efibootmgr nixpkgs#refind -c refind-install
-                    else
-                      # darwin-rebuild switch --flake ~/.config --keep-going -j auto
-                      nix-darwin switch --flake . --keep-going -j auto
-                    fi
+                  '' + (linux-mac system ''
+                    cd /etc/nixos
+                    sudo git pull
+                    sudo nixos-rebuild switch -v -j auto # --install-bootloader
+                    # nix shell nixpkgs#efibootmgr nixpkgs#refind -c refind-install
+                  '' ''
+                    # darwin-rebuild switch --flake ~/.config --keep-going -j auto
+                    ${nix-darwin.packages.${system}.default}/bin/nix-darwin switch --flake . --keep-going -j auto
+                  '') + ''
 
                     # Collect garbage
                     nix-collect-garbage -j auto --delete-older-than 14d > /dev/null 2>&1 &
@@ -115,9 +115,7 @@
                     echo '${rebuild-script}' > $out/bin/rebuild
                     chmod +x $out/bin/rebuild
                   '';
-                  propagatedBuildInputs = with pkgs;
-                    ([ git nix ] ++ (linux-mac system [ ]
-                      [ nix-darwin.packages.${system}.default ]));
+                  propagatedBuildInputs = with pkgs; [ git nix ];
                 }
               }/bin/rebuild";
           };

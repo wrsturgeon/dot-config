@@ -100,7 +100,7 @@
                     # nix shell nixpkgs#efibootmgr nixpkgs#refind -c refind-install
                   '' ''
                     # darwin-rebuild switch --flake ~/.config --keep-going -j auto
-                    ${nix-darwin.packages.${system}.default}/bin/nix-darwin switch --flake . --keep-going -j auto
+                    ${nix-darwin.packages.${system}.default}/bin/darwin-rebuild switch --flake ~/.config --keep-going -j auto
                   '') + ''
 
                     # Collect garbage

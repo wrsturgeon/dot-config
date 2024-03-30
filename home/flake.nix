@@ -239,7 +239,7 @@
                     [ ublock-origin ];
                 };
               } { })));
-            in builtins.trace enabled enabled;
+            in builtins.trace (builtins.mapAttrs (k: v: let e = v.enabled; in assert e; e) enabled) enabled;
           };
         in {
           inherit user-cfg;

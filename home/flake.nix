@@ -75,7 +75,7 @@
           ) apple-font-names;
           nerdless-apple-fonts-by-name = builtins.foldl' (
             acc: s: acc // { ${s} = apple-font-packages.${s}; }
-          ) nerdless-apple-font-names;
+          ) { } nerdless-apple-font-names;
           input-fonts = pkgs.input-fonts.override { acceptLicense = true; };
           iosevka-name = "Iosevka Custom";
           iosevka = pkgs.iosevka.override {

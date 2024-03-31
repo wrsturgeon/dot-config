@@ -32,11 +32,31 @@
       url = "github:shaunsingh/sfmono-nerd-font-ligaturized";
     };
   };
-  outputs = { apple-fonts, firefox-addons, home-manager
-    , hydrogen-textobjects-src, jupytext-src, nil, nixfmt, nixpkgs, self
-    , sf-mono-liga-src, }: {
-      configure = { home, laptop-name, linux-mac, locale, nixpkgs-config
-        , stateVersion, system, username, }:
+  outputs =
+    {
+      apple-fonts,
+      firefox-addons,
+      home-manager,
+      hydrogen-textobjects-src,
+      jupytext-src,
+      nil,
+      nixfmt,
+      nixpkgs,
+      self,
+      sf-mono-liga-src,
+    }:
+    {
+      configure =
+        {
+          home,
+          laptop-name,
+          linux-mac,
+          locale,
+          nixpkgs-config,
+          stateVersion,
+          system,
+          username,
+        }:
         let
           pkgs = import nixpkgs nixpkgs-config;
           jupytext = pkgs.vimUtils.buildVimPlugin {
@@ -50,13 +70,12 @@
           print-list = builtins.foldl' (acc: s: acc + " " + s) "";
           apple-font-packages = apple-fonts.packages.${system};
           apple-font-names = builtins.attrNames apple-font-packages;
-          nerdless-apple-font-names =
-            builtins.filter (s: !(pkgs.lib.strings.hasSuffix "nerd" s))
-            apple-font-names;
-          nerdless-apple-fonts = map (s: apple-font-packages.${s})
-            (builtins.trace
-              "Apple fonts:${print-list nerdless-apple-font-names}"
-              nerdless-apple-font-names);
+          nerdless-apple-font-names = builtins.filter (
+            s: !(pkgs.lib.strings.hasSuffix "nerd" s)
+          ) apple-font-names;
+          nerdless-apple-fonts-by-name = builtins.foldl' (
+            acc: s: acc // { ${s} = apple-font-packages.${s}; }
+          ) nerdless-apple-font-names;
           input-fonts = pkgs.input-fonts.override { acceptLicense = true; };
           iosevka-name = "Iosevka Custom";
           iosevka = pkgs.iosevka.override {
@@ -68,7 +87,12 @@
               ligations = {
                 # enable all those not enabled by `dlig` below
                 # (see the above link for a visual depiction):
-                enables = [ "eqexeq" "eqslasheq" "slasheq" "tildeeq" ];
+                enables = [
+                  "eqexeq"
+                  "eqslasheq"
+                  "slasheq"
+                  "tildeeq"
+                ];
                 inherits = "dlig";
               };
               noCvSs = false;
@@ -89,35 +113,39 @@
               cp -R $src/*.otf $out/share/fonts/opentype/
             '';
           };
-          font-packages = nerdless-apple-fonts
-            ++ [ input-fonts iosevka sf-mono-liga ]
-            ++ (with pkgs; [ cascadia-code ibm-plex ]);
+          font-pkgs-by-name = nerdless-apple-fonts-by-name // {
+            inherit input-fonts iosevka sf-mono-liga;
+            inherit (pkgs) cascadia-code ibm-plex;
+          };
+          pkgs-by-name =
+            font-pkgs-by-name
+            // {
+              inherit (pkgs)
+                cargo
+                discord
+                fd
+                gcc
+                gnumake
+                rss2email
+                rust-analyzer
+                rustfmt
+                slack
+                spotify
+                taplo
+                zoom-us
+                ;
+              # TODO: wezterm when fixed
+              inherit (pkgs.coqPackages) coq;
+            }
+            // (builtins.mapAttrs (k: v: v.packages.${system}.default) { inherit nil nixfmt; });
           user-cfg = {
             fonts.fontconfig.enable = true;
             home = {
               inherit stateVersion username;
-              packages =
-                (builtins.map (f: f.packages.${system}.default) [ nil nixfmt ])
-                ++ font-packages ++ (with pkgs;
-                  ([
-                    cargo
-                    coqPackages.coq
-                    discord
-                    fd
-                    gcc
-                    gnumake
-                    rss2email
-                    rust-analyzer
-                    rustfmt
-                    slack
-                    spotify
-                    taplo
-                    # wezterm
-                    zoom-us
-                  ]) ++ (linux-mac [ logseq pinentry tor-browser ] [ ]));
+              packages = builtins.attrValues pkgs-by-name;
             };
-            programs = let
-              enabled = (builtins.mapAttrs (k: v: v // { enable = true; }) ({
+            programs = builtins.mapAttrs (k: v: v // { enable = true; }) (
+              {
                 direnv = {
                   enableZshIntegration = true;
                   nix-direnv.enable = true;
@@ -131,47 +159,58 @@
                   extraConfig = ''
                     disable_ligatures always
                   '';
-                  settings = let
-                    family = iosevka-name;
-                    weight = "Light";
-                    bold = "Extrabold";
-                    italic = "Italic";
-                  in {
-                    font_family = family + " " + weight;
-                    bold_font = family + " " + bold;
-                    italic_font = family + " " + weight + " " + italic;
-                    bold_italic_font = family + " " + bold + " " + italic;
-                    font_size = linux-mac 9 13; # 12;
-                  };
+                  settings =
+                    let
+                      family = iosevka-name;
+                      weight = "Light";
+                      bold = "Extrabold";
+                      italic = "Italic";
+                    in
+                    {
+                      font_family = family + " " + weight;
+                      bold_font = family + " " + bold;
+                      italic_font = family + " " + weight + " " + italic;
+                      bold_italic_font = family + " " + bold + " " + italic;
+                      font_size = linux-mac 9 13; # 12;
+                    };
                   shellIntegration.enableZshIntegration = true;
                   theme = "Ayu";
                 };
                 neovim = {
                   defaultEditor = true;
                   extraLuaConfig = builtins.readFile ./init.lua;
-                  plugins = (with pkgs.vimPlugins; [
-                    cmp-buffer
-                    cmp-cmdline
-                    cmp_luasnip
-                    cmp-nvim-lsp
-                    cmp-path
-                    comment-nvim
-                    Coqtail
-                    crates-nvim
-                    gitsigns-nvim
-                    lualine-nvim
-                    luasnip
-                    neovim-ayu
-                    nvim-cmp
-                    nvim-lspconfig
-                    nvim-notify
-                    nvim-treesitter-textobjects
-                    sniprun
-                    telescope-nvim
-                  ]) ++ (
-                    # <https://maxwellrules.com/misc/nvim_jupyter.html>
-                    [ hydrogen-textobjects jupytext ]
-                    ++ (with pkgs.vimPlugins; [ iron-nvim vim-textobj-user ]));
+                  plugins =
+                    (with pkgs.vimPlugins; [
+                      cmp-buffer
+                      cmp-cmdline
+                      cmp_luasnip
+                      cmp-nvim-lsp
+                      cmp-path
+                      comment-nvim
+                      Coqtail
+                      crates-nvim
+                      gitsigns-nvim
+                      lualine-nvim
+                      luasnip
+                      neovim-ayu
+                      nvim-cmp
+                      nvim-lspconfig
+                      nvim-notify
+                      nvim-treesitter-textobjects
+                      sniprun
+                      telescope-nvim
+                    ])
+                    ++ (
+                      # <https://maxwellrules.com/misc/nvim_jupyter.html>
+                      [
+                        hydrogen-textobjects
+                        jupytext
+                      ]
+                      ++ (with pkgs.vimPlugins; [
+                        iron-nvim
+                        vim-textobj-user
+                      ])
+                    );
                   viAlias = true;
                   vimAlias = true;
                   withPython3 = true;
@@ -204,7 +243,8 @@
                     };
                   };
                 };
-              } // (linux-mac {
+              }
+              // (linux-mac {
                 firefox.profiles.will = {
                   # bookmarks directly from <https://nix-community.github.io/home-manager/options.xhtml#opt-programs.firefox.profiles._name_.bookmarks>:
                   bookmarks = [
@@ -212,8 +252,7 @@
                       name = "wikipedia";
                       tags = [ "wiki" ];
                       keyword = "wiki";
-                      url =
-                        "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
+                      url = "https://en.wikipedia.org/wiki/Special:Search?search=%s&go=Go";
                     }
                     {
                       name = "kernel.org";
@@ -229,29 +268,34 @@
                         }
                         {
                           name = "wiki";
-                          tags = [ "wiki" "nix" ];
+                          tags = [
+                            "wiki"
+                            "nix"
+                          ];
                           url = "https://nixos.wiki/";
                         }
                       ];
                     }
                   ];
-                  extensions = with firefox-addons.packages.${system};
-                    [ ublock-origin ];
+                  extensions = with firefox-addons.packages.${system}; [ ublock-origin ];
                 };
-              } { })));
-            in builtins.trace (builtins.mapAttrs (k: v: let e = v.enabled; in assert e; e) enabled) enabled;
+              } { })
+            );
           };
-        in {
-          inherit user-cfg;
+        in
+        {
+          inherit pkgs-by-name user-cfg;
           out = [
-            home-manager.${
-              (linux-mac "nixos" "darwin") + "Modules"
-            }.home-manager
+            home-manager.${(linux-mac "nixos" "darwin") + "Modules"}.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 users.${username} = user-cfg;
+              };
+              users.users.${username} = builtins.trace username {
+                name = username;
+                home = "/${linux-mac "home" "Users"}/${username}";
               };
             }
           ];

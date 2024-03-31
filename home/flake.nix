@@ -249,7 +249,7 @@
             }.home-manager
             {
               home-manager = {
-                useGlobalPkgs = true;
+                # useGlobalPkgs = true;
                 useUserPackages = true;
                 users.${username} = user-cfg;
               };

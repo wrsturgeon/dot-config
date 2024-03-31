@@ -141,7 +141,7 @@
           user-cfg = {
             fonts.fontconfig.enable = true;
             home = {
-              inherit stateVersion username;
+              inherit stateVersion;
               packages = builtins.attrValues pkgs-by-name;
             };
             programs = builtins.mapAttrs (k: v: v // { enable = true; }) (
@@ -154,7 +154,6 @@
                 fzf.enableZshIntegration = true;
                 gh = { };
                 git = { };
-                home-manager = { };
                 kitty = {
                   extraConfig = ''
                     disable_ligatures always
@@ -285,7 +284,7 @@
         in
         {
           inherit pkgs-by-name user-cfg;
-          out = [
+          modules = [
             home-manager.${(linux-mac "nixos" "darwin") + "Modules"}.home-manager
             {
               home-manager = {

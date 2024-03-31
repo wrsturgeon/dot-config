@@ -66,7 +66,7 @@
       };
       on = system: module: {
         inherit system;
-        modules = builtins.concatMap (flake: (flake.configure (config-args system)).out) ([
+        modules = builtins.concatMap (flake: (flake.configure (config-args system)).modules) ([
           home
           shared
           module

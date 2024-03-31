@@ -29,7 +29,7 @@
           pkgs = import nixpkgs nixpkgs-config;
         in
         {
-          out = [
+          modules = [
             {
               boot = {
                 kernelModules = [ "applesmc" ];

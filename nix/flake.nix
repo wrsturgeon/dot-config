@@ -76,16 +76,21 @@
           in
           builtins.map (
             x:
-            builtins.trace (builtins.attrNames (
-              if builtins.typeOf x == "lambda" then
-                x {
-                  config = { };
-                  lib = { };
-                  pkgs = import nixpkgs (nixpkgs-config system);
-                }
-              else
-                x
-            )) x
+            builtins.trace (
+              builtins.foldl' (acc: x: acc + x + " ") "{ " (
+                builtins.attrNames (
+                  if builtins.typeOf x == "lambda" then
+                    x {
+                      config = { };
+                      lib = { };
+                      pkgs = import nixpkgs (nixpkgs-config system);
+                    }
+                  else
+                    x
+                )
+              )
+              + "}"
+            ) x
           ) altogether;
       };
     in

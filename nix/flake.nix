@@ -70,13 +70,24 @@
           cfg = {
             inherit system;
             modules = [
-              (builtins.foldl' (import ./merge.nix) { } (
-                builtins.concatMap (flake: (flake.configure (config-args system)).modules) ([
-                  shared
-                  module
-                  home
-                ])
-              ))
+              (
+                args:
+                builtins.foldl' (import ./merge.nix) { } (
+                  builtins.concatMap
+                    (
+                      flake:
+                      let
+                        mods = flake.configure (config-args system).modules;
+                      in
+                      if builtins.typeOf mods == "lambda" then mods args else mods
+                    )
+                    ([
+                      shared
+                      module
+                      home
+                    ])
+                )
+              )
             ];
           };
         in

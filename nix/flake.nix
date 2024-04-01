@@ -72,20 +72,22 @@
             modules = [
               (
                 args:
-                builtins.foldl' (import ./merge.nix) { } (
-                  builtins.concatMap
-                    (
-                      flake:
-                      if builtins.typeOf flake == "lambda" then
-                        flake args
-                      else
-                        (flake.configure (config-args system)).modules
-                    )
-                    ([
-                      shared
-                      module
-                      home
-                    ])
+                builtins.trace args (
+                  builtins.foldl' (import ./merge.nix) { } (
+                    builtins.concatMap
+                      (
+                        flake:
+                        let
+                          mods = (flake.configure (config-args system)).modules;
+                        in
+                        if builtins.typeOf mods == "lambda" then mods args else mods
+                      )
+                      ([
+                        shared
+                        module
+                        home
+                      ])
+                  )
                 )
               )
             ];

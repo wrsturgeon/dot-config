@@ -135,7 +135,7 @@
                     + ''
                         ${
                           linux-mac system "sudo nixos" "${nix-darwin.packages.${system}.default}/bin/darwin"
-                        }-rebuild switch --flake ~/.config/nix --keep-going -v -j auto # --install-bootloader"
+                        }-rebuild switch --flake ${./.} --keep-going -v -j auto # --install-bootloader"
 
                       # Collect garbage
                       ${pkgs.nix}/bin/nix-collect-garbage -j auto --delete-older-than 14d > /dev/null 2>&1 &

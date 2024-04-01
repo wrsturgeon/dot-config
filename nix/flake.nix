@@ -79,7 +79,7 @@
                       if builtins.typeOf flake == "lambda" then
                         flake args
                       else
-                        flake.configure (config-args system).modules
+                        (flake.configure (config-args system)).modules
                     )
                     ([
                       shared

@@ -64,20 +64,23 @@
         nixpkgs-config = nixpkgs-config system;
         username = username system;
       };
-      on = system: module: {
-        inherit system;
-        modules =
-          let
-            merged = builtins.foldl' (import ./merge.nix) { } (
-              builtins.concatMap (flake: (flake.configure (config-args system)).modules) ([
-                shared
-                module
-                home
-              ])
-            );
-          in
-          builtins.trace merged [ merged ];
-      };
+      on =
+        system: module:
+        assert false;
+        {
+          inherit system;
+          modules =
+            let
+              merged = builtins.foldl' (import ./merge.nix) { } (
+                builtins.concatMap (flake: (flake.configure (config-args system)).modules) ([
+                  shared
+                  module
+                  home
+                ])
+              );
+            in
+            builtins.trace merged [ merged ];
+        };
     in
     {
       apps =

@@ -69,9 +69,9 @@
         modules =
           let
             altogether = builtins.concatMap (flake: (flake.configure (config-args system)).modules) ([
-              home
               shared
               module
+              home
             ]);
           in
           builtins.trace altogether altogether;

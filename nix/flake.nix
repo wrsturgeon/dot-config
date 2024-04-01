@@ -74,7 +74,9 @@
               home
             ]);
           in
-          builtins.map (x: builtins.trace x x) altogether;
+          builtins.map (
+            x: builtins.trace (builtins.attrNames (if builtins.typeOf x == "lambda" then x { } else x)) x
+          ) altogether;
       };
     in
     {

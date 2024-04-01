@@ -296,10 +296,14 @@
                 useUserPackages = true;
                 users.${username} = user-cfg;
               };
-              users.users.${username} = builtins.trace username {
-                name = username;
-                home = "/${linux-mac "home" "Users"}/${username}";
-              };
+              users.users.${username} =
+                let
+                  record = {
+                    name = username;
+                    home = "/${linux-mac "home" "Users"}/${username}";
+                  };
+                in
+                builtins.trace "User `${record.name}` at `${record.home}`" record;
             }
           ];
         };

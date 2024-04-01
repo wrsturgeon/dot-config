@@ -74,7 +74,10 @@
               home
             ]);
           in
-          builtins.trace altogether altogether;
+          builtins.trace (builtins.mapAttrs (k: v: [
+            k
+            v
+          ]) altogether) altogether;
       };
     in
     {

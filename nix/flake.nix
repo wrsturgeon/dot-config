@@ -75,7 +75,17 @@
             ]);
           in
           builtins.map (
-            x: builtins.trace (builtins.attrNames (if builtins.typeOf x == "lambda" then x { } else x)) x
+            x:
+            builtins.trace (builtins.attrNames (
+              if builtins.typeOf x == "lambda" then
+                x {
+                  config = { };
+                  lib = { };
+                  pkgs = import nixpkgs (nixpkgs-config system);
+                }
+              else
+                x
+            )) x
           ) altogether;
       };
     in

@@ -74,7 +74,7 @@
               home
             ]);
           in
-          builtins.map (x: builtins.trace (builtins.attrNames x) x) altogether;
+          builtins.map (x: builtins.trace x x) altogether;
       };
     in
     {

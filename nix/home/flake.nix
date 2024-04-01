@@ -222,7 +222,10 @@
                     # <https://nix-community.github.io/home-manager/index.xhtml#ch-installation>
                     . /etc/profiles/per-user/${username}/etc/profile.d/hm-session-vars.sh
 
-                    # Next time I inevitably fuck up my ''${PATH}
+                    # WHY THE FUCK ISN'T $PATH AUTOMATICALLY SET UP
+                    export PATH="/etc/profiles/per-user/${username}/bin:/run/current-system/sw/bin:''${PATH}"
+
+                    # Next time I inevitably fuck up the above
                     export BACKUP_NIX='${pkgs.nix}/bin/nix'
 
                     # RSS email update
@@ -294,7 +297,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.${username} = user-cfg;
+                users.${username} = { ... }: user-cfg;
               };
               users.users.${username} =
                 let

@@ -76,10 +76,10 @@
                   builtins.concatMap
                     (
                       flake:
-                      let
-                        mods = flake.configure (config-args system).modules;
-                      in
-                      if builtins.typeOf mods == "lambda" then mods args else mods
+                      if builtins.typeOf flake == "lambda" then
+                        flake args
+                      else
+                        flake.configure (config-args system).modules
                     )
                     ([
                       shared

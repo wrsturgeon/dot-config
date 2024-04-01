@@ -293,21 +293,24 @@
           modules = [
             home-manager.${(linux-mac "nixos" "darwin") + "Modules"}.home-manager
             # and then a separate element of the list:
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.${username} = { ... }: user-cfg;
-              };
-              users.users.${username} =
-                let
-                  record = {
-                    name = username;
-                    home = "/${linux-mac "home" "Users"}/${username}";
-                  };
-                in
-                builtins.trace "User `${record.name}` at `${record.home}`" record;
-            }
+            (
+              { ... }:
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.${username} = { ... }: user-cfg;
+                };
+                users.users.${username} =
+                  let
+                    record = {
+                      name = username;
+                      home = "/${linux-mac "home" "Users"}/${username}";
+                    };
+                  in
+                  builtins.trace "User `${record.name}` at `${record.home}`" record;
+              }
+            )
           ];
         };
     };

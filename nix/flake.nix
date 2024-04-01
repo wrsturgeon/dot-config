@@ -80,7 +80,10 @@
                         let
                           mods = (flake.configure (config-args system)).modules;
                         in
-                        if builtins.typeOf mods == "lambda" then mods args else mods
+                        if builtins.typeOf mods != "lambda" then
+                          throw "Modules should take a set argument, but one module's type was `{builtins.typeOf mods}`"
+                        else
+                          mods args
                       )
                       ([
                         shared

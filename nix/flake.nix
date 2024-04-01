@@ -66,21 +66,22 @@
       };
       on =
         system: module:
-        assert false;
-        {
-          inherit system;
-          modules =
-            let
-              merged = builtins.foldl' (import ./merge.nix) { } (
+        let
+          cfg = {
+            inherit system;
+            modules = [
+              (builtins.foldl' (import ./merge.nix) { } (
                 builtins.concatMap (flake: (flake.configure (config-args system)).modules) ([
                   shared
                   module
                   home
                 ])
-              );
-            in
-            builtins.trace merged [ merged ];
-        };
+              ))
+            ];
+          };
+        in
+        assert builtins.length cfg.modules == 1;
+        builtins.trace (builtins.elemAt cfg.modules 0) cfg;
     in
     {
       apps =

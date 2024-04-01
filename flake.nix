@@ -66,11 +66,15 @@
       };
       on = system: module: {
         inherit system;
-        modules = builtins.concatMap (flake: (flake.configure (config-args system)).modules) ([
-          home
-          shared
-          module
-        ]);
+        modules =
+          let
+            altogether = builtins.concatMap (flake: (flake.configure (config-args system)).modules) ([
+              home
+              shared
+              module
+            ]);
+          in
+          builtins.trace altogether altogether;
       };
     in
     {

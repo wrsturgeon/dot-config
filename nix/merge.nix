@@ -1,6 +1,8 @@
 let
   merge =
     a: b:
+    assert builtins.typeOf a == "set";
+    assert builtins.typeOf b == "set";
     let
       attrs = builtins.attrNames a ++ builtins.attrNames b;
       case =

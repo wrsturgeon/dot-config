@@ -128,21 +128,14 @@
 
                       # Rebuild the Nix system
                     ''
-                    + (linux-mac system
-                      ''
-                        cd /etc/nixos
-                        sudo ${git} pull
-                        sudo nixos-rebuild switch -v -j auto # --install-bootloader
-                        # ${nix} shell nixpkgs#efibootmgr nixpkgs#refind -c refind-install
-                      ''
-                      ''
-                        # darwin-rebuild switch --flake ~/.config --keep-going -j auto
-                        ${
-                          nix-darwin.packages.${system}.default
-                        }/bin/darwin-rebuild switch --flake ${./.} --keep-going -j auto
-                      ''
-                    )
+                    + (linux-mac system ''
+                      cd /etc/nixos
+                      sudo ${git} pull
+                    '' "")
                     + ''
+                        sudo ${
+                          linux-mac system "nixos" "${nix-darwin.packages.${system}.default}/bin/darwin"
+                        }-rebuild switch --flake ~/.config/nix --keep-going -v -j auto # --install-bootloader"
 
                       # Collect garbage
                       ${pkgs.nix}/bin/nix-collect-garbage -j auto --delete-older-than 14d > /dev/null 2>&1 &

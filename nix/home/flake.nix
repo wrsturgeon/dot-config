@@ -219,6 +219,9 @@
                   autosuggestion.enable = true;
                   enableCompletion = true;
                   initExtra = ''
+                    # <https://nix-community.github.io/home-manager/index.xhtml#ch-installation>
+                    . /etc/profiles/per-user/${username}/etc/profile.d/hm-session-vars.sh
+
                     # Next time I inevitably fuck up my ''${PATH}
                     export BACKUP_NIX='${pkgs.nix}/bin/nix'
 
@@ -286,6 +289,7 @@
           inherit pkgs-by-name user-cfg;
           modules = [
             home-manager.${(linux-mac "nixos" "darwin") + "Modules"}.home-manager
+            # and then a separate element of the list:
             {
               home-manager = {
                 useGlobalPkgs = true;

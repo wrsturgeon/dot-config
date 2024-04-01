@@ -50,8 +50,8 @@
                 settings = {
                   auto-optimise-store = true;
                   experimental-features = [
-                    "auto-allocate-uids"
-                    "configurable-impure-env"
+                    # "auto-allocate-uids"
+                    # "configurable-impure-env"
                     "flakes"
                     "nix-command"
                   ];

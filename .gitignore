@@ -5,13 +5,14 @@
 
 # All Nix stuff together:
 
-!flake.lock
-!flake.nix
-!home/
-!home/**
-!os/
-!os/**
-!rebuild.sh
+!nix/
+nix/**
+!nix/flake.lock
+!nix/flake.nix
+!nix/home/
+!nix/home/**
+!nix/os/
+!nix/os/**
 
 # Everything else:
 

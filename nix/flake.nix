@@ -90,52 +90,60 @@
               program = "${
                 let
                   rebuild-script =
+                    let
+                      date = "${pkgs.coreutils}/bin/date";
+                      git = "${pkgs.git}/bin/git";
+                      nix = "${pkgs.nix}/bin/nix";
+                      nixfmt = "${(home.configure (config-args system)).pkgs-by-name.nixfmt}/bin/nixfmt";
+                      uname = "${pkgs.coreutils}/bin/uname";
+                    in
                     ''
                       #!${pkgs.bash}/bin/bash
 
                       set -eux
 
-                      export COMMIT_DATE="$(date '+%B %-d, %Y, at %H:%M:%S') on $(uname -s)"
+                      export COMMIT_DATE="$(${date} "+%B %-d, %Y, at %H:%M:%S") on $(${uname} -s)"
 
                       # Push ~/.config changes
                       cd ~/.config
-                      git pull
+                      ${git} pull
+                      cd nix
                       rm -fr .direnv
-                      nixfmt .
-                      git add -A
-                      nix flake update
-                      git add -A
-                      git commit -m "''${COMMIT_DATE}" || :
-                      git push || :
+                      ${nixfmt} .
+                      ${git} add -A
+                      ${nix} flake update
+                      ${git} add -A
+                      ${git} commit -m "''${COMMIT_DATE}" || :
+                      ${git} push || :
 
                       # Synchronize Logseq notes
                       cd ~/Desktop/logseq
-                      git pull
-                      git submodule update --init --recursive --remote
-                      git add -A
-                      git commit -m "''${COMMIT_DATE}" || :
-                      git push
+                      ${git} pull
+                      ${git} submodule update --init --recursive --remote
+                      ${git} add -A
+                      ${git} commit -m "''${COMMIT_DATE}" || :
+                      ${git} push
 
                       # Rebuild the Nix system
                     ''
                     + (linux-mac system
                       ''
                         cd /etc/nixos
-                        sudo git pull
+                        sudo ${git} pull
                         sudo nixos-rebuild switch -v -j auto # --install-bootloader
-                        # nix shell nixpkgs#efibootmgr nixpkgs#refind -c refind-install
+                        # ${nix} shell nixpkgs#efibootmgr nixpkgs#refind -c refind-install
                       ''
                       ''
                         # darwin-rebuild switch --flake ~/.config --keep-going -j auto
                         ${
                           nix-darwin.packages.${system}.default
-                        }/bin/darwin-rebuild switch --flake ~/.config --keep-going -j auto
+                        }/bin/darwin-rebuild switch --flake ${./.} --keep-going -j auto
                       ''
                     )
                     + ''
 
                       # Collect garbage
-                      nix-collect-garbage -j auto --delete-older-than 14d > /dev/null 2>&1 &
+                      ${pkgs.nix}/bin/nix-collect-garbage -j auto --delete-older-than 14d > /dev/null 2>&1 &
                     '';
                 in
                 pkgs.stdenv.mkDerivation {
@@ -147,12 +155,6 @@
                     echo '${rebuild-script}' > $out/bin/rebuild
                     chmod +x $out/bin/rebuild
                   '';
-                  propagatedBuildInputs =
-                    [ ] # [ (home.configure (config-args system)).pkgs-by-name.nixfmt ]
-                    ++ (with pkgs; [
-                      git
-                      nix
-                    ]);
                 }
               }/bin/rebuild";
             };

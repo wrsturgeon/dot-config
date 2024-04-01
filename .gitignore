@@ -11,6 +11,7 @@ nix/**
 !nix/flake.nix
 !nix/home/
 !nix/home/**
+!nix/merge.nix
 !nix/os/
 !nix/os/**
 

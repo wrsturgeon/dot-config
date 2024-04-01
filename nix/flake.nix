@@ -68,30 +68,15 @@
         inherit system;
         modules =
           let
-            altogether = builtins.concatMap (flake: (flake.configure (config-args system)).modules) ([
-              shared
-              module
-              home
-            ]);
+            merged = builtins.foldl' (import ./merge.nix) { } (
+              builtins.concatMap (flake: (flake.configure (config-args system)).modules) ([
+                shared
+                module
+                home
+              ])
+            );
           in
-          builtins.map (
-            x:
-            builtins.trace (
-              builtins.foldl' (acc: x: acc + x + " ") "{ " (
-                builtins.attrNames (
-                  if builtins.typeOf x == "lambda" then
-                    x {
-                      config = { };
-                      lib = { };
-                      pkgs = import nixpkgs (nixpkgs-config system);
-                    }
-                  else
-                    x
-                )
-              )
-              + "}"
-            ) x
-          ) altogether;
+          builtins.trace merged [ merged ];
       };
     in
     {

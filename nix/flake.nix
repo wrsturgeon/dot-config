@@ -103,12 +103,14 @@
           };
         in
         assert builtins.length cfg.modules == 1;
-        builtins.trace ((builtins.elemAt cfg.modules 0) {
-          config = { };
-          lib = { };
-          pkgs = { };
-          utils = { };
-        }) cfg;
+        builtins.trace (builtins.trace "Full config:" (
+          (builtins.elemAt cfg.modules 0) {
+            config = { };
+            lib = { };
+            pkgs = { };
+            utils = { };
+          }
+        )) cfg;
     in
     {
       apps =

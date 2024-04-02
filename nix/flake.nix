@@ -31,9 +31,11 @@
       self,
     }:
     let
+      linux-system = "x86_64-linux";
+      mac-system = "x86_64-darwin";
       systems = [
-        "x86_64-darwin"
-        "x86_64-linux"
+        linux-system
+        mac-system
       ];
       is-linux = nixpkgs.lib.strings.hasSuffix "linux";
       is-mac = nixpkgs.lib.strings.hasSuffix "darwin";
@@ -101,7 +103,12 @@
           };
         in
         assert builtins.length cfg.modules == 1;
-        builtins.trace (builtins.elemAt cfg.modules 0) cfg;
+        builtins.trace ((builtins.elemAt cfg.modules 0) {
+          config = { };
+          lib = { };
+          pkgs = { };
+          utils = { };
+        }) cfg;
     in
     {
       apps =
@@ -159,7 +166,7 @@
                     + ''
                         ${
                           linux-mac system "sudo nixos" "${nix-darwin.packages.${system}.default}/bin/darwin"
-                        }-rebuild switch --flake ${./.} --keep-going -v -j auto # --install-bootloader"
+                        }-rebuild switch --flake ${./.} --keep-going -v -j auto --show-trace # --install-bootloader"
 
                       # Collect garbage
                       ${pkgs.nix}/bin/nix-collect-garbage -j auto --delete-older-than 14d > /dev/null 2>&1 &
@@ -190,7 +197,7 @@
         ) { } systems;
       darwinConfigurations =
         let
-          system = "x86_64-darwin";
+          system = mac-system;
         in
         {
           ${laptop-name system} = nix-darwin.lib.darwinSystem (on system mac);
@@ -226,9 +233,13 @@
             value = shell-on name;
           }) systems
         );
+      lib.config = {
+        linux = on linux-system linux;
+        mac = on linux-system mac;
+      };
       nixosConfigurations =
         let
-          system = "x86_64-linux";
+          system = linux-system;
         in
         {
           ${laptop-name system} = nixpkgs.lib.nixosSystem (on system linux);

@@ -84,7 +84,7 @@
                         if builtins.typeOf f != "lambda" then
                           throw "Modules should take a set argument, but one module's type was `${builtins.typeOf f}`"
                         else
-                          f args
+                          f (args // { pkgs = import nixpkgs (nixpkgs-config system); })
                       ) mods
                     )
                     ([

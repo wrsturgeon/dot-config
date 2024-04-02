@@ -295,12 +295,12 @@
               let
                 hm = home-manager.${(linux-mac "nixos" "darwin") + "Modules"}.home-manager;
               in
-              builtins.trace (hm {
+              builtins.trace (builtins.trace "Home-manager starter config:" (hm {
                 config = { };
                 lib = { };
                 pkgs = { };
                 utils = { };
-              }) hm
+              })) hm
             )
             # and then a separate element of the list:
             (

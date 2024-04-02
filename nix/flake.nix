@@ -124,10 +124,13 @@
                 let
                   rebuild-script =
                     let
+                      cmp = "${pkgs.diffutils}/bin/cmp";
+                      cp = "${pkgs.coreutils}/bin/cp";
                       date = "${pkgs.coreutils}/bin/date";
                       git = "${pkgs.git}/bin/git";
                       nix = "${pkgs.nix}/bin/nix";
                       nixfmt = "${(home.configure (config-args system)).pkgs-by-name.nixfmt}/bin/nixfmt";
+                      rm = "${pkgs.coreutils}/bin/rm";
                       uname = "${pkgs.coreutils}/bin/uname";
                     in
                     ''
@@ -141,10 +144,13 @@
                       cd ~/.config
                       ${git} pull
                       cd nix
-                      rm -fr .direnv
+                      ${rm} -fr .direnv
                       ${nixfmt} .
                       ${git} add -A
+                      ${cp} flake.lock flake.lock.prev
                       ${nix} flake update
+                      ${cmp} -s flake.lock flake.lock.prev || { echo "Nix updated some inputs; please re-run for consistency!"; ${rm} flake.lock.prev; exit 1; }
+                      ${rm} flake.lock.prev
                       ${git} add -A
                       ${git} commit -m "''${COMMIT_DATE}" || :
                       ${git} push || :

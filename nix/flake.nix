@@ -182,13 +182,11 @@
             in
             {
               default = pkgs.mkShell {
-                packages =
-                  (linux-mac system self.nixosConfigurations self.darwinConfigurations).${laptop-name system}.pkgs
-                  ++ (with pkgs; [
-                    lua-language-server
-                    nix
-                    stylua
-                  ]);
+                packages = with pkgs; [
+                  lua-language-server
+                  nix
+                  stylua
+                ];
               };
             };
         in

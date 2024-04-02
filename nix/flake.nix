@@ -94,22 +94,19 @@
                         in
                         if builtins.typeOf configured != "set" then
                           throw "Modules should return a set, but one module's return type was `${builtins.typeOf configured}`"
-                        else if configured ? config then
-                          assert !(configured.config ? config);
-                          configured.config // (builtins.removeAttrs configured [ "config" ])
+                        # else if configured ? config then
+                        #   assert !(configured.config ? config);
+                        #   configured.config // (builtins.removeAttrs configured [ "config" ])
                         else
                           configured
                     ) unconfigured-modules;
-                merged =
-                  if builtins.typeOf configured-modules != "list" then
-                    throw "Configured modules should be arranged in a list, but their type evaluated to `${builtins.typeOf configured-modules}`"
-                  else
-                    builtins.foldl' (import ./merge.nix) { } configured-modules;
               in
-              builtins.trace merged (
-                builtins.trace "merged.services.nix-daemon.enable = ${if merged.services.nix-daemon.enable then "true" else "false"}" merged
-
-              );
+              # merged =
+              #   if builtins.typeOf configured-modules != "list" then
+              #     throw "Configured modules should be arranged in a list, but their type evaluated to `${builtins.typeOf configured-modules}`"
+              #   else
+              #     builtins.foldl' (import ./merge.nix) { } configured-modules;
+              configured-modules;
         in
         {
           inherit system;

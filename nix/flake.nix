@@ -66,24 +66,14 @@
         nixpkgs-config = nixpkgs-config system;
         username = username system;
       };
-      on =
-        system: module:
-        let
-          monomodule =
-            args:
-            if builtins.typeOf args != "set" then
-              throw "Module input should have been a set, but its type was `${builtins.typeOf args}`"
-            else
-              builtins.concatMap (flake: (flake.configure (config-args system)).modules) [
-                home
-                shared
-                module
-              ];
-        in
-        {
-          inherit system;
-          modules = [ monomodule ];
-        };
+      on = system: module: {
+        inherit system;
+        modules = builtins.concatMap (flake: (flake.configure (config-args system)).modules) [
+          shared
+          module
+          home
+        ];
+      };
     in
     {
       apps =

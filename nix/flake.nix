@@ -115,7 +115,7 @@
                   builtins.foldl' (acc: s: acc + s + " ") "" (builtins.attrNames merged)
                 }}"
               else
-                merged;
+                builtins.trace merged merged;
         in
         {
           inherit system;
@@ -252,10 +252,20 @@
             value = shell-on name;
           }) systems
         );
-      lib.config = {
-        linux = on linux-system linux;
-        mac = on linux-system mac;
-      };
+      lib.config =
+        let
+          f =
+            system: module:
+            builtins.elemAt (on system module).modules 0 {
+              config = { };
+              inherit (nixpkgs) lib;
+              utils = { };
+            };
+        in
+        {
+          linux = f linux-system linux;
+          mac = f linux-system mac;
+        };
       nixosConfigurations =
         let
           system = linux-system;

@@ -69,60 +69,52 @@
       on =
         system: module:
         let
-          cfg = {
-            inherit system;
-            modules = [
-              (
-                args:
-                builtins.foldl' (import ./merge.nix) { } (
-                  builtins.concatMap
-                    (
-                      flake:
-                      builtins.map (
-                        f:
-                        if builtins.typeOf f != "lambda" then
-                          throw "Modules should take a set argument, but one module's type was `${builtins.typeOf f}`"
+          monomodule =
+            args:
+            let
+              out = builtins.foldl' (import ./merge.nix) { } (
+                builtins.concatMap
+                  (
+                    flake:
+                    builtins.map (
+                      f:
+                      if builtins.typeOf f != "lambda" then
+                        throw "Modules should take a set argument, but one module's type was `${builtins.typeOf f}`"
+                      else
+                        let
+                          out = f (args // { pkgs = import nixpkgs (nixpkgs-config system); });
+                        in
+                        if builtins.typeOf out != "set" then
+                          throw "Modules should return a set, but one module's return type was `${builtins.typeOf out}`"
+                        else if builtins.elem "config" out then
+                          out
                         else
-                          let
-                            out = f (args // { pkgs = import nixpkgs (nixpkgs-config system); });
-                          in
-                          if builtins.typeOf out != "set" then
-                            throw "Modules should return a set, but one module's return type was `${builtins.typeOf out}`"
-                          else if builtins.elem "config" out then
-                            out
-                          else
-                            { config = out; }
-                      ) (flake.configure (config-args system)).modules
-                    )
-                    ([
-                      shared
-                      module
-                      home
-                    ])
-                )
-              )
-            ];
-          };
-          singleton =
-            assert builtins.length cfg.modules == 1;
-            (builtins.elemAt cfg.modules 0) {
-              config = { };
-              lib = { };
-              pkgs = { };
-              utils = { };
-            };
+                          { config = out; }
+                    ) (flake.configure (config-args system)).modules
+                  )
+                  ([
+                    shared
+                    module
+                    home
+                  ])
+              );
+            in
+            if
+              builtins.attrNames out != [
+                "config"
+                "imports"
+              ]
+            then
+              throw "Expected the final configuration to have only `config` and `imports` attributes, but it has { ${
+                builtins.foldl' (acc: s: acc + s + " ") "" (builtins.attrNames out)
+              }}"
+            else
+              out;
         in
-        if
-          builtins.attrNames singleton != [
-            "config"
-            "imports"
-          ]
-        then
-          throw "Expected config to have only `config` and `imports` attributes, but it has { ${
-            builtins.foldl' (acc: s: acc + s + " ") "" (builtins.attrNames singleton)
-          }}"
-        else
-          cfg;
+        {
+          inherit system;
+          modules = [ monomodule ];
+        };
     in
     {
       apps =
@@ -232,13 +224,13 @@
             {
               default = pkgs.mkShell {
                 packages =
-                  let
-                    h = home.configure (config-args system);
-                  in
-                  h.user-cfg.home.packages
-                  ++ (builtins.attrValues (
-                    builtins.mapAttrs (k: v: if v ? program then v.program else pkgs.${k}) h.user-cfg.programs
-                  ))
+                  # let
+                  #   h = home.configure (config-args system);
+                  # in
+                  # h.user-cfg.home.packages
+                  # ++ (builtins.attrValues (
+                  #   builtins.mapAttrs (k: v: if v ? program then v.program else pkgs.${k}) h.user-cfg.programs
+                  [ ] # ))
                   ++ (with pkgs; [
                     lua-language-server
                     nix

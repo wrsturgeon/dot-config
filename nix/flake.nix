@@ -230,18 +230,19 @@
             {
               default = pkgs.mkShell {
                 packages =
-                  # let
-                  #   h = home.configure (config-args system);
-                  # in
-                  # h.user-cfg.home.packages
-                  # ++ (builtins.attrValues (
-                  #   builtins.mapAttrs (k: v: if v ? program then v.program else pkgs.${k}) h.user-cfg.programs
-                  [ ] # ))
-                  ++ (with pkgs; [
+                  # let h = home.configure (config-args system);
+                  # in h.user-cfg.home.packages ++ (builtins.attrValues
+                  #   (builtins.mapAttrs
+                  #     (k: v: if v ? program then v.program else pkgs.${k})
+                  #     h.user-cfg.programs))
+                  # ++ (
+                  with pkgs; [
                     lua-language-server
                     nix
                     stylua
-                  ]);
+                  ]
+                # )
+                ;
               };
             };
         in

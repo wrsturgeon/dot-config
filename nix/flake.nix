@@ -113,8 +113,8 @@
                       ${nixfmt} .
                       ${git} add -A
                       ${cp} flake.lock flake.lock.prev
-                      ${nix} flake update
-                      ${cmp} -s flake.lock flake.lock.prev || { echo "Nix updated some inputs; re-running for consistency..."; ${nix} run ${./.}; }
+                      ${nix} flake update || : # rate limits!
+                      ${cmp} -s flake.lock flake.lock.prev || { echo "Nix updated some inputs; re-running for consistency..."; ${nix} run ~/.config/nix; }
                       ${rm} flake.lock.prev
                       ${git} add -A
                       ${git} commit -m "''${COMMIT_DATE}" || :

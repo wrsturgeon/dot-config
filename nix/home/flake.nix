@@ -291,17 +291,7 @@
         {
           inherit pkgs-by-name user-cfg;
           modules = [
-            (
-              let
-                hm = home-manager.${(linux-mac "nixos" "darwin") + "Modules"}.home-manager;
-              in
-              builtins.trace (builtins.trace "Home-manager starter config:" (hm {
-                config = { };
-                lib = { };
-                pkgs = { };
-                utils = { };
-              })) hm
-            )
+            home-manager.${(linux-mac "nixos" "darwin") + "Modules"}.home-manager
             # and then a separate element of the list:
             (
               { ... }:

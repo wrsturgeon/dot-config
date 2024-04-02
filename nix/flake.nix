@@ -86,10 +86,12 @@
                           let
                             out = f (args // { pkgs = import nixpkgs (nixpkgs-config system); });
                           in
-                          if builtins.typeOf args == "set" then
+                          if builtins.typeOf args != "set" then
+                            throw "Modules should return a set, but one module's return type was `${builtins.typeOf out}`"
+                          else if builtins.elem "config" out then
                             out
                           else
-                            throw "Modules should return a set, but one module's return type was `${builtins.typeOf out}`"
+                            { config = out; }
                       ) (flake.configure (config-args system)).modules
                     )
                     ([
@@ -161,7 +163,7 @@
                       ${git} add -A
                       ${cp} flake.lock flake.lock.prev
                       ${nix} flake update
-                      ${cmp} -s flake.lock flake.lock.prev || { echo "Nix updated some inputs; please re-run for consistency!"; ${rm} flake.lock.prev; exit 1; }
+                      ${cmp} -s flake.lock flake.lock.prev || { echo "Nix updated some inputs; re-running for consistency..."; ${nix} run ${./.}; }
                       ${rm} flake.lock.prev
                       ${git} add -A
                       ${git} commit -m "''${COMMIT_DATE}" || :

@@ -74,39 +74,11 @@
             if builtins.typeOf args != "set" then
               throw "Module input should have been a set, but its type was `${builtins.typeOf args}`"
             else
-              let
-                unconfigured-modules = builtins.concatMap (flake: (flake.configure (config-args system)).modules) [
-                  home
-                  shared
-                  module
-                ];
-                configured-modules =
-                  if builtins.typeOf unconfigured-modules != "list" then
-                    throw "Unconfigured modules should be arranged in a list, but their type evaluated to `${builtins.typeOf unconfigured-modules}`"
-                  else
-                    builtins.map (
-                      f:
-                      if builtins.typeOf f != "lambda" then
-                        throw "Modules should take a set argument, but one module's type was `${builtins.typeOf f}` instead of `lambda`"
-                      else
-                        let
-                          configured = f (args // { pkgs = import nixpkgs (nixpkgs-config system); });
-                        in
-                        if builtins.typeOf configured != "set" then
-                          throw "Modules should return a set, but one module's return type was `${builtins.typeOf configured}`"
-                        # else if configured ? config then
-                        #   assert !(configured.config ? config);
-                        #   configured.config // (builtins.removeAttrs configured [ "config" ])
-                        else
-                          configured
-                    ) unconfigured-modules;
-              in
-              # merged =
-              #   if builtins.typeOf configured-modules != "list" then
-              #     throw "Configured modules should be arranged in a list, but their type evaluated to `${builtins.typeOf configured-modules}`"
-              #   else
-              #     builtins.foldl' (import ./merge.nix) { } configured-modules;
-              configured-modules;
+              builtins.concatMap (flake: (flake.configure (config-args system)).modules) [
+                home
+                shared
+                module
+              ];
         in
         {
           inherit system;

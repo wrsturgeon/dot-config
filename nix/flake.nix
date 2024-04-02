@@ -72,44 +72,39 @@
           monomodule =
             args:
             let
-              out = builtins.foldl' (import ./merge.nix) { } (
-                builtins.concatMap
-                  (
-                    flake:
-                    builtins.map (
-                      f:
-                      if builtins.typeOf f != "lambda" then
-                        throw "Modules should take a set argument, but one module's type was `${builtins.typeOf f}`"
-                      else
-                        let
-                          out = f (args // { pkgs = import nixpkgs (nixpkgs-config system); });
-                        in
-                        if builtins.typeOf out != "set" then
-                          throw "Modules should return a set, but one module's return type was `${builtins.typeOf out}`"
-                        else if builtins.elem "config" out then
-                          out
-                        else
-                          { config = out; }
-                    ) (flake.configure (config-args system)).modules
-                  )
-                  ([
-                    shared
-                    module
-                    home
-                  ])
-              );
+              unconfigured-modules = builtins.concatMap (flake: (flake.configure (config-args system)).modules) [
+                shared
+                module
+                home
+              ];
+              configured-modules = builtins.map (
+                f:
+                if builtins.typeOf f != "lambda" then
+                  throw "Modules should take a set argument, but one module's type was `${builtins.typeOf f}`"
+                else
+                  let
+                    configured = f (args // { pkgs = import nixpkgs (nixpkgs-config system); });
+                  in
+                  if builtins.typeOf configured != "set" then
+                    throw "Modules should return a set, but one module's return type was `${builtins.typeOf configured}`"
+                  else if builtins.elem "config" configured then
+                    configured
+                  else
+                    { config = configured; }
+              ) unconfigured-modules;
+              merged = builtins.foldl' (import ./merge.nix) { } configured-modules;
             in
             if
-              builtins.attrNames out != [
+              builtins.attrNames merged != [
                 "config"
                 "imports"
               ]
             then
               throw "Expected the final configuration to have only `config` and `imports` attributes, but it has { ${
-                builtins.foldl' (acc: s: acc + s + " ") "" (builtins.attrNames out)
+                builtins.foldl' (acc: s: acc + s + " ") "" (builtins.attrNames merged)
               }}"
             else
-              out;
+              merged;
         in
         {
           inherit system;

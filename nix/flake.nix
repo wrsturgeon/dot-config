@@ -76,9 +76,9 @@
             else
               let
                 unconfigured-modules = builtins.concatMap (flake: (flake.configure (config-args system)).modules) [
+                  home
                   shared
                   module
-                  home
                 ];
                 configured-modules =
                   if builtins.typeOf unconfigured-modules != "list" then
@@ -107,9 +107,8 @@
                     builtins.foldl' (import ./merge.nix) { } configured-modules;
               in
               builtins.trace merged (
-                builtins.trace "merged.services.nix-daemon.enable = ${if merged.services.nix-daemon.enable then "true" else "false"}" (
-                  builtins.trace "merged.nix.useDaemon = ${merged.nix.useDaemon}" merged
-                )
+                builtins.trace "merged.services.nix-daemon.enable = ${if merged.services.nix-daemon.enable then "true" else "false"}" merged
+
               );
         in
         {

@@ -13,20 +13,27 @@ let
           print-set = set: builtins.foldl' (acc: x: acc + x + " = ...; ") "{ " (builtins.attrNames set) + "}";
           case =
             k:
-            assert builtins.typeOf k == "string";
-            let
-              k-in = builtins.hasAttr k;
-            in
-            if k-in a then
-              if k-in b then merge a.${k} b.${k} else a.${k}
-            else if k-in b then
-              b.${k}
+            if builtins.typeOf k != "string" then
+              throw "`case` in `merge.nix` received an argument of type `${builtins.typeOf k}` instead of `string`"
             else
-              abort "Internal error in `merge` on key `${k}` merging `${print-set a}` and `${print-set b}`";
-          merge-attr = name: {
-            inherit name;
-            value = case name;
-          };
+              let
+                k-in = builtins.hasAttr k;
+              in
+              if k-in a then
+                if k-in b then merge a.${k} b.${k} else a.${k}
+              else if k-in b then
+                b.${k}
+              else
+                abort "Internal error in `merge` on key `${k}` merging `${print-set a}` and `${print-set b}`";
+          merge-attr =
+            name:
+            if builtins.typeOf name != "string" then
+              throw "`merge-attr` in `merge.nix` received an argument of type `${builtins.typeOf merge-attr}` instead of `string`"
+            else
+              {
+                inherit name;
+                value = case name;
+              };
         in
         builtins.listToAttrs (builtins.map merge-attr attrs);
 in

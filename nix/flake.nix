@@ -82,7 +82,7 @@
                           throw "Modules should take a set argument, but one module's type was `${builtins.typeOf f}`"
                         else
                           let
-                            out = f args;
+                            out = f (args // { pkgs = import nixpkgs (nixpkgs-config system); });
                           in
                           if builtins.typeOf args == "set" then
                             out

@@ -110,19 +110,17 @@
               utils = { };
             };
         in
-        builtins.trace (builtins.trace "Full config:" singleton) (
-          if
-            builtins.attrNames singleton != [
-              "config"
-              "imports"
-            ]
-          then
-            throw "Expected config to have only `config` and `imports` attributes, but it has { ${
-              builtins.foldl' (acc: s: acc + s + " ") ""
-            }}"
-          else
-            cfg
-        );
+        if
+          builtins.attrNames singleton != [
+            "config"
+            "imports"
+          ]
+        then
+          throw "Expected config to have only `config` and `imports` attributes, but it has { ${
+            builtins.foldl' (acc: s: acc + s + " ") "" (builtins.attrNames singleton)
+          }}"
+        else
+          cfg;
     in
     {
       apps =

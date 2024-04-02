@@ -71,40 +71,51 @@
         let
           monomodule =
             args:
-            let
-              unconfigured-modules = builtins.concatMap (flake: (flake.configure (config-args system)).modules) [
-                shared
-                module
-                home
-              ];
-              configured-modules = builtins.map (
-                f:
-                if builtins.typeOf f != "lambda" then
-                  throw "Modules should take a set argument, but one module's type was `${builtins.typeOf f}`"
-                else
-                  let
-                    configured = f (args // { pkgs = import nixpkgs (nixpkgs-config system); });
-                  in
-                  if builtins.typeOf configured != "set" then
-                    throw "Modules should return a set, but one module's return type was `${builtins.typeOf configured}`"
-                  else if builtins.elem "config" configured then
-                    configured
-                  else
-                    { config = configured; }
-              ) unconfigured-modules;
-              merged = builtins.foldl' (import ./merge.nix) { } configured-modules;
-            in
-            if
-              builtins.attrNames merged != [
-                "config"
-                "imports"
-              ]
-            then
-              throw "Expected the final configuration to have only `config` and `imports` attributes, but it has { ${
-                builtins.foldl' (acc: s: acc + s + " ") "" (builtins.attrNames merged)
-              }}"
+            if builtins.typeOf args != "set" then
+              throw "Module input should have been a set, but its type was `${builtins.typeOf args}`"
             else
-              merged;
+              let
+                unconfigured-modules = builtins.concatMap (flake: (flake.configure (config-args system)).modules) [
+                  shared
+                  module
+                  home
+                ];
+                configured-modules =
+                  if builtins.typeOf unconfigured-modules != "list" then
+                    throw "Unconfigured modules should be arranged in a list, but their type evaluated to `${builtins.typeOf unconfigured-modules}`"
+                  else
+                    builtins.map (
+                      f:
+                      if builtins.typeOf f != "lambda" then
+                        throw "Modules should take a set argument, but one module's type was `${builtins.typeOf f}` instead of `lambda`"
+                      else
+                        let
+                          configured = f (args // { pkgs = import nixpkgs (nixpkgs-config system); });
+                        in
+                        if builtins.typeOf configured != "set" then
+                          throw "Modules should return a set, but one module's return type was `${builtins.typeOf configured}`"
+                        else if builtins.elem "config" configured then
+                          configured
+                        else
+                          { config = configured; }
+                    ) unconfigured-modules;
+                merged =
+                  if builtins.typeOf configured-modules != "list" then
+                    throw "Configured modules should be arranged in a list, but their type evaluated to `${builtins.typeOf configured-modules}`"
+                  else
+                    builtins.foldl' (import ./merge.nix) { } configured-modules;
+              in
+              if
+                builtins.attrNames merged != [
+                  "config"
+                  "imports"
+                ]
+              then
+                throw "Expected the final configuration to have only `config` and `imports` attributes, but it has { ${
+                  builtins.foldl' (acc: s: acc + s + " ") "" (builtins.attrNames merged)
+                }}"
+              else
+                merged;
         in
         {
           inherit system;

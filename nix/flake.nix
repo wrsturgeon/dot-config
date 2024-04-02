@@ -115,7 +115,7 @@
                   builtins.foldl' (acc: s: acc + s + " ") "" (builtins.attrNames merged)
                 }}"
               else
-                builtins.trace merged merged;
+                builtins.trace merged (builtins.trace merged.config merged);
         in
         {
           inherit system;

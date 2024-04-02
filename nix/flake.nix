@@ -86,7 +86,7 @@
                           let
                             out = f (args // { pkgs = import nixpkgs (nixpkgs-config system); });
                           in
-                          if builtins.typeOf args != "set" then
+                          if builtins.typeOf out != "set" then
                             throw "Modules should return a set, but one module's return type was `${builtins.typeOf out}`"
                           else if builtins.elem "config" out then
                             out

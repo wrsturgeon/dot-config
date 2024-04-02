@@ -95,9 +95,9 @@
                         if builtins.typeOf configured != "set" then
                           throw "Modules should return a set, but one module's return type was `${builtins.typeOf configured}`"
                         else if configured ? config then
-                          configured
+                          configured.config // (builtins.removeAttrs configured [ "config" ])
                         else
-                          { config = configured; }
+                          configured
                     ) unconfigured-modules;
                 merged =
                   if builtins.typeOf configured-modules != "list" then

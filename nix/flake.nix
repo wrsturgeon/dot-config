@@ -136,7 +136,8 @@
                     '' "")
                     + ''
                         ${
-                          linux-mac system "sudo nixos-rebuild" "${nix} run ${nix-darwin} --"
+                          linux-mac system "sudo nixos-rebuild"
+                            "ls ${nix-darwin.outputs.packages.${system}.default}/bin && nix run nix-darwin --"
                         } switch --flake ${./.} --keep-going -v -j auto --show-trace # --install-bootloader"
 
                       # Collect garbage

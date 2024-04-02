@@ -94,7 +94,7 @@
                         in
                         if builtins.typeOf configured != "set" then
                           throw "Modules should return a set, but one module's return type was `${builtins.typeOf configured}`"
-                        else if builtins.elem "config" configured then
+                        else if configured ? config then
                           configured
                         else
                           { config = configured; }

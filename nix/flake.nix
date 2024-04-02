@@ -101,16 +101,28 @@
               )
             ];
           };
+          singleton =
+            assert builtins.length cfg.modules == 1;
+            (builtins.elemAt cfg.modules 0) {
+              config = { };
+              lib = { };
+              pkgs = { };
+              utils = { };
+            };
         in
-        assert builtins.length cfg.modules == 1;
-        builtins.trace (builtins.trace "Full config:" (
-          (builtins.elemAt cfg.modules 0) {
-            config = { };
-            lib = { };
-            pkgs = { };
-            utils = { };
-          }
-        )) cfg;
+        builtins.trace (builtins.trace "Full config:" singleton) (
+          if
+            builtins.attrNames singleton != [
+              "config"
+              "imports"
+            ]
+          then
+            throw "Expected config to have only `config` and `imports` attributes, but it has { ${
+              builtins.foldl' (acc: s: acc + s + " ") ""
+            }}"
+          else
+            cfg
+        );
     in
     {
       apps =

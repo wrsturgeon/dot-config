@@ -107,7 +107,9 @@
                     builtins.foldl' (import ./merge.nix) { } configured-modules;
               in
               builtins.trace merged (
-                builtins.trace "merged.services.nix-daemon.enable = ${if merged.services.nix-daemon.enable then "true" else "false"}" merged
+                builtins.trace "merged.services.nix-daemon.enable = ${if merged.services.nix-daemon.enable then "true" else "false"}" (
+                  builtins.trace "merged.nix.useDaemon = ${merged.nix.useDaemon}" merged
+                )
               );
         in
         {

@@ -95,6 +95,7 @@
                         if builtins.typeOf configured != "set" then
                           throw "Modules should return a set, but one module's return type was `${builtins.typeOf configured}`"
                         else if configured ? config then
+                          assert !(configured.config ? config);
                           configured.config // (builtins.removeAttrs configured [ "config" ])
                         else
                           configured
@@ -105,7 +106,7 @@
                   else
                     builtins.foldl' (import ./merge.nix) { } configured-modules;
               in
-              builtins.trace merged (builtins.trace merged.config merged);
+              builtins.trace merged merged;
         in
         {
           inherit system;

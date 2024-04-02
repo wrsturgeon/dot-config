@@ -224,19 +224,12 @@
             {
               default = pkgs.mkShell {
                 packages =
-                  # let h = home.configure (config-args system);
-                  # in h.user-cfg.home.packages ++ (builtins.attrValues
-                  #   (builtins.mapAttrs
-                  #     (k: v: if v ? program then v.program else pkgs.${k})
-                  #     h.user-cfg.programs))
-                  # ++ (
-                  with pkgs; [
+                  (linux-mac system self.nixosConfigurations self.darwinConfigurations).${laptop-name system}.pkgs
+                  ++ (with pkgs; [
                     lua-language-server
                     nix
                     stylua
-                  ]
-                # )
-                ;
+                  ]);
               };
             };
         in

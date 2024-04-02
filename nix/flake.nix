@@ -76,16 +76,19 @@
                   builtins.concatMap
                     (
                       flake:
-                      let
-                        mods = (flake.configure (config-args system)).modules;
-                      in
                       builtins.map (
                         f:
                         if builtins.typeOf f != "lambda" then
                           throw "Modules should take a set argument, but one module's type was `${builtins.typeOf f}`"
                         else
-                          f (args // { pkgs = import nixpkgs (nixpkgs-config system); })
-                      ) mods
+                          let
+                            out = f args;
+                          in
+                          if builtins.typeOf args == "set" then
+                            out
+                          else
+                            throw "Modules should return a set, but one module's return type was `${builtins.typeOf out}`"
+                      ) (flake.configure (config-args system)).modules
                     )
                     ([
                       shared

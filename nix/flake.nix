@@ -105,17 +105,7 @@
                   else
                     builtins.foldl' (import ./merge.nix) { } configured-modules;
               in
-              if
-                builtins.attrNames merged != [
-                  "config"
-                  "imports"
-                ]
-              then
-                throw "Expected the final configuration to have only `config` and `imports` attributes, but it has { ${
-                  builtins.foldl' (acc: s: acc + s + " ") "" (builtins.attrNames merged)
-                }}"
-              else
-                builtins.trace merged (builtins.trace merged.config merged);
+              builtins.trace merged (builtins.trace merged.config merged);
         in
         {
           inherit system;

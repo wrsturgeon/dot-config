@@ -82,22 +82,23 @@
             system:
             let
               pkgs = import nixpkgs (nixpkgs-config system);
+              chmod = "${pkgs.coreutils}/bin/chmod";
+              cmp = "${pkgs.diffutils}/bin/cmp";
+              cp = "${pkgs.coreutils}/bin/cp";
+              date = "${pkgs.coreutils}/bin/date";
+              echo = "${pkgs.coreutils}/bin/echo";
+              git = "${pkgs.git}/bin/git";
+              mkdir = "${pkgs.coreutils}/bin/mkdir";
+              nix = "${pkgs.nix}/bin/nix";
+              nixfmt = "${(home.configure (config-args system)).pkgs-by-name.nixfmt}/bin/nixfmt";
+              rm = "${pkgs.coreutils}/bin/rm";
+              uname = "${pkgs.coreutils}/bin/uname";
             in
             {
               type = "app";
               program = "${
                 let
                   rebuild-script =
-                    let
-                      cmp = "${pkgs.diffutils}/bin/cmp";
-                      cp = "${pkgs.coreutils}/bin/cp";
-                      date = "${pkgs.coreutils}/bin/date";
-                      git = "${pkgs.git}/bin/git";
-                      nix = "${pkgs.nix}/bin/nix";
-                      nixfmt = "${(home.configure (config-args system)).pkgs-by-name.nixfmt}/bin/nixfmt";
-                      rm = "${pkgs.coreutils}/bin/rm";
-                      uname = "${pkgs.coreutils}/bin/uname";
-                    in
                     ''
                       #!${pkgs.bash}/bin/bash
 
@@ -114,7 +115,7 @@
                       ${git} add -A
                       ${cp} flake.lock flake.lock.prev
                       ${nix} flake update || : # rate limits!
-                      ${cmp} -s flake.lock flake.lock.prev || { echo "Nix updated some inputs; re-running for consistency..."; ${nix} run ~/.config/nix; }
+                      ${cmp} -s flake.lock flake.lock.prev || { ${echo} "Nix updated some inputs; re-running for consistency..."; ${nix} run ~/.config/nix; }
                       ${rm} flake.lock.prev
                       ${git} add -A
                       ${git} commit -m "''${COMMIT_DATE}" || :
@@ -124,6 +125,10 @@
                       cd ~/Desktop/logseq
                       ${git} pull
                       ${git} submodule update --init --recursive --remote
+                      for year in $(seq 1700 2200); do
+                          ${echo} "- Year after [[$((year-1))]]" > ''${year}.md
+                          ${echo} "- Year before [[$((year+1))]]" >> ''${year}.md
+                      done
                       ${git} add -A
                       ${git} commit -m "''${COMMIT_DATE}" || :
                       ${git} push
@@ -148,9 +153,9 @@
                   src = ./.;
                   buildPhase = ":";
                   installPhase = ''
-                    mkdir -p $out/bin
-                    echo '${rebuild-script}' > $out/bin/rebuild
-                    chmod +x $out/bin/rebuild
+                    ${mkdir} -p $out/bin
+                    ${echo} '${rebuild-script}' > $out/bin/rebuild
+                    ${chmod} +x $out/bin/rebuild
                   '';
                 }
               }/bin/rebuild";

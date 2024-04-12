@@ -126,8 +126,7 @@
                       ${git} pull
                       ${git} submodule update --init --recursive --remote
                       for year in $(seq 1900 2100); do
-                          ${echo} "- Year after [[$((year-1))]]" > pages/''${year}.md
-                          ${echo} "- Year before [[$((year+1))]]" >> pages/''${year}.md
+                          ${echo} "- Year before [[$((year+1))]]" > pages/''${year}.md
                       done
                       ${git} add -A
                       ${git} commit -m "''${COMMIT_DATE}" || :

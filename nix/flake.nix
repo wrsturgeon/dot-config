@@ -88,6 +88,7 @@
               date = "${pkgs.coreutils}/bin/date";
               echo = "${pkgs.coreutils}/bin/echo";
               git = "${pkgs.git}/bin/git";
+              grep = "${pkgs.gnugrep}/bin/grep";
               mkdir = "${pkgs.coreutils}/bin/mkdir";
               nix = "${pkgs.nix}/bin/nix";
               nixfmt = "${(home.configure (config-args system)).pkgs-by-name.nixfmt}/bin/nixfmt";
@@ -125,8 +126,11 @@
                       cd ~/Desktop/logseq
                       ${git} pull
                       ${git} submodule update --init --recursive --remote
-                      for year in $(seq 1900 $(date +%Y)); do
-                          ${echo} "- Year before [[$((year+1))]]" > pages/''${year}.md
+                      for year in $(seq 1000 $(date +%Y)); do
+                          ${rm} -f pages/''${year}.md
+                          if ${grep} -nqr "\[\[''${year}\]\]" pages; then
+                              ${echo} "- Year before [[$((year+1))]]" > pages/''${year}.md
+                          fi
                       done
                       ${git} add -A
                       ${git} commit -m "''${COMMIT_DATE}" || :

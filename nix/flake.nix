@@ -135,8 +135,8 @@
                           # Have to iterate backward b/c the below creates a file containing the next year!
                           if ${grep} -nqr "\[\[''${year}\]\]" pages; then
                               # Could eliminate some redundancy by skipping loop iterations here but fuck it
-                              if ${grep} -nqr "\[\[''${year-1}\]\]" pages; then
-                                  ${echo} "- Year before [[$((year-1))]]" > pages/''${year}.md
+                              if ${grep} -nqr "\[\[''$((year+1))\]\]" pages; then
+                                  ${echo} "- Year before [[$((year+1))]]" > pages/''${year}.md
                               fi
                           fi
                       done

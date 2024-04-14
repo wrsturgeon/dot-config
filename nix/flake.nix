@@ -125,7 +125,7 @@
                       cd ~/Desktop/logseq
                       ${git} pull
                       ${git} submodule update --init --recursive --remote
-                      for year in $(seq 1900 2100); do
+                      for year in $(seq 1900 $(date +%Y)); do
                           ${echo} "- Year before [[$((year+1))]]" > pages/''${year}.md
                       done
                       ${git} add -A

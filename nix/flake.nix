@@ -131,7 +131,7 @@
                       for year in $(seq ''${FIRST_YEAR} ''${CURRENT_YEAR}); do
                           ${rm} -f pages/''${year}.md
                       done
-                      for year in $(seq ''${FIRST_YEAR} -1 ''${CURRENT_YEAR}); do
+                      for year in $(seq ''${CURRENT_YEAR} -1 ''${FIRST_YEAR}); do
                           # Have to iterate backward b/c the below creates a file containing the next year!
                           if ${grep} -nqr "\[\[''${year}\]\]" pages; then
                               ${echo} "- Year before [[$((year+1))]]" > pages/''${year}.md

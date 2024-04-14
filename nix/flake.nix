@@ -126,8 +126,13 @@
                       cd ~/Desktop/logseq
                       ${git} pull
                       ${git} submodule update --init --recursive --remote
-                      for year in $(seq 1000 $(date +%Y)); do
+                      export FIRST_YEAR=1000
+                      export CURRENT_YEAR=$(date +%Y)
+                      for year in $(seq ''${FIRST_YEAR} ''${CURRENT_YEAR}); do
                           ${rm} -f pages/''${year}.md
+                      done
+                      for year in $(seq ''${FIRST_YEAR} -1 ''${CURRENT_YEAR}); do
+                          # Have to iterate backward b/c the below creates a file containing the next year!
                           if ${grep} -nqr "\[\[''${year}\]\]" pages; then
                               ${echo} "- Year before [[$((year+1))]]" > pages/''${year}.md
                           fi

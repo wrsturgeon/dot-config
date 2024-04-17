@@ -136,7 +136,7 @@
                           if ${grep} -nqr "\[\[''${year}\]\]" pages; then
                               # Could eliminate some redundancy by skipping loop iterations here but fuck it
                               if ${grep} -nqr "\[\[''$((year+1))\]\]" pages; then
-                                  ${echo} "- [[year]] before [[$((year+1))]]" > pages/''${year}.md
+                                  ${echo} "- year before [[$((year+1))]]" > pages/''${year}.md
                               fi
                           fi
                       done

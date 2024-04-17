@@ -37,11 +37,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1713240255,
-        "narHash": "sha256-8z8BROMHCkoScMMVgGXsH8tXBA4rDd45zK/nTF2elnA=",
+        "lastModified": 1713326632,
+        "narHash": "sha256-d07JLeaPgcJIHqNxr3lJh8wsqFh4xcszO8Klpxhd1h4=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "fd16be339e6e14d30338fa143a6f105b82afa1d8",
+        "rev": "39c9d5f7acc97ec5611988972dc6ae8573a14a5d",
         "type": "gitlab"
       },
       "original": {
@@ -153,11 +153,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1713166971,
-        "narHash": "sha256-t0P/rKlsE5l1O3O2LYtAelLzp7PeoPCSzsIietQ1hSM=",
+        "lastModified": 1713294767,
+        "narHash": "sha256-LmaabaQZdx52MPGKPRt9Opoc9Gd9RbwvCdysUUYQoXI=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "1c43dcfac48a2d622797f7ab741670fdbcf8f609",
+        "rev": "fa8c16e2452bf092ac76f09ee1fb1e9f7d0796e7",
         "type": "github"
       },
       "original": {
@@ -276,11 +276,11 @@
         "flake-utils": "flake-utils_4"
       },
       "locked": {
-        "lastModified": 1713194606,
-        "narHash": "sha256-slz9WHQEWIfJWpCDFG1aiiiBEutIZcK2eoaSDARZc6E=",
+        "lastModified": 1713291528,
+        "narHash": "sha256-Xx0hY9XXXOmOgTlgpX9r1bQkigWhNXXEzeVRBI46EfY=",
         "owner": "serokell",
         "repo": "nixfmt",
-        "rev": "3cb264c8c748ca7a059bba676ebd9c6465797e48",
+        "rev": "87c4879b7a72a69726b76392847fb79a7044c6a6",
         "type": "github"
       },
       "original": {

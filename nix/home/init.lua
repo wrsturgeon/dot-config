@@ -299,6 +299,7 @@ end
 
 formatter('*.lua', 'stylua --call-parentheses=None --indent-type=Spaces --quote-style=ForceSingle %')
 formatter('*.nix', 'nixfmt %')
+-- formatter('*.py', 'black --line-length 100 %')
 formatter('*.py', 'black %')
 formatter('*.rs', 'rustfmt %')
 

@@ -90,7 +90,7 @@
               git = "${pkgs.git}/bin/git";
               grep = "${pkgs.gnugrep}/bin/grep";
               mkdir = "${pkgs.coreutils}/bin/mkdir";
-              nix = "${pkgs.nix}/bin/nix";
+              nix = "${pkgs.nixFlakes}/bin/nix";
               nixfmt = "${(home.configure (config-args system)).pkgs-by-name.nixfmt}/bin/nixfmt";
               rm = "${pkgs.coreutils}/bin/rm";
               uname = "${pkgs.coreutils}/bin/uname";
@@ -156,7 +156,7 @@
                         } switch --flake ${./.} --keep-going -v -j auto --show-trace # --install-bootloader
 
                       # Collect garbage
-                      ${pkgs.nix}/bin/nix-collect-garbage -j auto --delete-older-than 14d > /dev/null 2>&1 &
+                      ${pkgs.nixFlakes}/bin/nix-collect-garbage -j auto --delete-older-than 14d > /dev/null 2>&1 &
                     '';
                 in
                 pkgs.stdenv.mkDerivation {

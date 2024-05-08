@@ -90,6 +90,7 @@
               git = "${pkgs.git}/bin/git";
               grep = "${pkgs.gnugrep}/bin/grep";
               mkdir = "${pkgs.coreutils}/bin/mkdir";
+              nix = "${pkgs.nix}/bin/nix";
               nixfmt = "${(home.configure (config-args system)).pkgs-by-name.nixfmt}/bin/nixfmt";
               rm = "${pkgs.coreutils}/bin/rm";
               uname = "${pkgs.coreutils}/bin/uname";
@@ -114,8 +115,8 @@
                       ${nixfmt} .
                       ${git} add -A
                       ${cp} flake.lock flake.lock.prev
-                      nix flake update || : # rate limits!
-                      ${cmp} -s flake.lock flake.lock.prev || { ${echo} "Nix updated some inputs; re-running for consistency..."; nix run ~/.config/nix; }
+                      ${nix} flake update || : # rate limits!
+                      ${cmp} -s flake.lock flake.lock.prev || { ${echo} "Nix updated some inputs; re-running for consistency..."; ${nix} run ~/.config/nix; }
                       ${rm} flake.lock.prev
                       ${git} add -A
                       ${git} commit -m "''${COMMIT_DATE}" || :
@@ -151,7 +152,7 @@
                     '' "")
                     + ''
                         ${
-                          linux-mac system "sudo nixos-rebuild" "nix run nix-darwin --"
+                          linux-mac system "sudo nixos-rebuild" "${nix} run nix-darwin --"
                         } switch --flake ${./.} --keep-going -v -j auto --show-trace # --install-bootloader
 
                       # Collect garbage

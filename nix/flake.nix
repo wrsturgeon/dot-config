@@ -14,7 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:LnL7/nix-darwin";
     };
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     shared = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "path:./os/shared";

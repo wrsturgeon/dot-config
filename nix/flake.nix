@@ -200,7 +200,6 @@
               default = pkgs.mkShell {
                 packages = with pkgs; [
                   lua-language-server
-                  nix
                   stylua
                 ];
               };
@@ -212,20 +211,6 @@
             value = shell-on name;
           }) systems
         );
-      lib.config =
-        let
-          f =
-            system: module:
-            builtins.elemAt (on system module).modules 0 {
-              config = { };
-              inherit (nixpkgs) lib;
-              utils = { };
-            };
-        in
-        {
-          linux = f linux-system linux;
-          mac = f linux-system mac;
-        };
       nixosConfigurations =
         let
           system = linux-system;

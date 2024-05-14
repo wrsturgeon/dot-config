@@ -4,7 +4,6 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": [
-          "home",
           "nixpkgs"
         ],
         "ny": "ny",
@@ -31,7 +30,6 @@
       "inputs": {
         "flake-utils": "flake-utils_2",
         "nixpkgs": [
-          "home",
           "nixpkgs"
         ]
       },
@@ -120,35 +118,9 @@
         "type": "github"
       }
     },
-    "home": {
-      "inputs": {
-        "apple-fonts": "apple-fonts",
-        "firefox-addons": "firefox-addons",
-        "home-manager": "home-manager",
-        "hydrogen-textobjects-src": "hydrogen-textobjects-src",
-        "jupytext-src": "jupytext-src",
-        "nil": "nil",
-        "nixfmt": "nixfmt",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "sf-mono-liga-src": "sf-mono-liga-src"
-      },
-      "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-KapjelcLO3oeTmwkoGMaAhZs+PzRtYN/McSXjj8Zpow=",
-        "path": "./home",
-        "type": "path"
-      },
-      "original": {
-        "path": "./home",
-        "type": "path"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "home",
           "nixpkgs"
         ]
       },
@@ -198,41 +170,10 @@
         "type": "github"
       }
     },
-    "linux": {
-      "inputs": {
-        "nixos-hardware": "nixos-hardware",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-oT9c+o8UajwaNYZ8YDBIil6IJreGz0SXqbbBSSep53A=",
-        "path": "./os/linux",
-        "type": "path"
-      },
-      "original": {
-        "path": "./os/linux",
-        "type": "path"
-      }
-    },
-    "mac": {
-      "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-LQlfK4yyn09CJLs2j6FBXBonhsA7CobFcti3sdWEwVM=",
-        "path": "./os/mac",
-        "type": "path"
-      },
-      "original": {
-        "path": "./os/mac",
-        "type": "path"
-      }
-    },
     "nil": {
       "inputs": {
         "flake-utils": "flake-utils_3",
         "nixpkgs": [
-          "home",
           "nixpkgs"
         ],
         "rust-overlay": "rust-overlay"
@@ -251,26 +192,6 @@
         "type": "github"
       }
     },
-    "nix-darwin": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1715653378,
-        "narHash": "sha256-6kbg/PI3+SBP17f4T0js3CBsMLVtlD0JqJhDKgzk1mQ=",
-        "owner": "LnL7",
-        "repo": "nix-darwin",
-        "rev": "de8b0d60d6fd34f35abffc46adc94ebaa6996ce2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "LnL7",
-        "repo": "nix-darwin",
-        "type": "github"
-      }
-    },
     "nixfmt": {
       "inputs": {
         "flake-utils": "flake-utils_4"
@@ -286,22 +207,6 @@
       "original": {
         "owner": "serokell",
         "repo": "nixfmt",
-        "type": "github"
-      }
-    },
-    "nixos-hardware": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1677180169,
-        "narHash": "sha256-tn1pTjPP+H2lAQDb8/Iw/FeZLjAQnSH00rR7MOFKZ9w=",
-        "owner": "kekrby",
-        "repo": "nixos-hardware",
-        "rev": "e964f9f56c01992263c0b8040f989996aa870741",
-        "type": "github"
-      },
-      "original": {
-        "owner": "kekrby",
-        "repo": "nixos-hardware",
         "type": "github"
       }
     },
@@ -335,23 +240,24 @@
     },
     "root": {
       "inputs": {
-        "home": "home",
-        "linux": "linux",
-        "mac": "mac",
-        "nix-darwin": "nix-darwin",
+        "apple-fonts": "apple-fonts",
+        "firefox-addons": "firefox-addons",
+        "home-manager": "home-manager",
+        "hydrogen-textobjects-src": "hydrogen-textobjects-src",
+        "jupytext-src": "jupytext-src",
+        "nil": "nil",
+        "nixfmt": "nixfmt",
         "nixpkgs": "nixpkgs",
-        "shared": "shared"
+        "sf-mono-liga-src": "sf-mono-liga-src"
       }
     },
     "rust-overlay": {
       "inputs": {
         "flake-utils": [
-          "home",
           "nil",
           "flake-utils"
         ],
         "nixpkgs": [
-          "home",
           "nil",
           "nixpkgs"
         ]
@@ -432,23 +338,6 @@
       "original": {
         "type": "file",
         "url": "https://devimages-cdn.apple.com/design/resources/download/SF-Pro.dmg"
-      }
-    },
-    "shared": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-h4wjxMQ2PJHEUxxosTrtOZMGqGBHp9arSWAiRLXncAc=",
-        "path": "./os/shared",
-        "type": "path"
-      },
-      "original": {
-        "path": "./os/shared",
-        "type": "path"
       }
     },
     "systems": {

@@ -68,7 +68,7 @@
       };
       on = system: module: {
         inherit system;
-        modules = builtins.concatMap (flake: (flake.configure (config-args system)).modules) [
+        modules = builtins.concatMap (flake: (flake.lib.configure (config-args system)).modules) [
           shared
           module
           home
@@ -91,7 +91,7 @@
               grep = "${pkgs.gnugrep}/bin/grep";
               mkdir = "${pkgs.coreutils}/bin/mkdir";
               nix = "${pkgs.nix}/bin/nix";
-              nixfmt = "${(home.configure (config-args system)).pkgs-by-name.nixfmt}/bin/nixfmt";
+              nixfmt = "${(home.lib.configure (config-args system)).pkgs-by-name.nixfmt}/bin/nixfmt";
               rm = "${pkgs.coreutils}/bin/rm";
               uname = "${pkgs.coreutils}/bin/uname";
             in

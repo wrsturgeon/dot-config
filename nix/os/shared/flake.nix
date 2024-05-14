@@ -6,7 +6,7 @@
   outputs =
     { nixpkgs, self }:
     {
-      configure =
+      lib.configure =
         {
           home,
           laptop-name,

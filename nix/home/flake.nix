@@ -46,7 +46,7 @@
       sf-mono-liga-src,
     }:
     {
-      configure =
+      lib.configure =
         {
           home,
           laptop-name,
@@ -214,7 +214,6 @@
                   vimAlias = true;
                   withPython3 = true;
                 };
-                nix.package = pkgs.nixVersions.latest;
                 ripgrep = { };
                 zsh = {
                   autosuggestion.enable = true;

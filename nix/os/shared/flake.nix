@@ -48,7 +48,7 @@
                 };
                 networking.hostName = laptop-name;
                 nix = {
-                  package = pkgs.nixUnstable;
+                  package = pkgs.nixVersions.latest;
                   settings = {
                     auto-optimise-store = true;
                     experimental-features = [

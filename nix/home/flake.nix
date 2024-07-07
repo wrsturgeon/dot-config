@@ -132,8 +132,8 @@
                 slack
                 spotify
                 taplo
+                valgrind
                 zoom-us
-                wezterm
                 ;
               # TODO: wezterm when fixed
               inherit (pkgs.coqPackages) coq;

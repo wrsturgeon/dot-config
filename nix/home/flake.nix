@@ -131,7 +131,6 @@
                 rustfmt
                 slack
                 spotify
-                steam
                 taplo
                 zoom-us
                 ;

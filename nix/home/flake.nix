@@ -133,6 +133,7 @@
                 spotify
                 taplo
                 zoom-us
+                wezterm
                 ;
               # TODO: wezterm when fixed
               inherit (pkgs.coqPackages) coq;

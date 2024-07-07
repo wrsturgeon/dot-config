@@ -132,7 +132,6 @@
                 slack
                 spotify
                 taplo
-                valgrind
                 zoom-us
                 ;
               # TODO: wezterm when fixed

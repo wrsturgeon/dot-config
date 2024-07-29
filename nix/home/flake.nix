@@ -121,6 +121,7 @@
             font-pkgs-by-name
             // {
               inherit (pkgs)
+                arduino-ide
                 cargo
                 discord
                 fd

@@ -132,12 +132,12 @@
                 slack
                 spotify
                 taplo
-                vlc
                 zoom-us
                 ;
               # TODO: wezterm when fixed
               inherit (pkgs.coqPackages) coq;
             }
+            // (linux-mac { } { inherit (pkgs) vlc-bin; })
             // (builtins.mapAttrs (k: v: v.packages.${system}.default) { inherit nil nixfmt; });
           user-cfg = {
             fonts.fontconfig.enable = true;

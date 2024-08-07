@@ -132,6 +132,7 @@
                 slack
                 spotify
                 taplo
+                vlc
                 zoom-us
                 ;
               # TODO: wezterm when fixed

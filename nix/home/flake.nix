@@ -62,6 +62,7 @@
           misc-pkgs-by-name = {
             inherit (pkgs)
               cargo
+              coreutils-full
               discord
               fd
               gcc

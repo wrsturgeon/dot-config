@@ -83,17 +83,10 @@
             let
               pkgs = import nixpkgs (nixpkgs-config system);
               chmod = "${pkgs.coreutils}/bin/chmod";
-              cmp = "${pkgs.diffutils}/bin/cmp";
-              cp = "${pkgs.coreutils}/bin/cp";
-              date = "${pkgs.coreutils}/bin/date";
               echo = "${pkgs.coreutils}/bin/echo";
               git = "${pkgs.git}/bin/git";
-              grep = "${pkgs.gnugrep}/bin/grep";
               mkdir = "${pkgs.coreutils}/bin/mkdir";
               nix = "${pkgs.nix}/bin/nix";
-              nixfmt = "${(home.lib.configure (config-args system)).pkgs-by-name.nixfmt}/bin/nixfmt";
-              rm = "${pkgs.coreutils}/bin/rm";
-              uname = "${pkgs.coreutils}/bin/uname";
             in
             {
               type = "app";
@@ -104,29 +97,6 @@
                       #!${pkgs.bash}/bin/bash
 
                       set -eux
-
-                      export COMMIT_DATE="$(${date} "+%B %-d, %Y, at %H:%M:%S") on $(${uname} -s)"
-
-                      # Push ~/.config changes
-                      cd ~/.config
-                      ${git} pull
-                      cd nix
-                      ${rm} -fr .direnv
-                      ${nixfmt} .
-                      ${git} add -A
-                      ${cp} flake.lock flake.lock.prev
-                      ${nix} flake update || : # rate limits!
-                      ${cmp} -s flake.lock flake.lock.prev || { ${echo} "Nix updated some inputs; re-running for consistency..."; ${nix} run ~/.config/nix; }
-                      ${rm} flake.lock.prev
-                      ${git} add -A
-                      ${git} commit -m "''${COMMIT_DATE}" || :
-                      ${git} push || :
-
-                      # Synchronize Logseq notes
-                      cd ~/Desktop/logseq
-                      make .updated
-
-                      # Rebuild the Nix system
                     ''
                     + (linux-mac system ''
                       cd /etc/nixos

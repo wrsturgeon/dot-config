@@ -59,6 +59,25 @@
         }:
         let
           pkgs = import nixpkgs nixpkgs-config;
+          misc-pkgs-by-name = {
+            inherit (pkgs)
+              cargo
+              discord
+              fd
+              gcc
+              gimp
+              gnumake
+              rss2email
+              rust-analyzer
+              rustfmt
+              slack
+              spotify
+              taplo
+              zoom-us
+              ;
+            # TODO: wezterm when fixed
+            inherit (pkgs.coqPackages) coq;
+          };
           jupytext = pkgs.vimUtils.buildVimPlugin {
             name = "jupytext";
             src = jupytext-src;
@@ -119,24 +138,7 @@
           };
           pkgs-by-name =
             font-pkgs-by-name
-            // {
-              inherit (pkgs)
-                cargo
-                discord
-                fd
-                gcc
-                gnumake
-                rss2email
-                rust-analyzer
-                rustfmt
-                slack
-                spotify
-                taplo
-                zoom-us
-                ;
-              # TODO: wezterm when fixed
-              inherit (pkgs.coqPackages) coq;
-            }
+            // misc-pkgs-by-name
             // (linux-mac { } { inherit (pkgs) vlc-bin; })
             // (builtins.mapAttrs (k: v: v.packages.${system}.default) { inherit nil nixfmt; });
           user-cfg = {

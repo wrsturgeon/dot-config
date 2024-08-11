@@ -86,7 +86,6 @@
               echo = "${pkgs.coreutils}/bin/echo";
               git = "${pkgs.git}/bin/git";
               mkdir = "${pkgs.coreutils}/bin/mkdir";
-              nix = "${pkgs.nix}/bin/nix";
             in
             {
               type = "app";
@@ -104,11 +103,11 @@
                     '' "")
                     + ''
                         ${
-                          linux-mac system "sudo nixos-rebuild" "${nix} run nix-darwin --"
-                        } switch --flake ${./.} --keep-going -v -j auto --show-trace # --install-bootloader
+                          linux-mac system "sudo nixos-rebuild" "nix-darwin"
+                        } switch --flake . --keep-going -v -j auto --show-trace # --install-bootloader
 
                       # Collect garbage
-                      ${pkgs.nix}/bin/nix-collect-garbage -j auto --delete-older-than 14d > /dev/null 2>&1 &
+                      nix-collect-garbage -j auto --delete-older-than 14d > /dev/null 2>&1 &
                     '';
                 in
                 pkgs.stdenv.mkDerivation {

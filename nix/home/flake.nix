@@ -21,10 +21,6 @@
       flake = false;
       url = "github:gcballesteros/jupytext.nvim";
     };
-    nil = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:oxalica/nil";
-    };
     nixfmt.url = "github:serokell/nixfmt";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     sf-mono-liga-src = {
@@ -39,7 +35,6 @@
       home-manager,
       hydrogen-textobjects-src,
       jupytext-src,
-      nil,
       nixfmt,
       nixpkgs,
       self,
@@ -68,6 +63,7 @@
               gcc
               gimp
               gnumake
+              nil
               rss2email
               rust-analyzer
               rustfmt
@@ -141,7 +137,7 @@
             font-pkgs-by-name
             // misc-pkgs-by-name
             // (linux-mac { } { inherit (pkgs) vlc-bin; })
-            // (builtins.mapAttrs (k: v: v.packages.${system}.default) { inherit nil nixfmt; });
+            // (builtins.mapAttrs (k: v: v.packages.${system}.default) { inherit nixfmt; });
           user-cfg = {
             fonts.fontconfig.enable = true;
             home = {

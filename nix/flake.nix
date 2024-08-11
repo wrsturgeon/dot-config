@@ -76,63 +76,6 @@
       };
     in
     {
-      apps =
-        let
-          rebuild-on =
-            system:
-            let
-              pkgs = import nixpkgs (nixpkgs-config system);
-              chmod = "${pkgs.coreutils}/bin/chmod";
-              echo = "${pkgs.coreutils}/bin/echo";
-              git = "${pkgs.git}/bin/git";
-              mkdir = "${pkgs.coreutils}/bin/mkdir";
-            in
-            {
-              type = "app";
-              program = "${
-                let
-                  rebuild-script =
-                    ''
-                      #!${pkgs.bash}/bin/bash
-
-                      set -eux
-                    ''
-                    + (linux-mac system ''
-                      cd /etc/nixos
-                      sudo ${git} pull
-                    '' "")
-                    + ''
-                        ${
-                          linux-mac system "sudo nixos-rebuild" "nix-darwin"
-                        } switch --flake . --keep-going -v -j auto --show-trace # --install-bootloader
-
-                      # Collect garbage
-                      nix-collect-garbage -j auto --delete-older-than 14d > /dev/null 2>&1 &
-                    '';
-                in
-                pkgs.stdenv.mkDerivation {
-                  name = "reload";
-                  src = ./.;
-                  buildPhase = ":";
-                  installPhase = ''
-                    ${mkdir} -p $out/bin
-                    ${echo} '${rebuild-script}' > $out/bin/rebuild
-                    ${chmod} +x $out/bin/rebuild
-                  '';
-                }
-              }/bin/rebuild";
-            };
-        in
-        builtins.foldl' (
-          acc: system:
-          acc
-          // {
-            ${system} = {
-              rebuild = rebuild-on system;
-              default = self.apps.${system}.rebuild;
-            };
-          }
-        ) { } systems;
       darwinConfigurations =
         let
           system = mac-system;

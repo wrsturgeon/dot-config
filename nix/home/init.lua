@@ -297,7 +297,7 @@ formatter('*.lua', 'stylua --call-parentheses=None --indent-type=Spaces --quote-
 formatter('*.nix', 'nixfmt %')
 -- formatter('*.py', 'black --line-length 100 %')
 formatter('*.py', 'black %')
-formatter('*.rs', 'rustfmt %')
+formatter('*.rs', 'rustfmt --edition 2024 %')
 
 --%%%%%%%%%%%%%%%%%--
 --  P L U G I N S  --

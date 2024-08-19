@@ -74,6 +74,7 @@
               ;
             # TODO: wezterm when fixed
             inherit (pkgs.coqPackages) coq;
+            inherit (pkgs.vimPlugins) haskell-tools-nvim;
           };
           jupytext = pkgs.vimUtils.buildVimPlugin {
             name = "jupytext";

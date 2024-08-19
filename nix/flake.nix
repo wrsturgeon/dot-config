@@ -76,6 +76,12 @@
       };
     in
     {
+      apps = nixpkgs.lib.genAttrs systems (system: {
+        default = {
+          type = "app";
+          program = ./rebuild;
+        };
+      });
       darwinConfigurations =
         let
           system = mac-system;

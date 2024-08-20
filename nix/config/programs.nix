@@ -8,6 +8,9 @@ ctx: {
     direnvrcExtra = "echo 'Loaded direnv'";
     nix-direnv.enable = true;
   };
+  emacs = {
+    enable = true;
+  };
   tmux = {
     enable = true;
     enableFzf = true;

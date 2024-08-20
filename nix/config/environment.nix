@@ -7,6 +7,10 @@
   extraInit = ''
     echo 'Hello from `extraInit`!'
   '';
+  extraSetup = ''
+    echo 'Hello from `extraSetup`!'
+    ls $out
+  '';
   pathsToLink = [ "/share/zsh" ];
   systemPackages = with pkgs; [
     kitty

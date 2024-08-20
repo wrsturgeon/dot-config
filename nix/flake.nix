@@ -15,64 +15,45 @@
       url = "github:nix-community/nixvim";
     };
   };
-  outputs =
-    {
-      flake-utils,
-      nix-darwin,
-      nixpkgs,
-      nixvim,
-      self,
-    }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
+  outputs = { flake-utils, nix-darwin, nixpkgs, nixvim, self, }:
+    flake-utils.lib.eachDefaultSystem (system:
       let
 
         # Nixpkgs
         pkgs = import nixpkgs {
           inherit system;
-          config = {
-            allowUnfree = true;
-          };
+          config = { allowUnfree = true; };
         };
 
         # OS introspection utils
         on-linux = nixpkgs.lib.strings.hasSuffix "linux" system;
         on-mac = nixpkgs.lib.strings.hasSuffix "darwin" system;
-        linux-mac =
-          if on-linux then
-            (a: b: a)
-          else if on-mac then
-            (a: b: b)
-          else
-            throw "Unrecognized OS in system `${system}`!";
+        linux-mac = if on-linux then
+          (a: b: a)
+        else if on-mac then
+          (a: b: b)
+        else
+          throw "Unrecognized OS in system `${system}`!";
 
         # Usernames
         laptop-name = "mbp-" + (linux-mac "nixos" "macos");
         username = linux-mac "will" "willsturgeon";
 
         # Config
-        cfg-args = {
-          inherit
-            linux-mac
-            nixvim
-            pkgs
-            self
-            system
-            ;
-        };
+        cfg-args = { inherit linux-mac nixvim pkgs self system; };
         cfg = {
           inherit system;
           modules = [ (import ./config.nix cfg-args) ];
         };
-      in
-      {
+      in {
         apps.default = {
           type = "app";
           program = ./rebuild;
         };
-        packages = linux-mac { nixosConfigurations.${laptop-name} = nixpkgs.lib.nixosSystem cfg; } {
+        packages = linux-mac {
+          nixosConfigurations.${laptop-name} = nixpkgs.lib.nixosSystem cfg;
+        } {
           darwinConfigurations.${laptop-name} = nix-darwin.lib.darwinSystem cfg;
         };
-      }
-    );
+      });
 }

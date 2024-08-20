@@ -1,122 +1,80 @@
 {
   description = "System flakes";
   inputs = {
-    home = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "path:./home";
-    };
-    linux = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "path:./os/linux";
-    };
-    mac.url = "path:./os/mac";
+    flake-utils.url = "github:numtide/flake-utils";
     nix-darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:LnL7/nix-darwin";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    shared = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "path:./os/shared";
+    nixvim = {
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nix-darwin.follows = "nix-darwin";
+        nixpkgs.follows = "nixpkgs";
+      };
+      url = "github:nix-community/nixvim";
     };
   };
   outputs =
     {
-      home,
-      linux,
-      mac,
-      shared,
+      flake-utils,
       nix-darwin,
       nixpkgs,
+      nixvim,
       self,
     }:
-    let
-      linux-system = "x86_64-linux";
-      mac-system = "x86_64-darwin";
-      systems = [
-        linux-system
-        mac-system
-      ];
-      is-linux = nixpkgs.lib.strings.hasSuffix "linux";
-      is-mac = nixpkgs.lib.strings.hasSuffix "darwin";
-      linux-mac =
-        system: on-linux: on-mac:
-        if is-linux system then
-          on-linux
-        else if is-mac system then
-          on-mac
-        else
-          throw ''Unrecognized OS "${system}"'';
-      nixpkgs-config = system: {
-        inherit system;
-        config = {
-          allowBroken = true;
-          allowUnfree = true;
-          allowUnsupportedSystem = true;
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+
+        # Nixpkgs
+        pkgs = import nixpkgs {
+          inherit system;
+          config = {
+            allowUnfree = true;
+          };
         };
-      };
-      stateVersion = "23.05";
-      laptop-name = system: "mbp-" + (linux-mac system "nixos" "macos");
-      username = system: linux-mac system "will" "willsturgeon";
-      config-args = system: {
-        inherit home stateVersion system;
-        laptop-name = laptop-name system;
-        linux-mac = linux-mac system;
-        locale = "fr_FR.UTF-8";
-        nixpkgs-config = nixpkgs-config system;
-        username = username system;
-      };
-      on = system: module: {
-        inherit system;
-        modules = builtins.concatMap (flake: (flake.lib.configure (config-args system)).modules) [
-          shared
-          module
-          home
-        ];
-      };
-    in
-    {
-      apps = nixpkgs.lib.genAttrs systems (system: {
-        default = {
+
+        # OS introspection utils
+        on-linux = nixpkgs.lib.strings.hasSuffix "linux" system;
+        on-mac = nixpkgs.lib.strings.hasSuffix "darwin" system;
+        linux-mac-builder =
+          if on-linux then
+            { linux-mac = a: b: a; }
+          else if on-mac then
+            { linux-mac = a: b: b; }
+          else
+            throw "Unrecognized OS in system `${system}`!";
+        inherit (linux-mac-builder) linux-mac;
+
+        # Usernames
+        laptop-name = "mbp-" + (linux-mac "nixos" "macos");
+        username = linux-mac "will" "willsturgeon";
+
+        # Config
+        stateVersion = "23.05";
+        cfg-args = {
+          inherit
+            linux-mac
+            pkgs
+            stateVersion
+            system
+            ;
+        };
+        cfg = {
+          inherit system;
+          modules = [ (import ./config.nix cfg-args) ];
+        };
+      in
+      {
+        apps.default = {
           type = "app";
           program = ./rebuild;
         };
-      });
-      darwinConfigurations =
-        let
-          system = mac-system;
-        in
-        {
-          ${laptop-name system} = nix-darwin.lib.darwinSystem (on system mac);
-        };
-      devShells =
-        let
-          shell-on =
-            system:
-            let
-              pkgs = import nixpkgs (nixpkgs-config system);
-            in
-            {
-              default = pkgs.mkShell {
-                packages = with pkgs; [
-                  lua-language-server
-                  stylua
-                ];
-              };
-            };
-        in
-        builtins.listToAttrs (
-          builtins.map (name: {
-            inherit name;
-            value = shell-on name;
-          }) systems
-        );
-      nixosConfigurations =
-        let
-          system = linux-system;
-        in
-        {
-          ${laptop-name system} = nixpkgs.lib.nixosSystem (on system linux);
-        };
-    };
+      }
+      // linux-mac { nixosConfigurations.${laptop-name} = nixpkgs.lib.nixosSystem cfg; } {
+        darwinConfigurations.${laptop-name} = nix-darwin.lib.darwinSystem cfg;
+      }
+    );
 }

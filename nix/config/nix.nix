@@ -1,12 +1,4 @@
-{
-  laptop-name,
-  linux-mac,
-  nixvim,
-  pkgs,
-  self,
-  system,
-}:
-{
+ctx: {
   package = pkgs.nix;
   settings = {
     # auto-optimize-store = true;

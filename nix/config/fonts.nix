@@ -1,11 +1,4 @@
-{
-  laptop-name,
-  linux-mac,
-  nixvim,
-  pkgs,
-  self,
-  system,
-}:
+ctx:
 let
   iosevka-name = "Iosevka Custom";
   iosevka = pkgs.iosevka.override {

@@ -89,8 +89,8 @@ ctx.linux-mac null {
       minimize-to-application = false;
       mouse-over-hilite-stack = true;
       mru-spaces = true;
-      dock.orientation = "left";
-      system.defaults.dock.persistent-apps = [
+      orientation = "left";
+      persistent-apps = [
         "/System/Applications/System Settings.app"
         "/Applications/Nix Apps/Spotify.app"
         "/System/Applications/Messages.app"

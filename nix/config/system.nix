@@ -109,11 +109,23 @@ ctx.linux-mac null {
       show-recents = false;
       showhidden = true;
       static-only = false;
-      tilesize = 16;
+      tilesize = 24;
       wvous-bl-corner = 1;
       wvous-br-corner = 1;
       wvous-tl-corner = 1;
       wvous-tr-corner = 1;
+      finder = {
+        AppleShowAllExtensions = true;
+        AppleShowAllFiles = true;
+        CreateDesktop = true;
+        FXDefaultSearchSpace = null;
+        FXEnableExtensionChangeWarning = true;
+        FXPreferredViewStyle = "clmv";
+        QuitMenuItem = false;
+        ShowPathbar = true;
+        ShowStatusBar = true;
+        _FXShowPosixPathInTitle = true;
+      };
     };
   };
 }

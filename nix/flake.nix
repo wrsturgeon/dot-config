@@ -39,14 +39,13 @@
         # OS introspection utils
         on-linux = nixpkgs.lib.strings.hasSuffix "linux" system;
         on-mac = nixpkgs.lib.strings.hasSuffix "darwin" system;
-        linux-mac-builder =
+        linux-mac =
           if on-linux then
-            { linux-mac = a: b: a; }
+            (a: b: a)
           else if on-mac then
-            { linux-mac = a: b: b; }
+            (a: b: b)
           else
             throw "Unrecognized OS in system `${system}`!";
-        inherit (linux-mac-builder) linux-mac;
 
         # Usernames
         laptop-name = "mbp-" + (linux-mac "nixos" "macos");

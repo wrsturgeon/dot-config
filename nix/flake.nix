@@ -2,6 +2,7 @@
   description = "System flakes";
   inputs = {
     apple-fonts = {
+      url = "github:lyndeno/apple-fonts.nix";
       inputs = {
         flake-utils.follows = "flake-utils";
         nixpkgs.follows = "nixpkgs";

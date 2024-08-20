@@ -105,6 +105,15 @@ ctx.linux-mac null {
         "/Applications/Logseq.app"
       ];
       persistent-others = [ ];
+      show-process-indicators = true;
+      show-recents = false;
+      showhidden = true;
+      static-only = false;
+      tilesize = 16;
+      wvous-bl-corner = 1;
+      wvous-br-corner = 1;
+      wvous-tl-corner = 1;
+      wvous-tr-corner = 1;
     };
   };
 }

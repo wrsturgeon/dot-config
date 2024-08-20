@@ -7,10 +7,7 @@
       url = "github:LnL7/nix-darwin";
     };
     nixfmt = {
-      inputs = {
-        flake-utils.follows = "flake-utils";
-        # nixpkgs.follows = "nixpkgs";
-      };
+      flake = false;
       url = "github:nixos/nixfmt";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";

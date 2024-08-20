@@ -101,7 +101,7 @@ ctx.linux-mac null {
         "/System/Applications/Reminders.app"
         "/Applications/Arc.app"
         "/Applications/Notion Calendar.app"
-        "/Applications/kitty.app"
+        "/Applications/Nix Apps/kitty.app"
         "/Applications/Logseq.app"
       ];
       persistent-others = [ ];

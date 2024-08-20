@@ -45,11 +45,11 @@
           inherit system;
           modules = [
             (builtins.mapAttrs (_: filename: import config/${filename} cfg-args)
-              (builtins.listToAttrs (builtins.map (filename:
-                assert pkgs.lib.strings.hasSuffix ".nix" filename; {
-                  name = pkgs.lib.strings.removeSuffix ".nix" filename;
-                  value = filename;
-                }) (builtins.attrNames (builtins.readDir ./config)))))
+              (builtins.listToAttrs (builtins.map (filename: {
+                name = pkgs.lib.strings.removeSuffix ".nix" filename;
+                value = filename;
+              }) (builtins.filter (pkgs.lib.strings.hasSuffix ".nix")
+                (builtins.attrNames (builtins.readDir ./config))))))
           ];
         };
       in {

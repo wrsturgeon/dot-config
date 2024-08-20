@@ -1,1 +1,1 @@
-ctx: linux-mac { } { nix-daemon.enable = true; }
+ctx: ctx.linux-mac { } { nix-daemon.enable = true; }

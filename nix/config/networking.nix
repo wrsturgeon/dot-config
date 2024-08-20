@@ -1,5 +1,5 @@
 ctx: {
   computerName = "Will Sturgeon";
   # hostName = "willsturgeon";
-  hostName = laptop-name;
+  hostName = ctx.laptop-name;
 }

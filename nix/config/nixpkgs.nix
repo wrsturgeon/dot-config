@@ -1,1 +1,1 @@
-ctx: { hostPlatform = system; }
+ctx: { hostPlatform = ctx.system; }

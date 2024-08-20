@@ -1,5 +1,5 @@
 ctx: {
-  package = pkgs.nix;
+  package = ctx.pkgs.nix;
   settings = {
     # auto-optimize-store = true;
     experimental-features = [

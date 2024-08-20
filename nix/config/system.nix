@@ -21,7 +21,7 @@ ctx: {
       AppleWindowTabbingMode = "fullscreen";
       InitialKeyRepeat = 1;
       KeyRepeat = 1;
-      NSAutomaticCapitalisation = false;
+      NSAutomaticCapitalizationEnabled = false;
       NSAutomaticDashSubstitution = true;
       NSAutomaticInlinePredictionEnabled = false;
       NSAutomaticPeriodSubstitution = false;

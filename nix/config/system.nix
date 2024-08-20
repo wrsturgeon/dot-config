@@ -119,7 +119,7 @@ ctx.linux-mac null {
       AppleShowAllExtensions = true;
       AppleShowAllFiles = true;
       CreateDesktop = true;
-      FXDefaultSearchSpace = null;
+      FXDefaultSearchScope = null;
       FXEnableExtensionChangeWarning = true;
       FXPreferredViewStyle = "clmv";
       QuitMenuItem = false;

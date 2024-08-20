@@ -1,1 +1,1 @@
-ctx: { hostPlatform = ctx.system; }
+ctx: { inherit (ctx) pkgs; }

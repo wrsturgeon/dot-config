@@ -1,4 +1,4 @@
-{ linux-mac, nixvim, pkgs, self, system, }: {
+{ laptop-name, linux-mac, nixvim, pkgs, self, system, }: {
   etc = {
     gitignore.text = ''
       **/.DS_Store

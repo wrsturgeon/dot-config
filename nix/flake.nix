@@ -9,7 +9,7 @@
     nixfmt = {
       inputs = {
         flake-utils.follows = "flake-utils";
-        nixpkgs.follows = "nixpkgs";
+        # nixpkgs.follows = "nixpkgs";
       };
       url = "github:nixos/nixfmt";
     };

@@ -22,7 +22,7 @@ ctx: {
       InitialKeyRepeat = 1;
       KeyRepeat = 1;
       NSAutomaticCapitalizationEnabled = false;
-      NSAutomaticDashSubstitution = true;
+      NSAutomaticDashSubstitutionEnabled = true;
       NSAutomaticInlinePredictionEnabled = false;
       NSAutomaticPeriodSubstitution = false;
       NSAutomaticQuoteSubstitution = true;

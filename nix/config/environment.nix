@@ -28,18 +28,18 @@
     gcc
     gimp
     gnumake
+    kitty
     nil
+    nixfmt-rfc-style
+    ripgrep
     rss2email
     rust-analyzer
     rustfmt
     slack
     spotify
     taplo
-    zoom-us
-    kitty
-    nixfmt-rfc-style
-    ripgrep
     # wezterm
+    zoom-us
   ];
   variables = {
     EDITOR = "vim";

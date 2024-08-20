@@ -54,5 +54,23 @@ ctx: {
       "com.apple.trackpad.trackpadCornerClickBehavior" = 1;
     };
     SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
+    WindowManager = {
+      # Really, these are all about Stage Manager
+      AppWindowGroupingBehavior = false;
+      AutoHide = true;
+      EnableStandardClickToShowDesktop = true;
+      GloballyEnabled = true; # Enables Stage Manager universally
+      HideDesktop = true;
+      StageManagerHideWidgets = true;
+      StandardHideDesktopIcons = true;
+      StandardHideWidgets = true;
+    };
+    alf = {
+      allowdownloadsignedenabled = 0;
+      allowsignedenabled = false;
+      globalstate = 1;
+      loggingenabled = 1;
+      stealthenabled = 1;
+    };
   };
 }

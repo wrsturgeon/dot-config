@@ -1,5 +1,5 @@
 { linux-mac, nixvim, pkgs, self, system, }: {
-  environment.systemPackages = with pkgs; [ nixfmt ];
+  environment.systemPackages = with pkgs; [ nixfmt wezterm ];
   nix = {
     package = pkgs.nix;
     settings.experimental-features = "nix-command flakes";

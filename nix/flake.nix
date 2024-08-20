@@ -71,9 +71,9 @@
           type = "app";
           program = ./rebuild;
         };
-      }
-      // linux-mac { nixosConfigurations.${laptop-name} = nixpkgs.lib.nixosSystem cfg; } {
-        darwinConfigurations.${laptop-name} = nix-darwin.lib.darwinSystem cfg;
+        packages = linux-mac { nixosConfigurations.${laptop-name} = nixpkgs.lib.nixosSystem cfg; } {
+          darwinConfigurations.${laptop-name} = nix-darwin.lib.darwinSystem cfg;
+        };
       }
     );
 }

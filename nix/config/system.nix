@@ -76,7 +76,7 @@ ctx.linux-mac null {
     dock = {
       enable-spring-load-actions-on-all-items = true;
       appswitcher-all-displays = true;
-      autohide = true;
+      autohide = false; # true;
       autohide-delay = 0.0;
       autohide-time-modifier = 0.1;
       dashboard-in-overlay = true;

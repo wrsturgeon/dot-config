@@ -14,7 +14,7 @@
   pathsToLink = [ "/share/zsh" ];
   systemPackages = with pkgs; [
     kitty
-    nixfmt
+    nixfmt-rfc-style
     ripgrep
     # wezterm
   ];

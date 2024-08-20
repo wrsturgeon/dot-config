@@ -1,1 +1,11 @@
-{ laptop-name, linux-mac, nixvim, pkgs, self, system, }: { zsh.enable = true; }
+{
+  laptop-name,
+  linux-mac,
+  nixvim,
+  pkgs,
+  self,
+  system,
+}:
+{
+  zsh.enable = true;
+}

@@ -1,4 +1,11 @@
-{ laptop-name, linux-mac, nixvim, pkgs, self, system, }:
+{
+  laptop-name,
+  linux-mac,
+  nixvim,
+  pkgs,
+  self,
+  system,
+}:
 let
   iosevka-name = "Iosevka Custom";
   iosevka = pkgs.iosevka.override {
@@ -10,7 +17,12 @@ let
       ligations = {
         # enable all those not enabled by `dlig` below
         # (see the above link for a visual depiction):
-        enables = [ "eqexeq" "eqslasheq" "slasheq" "tildeeq" ];
+        enables = [
+          "eqexeq"
+          "eqslasheq"
+          "slasheq"
+          "tildeeq"
+        ];
         inherits = "dlig";
       };
       noCvSs = false;
@@ -21,4 +33,7 @@ let
     };
     set = "custom";
   };
-in { packages = [ iosevka ]; }
+in
+{
+  packages = [ iosevka ];
+}

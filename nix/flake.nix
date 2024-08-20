@@ -1,13 +1,13 @@
 {
   description = "System flakes";
   inputs = {
-    apple-fonts = {
-      url = "github:lyndeno/apple-fonts.nix";
-      inputs = {
-        flake-utils.follows = "flake-utils";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
+    # apple-fonts = {
+    #   url = "github:lyndeno/apple-fonts.nix";
+    #   inputs = {
+    #     flake-utils.follows = "flake-utils";
+    #     nixpkgs.follows = "nixpkgs";
+    #   };
+    # };
     flake-utils.url = "github:numtide/flake-utils";
     nix-darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,13 +21,16 @@
       };
       url = "github:nix-community/nixvim";
     };
-    sf-mono-liga-src = {
-      flake = false;
-      url = "github:shaunsingh/sfmono-nerd-font-ligaturized";
-    };
+    # sf-mono-liga-src = {
+    #   flake = false;
+    #   url = "github:shaunsingh/sfmono-nerd-font-ligaturized";
+    # };
   };
-  outputs = { apple-fonts, flake-utils, nix-darwin, nixpkgs, nixvim, self
-    , sf-mono-liga-src }:
+  outputs = {
+    # apple-fonts,
+    flake-utils, nix-darwin, nixpkgs, nixvim, self,
+    # sf-mono-liga-src
+    }:
     flake-utils.lib.eachDefaultSystem (system:
       let
 

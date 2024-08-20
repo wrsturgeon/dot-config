@@ -27,7 +27,7 @@ ctx: {
       NSAutomaticPeriodSubstitutionEnabled = false;
       NSAutomaticQuoteSubstitutionEnabled = true;
       NSAutomaticSpellingCorrectionEnabled = false;
-      NSAutomaticWindowAnimationEnabled = true;
+      NSAutomaticWindowAnimationsEnabled = true;
       NSDisableAutomaticTermination = null;
       NSDocumentSaveNewDocumentsToCloud = false;
       NSNavPanelExpandedStateForSaveMode = true;

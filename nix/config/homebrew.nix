@@ -1,4 +1,5 @@
-ctx: {
+ctx:
+ctx.linux-mac null {
   enable = true;
   casks = [
     "arc"

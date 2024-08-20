@@ -55,6 +55,7 @@
         cfg-args = {
           inherit
             linux-mac
+            nixvim
             pkgs
             stateVersion
             system

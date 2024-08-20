@@ -182,4 +182,13 @@ ctx.linux-mac null {
       reduceTransparency = false;
     };
   };
+  keyboard = {
+    enableKeyMapping = true;
+    nonUS.remapTilde = false;
+    remapCapsLockToControl = false;
+    remapCapsLockToEscape = false;
+    swapLeftCommandAndLeftAlt = false;
+    swapLeftCtrlAndFn = false;
+  };
+  startup.chime = true;
 }

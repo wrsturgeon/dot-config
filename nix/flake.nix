@@ -9,7 +9,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixvim = {
       inputs = {
-        flake-utils.follows = "flake-utils";
         nix-darwin.follows = "nix-darwin";
         nixpkgs.follows = "nixpkgs";
       };

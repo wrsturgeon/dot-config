@@ -13,14 +13,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
     };
-    hydrogen-textobjects-src = {
-      flake = false;
-      url = "github:gcballesteros/vim-textobj-hydrogen";
-    };
-    jupytext-src = {
-      flake = false;
-      url = "github:gcballesteros/jupytext.nvim";
-    };
     nixfmt.url = "github:serokell/nixfmt";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     sf-mono-liga-src = {
@@ -33,8 +25,6 @@
       apple-fonts,
       firefox-addons,
       home-manager,
-      hydrogen-textobjects-src,
-      jupytext-src,
       nixfmt,
       nixpkgs,
       self,
@@ -76,15 +66,6 @@
             inherit (pkgs.coqPackages) coq;
             inherit (pkgs.vimPlugins) haskell-tools-nvim;
           };
-          jupytext = pkgs.vimUtils.buildVimPlugin {
-            name = "jupytext";
-            src = jupytext-src;
-          };
-          hydrogen-textobjects = pkgs.vimUtils.buildVimPlugin {
-            name = "hydrogen-textobjects";
-            src = hydrogen-textobjects-src;
-          };
-          print-list = builtins.foldl' (acc: s: acc + " " + s) "";
           apple-font-packages = apple-fonts.packages.${system};
           apple-font-names = builtins.attrNames apple-font-packages;
           nerdless-apple-font-names = builtins.filter (
@@ -171,50 +152,50 @@
                       bold_font = family + " " + bold;
                       italic_font = family + " " + weight + " " + italic;
                       bold_italic_font = family + " " + bold + " " + italic;
-                      font_size = linux-mac 9 13; # 12;
+                      font_size = linux-mac 8 13; # linux-mac 9 13; # 12;
                     };
                   shellIntegration.enableZshIntegration = true;
                   theme = "Ayu";
                 };
-                neovim = {
-                  defaultEditor = true;
-                  extraLuaConfig = builtins.readFile ./init.lua;
-                  plugins =
-                    (with pkgs.vimPlugins; [
-                      cmp-buffer
-                      cmp-cmdline
-                      cmp_luasnip
-                      cmp-nvim-lsp
-                      cmp-path
-                      comment-nvim
-                      Coqtail
-                      crates-nvim
-                      gitsigns-nvim
-                      lualine-nvim
-                      luasnip
-                      neovim-ayu
-                      nvim-cmp
-                      nvim-lspconfig
-                      nvim-notify
-                      nvim-treesitter-textobjects
-                      sniprun
-                      telescope-nvim
-                    ])
-                    ++ (
-                      # <https://maxwellrules.com/misc/nvim_jupyter.html>
-                      [
-                        hydrogen-textobjects
-                        jupytext
-                      ]
-                      ++ (with pkgs.vimPlugins; [
-                        iron-nvim
-                        vim-textobj-user
-                      ])
-                    );
-                  viAlias = true;
-                  vimAlias = true;
-                  withPython3 = true;
-                };
+                # neovim = {
+                #   defaultEditor = true;
+                #   extraLuaConfig = builtins.readFile ./init.lua;
+                #   plugins =
+                #     (with pkgs.vimPlugins; [
+                #       cmp-buffer
+                #       cmp-cmdline
+                #       cmp_luasnip
+                #       cmp-nvim-lsp
+                #       cmp-path
+                #       comment-nvim
+                #       Coqtail
+                #       crates-nvim
+                #       gitsigns-nvim
+                #       lualine-nvim
+                #       luasnip
+                #       neovim-ayu
+                #       nvim-cmp
+                #       nvim-lspconfig
+                #       nvim-notify
+                #       nvim-treesitter-textobjects
+                #       sniprun
+                #       telescope-nvim
+                #     ])
+                #     ++ (
+                #       # <https://maxwellrules.com/misc/nvim_jupyter.html>
+                #       [
+                #         hydrogen-textobjects
+                #         jupytext
+                #       ]
+                #       ++ (with pkgs.vimPlugins; [
+                #         iron-nvim
+                #         vim-textobj-user
+                #       ])
+                #     );
+                #   viAlias = true;
+                #   vimAlias = true;
+                #   withPython3 = true;
+                # };
                 # nix.package = pkgs.nixVersions.latest;
                 ripgrep = { };
                 zsh = {

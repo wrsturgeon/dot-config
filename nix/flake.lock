@@ -107,8 +107,6 @@
         "apple-fonts": "apple-fonts",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
-        "hydrogen-textobjects-src": "hydrogen-textobjects-src",
-        "jupytext-src": "jupytext-src",
         "nixfmt": "nixfmt",
         "nixpkgs": [
           "nixpkgs"
@@ -117,7 +115,7 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-gGWfHIeMATGIoqLqRWMdqihmy9jRBm7C+HbiOVkGVXo=",
+        "narHash": "sha256-+w9Q/beHyioBKAsxy3RLq7v3PLJ7k0IhpkYjjtUDJYs=",
         "path": "./home",
         "type": "path"
       },
@@ -144,38 +142,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "hydrogen-textobjects-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1601364767,
-        "narHash": "sha256-uYsgVhCjF/AyUO/sfnUDYaAbB1Fm3u+5O60v2bN6Fs4=",
-        "owner": "gcballesteros",
-        "repo": "vim-textobj-hydrogen",
-        "rev": "e6f9a6b26a3524615bac347503c35327636fab72",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gcballesteros",
-        "repo": "vim-textobj-hydrogen",
-        "type": "github"
-      }
-    },
-    "jupytext-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1712342824,
-        "narHash": "sha256-LBBRZOSqn70qruSA/vbPMTzS7y05F/z4EqC+5JlU6NM=",
-        "owner": "gcballesteros",
-        "repo": "jupytext.nvim",
-        "rev": "c8baf3ad344c59b3abd461ecc17fc16ec44d0f7b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gcballesteros",
-        "repo": "jupytext.nvim",
         "type": "github"
       }
     },

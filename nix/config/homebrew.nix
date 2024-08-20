@@ -1,6 +1,5 @@
 ctx:
 ctx.linux-mac null {
-  enable = true;
   casks = [
     "arc"
     "git-credential-manager"
@@ -9,4 +8,9 @@ ctx.linux-mac null {
     "steam"
     "tor-browser"
   ];
+  enable = true;
+  onActivation = {
+    autoUpdate = true;
+    cleanup = "zap";
+  };
 }

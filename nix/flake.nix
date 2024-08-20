@@ -15,7 +15,7 @@
       url = "github:nix-community/nixvim";
     };
   };
-  outputs = { flake-utils, nix-darwin, nixpkgs, nixvim, self, }:
+  outputs = { flake-utils, nix-darwin, nixpkgs, nixvim, self }:
     flake-utils.lib.eachDefaultSystem (system:
       let
 
@@ -36,7 +36,7 @@
           throw "Unrecognized OS in system `${system}`!";
 
         # Usernames
-        laptop-name = "mbp-" + (linux-mac "nixos" "macos");
+        laptop-name = "willsturgeon"; # "mbp-" + (linux-mac "nixos" "macos");
         username = linux-mac "will" "willsturgeon";
 
         # Config

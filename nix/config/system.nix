@@ -177,7 +177,7 @@ ctx.linux-mac null {
     universalaccess = {
       closeViewScrollWheelToggle = true;
       closeViewZoomFollowsFocus = true;
-      mouseDriverCursorSize = 1;
+      mouseDriverCursorSize = 1.0;
       reduceMotion = false;
       reduceTransparency = false;
     };

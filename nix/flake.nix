@@ -59,7 +59,6 @@
         username = linux-mac "will" "willsturgeon";
 
         # Config
-        stateVersion = "23.05";
         cfg-args = {
           inherit
             linux-mac
@@ -67,7 +66,6 @@
             nixvim
             pkgs
             self
-            stateVersion
             system
             ;
         };

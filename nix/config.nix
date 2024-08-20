@@ -4,7 +4,6 @@
   nixvim,
   pkgs,
   self,
-  stateVersion,
   system,
 }:
 {
@@ -13,6 +12,6 @@
   nixpkgs.hostPlatform=system;
   programs={zsh.enable=true;};
   services.nix-daemon.enable = true;
-  system={inherit stateVersion;configurationRevision = self.rev or self.dirtyRev or null;
+  system={configurationRevision = self.rev or self.dirtyRev or null;
 };
 }

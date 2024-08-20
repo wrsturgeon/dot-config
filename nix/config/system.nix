@@ -127,5 +127,18 @@ ctx.linux-mac null {
       ShowStatusBar = true;
       _FXShowPosixPathInTitle = true;
     };
+    loginwindow = {
+      DisableConsoleAccess = false;
+      GuestEnabled = true;
+      LoginwindowText = "GO FUCK YOURSELF <3";
+      PowerOffDisabledWhileLoggedIn = false;
+      RestartDisabled = false;
+      RestartDisabledWhileLoggedIn = false;
+      SHOWFULLNAME = false;
+      ShutDownDisabled = false;
+      ShutDownDisabledWhileLoggedIn = false;
+      SleepDisabled = false;
+      autoLoginUser = "Off";
+    };
   };
 }

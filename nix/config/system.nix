@@ -24,8 +24,8 @@ ctx: {
       NSAutomaticCapitalizationEnabled = false;
       NSAutomaticDashSubstitutionEnabled = true;
       NSAutomaticInlinePredictionEnabled = false;
-      NSAutomaticPeriodSubstitution = false;
-      NSAutomaticQuoteSubstitution = true;
+      NSAutomaticPeriodSubstitutionEnabled = false;
+      NSAutomaticQuoteSubstitutionEnabled = true;
       NSAutomaticSpellingCorrectionEnabled = false;
       NSAutomaticWindowAnimationEnabled = true;
       NSDisableAutomaticTermination = null;

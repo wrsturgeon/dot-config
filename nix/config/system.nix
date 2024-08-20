@@ -149,5 +149,11 @@ ctx.linux-mac null {
       ShowDayOfWeek = true;
       ShowSeconds = true;
     };
+    screencapture = {
+      disable-shadow = false;
+      location = "~/Desktop/Screenshots";
+      show-thumbnail = false;
+      type = "png";
+    };
   };
 }

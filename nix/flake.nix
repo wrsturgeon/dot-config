@@ -40,7 +40,7 @@
         username = linux-mac "will" "willsturgeon";
 
         # Config
-        cfg-args = { inherit linux-mac nixvim pkgs self system; };
+        cfg-args = { inherit laptop-name linux-mac nixvim pkgs self system; };
         cfg = {
           inherit system;
           modules = [

@@ -44,8 +44,12 @@
         cfg = {
           inherit system;
           modules = [
-            (builtins.mapAttrs (name: _: import config/${name}.nix cfg-args)
-              (builtins.readDir ./config))
+            (builtins.mapAttrs (_: filename: import config/${filename} cfg-args)
+              (builtins.listToAttrs (builtins.map (filename:
+                assert builtins.hasSuffix ".nix" filename; {
+                  name = builtins.removeSuffix ".nix" filename;
+                  value = filename;
+                }) (builtins.attrNames (builtins.readDir ./config)))))
           ];
         };
       in {

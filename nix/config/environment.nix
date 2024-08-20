@@ -17,6 +17,7 @@ ctx: {
       cargo
       coreutils-full
       discord
+      emacs
       fd
       gcc
       gimp

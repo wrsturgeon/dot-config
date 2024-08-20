@@ -67,7 +67,7 @@ ctx: {
     };
     alf = {
       allowdownloadsignedenabled = 0;
-      allowsignedenabled = false;
+      allowsignedenabled = 0;
       globalstate = 1;
       loggingenabled = 1;
       stealthenabled = 1;

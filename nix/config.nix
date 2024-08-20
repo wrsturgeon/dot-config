@@ -5,4 +5,6 @@
   stateVersion,
   system,
 }:
-{ }
+{
+  services.nix-daemon.enable = true;
+}

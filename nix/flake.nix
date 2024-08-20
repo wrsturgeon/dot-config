@@ -26,7 +26,7 @@
     {
       flake-utils,
       nix-darwin,
-nixfmt,
+      nixfmt,
       nixpkgs,
       nixvim,
       self,
@@ -66,6 +66,7 @@ nixfmt,
             nixfmt
             nixvim
             pkgs
+            self
             stateVersion
             system
             ;

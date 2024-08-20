@@ -9,9 +9,10 @@
 nix/**
 !nix/flake.lock
 !nix/flake.nix
+!nix/config.nix
+!nix/merge.nix
 !nix/home/
 !nix/home/**
-!nix/merge.nix
 !nix/os/
 !nix/os/**
 

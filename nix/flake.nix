@@ -43,9 +43,10 @@
         cfg-args = { inherit linux-mac nixvim pkgs self system; };
         cfg = {
           inherit system;
-          modules = builtins.singleton
+          modules = [
             (builtins.mapAttrs (name: _: import config/${name}.nix cfg-args)
-              (builtins.readDir ./config));
+              (builtins.readDir ./config))
+          ];
         };
       in {
         apps.default = {

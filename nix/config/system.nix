@@ -1,1 +1,1 @@
-ctx: { configurationRevision = self.rev or self.dirtyRev or null; }
+ctx: { configurationRevision = ctx.self.rev or ctx.self.dirtyRev or null; }

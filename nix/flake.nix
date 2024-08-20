@@ -26,8 +26,8 @@
         };
 
         # OS introspection utils
-        on-linux = nixpkgs.lib.strings.hasSuffix "linux" system;
-        on-mac = nixpkgs.lib.strings.hasSuffix "darwin" system;
+        on-linux = pkgs.lib.strings.hasSuffix "linux" system;
+        on-mac = pkgs.lib.strings.hasSuffix "darwin" system;
         linux-mac = if on-linux then
           (a: b: a)
         else if on-mac then
@@ -46,8 +46,8 @@
           modules = [
             (builtins.mapAttrs (_: filename: import config/${filename} cfg-args)
               (builtins.listToAttrs (builtins.map (filename:
-                assert builtins.hasSuffix ".nix" filename; {
-                  name = builtins.removeSuffix ".nix" filename;
+                assert pkgs.lib.strings.hasSuffix ".nix" filename; {
+                  name = pkgs.lib.strings.removeSuffix ".nix" filename;
                   value = filename;
                 }) (builtins.attrNames (builtins.readDir ./config)))))
           ];
@@ -58,7 +58,7 @@
           program = ./rebuild;
         };
         packages = linux-mac {
-          nixosConfigurations.${laptop-name} = nixpkgs.lib.nixosSystem cfg;
+          nixosConfigurations.${laptop-name} = pkgs.lib.nixosSystem cfg;
         } {
           darwinConfigurations.${laptop-name} = nix-darwin.lib.darwinSystem cfg;
         };

@@ -32,6 +32,7 @@ ctx: {
       slack
       spotify
       taplo
+      tree
       # wezterm
       zoom-us
     ])

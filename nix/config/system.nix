@@ -1,4 +1,5 @@
-ctx: {
+ctx:
+ctx.linux-mac null {
   configurationRevision = ctx.self.rev or ctx.self.dirtyRev or null;
   defaults = {
     ".GlobalPreferences" = {
@@ -71,6 +72,38 @@ ctx: {
       globalstate = 1;
       loggingenabled = 1;
       stealthenabled = 1;
+    };
+    dock = {
+      enable-spring-load-actions-on-all-items = true;
+      appswitcher-all-displays = true;
+      autohide = true;
+      autohide-delay = 0.0;
+      autohide-time-modifier = 0.1;
+      dashboard-in-overlay = true;
+      expose-animation-duration = 0.1;
+      expose-group-by-app = false;
+      largesize = null;
+      launchanim = true;
+      magnification = false;
+      mineffect = "genie";
+      minimize-to-application = false;
+      mouse-over-hilite-stack = true;
+      mru-spaces = true;
+      dock.orientation = left;
+      system.defaults.dock.persistent-apps = [
+        "/System/Applications/System Settings.app"
+        "/Applications/Nix Apps/Spotify.app"
+        "/System/Applications/Messages.app"
+        "/Applications/Nix Apps/Discord.app"
+        "/Applications/Spark.app"
+        "/Applications/Nix Apps/Slack.app"
+        "/System/Applications/Notes.app"
+        "/System/Applications/Reminders.app"
+        "/Applications/Arc.app"
+        "/Applications/Notion Calendar.app"
+        "/Applications/kitty.app"
+        "/Applications/Logseq.app"
+      ];
     };
   };
 }

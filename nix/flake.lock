@@ -185,22 +185,6 @@
         "type": "github"
       }
     },
-    "nixfmt": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1723845012,
-        "narHash": "sha256-Euge1KKOuFrMY63gD9zVBgRmKCztQcYFg4t4nQwI6gQ=",
-        "owner": "nixos",
-        "repo": "nixfmt",
-        "rev": "14be7e665024f1a8c31d748b22f5e215856d3479",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixfmt",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1723991338,
@@ -273,7 +257,6 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nix-darwin": "nix-darwin",
-        "nixfmt": "nixfmt",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim"
       }

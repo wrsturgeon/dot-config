@@ -6,10 +6,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:LnL7/nix-darwin";
     };
-    nixfmt = {
-      flake = false;
-      url = "github:nixos/nixfmt";
-    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixvim = {
       inputs = {
@@ -23,7 +19,6 @@
     {
       flake-utils,
       nix-darwin,
-      nixfmt,
       nixpkgs,
       nixvim,
       self,
@@ -59,7 +54,6 @@
         cfg-args = {
           inherit
             linux-mac
-            nixfmt
             nixvim
             pkgs
             self

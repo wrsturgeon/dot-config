@@ -42,7 +42,8 @@
       # wezterm
       zoom-us
     ])
-    ++ (with pkgs.coqPackages; [ coq ]);
+    ++ (with pkgs.coqPackages; [ coq ])
+    ++ (linux-mac [ ] [ pkgs.vlc-bin ]);
   variables = {
     EDITOR = "vim";
     LANG = "fr_FR.UTF-8";

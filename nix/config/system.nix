@@ -58,7 +58,7 @@ ctx.linux-mac null {
     WindowManager = {
       # Really, these are all about Stage Manager
       AppWindowGroupingBehavior = false;
-      AutoHide = true;
+      AutoHide = false; # true;
       EnableStandardClickToShowDesktop = true;
       GloballyEnabled = true; # Enables Stage Manager universally
       HideDesktop = true;
@@ -89,7 +89,7 @@ ctx.linux-mac null {
       minimize-to-application = false;
       mouse-over-hilite-stack = true;
       mru-spaces = true;
-      dock.orientation = left;
+      dock.orientation = "left";
       system.defaults.dock.persistent-apps = [
         "/System/Applications/System Settings.app"
         "/Applications/Nix Apps/Spotify.app"

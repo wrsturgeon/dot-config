@@ -155,5 +155,31 @@ ctx.linux-mac null {
       show-thumbnail = false;
       type = "png";
     };
+    screensaver = {
+      askForPassword = true;
+      askForPasswordDelay = 0;
+    };
+    smb = {
+      NetBIOSName = null;
+      ServerDescription = null;
+    };
+    spaces.spans-displays = null;
+    trackpad = {
+      ActuationStrength = 0;
+      Clicking = false;
+      Dragging = false;
+      FirstClickThreshold = 1;
+      SecondClickThreshold = 1;
+      TrackpadRightClick = true;
+      TrackpadThreeFingerDrag = true;
+      TrackpadThreeFingerTapGesture = 2;
+    };
+    universalaccess = {
+      closeViewScrollWheelToggle = true;
+      closeViewZoomFollowsFocus = true;
+      mouseDriverCursorSize = 1;
+      reduceMotion = false;
+      reduceTransparency = false;
+    };
   };
 }

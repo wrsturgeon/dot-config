@@ -11,10 +11,8 @@ nix/**
 !nix/flake.nix
 !nix/config.nix
 !nix/merge.nix
-!nix/home/
-!nix/home/**
-!nix/os/
-!nix/os/**
+!nix/firmware/
+!nix/firmware/**
 
 # Everything else:
 
@@ -22,6 +20,7 @@ nix/**
 !.gitmodules
 
 !emacs/
+emacs/**
 !emacs/early-init.el
 !emacs/init.el
 

@@ -89,7 +89,7 @@ ctx.linux-mac null {
       minimize-to-application = false;
       mouse-over-hilite-stack = true;
       mru-spaces = true;
-      orientation = "bottom";
+      orientation = "left";
       persistent-apps = [
         "/System/Applications/System Settings.app"
         "/Applications/Nix Apps/Spotify.app"

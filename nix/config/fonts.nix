@@ -1,7 +1,7 @@
 ctx:
 let
   iosevka-name = "Iosevka Custom";
-  iosevka = pkgs.iosevka.override {
+  iosevka = ctx.pkgs.iosevka.override {
     # <https://github.com/be5invis/Iosevka/blob/main/doc/language-specific-ligation-sets.md>
     privateBuildPlan = {
       exportGlyphNames = true;

@@ -13,7 +13,7 @@ ctx: {
   '';
   pathsToLink = [ "/share/zsh" ];
   systemPackages =
-    (with pkgs; [
+    (with ctx.pkgs; [
       cargo
       coreutils-full
       discord
@@ -34,8 +34,8 @@ ctx: {
       # wezterm
       zoom-us
     ])
-    ++ (with pkgs.coqPackages; [ coq ])
-    ++ (linux-mac [ ] [ pkgs.vlc-bin ]);
+    ++ (with ctx.pkgs.coqPackages; [ coq ])
+    ++ (ctx.linux-mac [ ] [ ctx.pkgs.vlc-bin ]);
   variables = {
     EDITOR = "vim";
     LANG = "fr_FR.UTF-8";

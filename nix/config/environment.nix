@@ -18,5 +18,8 @@
     ripgrep
     # wezterm
   ];
-  variables.LANG = "fr_FR.UTF-8";
+  variables = {
+    EDITOR = "vim";
+    LANG = "fr_FR.UTF-8";
+  };
 }

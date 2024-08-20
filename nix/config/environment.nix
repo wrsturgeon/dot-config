@@ -21,6 +21,21 @@
   '';
   pathsToLink = [ "/share/zsh" ];
   systemPackages = with pkgs; [
+    cargo
+    coreutils-full
+    discord
+    fd
+    gcc
+    gimp
+    gnumake
+    nil
+    rss2email
+    rust-analyzer
+    rustfmt
+    slack
+    spotify
+    taplo
+    zoom-us
     kitty
     nixfmt-rfc-style
     ripgrep

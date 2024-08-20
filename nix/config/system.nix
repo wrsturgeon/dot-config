@@ -130,7 +130,7 @@ ctx.linux-mac null {
     loginwindow = {
       DisableConsoleAccess = false;
       GuestEnabled = true;
-      LoginwindowText = "GO FUCK YOURSELF <3";
+      # LoginwindowText = "GO FUCK YOURSELF <3";
       PowerOffDisabledWhileLoggedIn = false;
       RestartDisabled = false;
       RestartDisabledWhileLoggedIn = false;
@@ -139,6 +139,15 @@ ctx.linux-mac null {
       ShutDownDisabledWhileLoggedIn = false;
       SleepDisabled = false;
       autoLoginUser = "Off";
+    };
+    menuExtraClock = {
+      IsAnalog = false;
+      Show24Hour = true;
+      ShowAMPM = false;
+      ShowDate = 1;
+      ShowDayOfMonth = true;
+      ShowDayOfWeek = true;
+      ShowSeconds = true;
     };
   };
 }

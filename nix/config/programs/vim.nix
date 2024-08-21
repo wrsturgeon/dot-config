@@ -1,7 +1,7 @@
 ctx:
 let
   theme = "ayu";
-  enable = attrs: builtins.mapAttrs (k: v: v // { enable = true; });
+  enable = builtins.mapAttrs (k: v: v // { enable = true; });
 in
 {
   colorschemes.${theme}.enable = true;

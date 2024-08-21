@@ -73,7 +73,7 @@
         emacs-init-pkg = pkgs.runCommand emacs-init-filename { } ''
           set -eux
           mkdir -p $out/share/emacs/site-lisp
-          cp ${pkgs.writeToFile emacs-init-filename emacs-init} $out/share/emacs/site-lisp/${emacs-init-filename}
+          cp ${pkgs.writeText emacs-init-filename emacs-init} $out/share/emacs/site-lisp/${emacs-init-filename}
         '';
         emacs-pkgs =
           epkgs: with epkgs; [

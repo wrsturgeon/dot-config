@@ -16,6 +16,7 @@ ctx: {
   systemPackages =
     (with ctx; [
       emacs
+      git
       vim
     ])
     ++ (with ctx.pkgs; [

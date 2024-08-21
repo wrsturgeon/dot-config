@@ -15,7 +15,6 @@ in
       "start"
     ];
     belloff = "all";
-    # clipboard = "unnamedplus"; # system clipboard
     cursorline = true;
     cursorlineopt = "line";
     errorbells = false;
@@ -49,6 +48,9 @@ in
     wrap = false;
   };
   plugins = enable {
+    gitsigns = {
+      gitPackage = ctx.git;
+    };
     lsp = {
       servers = enable {
         bashls = { };

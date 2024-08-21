@@ -61,26 +61,21 @@
 
         # Usernames
         laptop-name = "willsturgeon"; # "mbp-" + (linux-mac "nixos" "macos");
-        username = linux-mac "will" "willsturgeon";
-
-        # Vim
-        vim = nixvim.legacyPackages.${system}.makeNixvim (import ./config/programs/vim.nix cfg-args);
-
-        # Emacs
-        emacs = import ./config/programs/emacs cfg-args;
+        # username = linux-mac "will" "willsturgeon";
 
         # Config
         cfg-args = {
           inherit
-            emacs
             laptop-name
             linux-mac
             nixvim
             pkgs
             self
             system
-            vim
             ;
+          emacs = import ./config/programs/emacs cfg-args;
+          git = pkgs.gitFull;
+          vim = nixvim.legacyPackages.${system}.makeNixvim (import ./config/programs/vim.nix cfg-args);
         };
         cfg = {
           inherit system;

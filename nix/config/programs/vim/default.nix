@@ -7,5 +7,5 @@ in
   colorschemes.${theme}.enable = true;
   extraPlugins = with ctx.pkgs.vimPlugins; [ Coqtail ];
   opts = import ./options.nix;
-  plugins = import ./plugins.nix (ctx // { inherit enable; });
+  plugins = import ./plugins (ctx // { inherit enable; });
 }

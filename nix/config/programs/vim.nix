@@ -9,22 +9,22 @@ in
   opts = {
     autoindent = true;
     autoread = true;
-    backspace = [
-      "indent"
-      "eol"
-      "start"
-    ];
-    belloff = "all";
+    # backspace = [
+    #   "indent"
+    #   "eol"
+    #   "start"
+    # ];
+    # belloff = "all";
     errorbells = false;
     foldenable = false;
     incsearch = true;
     list = true;
-    listchars = [
-      "tab:>-"
-      "trail:."
-      "extends:#"
-      "nbsp:."
-    ];
+    # listchars = [
+    #   "tab:>-"
+    #   "trail:."
+    #   "extends:#"
+    #   "nbsp:."
+    # ];
     number = true;
     relativenumber = true;
     ruler = true;
@@ -38,7 +38,7 @@ in
     softtabstop = 2;
     undolevels = 256;
     wildmenu = true;
-    wildmode = "list:longest";
+    # wildmode = "list:longest";
     wrap = false;
   };
   plugins = enable {

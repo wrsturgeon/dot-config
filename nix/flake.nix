@@ -65,7 +65,7 @@
 
         # Vim
         vim =
-          (builtins.trace (builtins.attrNames nixvim.lib.${system}) nixvim).packages.${system}.makeNixvim
+          (builtins.trace (builtins.attrNames nixvim.packages.${system}) nixvim).packages.${system}.makeNixvim
             { };
 
         # Emacs

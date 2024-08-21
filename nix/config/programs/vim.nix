@@ -28,6 +28,7 @@ in
         "K" = "hover";
       };
     };
+    lsp-format = { };
     rainbow-delimiters = { };
     # rust-tools = { };
     treesitter = {

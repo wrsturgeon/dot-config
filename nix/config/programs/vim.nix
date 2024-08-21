@@ -4,7 +4,22 @@ in
 {
   colorschemes.${theme}.enable = true;
   plugins = builtins.mapAttrs (k: v: v // { enable = true; }) {
+    lsp = {
+      servers = {
+        bashls.enable = true;
+        clangd.enable = true;
+        nixd.enable = true;
+      };
+      keymaps.lspBuf = {
+        "gd" = "definition";
+        "gD" = "references";
+        "gt" = "type_definition";
+        "gi" = "implementation";
+        "K" = "hover";
+      };
+    };
     rainbow-delimiters = { };
+    rust-tools.enable = true;
     treesitter = {
       nixGrammars = true;
       settings.indent.enable = true;

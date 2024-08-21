@@ -72,8 +72,13 @@
           mkdir -p $out/share/emacs/site-lisp
           echo '${emacs-init}' > $out/share/emacs/site-lisp/${emacs-init-filename}
         '';
+        emacs-pkgs =
+          epkgs: with epkgs; [
+            evil
+            proof-general
+          ];
         emacs = (pkgs.emacsPackagesFor pkgs.emacs-nox).emacsWithPackages (
-          ctx: [ emacs-init-pkg ] ++ (with ctx; [ evil ])
+          epkgs: [ emacs-init-pkg ] ++ (emacs-pkgs epkgs)
         );
 
         # Config

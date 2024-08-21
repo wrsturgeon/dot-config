@@ -109,7 +109,7 @@ ctx.linux-mac null {
       show-recents = false;
       showhidden = true;
       static-only = false;
-      tilesize = 24;
+      tilesize = 32;
       wvous-bl-corner = 1;
       wvous-br-corner = 1;
       wvous-tl-corner = 1;

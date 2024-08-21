@@ -64,7 +64,17 @@
         username = linux-mac "will" "willsturgeon";
 
         # Emacs
-        emacs = (pkgs.emacsPackagesFor pkgs.emacs-nox).emacsWithPackages (ctx: with ctx; [ evil ]);
+        emacs-init = ''
+          (evil-mode 1)
+        '';
+        emacs-init-filename = "default.el";
+        emacs-init-pkg = pkgs.runCommand emacs-init-filename { } ''
+          mkdir -p $out/share/emacs/site-lisp
+          echo '${emacs-init}' > $out/share/emacs/site-lisp/${emacs-init-filename}
+        '';
+        emacs = (pkgs.emacsPackagesFor pkgs.emacs-nox).emacsWithPackages (
+          ctx: [ emacs-init-filename ] ++ (with ctx; [ evil ])
+        );
 
         # Config
         cfg-args = {

@@ -9,11 +9,11 @@ in
   opts = {
     autoindent = true;
     autoread = true;
-    # backspace = [
-    #   "indent"
-    #   "eol"
-    #   "start"
-    # ];
+    backspace = [
+      "indent"
+      "eol"
+      "start"
+    ];
     # belloff = "all";
     errorbells = false;
     foldenable = false;

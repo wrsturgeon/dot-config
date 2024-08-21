@@ -3,7 +3,7 @@ ctx.linux-mac null {
   casks = [
     "arc"
     "git-credential-manager"
-    "logseq"
+    # "logseq"
     "minecraft"
     "steam"
     "tor-browser"
@@ -11,6 +11,6 @@ ctx.linux-mac null {
   enable = true;
   onActivation = {
     autoUpdate = true;
-    cleanup = "zap";
+    # cleanup = "zap";
   };
 }

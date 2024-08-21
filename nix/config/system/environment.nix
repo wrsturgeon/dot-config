@@ -28,6 +28,7 @@ ctx: {
       gimp
       gnumake
       kitty
+      logseq
       nil
       nixfmt-rfc-style
       ripgrep

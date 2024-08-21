@@ -1,5 +1,5 @@
 let
-  theme = "ayu-dark";
+  theme = "ayu";
 in
 {
   colorschemes.${theme}.enable = true;

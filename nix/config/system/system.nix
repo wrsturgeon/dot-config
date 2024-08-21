@@ -91,6 +91,20 @@ ctx.linux-mac null {
       mru-spaces = true;
       orientation = "bottom";
       persistent-apps =
+        let
+          dock-apps = builtins.map (
+            app:
+            let
+              appdir = "${app}/Applications";
+              appfile = builtins.head (
+                builtins.filter (ctx.pkgs.lib.strings.hasSuffix ".app") (
+                  builtins.attrNames (builtins.readDir appdir)
+                )
+              );
+            in
+            "${appdir}/${appfile}"
+          ) ctx.dock-apps;
+        in
         [
           "/System/Applications/System Settings.app"
           "/System/Applications/Messages.app"
@@ -99,10 +113,7 @@ ctx.linux-mac null {
           "/System/Applications/Reminders.app"
           "/Applications/Notion Calendar.app"
         ]
-        ++ (builtins.map (
-          app:
-          "${app}/Applications/${builtins.head (builtins.filter (ctx.pkgs.lib.strings.hasSuffix ".app") (builtins.readDir "${app}/Applications"))}"
-        ) ctx.dock-apps);
+        ++ dock-apps;
       persistent-others = [ ];
       show-process-indicators = true;
       show-recents = false;

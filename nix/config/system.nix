@@ -92,17 +92,16 @@ ctx.linux-mac null {
       orientation = "bottom";
       persistent-apps = [
         "/System/Applications/System Settings.app"
-        # "/Applications/Nix Apps/Spotify.app"
         "${ctx.pkgs.spotify}/Applications/Spotify.app"
         "/System/Applications/Messages.app"
-        "/Applications/Nix Apps/Discord.app"
+        "${ctx.pkgs.discord}/Applications/Discord.app"
         "/Applications/Spark.app"
-        "/Applications/Nix Apps/Slack.app"
+        "${ctx.pkgs.slack}/Applications/Slack.app"
         "/System/Applications/Notes.app"
         "/System/Applications/Reminders.app"
         "/Applications/Arc.app"
         "/Applications/Notion Calendar.app"
-        "/Applications/Nix Apps/kitty.app"
+        "${ctx.pkgs.kitty}/Applications/kitty.app"
         "/Applications/Logseq.app"
       ];
       persistent-others = [ ];

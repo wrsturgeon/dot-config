@@ -17,7 +17,7 @@ git add -A
 nix flake update || : # rate limits!
 git add -A
 # git commit -m "$(date "+%B %-d, %Y, at %H:%M:%S") on ${OS}" || :
-git commit -m "$(date '+%Y/%m/%d %H:%M:%S') ${OS}" || :
+git commit -m '`'"$(date '+%Y/%m/%d %H:%M:%S') ${OS}"'`' || :
 git push || :
 
 if [[ "${OS}" == "Linux" ]]; then

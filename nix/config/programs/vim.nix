@@ -38,7 +38,6 @@ in
     sidescrolloff = 8;
     smarttab = true;
     softtabstop = 2;
-    syntax = true;
     t_Co = 256;
     ttyfast = true;
     updatetime = 250;

@@ -19,7 +19,7 @@ in
       };
     };
     rainbow-delimiters = { };
-    rust-tools.enable = true;
+    rust-tools = { };
     treesitter = {
       nixGrammars = true;
       settings.indent.enable = true;

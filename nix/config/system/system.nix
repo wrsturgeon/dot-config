@@ -113,7 +113,7 @@ ctx.linux-mac null {
           "/System/Applications/Reminders.app"
           "/Applications/Notion Calendar.app"
         ]
-        ++ dock-apps;
+        ++ (builtins.trace "Dock apps: ${builtins.toString dock-apps}" dock-apps);
       persistent-others = [ ];
       show-process-indicators = true;
       show-recents = false;

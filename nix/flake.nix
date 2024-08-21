@@ -65,7 +65,7 @@
 
         # Emacs
         emacs-init = ''
-          ;; (evil-mode 1)
+          (evil-mode 1)
         '';
         emacs-init-filename = "default.el";
         emacs-init-pkg = pkgs.runCommand emacs-init-filename { } ''

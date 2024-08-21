@@ -20,8 +20,8 @@ ctx.linux-mac null {
       AppleShowScrollBars = "Always";
       AppleTemperatureUnit = "Fahrenheit";
       AppleWindowTabbingMode = "fullscreen";
-      InitialKeyRepeat = 10;
-      KeyRepeat = 10;
+      InitialKeyRepeat = 15;
+      KeyRepeat = 2;
       NSAutomaticCapitalizationEnabled = false;
       NSAutomaticDashSubstitutionEnabled = true;
       NSAutomaticInlinePredictionEnabled = false;

@@ -6,6 +6,11 @@ in
 {
   colorschemes.${theme}.enable = true;
   extraPlugins = with ctx.pkgs.vimPlugins; [ Coqtail ];
+  opts = {
+    number = true;
+    relativenumber = true;
+    shiftwidth = 2;
+  };
   plugins = enable {
     lsp = {
       servers = enable {

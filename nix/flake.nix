@@ -64,31 +64,10 @@
         username = linux-mac "will" "willsturgeon";
 
         # Vim
-        vim = builtins.trace "${pkgs.vimPlugins.lsp-format-nvim}" (
-          nixvim.legacyPackages.${system}.makeNixvim (import ./config/programs/vim.nix cfg-args)
-        );
+        vim = nixvim.legacyPackages.${system}.makeNixvim (import ./config/programs/vim.nix cfg-args);
 
         # Emacs
-        emacs-init = ''
-          (evil-mode 1)
-          (load-theme 'material t)
-          (set-frame-font "Iosevka Custom" nil t)
-        '';
-        emacs-init-filename = "default.el";
-        emacs-init-pkg = pkgs.runCommand emacs-init-filename { } ''
-          mkdir -p $out/share/emacs/site-lisp
-          cp ${pkgs.writeText emacs-init-filename emacs-init} $out/share/emacs/site-lisp/${emacs-init-filename}
-        '';
-        emacs-pkgs =
-          epkgs: with epkgs; [
-            evil
-            material-theme
-            proof-general
-          ];
-        raw-emacs = pkgs.emacs-nox; # pkgs.emacs;
-        emacs = (pkgs.emacsPackagesFor raw-emacs).emacsWithPackages (
-          epkgs: [ emacs-init-pkg ] ++ (emacs-pkgs epkgs)
-        );
+        emacs = import ./config/programs/emacs cfg-args;
 
         # Config
         cfg-args = {

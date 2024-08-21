@@ -13,7 +13,7 @@ ctx: {
   '';
   pathsToLink = [ "/share/zsh" ];
   shellAliases = {
-    e = "${ctx.emacs}/bin/emacs";
+    e = "emacs"; # "${ctx.emacs}/bin/emacs";
   };
   systemPackages =
     (with ctx; [ emacs ])

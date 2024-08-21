@@ -5,6 +5,7 @@ let
 in
 {
   colorschemes.${theme}.enable = true;
+  extraPlugins = with ctx.pkgs.vimPlugins; [ coqtail ];
   plugins = enable {
     lsp = {
       servers = enable {

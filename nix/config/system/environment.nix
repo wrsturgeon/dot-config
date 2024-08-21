@@ -37,7 +37,7 @@ ctx: {
       rustfmt
       # steam
       taplo
-      tor-browser
+      # tor-browser
       tree
       # wezterm
       zoom-us

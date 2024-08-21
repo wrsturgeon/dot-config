@@ -5,24 +5,17 @@ in
   colorschemes.${theme}.enable = true;
   plugins = builtins.mapAttrs (k: v: v // { enable = true; }) {
     lsp = {
-      servers = builtins.listToAttrs (
-        builtins.map
-          (k: {
-            name = k;
-            value = {
-              enable = true;
-            };
-          })
-          [
-            "bashls"
-            "clangd"
-            "hls"
-            "nixd"
-            "ocamllsp"
-            "ruff"
-            "rust-analyzer"
-          ]
-      );
+      servers = builtins.mapAttrs (k: v: v // { enable = true; }) {
+        bashls = { };
+        clangd = { };
+        hls = { };
+        nixd = { };
+        ocamllsp = { };
+        ruff = { };
+        rust-analyzer = {
+          installRustc = true;
+        };
+      };
       keymaps.lspBuf = {
         "gd" = "definition";
         "gD" = "references";

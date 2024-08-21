@@ -102,7 +102,7 @@ ctx.linux-mac null {
         "/Applications/Arc.app"
         "/Applications/Notion Calendar.app"
         "${ctx.pkgs.kitty}/Applications/kitty.app"
-        "/Applications/Logseq.app"
+        "${ctx.pkgs.logseq}/Applications/Logseq.app"
       ];
       persistent-others = [ ];
       show-process-indicators = true;

@@ -20,8 +20,8 @@ ctx.linux-mac null {
       AppleShowScrollBars = "Always";
       AppleTemperatureUnit = "Fahrenheit";
       AppleWindowTabbingMode = "fullscreen";
-      InitialKeyRepeat = 15;
-      KeyRepeat = 2;
+      InitialKeyRepeat = 10;
+      KeyRepeat = 1;
       NSAutomaticCapitalizationEnabled = false;
       NSAutomaticDashSubstitutionEnabled = true;
       NSAutomaticInlinePredictionEnabled = false;
@@ -68,10 +68,10 @@ ctx.linux-mac null {
     };
     alf = {
       allowdownloadsignedenabled = 0;
-      allowsignedenabled = 0;
+      allowsignedenabled = 1;
       globalstate = 1;
       loggingenabled = 1;
-      stealthenabled = 1;
+      stealthenabled = 0;
     };
     dock = {
       enable-spring-load-actions-on-all-items = true;
@@ -171,7 +171,7 @@ ctx.linux-mac null {
       FirstClickThreshold = 1;
       SecondClickThreshold = 1;
       TrackpadRightClick = true;
-      TrackpadThreeFingerDrag = true;
+      TrackpadThreeFingerDrag = false; # true;
       TrackpadThreeFingerTapGesture = 2;
     };
     universalaccess = {

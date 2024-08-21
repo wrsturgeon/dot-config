@@ -1,12 +1,13 @@
 ctx:
 let
   theme = "ayu";
+  enabled = attrs: builtins.mapAttrs (k: v: v // { enable = true; });
 in
 {
   colorschemes.${theme}.enable = true;
-  plugins = builtins.mapAttrs (k: v: v // { enable = true; }) {
+  plugins = enabled {
     lsp = {
-      servers = builtins.mapAttrs (k: v: v // { enable = true; }) {
+      servers = enabled {
         bashls = { };
         clangd = { };
         hls = { };

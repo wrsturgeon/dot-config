@@ -15,11 +15,9 @@ in
       "start"
     ];
     belloff = "all";
-    compatible = false;
     errorbells = false;
     foldenable = false;
     incsearch = true;
-    laststatus = 2;
     list = true;
     listchars = [
       "tab:>-"
@@ -38,9 +36,7 @@ in
     sidescrolloff = 8;
     smarttab = true;
     softtabstop = 2;
-    ttyfast = true;
-    updatetime = 250;
-    undolevels = 100;
+    undolevels = 256;
     wildmenu = true;
     wildmode = "list:longest";
     wrap = false;

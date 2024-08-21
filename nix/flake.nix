@@ -77,7 +77,8 @@
             evil
             proof-general
           ];
-        emacs = (pkgs.emacsPackagesFor pkgs.emacs-nox).emacsWithPackages (
+        raw-emacs = pkgs.emacs;
+        emacs = (pkgs.emacsPackagesFor raw-emacs).emacsWithPackages (
           epkgs: [ emacs-init-pkg ] ++ (emacs-pkgs epkgs)
         );
 

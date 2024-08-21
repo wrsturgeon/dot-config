@@ -63,6 +63,9 @@
         laptop-name = "willsturgeon"; # "mbp-" + (linux-mac "nixos" "macos");
         username = linux-mac "will" "willsturgeon";
 
+        # Vim
+        vim = pkgs.nixvim.packages.${system}.makeNixvim { };
+
         # Emacs
         emacs-init = ''
           (evil-mode 1)
@@ -95,6 +98,7 @@
             pkgs
             self
             system
+            vim
             ;
         };
         cfg = {

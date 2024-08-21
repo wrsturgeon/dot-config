@@ -14,9 +14,14 @@ ctx: {
   pathsToLink = [ "/share/zsh" ];
   shellAliases = {
     e = "emacs"; # "${ctx.emacs}/bin/emacs";
+    vi = "vim";
+    vim = "nvim";
   };
   systemPackages =
-    (with ctx; [ emacs ])
+    (with ctx; [
+      emacs
+      vim
+    ])
     ++ (with ctx.pkgs; [
       cargo
       coreutils-full
@@ -42,7 +47,7 @@ ctx: {
     ++ (with ctx.pkgs.coqPackages; [ coq ])
     ++ (ctx.linux-mac [ ] [ ctx.pkgs.vlc-bin ]);
   variables = {
-    EDITOR = "vim";
+    EDITOR = "vi";
     LANG = "fr_FR.UTF-8";
   };
 }

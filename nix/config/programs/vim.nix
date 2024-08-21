@@ -8,7 +8,9 @@ in
       servers = {
         bashls.enable = true;
         clangd.enable = true;
+        hls.enable = true;
         nixd.enable = true;
+        ocamllsp = true;
         ruff = true;
         rust-analyzer = true;
       };

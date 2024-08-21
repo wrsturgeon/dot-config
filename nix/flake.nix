@@ -64,7 +64,9 @@
         username = linux-mac "will" "willsturgeon";
 
         # Vim
-        vim = nixvim.legacyPackages.${system}.makeNixvim (import ./config/programs/vim.nix cfg-args);
+        vim = builtins.trace pkgs.vimPlugins.lsp-format-nvim (
+          nixvim.legacyPackages.${system}.makeNixvim (import ./config/programs/vim.nix cfg-args)
+        );
 
         # Emacs
         emacs-init = ''

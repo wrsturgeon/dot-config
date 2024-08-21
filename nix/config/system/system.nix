@@ -104,6 +104,7 @@ ctx.linux-mac null {
             in
             "${appdir}/${appfile}"
           ) ctx.dock-apps;
+          trace = "\nDock apps:\n${ctx.lib.strings.concatLines dock-apps}\n";
         in
         [
           "/System/Applications/System Settings.app"
@@ -113,7 +114,7 @@ ctx.linux-mac null {
           "/System/Applications/Reminders.app"
           "/Applications/Notion Calendar.app"
         ]
-        ++ (builtins.trace "Dock apps: ${builtins.toString dock-apps}" dock-apps);
+        ++ (builtins.trace trace dock-apps);
       persistent-others = [ ];
       show-process-indicators = true;
       show-recents = false;

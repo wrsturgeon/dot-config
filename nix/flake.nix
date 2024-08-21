@@ -65,8 +65,9 @@
 
         # Emacs
         emacs-init = ''
-          (set-frame-font "Iosevka Custom" nil t)
           (evil-mode 1)
+          (load-theme 'ayu-dark t)
+          (set-frame-font "Iosevka Custom" nil t)
         '';
         emacs-init-filename = "default.el";
         emacs-init-pkg = pkgs.runCommand emacs-init-filename { } ''

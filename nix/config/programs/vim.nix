@@ -15,6 +15,8 @@ in
       "start"
     ];
     belloff = "all";
+    cursorline = true;
+    cursorlineopt = "number";
     errorbells = false;
     foldenable = false;
     incsearch = true;
@@ -33,7 +35,7 @@ in
     softtabstop = 2;
     undolevels = 256;
     wildmenu = true;
-    # wildmode = "list:longest";
+    wildmode = "list:longest";
     wrap = false;
   };
   plugins = enable {

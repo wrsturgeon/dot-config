@@ -35,7 +35,9 @@ ctx: {
       rss2email
       rust-analyzer
       rustfmt
+      steam
       taplo
+      tor-browser
       tree
       # wezterm
       zoom-us

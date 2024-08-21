@@ -15,6 +15,7 @@ in
       "start"
     ];
     belloff = "all";
+    compatible = false;
     errorbells = false;
     filetype = true;
     foldenable = false;
@@ -27,7 +28,6 @@ in
       "extends:#"
       "nbsp:."
     ];
-    nocompatible = true;
     number = true;
     relativenumber = true;
     ruler = true;

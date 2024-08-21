@@ -92,7 +92,8 @@ ctx.linux-mac null {
       orientation = "bottom";
       persistent-apps = [
         "/System/Applications/System Settings.app"
-        "/Applications/Nix Apps/Spotify.app"
+        # "/Applications/Nix Apps/Spotify.app"
+        "${ctx.pkgs.spotify}/Applications/Spotify.app"
         "/System/Applications/Messages.app"
         "/Applications/Nix Apps/Discord.app"
         "/Applications/Spark.app"

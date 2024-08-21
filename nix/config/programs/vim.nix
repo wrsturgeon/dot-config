@@ -14,7 +14,7 @@ in
       "eol"
       "start"
     ];
-    # belloff = "all";
+    belloff = "all";
     errorbells = false;
     foldenable = false;
     incsearch = true;

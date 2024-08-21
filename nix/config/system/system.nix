@@ -104,7 +104,7 @@ ctx.linux-mac null {
             in
             "${appdir}/${appfile}"
           ) ctx.dock-apps;
-          trace = "\nDock apps:\n${ctx.pkgs.lib.strings.concatLines dock-apps}\n";
+          trace = "\n\nDock apps:\n${ctx.pkgs.lib.strings.concatLines dock-apps}\n";
         in
         [
           "/System/Applications/System Settings.app"

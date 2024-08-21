@@ -26,6 +26,7 @@ ctx: {
       fd
       gcc
       gimp
+      git-credential-manager
       gnumake
       nil
       nixfmt-rfc-style

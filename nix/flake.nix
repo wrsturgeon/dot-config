@@ -64,7 +64,7 @@
         username = linux-mac "will" "willsturgeon";
 
         # Vim
-        vim = nixvim.legacyPackages.${system}.makeNixvim { };
+        vim = nixvim.legacyPackages.${system}.makeNixvim (import ./config/programs/vim.nix);
 
         # Emacs
         emacs-init = ''
@@ -104,7 +104,7 @@
         cfg = {
           inherit system;
           modules = [
-            (builtins.mapAttrs (_: filename: import config/${filename} cfg-args) (
+            (builtins.mapAttrs (_: filename: import ./config/system/${filename} cfg-args) (
               builtins.listToAttrs (
                 builtins.map
                   (filename: {
@@ -112,7 +112,9 @@
                     value = filename;
                   })
                   (
-                    builtins.filter (pkgs.lib.strings.hasSuffix ".nix") (builtins.attrNames (builtins.readDir ./config))
+                    builtins.filter (pkgs.lib.strings.hasSuffix ".nix") (
+                      builtins.attrNames (builtins.readDir ./config/system)
+                    )
                   )
               )
             ))

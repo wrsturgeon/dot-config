@@ -9,6 +9,8 @@ in
         bashls.enable = true;
         clangd.enable = true;
         nixd.enable = true;
+        ruff = true;
+        rust-analyzer = true;
       };
       keymaps.lspBuf = {
         "gd" = "definition";
@@ -19,7 +21,7 @@ in
       };
     };
     rainbow-delimiters = { };
-    rust-tools = { };
+    # rust-tools = { };
     treesitter = {
       nixGrammars = true;
       settings.indent.enable = true;

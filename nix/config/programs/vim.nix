@@ -36,7 +36,7 @@ in
     showcmd = true;
     showmode = true;
     sidescrolloff = 8;
-    signcolumn = true;
+    signcolumn = "yes";
     smarttab = true;
     splitbelow = true;
     splitright = true;

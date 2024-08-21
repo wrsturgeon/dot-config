@@ -66,7 +66,7 @@
         # Emacs
         emacs-init = ''
           (evil-mode 1)
-          (load-theme 'ayu-dark t)
+          (load-theme 'material t)
           (set-frame-font "Iosevka Custom" nil t)
         '';
         emacs-init-filename = "default.el";
@@ -76,8 +76,8 @@
         '';
         emacs-pkgs =
           epkgs: with epkgs; [
-            ayu-theme
             evil
+            material-theme
             proof-general
           ];
         raw-emacs = pkgs.emacs-nox; # pkgs.emacs;

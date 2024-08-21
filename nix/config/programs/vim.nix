@@ -19,12 +19,12 @@ in
     foldenable = false;
     incsearch = true;
     list = true;
-    # listchars = [
-    #   "tab:>-"
-    #   "trail:."
-    #   "extends:#"
-    #   "nbsp:."
-    # ];
+    listchars = [
+      "tab:> "
+      "trail:-"
+      # "extends:#"
+      "nbsp:+"
+    ];
     number = true;
     relativenumber = true;
     ruler = true;

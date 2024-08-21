@@ -63,9 +63,13 @@
         laptop-name = "willsturgeon"; # "mbp-" + (linux-mac "nixos" "macos");
         username = linux-mac "will" "willsturgeon";
 
+        # Emacs
+        emacs = (pkgs.emacsPackagesFor pkgs.emacs-nox).emacsWithPackages (ctx: with ctx; [ evil ]);
+
         # Config
         cfg-args = {
           inherit
+            emacs
             laptop-name
             linux-mac
             nixvim
@@ -73,7 +77,6 @@
             self
             system
             ;
-          emacs = pkgs.emacs-nox;
         };
         cfg = {
           inherit system;

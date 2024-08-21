@@ -7,9 +7,46 @@ in
   colorschemes.${theme}.enable = true;
   extraPlugins = with ctx.pkgs.vimPlugins; [ Coqtail ];
   opts = {
+    autoindent = true;
+    autoread = true;
+    backspace = [
+      "indent"
+      "eol"
+      "start"
+    ];
+    belloff = "all";
+    errorbells = false;
+    filetype = true;
+    foldenable = false;
+    incsearch = true;
+    laststatus = 2;
+    list = true;
+    listchars = [
+      "tab:>-"
+      "trail:."
+      "extends:#"
+      "nbsp:."
+    ];
+    nocompatible = true;
     number = true;
     relativenumber = true;
+    ruler = true;
+    scrolloff = 8;
+    shiftround = true;
     shiftwidth = 2;
+    showcmd = true;
+    showmode = true;
+    sidescrolloff = 8;
+    smarttab = true;
+    softtabstop = 2;
+    syntax = true;
+    t_Co = 256;
+    ttyfast = true;
+    updatetime = 250;
+    undolevels = 100;
+    wildmenu = true;
+    wildmode = "list:longest";
+    wrap = false;
   };
   plugins = enable {
     lsp = {

@@ -13,6 +13,7 @@ nix/**
 !nix/config/**
 !nix/firmware/
 !nix/firmware/**
+!nix/rebuild
 
 # Everything else:
 

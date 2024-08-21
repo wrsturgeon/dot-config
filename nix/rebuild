@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+set -eu
+
+export OS="$(uname -s)"
+
+# Synchronize Logseq notes:
+cd ~/Desktop/logseq
+make .updated
+
+# Push ~/.config changes:
+cd ~/.config
+git pull
+cd nix
+nixfmt .
+git add -A
+nix flake update || : # rate limits!
+git add -A
+# git commit -m "$(date "+%B %-d, %Y, at %H:%M:%S") on ${OS}" || :
+git commit -m "$(date '+%Y/%m/%d %H:%M:%S') ${OS}" || :
+git push || :
+
+if [[ "${OS}" == "Linux" ]]; then
+  cd /etc/nixos
+  sudo git pull
+  export CMD="sudo nixos-rebuild"
+else
+  if [[ "${OS}" == "Darwin" ]]; then
+    # export CMD="nix run nix-darwin --"
+    export CMD="darwin-rebuild"
+  else
+    echo 'Unrecognized OS'
+    exit 1
+  fi
+fi
+
+# Rebuild the Nix system:
+${CMD} switch --flake . --keep-going -v -j auto --show-trace # --install-bootloader
+
+# Collect garbage
+nix-collect-garbage -j auto --delete-older-than 14d > /dev/null 2>&1 &

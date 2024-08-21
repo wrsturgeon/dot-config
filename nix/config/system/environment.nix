@@ -14,7 +14,8 @@ ctx: {
     vim = "nvim";
   };
   systemPackages =
-    (with ctx; [
+    ctx.dock-apps
+    ++ (with ctx; [
       emacs
       git
       vim
@@ -22,21 +23,16 @@ ctx: {
     ++ (with ctx.pkgs; [
       cargo
       coreutils-full
-      discord
       fd
       gcc
       gimp
       gnumake
-      kitty
-      logseq
       nil
       nixfmt-rfc-style
       ripgrep
       rss2email
       rust-analyzer
       rustfmt
-      slack
-      spotify
       taplo
       tree
       # wezterm

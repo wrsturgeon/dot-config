@@ -8,7 +8,12 @@ ctx.enable (
       })
       (
         builtins.filter (k: k != "default.nix") (
-          builtins.filter (ctx.pkgs.lib.strings.hasSuffix ".nix") (builtins.attrNames (builtins.readDir ./.))
+          let
+            shit = builtins.filter (ctx.pkgs.lib.strings.hasSuffix ".nix") (
+              builtins.attrNames (builtins.readDir ./.)
+            );
+          in
+          builtins.trace (builtins.toString shit) shit
         )
       )
   )

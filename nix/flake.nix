@@ -71,6 +71,7 @@
         '';
         emacs-init-filename = "default.el";
         emacs-init-pkg = pkgs.runCommand emacs-init-filename { } ''
+          set -eux
           mkdir -p $out/share/emacs/site-lisp
           echo '${pkgs.lib.strings.escapeShellArg emacs-init}' > $out/share/emacs/site-lisp/${emacs-init-filename}
         '';

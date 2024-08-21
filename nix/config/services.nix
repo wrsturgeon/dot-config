@@ -2,7 +2,7 @@ ctx:
 {
   emacs = {
     enable = true;
-    package = ctx.pkgs.emacs;
+    package = ctx.emacs;
     exec = "emacs";
   };
 }

@@ -73,6 +73,7 @@
             self
             system
             ;
+          emacs = pkgs.emacs-nox;
         };
         cfg = {
           inherit system;

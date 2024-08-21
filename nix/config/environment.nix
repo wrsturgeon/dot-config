@@ -13,11 +13,11 @@ ctx: {
   '';
   pathsToLink = [ "/share/zsh" ];
   systemPackages =
-    (with ctx.pkgs; [
+    (with ctx; [ emacs ])
+    ++ (with ctx.pkgs; [
       cargo
       coreutils-full
       discord
-      emacs
       fd
       gcc
       gimp

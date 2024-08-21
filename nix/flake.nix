@@ -64,7 +64,7 @@
         username = linux-mac "will" "willsturgeon";
 
         # Vim
-        vim = pkgs.nixvim.packages.${system}.makeNixvim { };
+        vim = (builtins.trace (builtins.toString nixvim) nixvim).packages.${system}.makeNixvim { };
 
         # Emacs
         emacs-init = ''

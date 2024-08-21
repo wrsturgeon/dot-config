@@ -12,6 +12,9 @@ ctx: {
     ls $out
   '';
   pathsToLink = [ "/share/zsh" ];
+  shellAliases = {
+    e = "${ctx.emacs}/bin/emacs";
+  };
   systemPackages =
     (with ctx; [ emacs ])
     ++ (with ctx.pkgs; [

@@ -28,7 +28,7 @@ ctx: {
       gimp
       git-credential-manager
       gnumake
-      minecraft
+      # minecraft # broken!
       nil
       nixfmt-rfc-style
       ripgrep

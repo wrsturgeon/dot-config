@@ -17,7 +17,6 @@ in
     belloff = "all";
     compatible = false;
     errorbells = false;
-    filetype = true;
     foldenable = false;
     incsearch = true;
     laststatus = 2;

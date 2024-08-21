@@ -77,6 +77,7 @@ in
     lsp-format = { };
     rainbow-delimiters = { };
     # rust-tools = { };
+    telescope = { };
     treesitter = {
       nixGrammars = true;
       settings.indent.enable = true;

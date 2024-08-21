@@ -64,8 +64,7 @@
         username = linux-mac "will" "willsturgeon";
 
         # Emacs
-        # emacs = (pkgs.emacsPackagesFor pkgs.emacs-nox).emacsWithPackages (ctx: with ctx; [ evil ]);
-        emacs = emacs.pkgs.withPackages (epkgs: (with epkgs.melpaStablePackages; [ evil ]));
+        emacs = (pkgs.emacsPackagesFor pkgs.emacs-nox).emacsWithPackages (ctx: with ctx; [ evil ]);
 
         # Config
         cfg-args = {

@@ -8,7 +8,7 @@ ctx.linux-mac null {
     "tor-browser"
   ];
   enable = true;
-  masApps = [ ];
+  masApps = { };
   onActivation = {
     autoUpdate = true;
     cleanup = "zap";

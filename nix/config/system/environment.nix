@@ -35,7 +35,7 @@ ctx: {
       rss2email
       rust-analyzer
       rustfmt
-      steam
+      # steam
       taplo
       tor-browser
       tree

@@ -2,7 +2,12 @@ ctx:
 ctx.linux-mac null {
   # Effectively disallow Homebrew by immediately "zapping" everything installed out of existence:
   brews = [ ];
-  casks = [ ];
+  casks = [ "minecraft" ];
   enable = true;
-  onActivation.cleanup = "zap";
+  masApps = [ ];
+  onActivation = {
+    autoUpdate = true;
+    cleanup = "zap";
+  };
+  whalebrews = [ ];
 }

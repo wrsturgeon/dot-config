@@ -1,7 +1,6 @@
 ctx:
 ctx.linux-mac null {
   casks = [
-    "arc"
     "git-credential-manager"
     "minecraft"
     "steam"

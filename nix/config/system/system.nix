@@ -90,20 +90,19 @@ ctx.linux-mac null {
       mouse-over-hilite-stack = true;
       mru-spaces = true;
       orientation = "bottom";
-      persistent-apps = [
-        "/System/Applications/System Settings.app"
-        "${ctx.pkgs.spotify}/Applications/Spotify.app"
-        "/System/Applications/Messages.app"
-        "${ctx.pkgs.discord}/Applications/Discord.app"
-        "/Applications/Spark.app"
-        "${ctx.pkgs.slack}/Applications/Slack.app"
-        "/System/Applications/Notes.app"
-        "/System/Applications/Reminders.app"
-        "/Applications/Arc.app"
-        "/Applications/Notion Calendar.app"
-        "${ctx.pkgs.kitty}/Applications/kitty.app"
-        "${ctx.pkgs.logseq}/Applications/Logseq.app"
-      ];
+      persistent-apps =
+        [
+          "/System/Applications/System Settings.app"
+          "/System/Applications/Messages.app"
+          "/Applications/Spark.app"
+          "/System/Applications/Notes.app"
+          "/System/Applications/Reminders.app"
+          "/Applications/Notion Calendar.app"
+        ]
+        ++ (builtins.map (
+          app:
+          "${app}/Applications/${builtins.head (builtins.filter (ctx.pkgs.lib.strings.hasSuffix ".app") (builtins.readDir "${app}/Applications"))}"
+        ) ctx.dock-apps);
       persistent-others = [ ];
       show-process-indicators = true;
       show-recents = false;

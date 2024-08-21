@@ -73,6 +73,14 @@
             self
             system
             ;
+          dock-apps = with pkgs; [
+            spotify
+            discord
+            slack
+            arc-browser
+            kitty
+            logseq
+          ];
           emacs = import ./config/programs/emacs cfg-args;
           git = pkgs.gitFull;
           vim = nixvim.legacyPackages.${system}.makeNixvim (import ./config/programs/vim cfg-args);

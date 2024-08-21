@@ -1,3 +1,4 @@
+ctx:
 let
   theme = "ayu";
 in
@@ -14,7 +15,9 @@ in
         ruff = { };
         rust-analyzer = {
           installCargo = true;
+          cargoPackage = ctx.pkgs.cargo;
           installRustc = true;
+          rustcPackage = ctx.pkgs.rustc;
         };
       };
       keymaps.lspBuf = {

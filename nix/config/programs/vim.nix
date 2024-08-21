@@ -13,6 +13,7 @@ in
         ocamllsp = { };
         ruff = { };
         rust-analyzer = {
+          installCargo = true;
           installRustc = true;
         };
       };

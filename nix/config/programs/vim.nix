@@ -16,7 +16,7 @@ in
     ];
     belloff = "all";
     cursorline = true;
-    cursorlineopt = "number";
+    cursorlineopt = "line"; # "number";
     errorbells = false;
     foldenable = false;
     incsearch = true;

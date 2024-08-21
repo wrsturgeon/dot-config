@@ -1,22 +1,19 @@
-ctx: {
+ctx:
+builtins.mapAttrs (k: v: v // { enable = true; }) {
   bash = {
-    enable = true;
     enableCompletion = true;
   };
   direnv = {
-    enable = true;
     direnvrcExtra = "echo 'Loaded direnv'";
     nix-direnv.enable = true;
   };
   tmux = {
-    enable = true;
     enableFzf = true;
     enableMouse = true;
     enableSensible = true;
     enableVim = true;
   };
   zsh = {
-    enable = true;
     enableBashCompletion = true;
     enableCompletion = true;
     enableFzfCompletion = true;

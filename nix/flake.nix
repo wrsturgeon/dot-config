@@ -73,7 +73,7 @@
           echo '${emacs-init}' > $out/share/emacs/site-lisp/${emacs-init-filename}
         '';
         emacs = (pkgs.emacsPackagesFor pkgs.emacs-nox).emacsWithPackages (
-          ctx: [ emacs-init-filename ] ++ (with ctx; [ evil ])
+          ctx: [ emacs-init-pkg ] ++ (with ctx; [ evil ])
         );
 
         # Config

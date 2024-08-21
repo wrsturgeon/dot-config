@@ -19,13 +19,6 @@ nix/**
 !.gitignore
 !.gitmodules
 
-!rss2email.cfg
-# who cares if you know my spam email <3
-
-!touchegg/
-touchegg/**
-!touchegg/touchegg.conf
-
 !user-dirs.dirs
 
 **/*-old

@@ -15,13 +15,18 @@ in
       "start"
     ];
     belloff = "all";
+    # clipboard = "unnamedplus"; # system clipboard
     cursorline = true;
-    cursorlineopt = "line"; # "number";
+    cursorlineopt = "line";
     errorbells = false;
+    expandtab = true;
     foldenable = false;
+    hlsearch = false;
+    ignorecase = true;
     incsearch = true;
     list = true;
     listchars = "tab:> ,trail:-,extends:#,nbsp:+";
+    mouse = false;
     number = true;
     relativenumber = true;
     ruler = true;
@@ -31,8 +36,13 @@ in
     showcmd = true;
     showmode = true;
     sidescrolloff = 8;
+    signcolumn = true;
     smarttab = true;
+    splitbelow = true;
+    splitright = true;
     softtabstop = 2;
+    tabstop = 2;
+    termguicolors = true;
     undolevels = 256;
     wildmenu = true;
     wildmode = "list:longest";

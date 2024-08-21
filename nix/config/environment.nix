@@ -7,13 +7,9 @@ ctx: {
   extraInit = ''
     echo 'Hello from `extraInit`!'
   '';
-  extraSetup = ''
-    echo 'Hello from `extraSetup`!'
-    ls $out
-  '';
   pathsToLink = [ "/share/zsh" ];
   shellAliases = {
-    e = "emacs"; # "${ctx.emacs}/bin/emacs";
+    e = "emacs";
     vi = "vim";
     vim = "nvim";
   };

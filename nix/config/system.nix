@@ -51,7 +51,7 @@ ctx.linux-mac null {
       "com.apple.swipescrolldirection" = true;
       "com.apple.trackpad.enableSecondaryClick" = true;
       "com.apple.trackpad.forceClick" = true;
-      "com.apple.trackpad.scaling" = 3.0;
+      "com.apple.trackpad.scaling" = 2.0;
       "com.apple.trackpad.trackpadCornerClickBehavior" = 1;
     };
     SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;

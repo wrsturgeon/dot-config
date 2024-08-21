@@ -26,7 +26,7 @@ in
     incsearch = true;
     list = true;
     listchars = "tab:> ,trail:-,extends:#,nbsp:+";
-    mouse = false;
+    mouse = "";
     number = true;
     relativenumber = true;
     ruler = true;

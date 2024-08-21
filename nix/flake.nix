@@ -75,6 +75,7 @@
         '';
         emacs-pkgs =
           epkgs: with epkgs; [
+            ayu-theme
             evil
             proof-general
           ];

@@ -65,6 +65,7 @@
 
         # Emacs
         emacs-init = ''
+          (set-frame-font "Iosevka Custom" nil t)
           (evil-mode 1)
         '';
         emacs-init-filename = "default.el";

@@ -76,6 +76,7 @@
           dock-apps = with pkgs; [
             spotify
             discord
+            signal-desktop
             slack
             arc-browser
             kitty

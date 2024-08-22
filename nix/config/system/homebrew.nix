@@ -4,6 +4,7 @@ ctx.linux-mac null {
   brews = [ ];
   casks = [
     "minecraft"
+    "signal"
     "steam"
     "tor-browser"
   ];

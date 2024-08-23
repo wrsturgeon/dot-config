@@ -7,7 +7,7 @@ ctx: {
       "nix-command"
       "flakes"
     ];
-    log-lines = 64;
+    log-lines = 48;
     # sandbox = true;
   };
 }

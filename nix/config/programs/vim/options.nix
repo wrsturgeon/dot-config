@@ -21,12 +21,12 @@
   number = true;
   relativenumber = true;
   ruler = true;
-  scrolloff = 8;
+  scrolloff = 5;
   shiftround = true;
   shiftwidth = 2;
   showcmd = true;
   showmode = true;
-  sidescrolloff = 8;
+  sidescrolloff = 5;
   signcolumn = "yes";
   smarttab = true;
   splitbelow = true;

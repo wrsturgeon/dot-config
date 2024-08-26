@@ -33,6 +33,7 @@ ctx: {
       ripgrep
       rss2email
       rust-analyzer
+      rustfmt
       # steam
       taplo
       # tor-browser
@@ -43,7 +44,6 @@ ctx: {
     ++ (with ctx.rust; [
       cargo
       rustc
-      rustfmt
     ])
     ++ (with ctx.pkgs.coqPackages; [ coq ])
     ++ (ctx.linux-mac [ ] [ ctx.pkgs.vlc-bin ]);

@@ -21,7 +21,6 @@ ctx: {
       vim
     ])
     ++ (with ctx.pkgs; [
-      cargo
       coreutils-full
       fd
       gcc
@@ -33,14 +32,18 @@ ctx: {
       nixfmt-rfc-style
       ripgrep
       rss2email
-      rust-analyzer
-      rustfmt
       # steam
       taplo
       # tor-browser
       tree
       # wezterm
       zoom-us
+    ])
+    ++ (with ctx.rust; [
+      cargo
+      rust-analyzer
+      rustc
+      rustfmt
     ])
     ++ (with ctx.pkgs.coqPackages; [ coq ])
     ++ (ctx.linux-mac [ ] [ ctx.pkgs.vlc-bin ]);

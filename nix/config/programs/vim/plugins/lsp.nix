@@ -8,9 +8,9 @@ ctx: {
     ruff = { };
     rust-analyzer = {
       installCargo = true;
-      cargoPackage = ctx.pkgs.cargo;
+      cargoPackage = ctx.rust.cargo;
       installRustc = true;
-      rustcPackage = ctx.pkgs.rustc;
+      rustcPackage = ctx.rust.rustc;
     };
   };
   keymaps.lspBuf = {

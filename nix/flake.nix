@@ -8,6 +8,10 @@
     #     nixpkgs.follows = "nixpkgs";
     #   };
     # };
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-utils.url = "github:numtide/flake-utils";
     nix-darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,6 +33,7 @@
   outputs =
     {
       # apple-fonts,
+      fenix,
       flake-utils,
       nix-darwin,
       nixpkgs,
@@ -84,6 +89,7 @@
           emacs = import ./config/programs/emacs cfg-args;
           git = pkgs.gitFull;
           vim = nixvim.legacyPackages.${system}.makeNixvim (import ./config/programs/vim cfg-args);
+          rust = fenix.packages.${system}.minimal;
         };
         cfg = {
           inherit system;

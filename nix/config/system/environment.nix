@@ -32,6 +32,7 @@ ctx: {
       nixfmt-rfc-style
       ripgrep
       rss2email
+      rust-analyzer
       # steam
       taplo
       # tor-browser
@@ -41,7 +42,6 @@ ctx: {
     ])
     ++ (with ctx.rust; [
       cargo
-      rust-analyzer
       rustc
       rustfmt
     ])

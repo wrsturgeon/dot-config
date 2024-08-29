@@ -20,6 +20,10 @@ nix/**
 !.gitignore
 !.gitmodules
 
+!kitty/
+kitty/**
+!kitty/kitty.conf
+
 !user-dirs.dirs
 
 **/*-old

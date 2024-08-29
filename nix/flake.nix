@@ -84,7 +84,9 @@
             slack
             arc-browser
             # wezterm
-            (kitty.override { shit = "fuck"; })
+            (kitty.override {
+              nerdfonts.override = _: pkgs.nerdfonts;
+            })
             logseq
           ];
           emacs = import ./config/programs/emacs cfg-args;

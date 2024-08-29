@@ -83,10 +83,11 @@
             discord
             slack
             arc-browser
+            # (kitty.override {
+            #   nerdfonts.override = _: pkgs.nerdfonts;
+            # })
+            kitty
             # wezterm
-            (kitty.override {
-              nerdfonts.override = _: pkgs.nerdfonts;
-            })
             logseq
           ];
           emacs = import ./config/programs/emacs cfg-args;

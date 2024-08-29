@@ -119,6 +119,8 @@
               nerdfonts.override =
                 _:
                 pkgs.stdenvNoCC.mkDerivation {
+                  name = "fake-symbols-nerd-font-mono";
+                  src = ./.;
                   buildPhase = ":";
                   installPhase = ''
                     mkdir -p $out/share/fonts/truetype

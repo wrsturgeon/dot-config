@@ -68,9 +68,37 @@
         laptop-name = "willsturgeon"; # "mbp-" + (linux-mac "nixos" "macos");
         # username = linux-mac "will" "willsturgeon";
 
+        # Custom fonts
+        iosevka = pkgs.iosevka.override {
+          # <https://github.com/be5invis/Iosevka/blob/main/doc/language-specific-ligation-sets.md>
+          privateBuildPlan = {
+            exportGlyphNames = true;
+            family = "Iosevka Custom";
+            # <https://github.com/be5invis/Iosevka?tab=readme-ov-file#ligations>
+            ligations = {
+              # enable all those not enabled by `dlig` below
+              # (see the above link for a visual depiction):
+              enables = [
+                "eqexeq"
+                "eqslasheq"
+                "slasheq"
+                "tildeeq"
+              ];
+              inherits = "dlig";
+            };
+            noCvSs = false;
+            noLigation = false;
+            spacing = "fontconfig-mono";
+            variants.inherits = "ss08";
+            webfontFormats = [ ]; # i.e. none
+          };
+          set = "custom";
+        };
+
         # Config
         cfg-args = {
           inherit
+            iosevka
             laptop-name
             linux-mac
             nixvim

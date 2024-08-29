@@ -83,7 +83,7 @@
             discord
             slack
             arc-browser
-            (builtins.trace (builtins.attrNames kitty) kitty)
+            (kitty.override { nativeBuildInputs = kitty.nativeBuildInputs ++ [ nerdfonts ]; })
             logseq
           ];
           emacs = import ./config/programs/emacs cfg-args;

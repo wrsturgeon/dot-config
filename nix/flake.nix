@@ -83,8 +83,8 @@
             discord
             slack
             arc-browser
-            wezterm
-            # kitty
+            # wezterm
+            (kitty.override { shit = "fuck"; })
             logseq
           ];
           emacs = import ./config/programs/emacs cfg-args;

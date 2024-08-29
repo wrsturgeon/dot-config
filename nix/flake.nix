@@ -114,7 +114,18 @@
             # (kitty.override {
             #   nerdfonts.override = _: pkgs.nerdfonts;
             # })
-            (builtins.trace (builtins.trace "${pkgs.iosevka}" (builtins.readDir "${pkgs.iosevka}")) kitty)
+            # (builtins.trace (builtins.trace "${pkgs.iosevka}" (builtins.readDir "${pkgs.iosevka}")) kitty)
+            (kitty.override {
+              nerdfonts.override =
+                _:
+                pkgs.stdenvNoCC.mkDerivation {
+                  buildPhase = ":";
+                  installPhase = ''
+                    mkdir -p $out/share/fonts/truetype
+                    cp ${iosevka}/share/fonts/truetype/Iosevka-Regular.ttf $out/share/fonts/truetype/SymbolsNerdFontMono-Regular.ttf
+                  '';
+                };
+            })
             # wezterm
             logseq
           ];

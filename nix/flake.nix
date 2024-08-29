@@ -83,7 +83,7 @@
             discord
             slack
             arc-browser
-            kitty
+            (builtins.trace kitty kitty)
             logseq
           ];
           emacs = import ./config/programs/emacs cfg-args;

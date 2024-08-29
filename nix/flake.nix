@@ -86,7 +86,7 @@
             # (kitty.override {
             #   nerdfonts.override = _: pkgs.nerdfonts;
             # })
-            kitty
+            (builtins.trace "${pkgs.iosevka}" kitty)
             # wezterm
             logseq
           ];

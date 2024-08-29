@@ -38,7 +38,6 @@ ctx: {
       taplo
       # tor-browser
       tree
-      # wezterm
       zoom-us
     ])
     ++ (with ctx.rust; [

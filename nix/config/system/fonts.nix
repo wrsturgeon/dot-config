@@ -28,5 +28,5 @@ let
   };
 in
 {
-  packages = [ iosevka ] ++ (with ctx.pkgs; [ nerdfonts ]);
+  packages = [ (builtins.trace "${iosevka}" iosevka) ] ++ (with ctx.pkgs; [ nerdfonts ]);
 }

@@ -28,5 +28,5 @@ let
   };
 in
 {
-  packages = [ iosevka ];
+  packages = [ iosevka ] ++ (with ctx.pkgs; [ nerdfonts ]);
 }

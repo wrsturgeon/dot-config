@@ -123,6 +123,7 @@
                         sed -i 's/raise SystemExit.*font.*was not found on your system, please install it.*/return/g' setup.py
                       '';
                       installPhase = ''
+                        pwd
                         ls -A
                         exit 1
                         ${cfg.installPhase}

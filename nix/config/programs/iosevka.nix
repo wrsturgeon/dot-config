@@ -31,7 +31,7 @@ ctx.pkgs.buildNpmPackage rec {
   inherit pname;
   version = "custom"; # don't try this at home
   src = ctx.iosevka-src;
-  # npmDepsHash = "sha256-bhj5q3HEtSdB5LA6IhBCo4XJwc6a3CUrHaV+d1vcj+I=";
+  npmDepsHash = "sha256-bhj5q3HEtSdB5LA6IhBCo4XJwc6a3CUrHaV+d1vcj+I=";
   # nativeBuildInputs =
   #   [
   #     remarshal

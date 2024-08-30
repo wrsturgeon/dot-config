@@ -74,7 +74,7 @@
         # username = linux-mac "will" "willsturgeon";
 
         # Custom fonts
-        iosevka = import ./config/programs/fonts/iosevka.nix cfg-args;
+        iosevka = import ./config/programs/iosevka.nix cfg-args;
 
         # Config
         cfg-args = {

@@ -115,19 +115,34 @@
             #   nerdfonts.override = _: pkgs.nerdfonts;
             # })
             # (builtins.trace (builtins.trace "${pkgs.iosevka}" (builtins.readDir "${pkgs.iosevka}")) kitty)
+            # (kitty.override {
+            #   shit = "fuck";
+            #   nerdfonts.override =
+            #     _:
+            #     pkgs.stdenvNoCC.mkDerivation {
+            #       name = "fake-symbols-nerd-font-mono";
+            #       src = ./.;
+            #       buildPhase = ":";
+            #       installPhase = ''
+            #         mkdir -p $out/share/fonts/truetype
+            #         cp ${iosevka}/share/fonts/truetype/Iosevka-Regular.ttf $out/share/fonts/truetype/SymbolsNerdFontMono-Regular.ttf
+            #       '';
+            #     };
+            # })
             (kitty.override {
-              shit = "fuck";
-              nerdfonts.override =
-                _:
-                pkgs.stdenvNoCC.mkDerivation {
-                  name = "fake-symbols-nerd-font-mono";
-                  src = ./.;
-                  buildPhase = ":";
-                  installPhase = ''
-                    mkdir -p $out/share/fonts/truetype
-                    cp ${iosevka}/share/fonts/truetype/Iosevka-Regular.ttf $out/share/fonts/truetype/SymbolsNerdFontMono-Regular.ttf
-                  '';
-                };
+              python3Packages = pkgs.python3Packages // {
+                buildPythonApplication =
+                  cfg:
+                  pkgs.python3Packages.buildPythonApplication (
+                    cfg
+                    // {
+                      configurePhase = builtins.trace "${iosevka}" ''
+                        ${cfg.configurePhase}
+                        mv ${iosevka}/share/fonts/truetype/IosevkaRegular.ttf
+                      '';
+                    }
+                  );
+              };
             })
             # wezterm
             logseq

@@ -147,7 +147,6 @@
                       nativeBuildInputs =
                         cfg.nativeBuildInputs
                         ++ (with pkgs.python3Packages; [
-                          iconutil
                           matplotlib
                         ]);
                     }

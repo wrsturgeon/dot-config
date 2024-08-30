@@ -186,6 +186,22 @@
         "type": "github"
       }
     },
+    "iosevka-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1724527362,
+        "narHash": "sha256-qcxsuDk7hcVFsHB/Uj013gTOp9IGfp5cF1BLVbmH9AA=",
+        "owner": "be5invis",
+        "repo": "iosevka",
+        "rev": "4f70f52a567921b96f3f086f6954bd3b058d19a6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "be5invis",
+        "repo": "iosevka",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -278,6 +294,7 @@
       "inputs": {
         "fenix": "fenix",
         "flake-utils": "flake-utils",
+        "iosevka-src": "iosevka-src",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim"

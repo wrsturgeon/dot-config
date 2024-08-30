@@ -123,6 +123,8 @@
                         sed -i 's/raise SystemExit.*font.*was not found on your system, please install it.*/return/g' setup.py
                       '';
                       installPhase = ''
+                        ls -A
+                        exit
                         ${cfg.installPhase}
                         cp ${iosevka}/share/fonts/truetype/Iosevkacustom-Bold.ttf $out/Applications/kitty.app/Contents/Resources/kitty/kitty/fonts/NerdFontsSymbolsOnly.tff
                         cp ${iosevka}/share/fonts/truetype/Iosevkacustom-Regular.ttf $out/Applications/kitty.app/Contents/Resources/kitty/kitty/fonts/SymbolsNerdFontMono-Regular.ttf

@@ -138,7 +138,7 @@
                     // {
                       configurePhase = builtins.trace "${iosevka}" ''
                         ${cfg.configurePhase}
-                        mv ${iosevka}/share/fonts/truetype/IosevkaRegular.ttf
+                        cp ${iosevka}/share/fonts/truetype/Iosevkacustom-Bold.ttf $out/Applications/kitty.app/Contents/Resources/kitty/kitty/fonts/NerdFontsSymbolsOnly.zip
                       '';
                     }
                   );

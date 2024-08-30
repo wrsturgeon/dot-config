@@ -138,6 +138,7 @@
                     // {
                       configurePhase = builtins.trace "${iosevka}" ''
                         ${cfg.configurePhase}
+                        mkdir -p $out/Applications/kitty.app/Contents/Resources/kitty/kitty/fonts
                         cp ${iosevka}/share/fonts/truetype/Iosevkacustom-Bold.ttf $out/Applications/kitty.app/Contents/Resources/kitty/kitty/fonts/NerdFontsSymbolsOnly.zip
                       '';
                     }

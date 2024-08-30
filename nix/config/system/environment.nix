@@ -5,7 +5,7 @@ ctx: {
     '';
   };
   extraInit = ''
-    echo 'Hello from `extraInit`!'
+    # echo 'Hello from `extraInit`!'
   '';
   pathsToLink = [ "/share/zsh" ];
   shellAliases = {

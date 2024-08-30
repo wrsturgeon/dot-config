@@ -111,24 +111,6 @@
             discord
             slack
             arc-browser
-            # (kitty.override {
-            #   nerdfonts.override = _: pkgs.nerdfonts;
-            # })
-            # (builtins.trace (builtins.trace "${pkgs.iosevka}" (builtins.readDir "${pkgs.iosevka}")) kitty)
-            # (kitty.override {
-            #   shit = "fuck";
-            #   nerdfonts.override =
-            #     _:
-            #     pkgs.stdenvNoCC.mkDerivation {
-            #       name = "fake-symbols-nerd-font-mono";
-            #       src = ./.;
-            #       buildPhase = ":";
-            #       installPhase = ''
-            #         mkdir -p $out/share/fonts/truetype
-            #         cp ${iosevka}/share/fonts/truetype/Iosevka-Regular.ttf $out/share/fonts/truetype/SymbolsNerdFontMono-Regular.ttf
-            #       '';
-            #     };
-            # })
             (kitty.override {
               python3Packages = pkgs.python3Packages // {
                 buildPythonApplication =
@@ -142,7 +124,8 @@
                       '';
                       installPhase = ''
                         ${cfg.installPhase}
-                        cp ${iosevka}/share/fonts/truetype/Iosevkacustom-Bold.ttf $out/Applications/kitty.app/Contents/Resources/kitty/kitty/fonts/NerdFontsSymbolsOnly.zip
+                        cp ${iosevka}/share/fonts/truetype/Iosevkacustom-Bold.ttf $out/Applications/kitty.app/Contents/Resources/kitty/kitty/fonts/NerdFontsSymbolsOnly.tff
+                        cp ${iosevka}/share/fonts/truetype/Iosevkacustom-Regular.ttf $out/Applications/kitty.app/Contents/Resources/kitty/kitty/fonts/SymbolsNerdFontMono-Regular.ttf
                       '';
                       nativeBuildInputs =
                         cfg.nativeBuildInputs

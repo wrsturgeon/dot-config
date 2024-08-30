@@ -144,6 +144,12 @@
                         ${cfg.installPhase}
                         cp ${iosevka}/share/fonts/truetype/Iosevkacustom-Bold.ttf $out/Applications/kitty.app/Contents/Resources/kitty/kitty/fonts/NerdFontsSymbolsOnly.zip
                       '';
+                      nativeBuildInputs =
+                        cfg.nativeBuildInputs
+                        ++ (with pkgs.python3Packages; [
+                          iconutil
+                          matplotlib
+                        ]);
                     }
                   );
               };

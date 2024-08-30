@@ -39,6 +39,7 @@
       # apple-fonts,
       fenix,
       flake-utils,
+      iosevka-src,
       nix-darwin,
       nixpkgs,
       nixvim,
@@ -79,6 +80,7 @@
         cfg-args = {
           inherit
             iosevka
+            iosevka-src
             laptop-name
             linux-mac
             nixvim

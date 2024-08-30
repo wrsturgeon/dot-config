@@ -136,11 +136,11 @@
                   pkgs.python3Packages.buildPythonApplication (
                     cfg
                     // {
-                      configurePhase = builtins.trace "${iosevka}" ''
+                      configurePhase = ''
                         ${cfg.configurePhase}
                         mkdir -p $out/Applications/kitty.app/Contents/Resources/kitty/kitty/fonts
                         cp ${iosevka}/share/fonts/truetype/Iosevkacustom-Bold.ttf $out/Applications/kitty.app/Contents/Resources/kitty/kitty/fonts/NerdFontsSymbolsOnly.zip
-                        sed -i 's/raise SystemExit(f'The font {human_name!r} was not found on your system, please install it')/pass/g' $(find . -name '*.py')
+                        sed -i 's/raise SystemExit.*font.*was not found on your system, please install it.*/pass/g' $(find . -name '*.py')
                       '';
                     }
                   );

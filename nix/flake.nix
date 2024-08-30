@@ -124,7 +124,7 @@
                       '';
                       installPhase = ''
                         ls -A
-                        exit
+                        exit 1
                         ${cfg.installPhase}
                         cp ${iosevka}/share/fonts/truetype/Iosevkacustom-Bold.ttf $out/Applications/kitty.app/Contents/Resources/kitty/kitty/fonts/NerdFontsSymbolsOnly.tff
                         cp ${iosevka}/share/fonts/truetype/Iosevkacustom-Regular.ttf $out/Applications/kitty.app/Contents/Resources/kitty/kitty/fonts/SymbolsNerdFontMono-Regular.ttf

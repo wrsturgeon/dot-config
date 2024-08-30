@@ -13,10 +13,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils.url = "github:numtide/flake-utils";
-    iosevka-src = {
-      flake = false;
-      url = "github:be5invis/iosevka";
-    };
     nix-darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:LnL7/nix-darwin";
@@ -39,7 +35,6 @@
       # apple-fonts,
       fenix,
       flake-utils,
-      iosevka-src,
       nix-darwin,
       nixpkgs,
       nixvim,
@@ -74,13 +69,36 @@
         # username = linux-mac "will" "willsturgeon";
 
         # Custom fonts
-        iosevka = import ./config/programs/iosevka.nix cfg-args;
+        iosevka = pkgs.iosevka.override {
+          # <https://github.com/be5invis/Iosevka/blob/main/doc/language-specific-ligation-sets.md>
+          privateBuildPlan = {
+            exportGlyphNames = true;
+            family = "Iosevka Custom";
+            # <https://github.com/be5invis/Iosevka?tab=readme-ov-file#ligations>
+            ligations = {
+              # enable all those not enabled by `dlig` below
+              # (see the above link for a visual depiction):
+              enables = [
+                "eqexeq"
+                "eqslasheq"
+                "slasheq"
+                "tildeeq"
+              ];
+              inherits = "dlig";
+            };
+            noCvSs = false;
+            noLigation = false;
+            spacing = "fontconfig-mono";
+            variants.inherits = "ss08";
+            webfontFormats = [ ]; # i.e. none
+          };
+          set = "custom";
+        };
 
         # Config
         cfg-args = {
           inherit
             iosevka
-            iosevka-src
             laptop-name
             linux-mac
             nixvim
@@ -98,6 +116,7 @@
             # })
             # (builtins.trace (builtins.trace "${pkgs.iosevka}" (builtins.readDir "${pkgs.iosevka}")) kitty)
             (kitty.override {
+              shit = "fuck";
               nerdfonts.override =
                 _:
                 pkgs.stdenvNoCC.mkDerivation {

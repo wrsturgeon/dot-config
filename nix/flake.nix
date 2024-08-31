@@ -69,7 +69,7 @@
         # username = linux-mac "will" "willsturgeon";
 
         # Kitty terminal emulator
-        kitty = import ./config/packages/kitty cfg-args;
+        kitty = import ./config/programs/kitty cfg-args;
 
         # Custom fonts
         iosevka = pkgs.iosevka.override {

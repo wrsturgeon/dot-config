@@ -34,7 +34,7 @@ else
 fi
 
 # Rebuild the Nix system:
-${CMD} switch --flake . --keep-going -v -j auto --show-trace --install-bootloader
+${CMD} switch --flake . --keep-going -v -j auto --show-trace # --install-bootloader
 
 # Collect garbage
 nix-collect-garbage -j auto --delete-old

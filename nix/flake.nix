@@ -94,9 +94,6 @@
               );
           };
         };
-        kitty = pkgs.writeShellScriptBin "kitty" ''
-          ${kitty-raw}/bin/kitty
-        '';
 
         # Custom fonts
         iosevka = pkgs.iosevka.override {

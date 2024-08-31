@@ -18,7 +18,9 @@ ctx.pkgs.kitty.override {
               ${cfg.installPhase}
               cp ${iosevka} ./fonts/SymbolsNerdFontMono-Regular.ttf
               cp ${iosevka} $out/Applications/kitty.app/Contents/Resources/kitty/fonts/SymbolsNerdFontMono-Regular.ttf
-              sed -i 's|"$@"|"--config" "${ctx.kitty-config}/kitty.conf" "$@"|' $(find $out -name kitty)
+              for f in $(find $out -name kitty); do
+                sed -i 's|"$@"|"--config" "${ctx.kitty-config}/kitty.conf" "$@"|' $f
+              done
             '';
           nativeBuildInputs =
             cfg.nativeBuildInputs

@@ -1,5 +1,6 @@
 ctx:
 ctx.pkgs.writeTextFile {
+  destination = "/kitty.conf";
   name = "kitty.conf";
   text = ''
     include ${ctx.pkgs.kitty-themes}/themes/GitHub_Dark.conf

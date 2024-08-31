@@ -69,7 +69,7 @@
         # username = linux-mac "will" "willsturgeon";
 
         # Kitty terminal emulator
-        kitty-raw = pkgs.kitty.override {
+        kitty = pkgs.kitty.override {
           python3Packages = pkgs.python3Packages // {
             buildPythonApplication =
               cfg:
@@ -83,6 +83,7 @@
                   installPhase = ''
                     ${cfg.installPhase}
                     cp ${iosevka}/share/fonts/truetype/Iosevkacustom-Regular.ttf ./fonts/SymbolsNerdFontMono-Regular.ttf
+                    sed -i "2i|export KITTY_CONFIG_DIRECTORY='${cfg-args.kitty-config}'|" $out/bin/kitty
                   '';
                   nativeBuildInputs =
                     cfg.nativeBuildInputs
@@ -94,7 +95,6 @@
           };
         };
         kitty = pkgs.writeShellScriptBin "kitty" ''
-          export KITTY_CONFIG_DIRECTORY=${cfg-args.kitty-config}
           ${kitty-raw}/bin/kitty
         '';
 

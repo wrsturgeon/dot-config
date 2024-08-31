@@ -111,8 +111,7 @@
             discord
             slack
             arc-browser
-            (pkgs.runCommand ''
-              export KITTY_CONFIG_DIRECTORY='${ctx.kitty-config}'
+            (pkgs.runCommand "kitty" { KITTY_CONFIG_DIRECTORY = ctx.kitty-config; } ''
               ${
                 kitty.override {
                   python3Packages = pkgs.python3Packages // {

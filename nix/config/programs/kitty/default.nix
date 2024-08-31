@@ -1,5 +1,5 @@
 ctx:
-ctx.pkgs.builtins.writeTextFile "kitty.conf" ''
+builtins.writeTextFile "kitty.conf" ''
   include ${ctx.pkgs.kitty-themes}
 
   font_family Iosevka Custom Light

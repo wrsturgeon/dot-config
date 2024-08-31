@@ -116,7 +116,6 @@
               discord
               slack
               arc-browser
-              # wezterm
               logseq
             ]);
           emacs = import ./config/programs/emacs cfg-args;

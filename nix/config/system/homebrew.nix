@@ -7,6 +7,7 @@ ctx.linux-mac null {
     "signal"
     "steam"
     "tor-browser"
+    "wezterm"
   ];
   enable = true;
   masApps = { };

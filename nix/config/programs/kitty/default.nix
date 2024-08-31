@@ -10,11 +10,16 @@ ctx.pkgs.kitty.override {
             ${cfg.configurePhase}
             sed -i 's/raise SystemExit.*font.*was not found on your system, please install it.*/return/g' setup.py
           '';
-          installPhase = ''
-            ${cfg.installPhase}
-            cp ${ctx.iosevka}/share/fonts/truetype/Iosevkacustom-Regular.ttf ./fonts/SymbolsNerdFontMono-Regular.ttf
-            sed -i 's|"$@"|"--config" "${ctx.kitty-config}/kitty.conf" "$@"|' $out/bin/kitty
-          '';
+          installPhase =
+            let
+              iosevka = "${ctx.iosevka}/share/fonts/truetype/Iosevkacustom-Regular.ttf";
+            in
+            ''
+              ${cfg.installPhase}
+              cp ${iosevka} ./fonts/SymbolsNerdFontMono-Regular.ttf
+              cp ${iosevka} $out/Applications/kitty.app/Contents/Resources/kitty/fonts/SymbolsNerdFontMono-Regular.ttf
+              sed -i 's|"$@"|"--config" "${ctx.kitty-config}/kitty.conf" "$@"|' $out/bin/kitty
+            '';
           nativeBuildInputs =
             cfg.nativeBuildInputs
             ++ (with ctx.pkgs.python3Packages; [

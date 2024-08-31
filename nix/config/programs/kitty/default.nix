@@ -1,6 +1,6 @@
 ctx:
 ctx.pkgs.writeTextFile "kitty.conf" ''
-  include ${ctx.pkgs.kitty-themes}
+  include ${ctx.pkgs.kitty-themes}/themes/GitHub_Dark.conf
 
   font_family Iosevka Custom Light
   bold_font Iosevka Custom Extrabold

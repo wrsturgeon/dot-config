@@ -1,6 +1,6 @@
 ctx:
 let
-  theme = "ayu";
+  theme = "github-dark"; # "ayu";
   enable = builtins.mapAttrs (k: v: v // { enable = true; });
 in
 {

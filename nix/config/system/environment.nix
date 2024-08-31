@@ -46,8 +46,14 @@ ctx: {
     ])
     ++ (with ctx.pkgs.coqPackages; [ coq ])
     ++ (ctx.linux-mac [ ] [ ctx.pkgs.vlc-bin ]);
-  variables = {
-    EDITOR = "vi";
-    LANG = "fr_FR.UTF-8";
-  };
+  variables =
+    let
+      editor = "vi";
+    in
+    {
+      EDITOR = editor;
+      LANG = "fr_FR.UTF-8";
+      KITTY_CONFIG_DIRECTORY = "${ctx.kitty-config}";
+      VISUAL = editor;
+    };
 }

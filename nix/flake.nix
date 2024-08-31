@@ -140,6 +140,7 @@
           ];
           emacs = import ./config/programs/emacs cfg-args;
           git = pkgs.gitFull;
+          kitty-config = import ./config/programs/kitty;
           vim = nixvim.legacyPackages.${system}.makeNixvim (import ./config/programs/vim cfg-args);
           rust = fenix.packages.${system}.minimal;
         };

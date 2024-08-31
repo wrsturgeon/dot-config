@@ -83,7 +83,7 @@
                   installPhase = ''
                     ${cfg.installPhase}
                     cp ${iosevka}/share/fonts/truetype/Iosevkacustom-Regular.ttf ./fonts/SymbolsNerdFontMono-Regular.ttf
-                    sed -i 's|"$@"|"--config ${cfg-args.kitty-config}/kitty.conf $@"|' $out/bin/kitty
+                    sed -i 's|"$@"|"--config" "${cfg-args.kitty-config}/kitty.conf" "$@"|' $out/bin/kitty
                   '';
                   nativeBuildInputs =
                     cfg.nativeBuildInputs

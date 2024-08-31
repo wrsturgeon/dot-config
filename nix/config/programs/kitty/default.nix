@@ -1,21 +1,26 @@
 ctx:
-ctx.pkgs.writeTextFile {
-  destination = "/kitty.conf";
-  name = "kitty-config";
-  text = ''
-    include ${ctx.pkgs.kitty-themes}/share/kitty-themes/themes/GitHub_Dark.conf
-
-    # font_family Iosevka Custom Light
-    font_family Iosevka Custom Regular
-    bold_font Iosevka Custom Extrabold
-    # italic_font Iosevka Custom Light Italic
-    italic_font Iosevka Custom Regular Italic
-    bold_italic_font Iosevka Custom Extrabold Italic
-
-    font_size 13
-
-    symbol_map Iosevka Custom Regular
-
-    disable_ligatures always
-  '';
+ctx.pkgs.kitty.override {
+  python3Packages = ctx.pkgs.python3Packages // {
+    buildPythonApplication =
+      cfg:
+      ctx.pkgs.python3Packages.buildPythonApplication (
+        cfg
+        // {
+          configurePhase = ''
+            ${cfg.configurePhase}
+            sed -i 's/raise SystemExit.*font.*was not found on your system, please install it.*/return/g' setup.py
+          '';
+          installPhase = ''
+            ${cfg.installPhase}
+            cp ${ctx.iosevka}/share/fonts/truetype/Iosevkacustom-Regular.ttf ./fonts/SymbolsNerdFontMono-Regular.ttf
+            sed -i 's|"$@"|"--config" "${ctx.kitty-config}/kitty.conf" "$@"|' $out/bin/kitty
+          '';
+          nativeBuildInputs =
+            cfg.nativeBuildInputs
+            ++ (with ctx.pkgs.python3Packages; [
+              matplotlib
+            ]);
+        }
+      );
+  };
 }

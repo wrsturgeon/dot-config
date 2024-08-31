@@ -69,31 +69,7 @@
         # username = linux-mac "will" "willsturgeon";
 
         # Kitty terminal emulator
-        kitty = pkgs.kitty.override {
-          python3Packages = pkgs.python3Packages // {
-            buildPythonApplication =
-              cfg:
-              pkgs.python3Packages.buildPythonApplication (
-                cfg
-                // {
-                  configurePhase = ''
-                    ${cfg.configurePhase}
-                    sed -i 's/raise SystemExit.*font.*was not found on your system, please install it.*/return/g' setup.py
-                  '';
-                  installPhase = ''
-                    ${cfg.installPhase}
-                    cp ${iosevka}/share/fonts/truetype/Iosevkacustom-Regular.ttf ./fonts/SymbolsNerdFontMono-Regular.ttf
-                    sed -i 's|"$@"|"--config" "${cfg-args.kitty-config}/kitty.conf" "$@"|' $out/bin/kitty
-                  '';
-                  nativeBuildInputs =
-                    cfg.nativeBuildInputs
-                    ++ (with pkgs.python3Packages; [
-                      matplotlib
-                    ]);
-                }
-              );
-          };
-        };
+        kitty = import ./config/packages/kitty cfg-args;
 
         # Custom fonts
         iosevka = pkgs.iosevka.override {
@@ -145,7 +121,6 @@
             ]);
           emacs = import ./config/programs/emacs cfg-args;
           git = pkgs.gitFull;
-          kitty-config = import ./config/programs/kitty cfg-args;
           vim = nixvim.legacyPackages.${system}.makeNixvim (import ./config/programs/neovim cfg-args);
           rust = fenix.packages.${system}.minimal;
         };

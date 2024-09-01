@@ -143,7 +143,7 @@
         "type": "github"
       }
     },
-    "github-dark-nvim": {
+    "github-dark-nvim-src": {
       "flake": false,
       "locked": {
         "lastModified": 1664352368,
@@ -294,7 +294,7 @@
       "inputs": {
         "fenix": "fenix",
         "flake-utils": "flake-utils",
-        "github-dark-nvim": "github-dark-nvim",
+        "github-dark-nvim-src": "github-dark-nvim-src",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim"

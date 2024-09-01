@@ -104,16 +104,17 @@
         };
 
         # GitHub Dark theme for Neovim
-        github-dark-nvim = pkgs.stdenv.mkDerivationNoCC {
+        github-dark-nvim = pkgs.stdenvNoCC.mkDerivation {
           pname = "github-dark-nvim";
           version = "git";
           src = github-dark-nvim-src;
           buildPhase = ''
             echo '${pkgs.vimPlugins.gruvbox}'
             ls '${pkgs.vimPlugins.gruvbox}'
+            exit 1
           '';
           installPhase = ''
-            cp -r . $out
+            mv -r . $out
           '';
         };
 

@@ -37,4 +37,4 @@ fi
 ${CMD} switch --flake . --keep-going -v -j auto --show-trace # --install-bootloader
 
 # Collect garbage
-( nix-collect-garbage -j auto --delete-old & )
+( nix-collect-garbage -j auto --delete-old > /dev/null 2>&1 & )

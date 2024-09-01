@@ -13,7 +13,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils.url = "github:numtide/flake-utils";
-    github-dark-nvim = {
+    github-dark-nvim-src = {
       flake = false;
       url = "github:vv9k/vim-github-dark";
     };
@@ -39,7 +39,7 @@
       # apple-fonts,
       fenix,
       flake-utils,
-      github-dark-nvim,
+      github-dark-nvim-src,
       nix-darwin,
       nixpkgs,
       nixvim,
@@ -101,6 +101,17 @@
             webfontFormats = [ ]; # i.e. none
           };
           set = "custom";
+        };
+
+        # GitHub Dark theme for Neovim
+        github-dark-nvim = pkgs.stdenvNoCC.mkDerivation {
+          name = "github-dark-nvim";
+          version = "git";
+          src = github-dark-nvim-src;
+          buildPhase = ":";
+          installPhase = ''
+            cp -r . $out
+          '';
         };
 
         # Config

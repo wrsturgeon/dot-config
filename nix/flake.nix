@@ -13,6 +13,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils.url = "github:numtide/flake-utils";
+    github-dark-nvim = {
+      flake = false;
+      url = "github:vv9k/vim-github-dark";
+    };
     nix-darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:LnL7/nix-darwin";
@@ -35,6 +39,7 @@
       # apple-fonts,
       fenix,
       flake-utils,
+      github-dark-nvim,
       nix-darwin,
       nixpkgs,
       nixvim,
@@ -101,6 +106,7 @@
         # Config
         cfg-args = {
           inherit
+            github-dark-nvim
             iosevka
             laptop-name
             linux-mac

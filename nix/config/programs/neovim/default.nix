@@ -1,6 +1,6 @@
 ctx:
 let
-  theme = builtins.trace "${ctx.pkgs.vimPlugins.ayu}" "ghdark"; # "ayu";
+  theme = builtins.trace "${ctx.pkgs.vimPlugins.gruvbox}" "ghdark"; # "ayu";
   enable = builtins.mapAttrs (k: v: v // { enable = true; });
 in
 {

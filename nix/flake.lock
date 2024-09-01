@@ -143,6 +143,22 @@
         "type": "github"
       }
     },
+    "github-dark-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1664352368,
+        "narHash": "sha256-o7uZMqH3ZkYbL1O16NDZLtqKgqBN223dFFCB+Vc7Mxo=",
+        "owner": "vv9k",
+        "repo": "vim-github-dark",
+        "rev": "25361ac70c66d776bdcf5d749042f07e6e7f50ff",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vv9k",
+        "repo": "vim-github-dark",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -278,6 +294,7 @@
       "inputs": {
         "fenix": "fenix",
         "flake-utils": "flake-utils",
+        "github-dark-nvim": "github-dark-nvim",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim"

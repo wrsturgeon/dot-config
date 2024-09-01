@@ -108,11 +108,11 @@
           pname = "github-dark-nvim";
           version = "git";
           src = github-dark-nvim-src;
-          buildPhase = ''
-            echo '${pkgs.vimPlugins.gruvbox}'
-            ls '${pkgs.vimPlugins.gruvbox}'
-            exit 1
-          '';
+          # buildPhase = ''
+          #   echo '${pkgs.vimPlugins.gruvbox}'
+          #   ls '${pkgs.vimPlugins.gruvbox}'
+          # '';
+          buildPhase = ":";
           installPhase = ''
             mv -r . $out
           '';

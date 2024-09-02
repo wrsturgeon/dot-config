@@ -1,12 +1,9 @@
 ctx:
-let
-  theme = "ayu_light"; # "ayu"; # "GitHub_Dark";
-in
 ctx.pkgs.writeTextFile {
   destination = "/kitty.conf";
   name = "kitty-config";
   text = ''
-    include ${ctx.pkgs.kitty-themes}/share/kitty-themes/themes/${theme}.conf
+    include ${ctx.pkgs.kitty-themes}/share/kitty-themes/themes/${ctx.kitty-settings.theme}.conf
 
     # font_family Iosevka Custom Light
     font_family Iosevka Custom Regular

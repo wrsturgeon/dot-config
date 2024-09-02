@@ -10,7 +10,7 @@ ctx.pkgs.writeTextFile {
     italic_font Iosevka Custom ${ctx.terminal-settings.italic}
     bold_italic_font Iosevka Custom Extrabold Italic
 
-    font_size ${ctx.terminal-settings.font-size}
+    font_size ${builtins.toString ctx.terminal-settings.font-size}
 
     disable_ligatures always
   '';

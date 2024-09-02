@@ -1,10 +1,9 @@
 ctx:
 let
-  theme = "ayu-light"; # "ayu"; # "ghdark";
   enable = builtins.mapAttrs (k: v: v // { enable = true; });
 in
 {
-  colorscheme = theme;
+  colorscheme = ctx.terminal-settings.theme;
   extraPlugins =
     (with ctx; [ github-dark-nvim ])
     ++ (with ctx.pkgs.vimPlugins; [

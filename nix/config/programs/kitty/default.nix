@@ -2,8 +2,10 @@ orig-ctx:
 let
   kitty-settings = rec {
     dark = true;
-    weight = if dark then "Light" else "Regular";
-    italic = if dark then "Light Italic" else "Italic";
+    # weight = if dark then "Light" else "Regular";
+    # italic = if dark then "Light Italic" else "Italic";
+    weight = "Regular";
+    italic = "Italic";
     theme = "ayu-${if dark then "dark" else "light"}";
   };
   ctx = orig-ctx // {

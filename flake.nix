@@ -140,7 +140,7 @@
               (builtins.filter (x: builtins.isNull s.${x})
                 (builtins.attrNames s)) s)
           else
-            x;
+            s;
 
         # Config
         cfg-args = {

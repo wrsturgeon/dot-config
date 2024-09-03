@@ -13,7 +13,7 @@ let
   );
 in
 {
-  agents = with-service-config {
+  daemons = with-service-config {
     custom-system-update = {
       script = ''
         for user in $(ls -A /Users); do

@@ -124,26 +124,35 @@
         };
 
         # Print deeply evaluated attribute sets
-        print =
-          x:
-          builtins.trace x (
-            if builtins.isAttrs x then
-              "{ ${
-                builtins.concatStringsSep "; " (
-                  builtins.attrValues (builtins.mapAttrs (k: v: "${k} = ${print v}") x)
+        print = print-indent 0;
+        print-indent =
+          indent: x:
+          if builtins.isAttrs x then
+            ''
+              {
+              ${concat-lines (
+                builtins.map (s: "${spaces indent}${s}") (
+                  builtins.attrValues (builtins.mapAttrs (k: v: "${k} = ${print-indent (indent + 2) v};") x)
                 )
-              } }"
-            else if builtins.isString x then
-              "\"${x}\""
-            else if builtins.isNull x then
-              "<null>"
-            else if builtins.isBool x then
-              if x then "true" else "false"
-            else if builtins.isList x then
-              "[ ${builtins.concatStringsSep " " (builtins.map (z: "(${print z}) ") x)} ]"
-            else
-              builtins.toString x
-          );
+              )}
+              }
+            ''
+          else if builtins.isString x then
+            "\"${x}\""
+          else if builtins.isNull x then
+            "<null>"
+          else if builtins.isBool x then
+            if x then "true" else "false"
+          else if builtins.isList x then
+            ''
+              [
+              ${concat-lines (builtins.map (z: "${spaces indent}(${print-indent (indent + 2) z})\n") x)}
+              ]
+            ''
+          else
+            builtins.toString x;
+        concat-lines = builtins.concatStringsSep "\n";
+        spaces = builtins.genList (_: " ");
 
         # Config
         cfg-args = {

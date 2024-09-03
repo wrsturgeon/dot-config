@@ -1,5 +1,4 @@
-ctx: {
-  computerName = "Will Sturgeon";
-  # hostName = "willsturgeon";
+ctx:
+{
   hostName = ctx.laptop-name;
-}
+} // linux-mac { } { computerName = "Will Sturgeon"; }

@@ -222,6 +222,22 @@
         "type": "github"
       }
     },
+    "nixos-hardware": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1677180169,
+        "narHash": "sha256-tn1pTjPP+H2lAQDb8/Iw/FeZLjAQnSH00rR7MOFKZ9w=",
+        "owner": "kekrby",
+        "repo": "nixos-hardware",
+        "rev": "e964f9f56c01992263c0b8040f989996aa870741",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kekrby",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1725103162,
@@ -296,6 +312,7 @@
         "flake-utils": "flake-utils",
         "github-dark-nvim-src": "github-dark-nvim-src",
         "nix-darwin": "nix-darwin",
+        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim"
       }

@@ -6,13 +6,10 @@ ctx:
   };
   zsh = {
     enableBashCompletion = true;
+    enableCompletion = true;
     promptInit =
       "source ${ctx.pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-  } // ctx.linux-mac {
-    completion.enable = true;
-    syntaxHighlighting.enable = true;
-  } {
-    enableCompletion = true;
+  } // ctx.linux-mac { syntaxHighlighting.enable = true; } {
     enableFzfCompletion = true;
     enableFzfGit = true;
     enableFzfHistory = true;
@@ -29,5 +26,8 @@ ctx:
     enableVim = true;
   };
 })) // {
-  bash = { enableCompletion = true; } // ctx.linux-mac { } { enable = true; };
+  bash = ctx.linux-mac { completion.enable = true; } {
+    enable = true;
+    enableCompletion = true;
+  };
 }

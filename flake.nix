@@ -42,8 +42,8 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
 
-      	# `lib.strings`
-	inherit (nixpkgs.lib) strings;
+        # `lib.strings`
+        inherit (nixpkgs.lib) strings;
 
         # Nixpkgs
         pkgs = import nixpkgs {

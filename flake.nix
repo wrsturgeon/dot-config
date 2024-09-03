@@ -136,7 +136,7 @@
         # Recursively delete null bindings
         nonnull = s:
           if builtins.isAttrs s then
-            builtins.mapAttrs nonnull (builtins.removeAttrs
+            builtins.mapAttrs (_: nonnull) (builtins.removeAttrs
               (builtins.filter (x: builtins.isNull s.${x})
                 (builtins.attrNames s)) s)
           else

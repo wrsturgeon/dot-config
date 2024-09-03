@@ -18,6 +18,7 @@ in
         cd ~/.config/nix
         ./rebuild
       '';
+      serviceConfig.StartCalendarInterval = [ { Minute = 0; } ];
     };
   };
   envVariables = {

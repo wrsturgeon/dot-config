@@ -1,1 +1,1 @@
-ctx: { pam.enableSudoTouchIdAuth = true; }
+ctx: ctx.linux-mac { } { pam.enableSudoTouchIdAuth = true; }

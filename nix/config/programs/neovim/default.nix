@@ -1,9 +1,10 @@
 ctx:
 let
+  cfg = ctx.terminal-settings "-";
   enable = builtins.mapAttrs (k: v: v // { enable = true; });
 in
 {
-  colorscheme = ctx.terminal-settings.theme;
+  colorscheme = cfg.theme;
   extraPlugins =
     (with ctx; [ github-dark-nvim ])
     ++ (with ctx.pkgs.vimPlugins; [

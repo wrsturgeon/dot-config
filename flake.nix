@@ -148,15 +148,19 @@
         };
         cfg = {
           inherit system;
-          modules = [
-            (builtins.mapAttrs
+          modules = let
+            mapped = builtins.map (filename: {
+              name = strings.removeSuffix ".nix" filename;
+              value = filename;
+            }) (builtins.filter (strings.hasSuffix ".nix")
+              (builtins.attrNames (builtins.readDir ./config/system)));
+            with-nulls = builtins.mapAttrs
               (_: filename: import ./config/system/${filename} cfg-args)
-              (builtins.listToAttrs (builtins.map (filename: {
-                name = strings.removeSuffix ".nix" filename;
-                value = filename;
-              }) (builtins.filter (strings.hasSuffix ".nix")
-                (builtins.attrNames (builtins.readDir ./config/system))))))
-          ];
+              (builtins.listToAttrs with-nulls);
+            nulls = builtins.filter (x: builtins.isNull with-nulls.${x})
+              (builtins.attrNames with-nulls);
+            monomodule = builtins.removeAttrs nulls with-nulls;
+          in [ monomodule ];
         };
       in {
         apps.default = {

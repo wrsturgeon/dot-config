@@ -75,14 +75,14 @@
 
         # Kitty terminal emulator
         kitty = import ./config/programs/kitty cfg-args;
-        terminal-settings = sep: rec {
+        terminal-settings = rec {
           font-size = 13;
           dark = true;
           # weight = if dark then "Light" else "Regular";
           # italic = if dark then "Light Italic" else "Italic";
           weight = "Regular";
           italic = "Italic";
-          theme = "ayu${sep}${if dark then "dark" else "light"}";
+          theme = "ayu-${if dark then "dark" else "light"}";
         };
 
         # Custom fonts

@@ -131,8 +131,8 @@
             ''
               {
               ${concat-lines (
-                builtins.map (s: "${spaces indent}${s}") (
-                  builtins.attrValues (builtins.mapAttrs (k: v: "${k} = ${print-indent (indent + 2) v};") x)
+                builtins.attrValues (
+                  builtins.mapAttrs (k: v: "${spaces indent}${k} = ${print-indent (indent + 2) v};") x
                 )
               )}
               }

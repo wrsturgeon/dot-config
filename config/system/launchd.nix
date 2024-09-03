@@ -1,5 +1,5 @@
 ctx:
-let
+linux-mac null (let
   with-service-config = builtins.mapAttrs (k: v:
     v // {
       serviceConfig = (v.serviceConfig or { }) // {
@@ -20,4 +20,4 @@ in {
     };
   };
   envVariables = { LANG = "fr_FR.UTF-8"; };
-}
+})

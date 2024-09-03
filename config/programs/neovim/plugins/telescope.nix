@@ -2,9 +2,7 @@ ctx: {
   keymaps = {
     "<C-p>" = {
       action = "git_files";
-      options = {
-        desc = "Telescope Git Files";
-      };
+      options = { desc = "Telescope Git Files"; };
     };
     "<leader>fb" = "buffers";
     "<leader>fc" = "commands";

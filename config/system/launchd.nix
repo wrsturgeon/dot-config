@@ -1,18 +1,14 @@
 ctx:
 let
-  with-service-config = builtins.mapAttrs (
-    k: v:
-    v
-    // {
+  with-service-config = builtins.mapAttrs (k: v:
+    v // {
       serviceConfig = (v.serviceConfig or { }) // {
         KeepAlive = true;
         StandardOutPath = "/var/log/${k}.out.log";
         StandardErrorPath = "/var/log/${k}.err.log";
       };
-    }
-  );
-in
-{
+    });
+in {
   daemons = with-service-config {
     custom-system-update = {
       script = ''
@@ -20,10 +16,8 @@ in
           cd /Users/''${user}/.config/nix && ./rebuild
         done
       '';
-      serviceConfig.StartCalendarInterval = [ { Minute = 0; } ];
+      serviceConfig.StartCalendarInterval = [{ Minute = 0; }];
     };
   };
-  envVariables = {
-    LANG = "fr_FR.UTF-8";
-  };
+  envVariables = { LANG = "fr_FR.UTF-8"; };
 }

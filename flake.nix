@@ -166,7 +166,7 @@
             }) all-nix;
             configs = builtins.listToAttrs all-configs;
             relevant = nonnull configs;
-          in [ relevant ];
+          in [ (builtins.trace relevant relevant) ];
         };
       in {
         apps.default = {

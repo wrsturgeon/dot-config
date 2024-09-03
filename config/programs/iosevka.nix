@@ -9,7 +9,12 @@ let
     ligations = {
       # enable all those not enabled by `dlig` below
       # (see the above link for a visual depiction):
-      enables = [ "eqexeq" "eqslasheq" "slasheq" "tildeeq" ];
+      enables = [
+        "eqexeq"
+        "eqslasheq"
+        "slasheq"
+        "tildeeq"
+      ];
       inherits = "dlig";
     };
     noCvSs = false;
@@ -21,7 +26,8 @@ let
   set = "custom";
   pname = "iosevka";
 
-in ctx.pkgs.buildNpmPackage rec {
+in
+ctx.pkgs.buildNpmPackage rec {
   inherit pname;
   version = "custom"; # don't try this at home
   src = ctx.iosevka-src;
@@ -38,24 +44,29 @@ in ctx.pkgs.buildNpmPackage rec {
   #   ];
   buildPlan = builtins.toJSON { buildPlans.${pname} = privateBuildPlan; };
 
-  passAsFile = [ "extraParameters" ] ++ ctx.pkgs.lib.optionals
-    (!(builtins.isString privateBuildPlan
-      && ctx.pkgs.lib.hasPrefix builtins.storeDir privateBuildPlan))
-    [ "buildPlan" ];
+  passAsFile =
+    [ "extraParameters" ]
+    ++ ctx.pkgs.lib.optionals (
+      !(builtins.isString privateBuildPlan && ctx.pkgs.lib.hasPrefix builtins.storeDir privateBuildPlan)
+    ) [ "buildPlan" ];
 
   configurePhase = ''
     runHook preConfigure
     ${ctx.pkgs.lib.optionalString (builtins.isAttrs privateBuildPlan) ''
       remarshal -i "$buildPlanPath" -o private-build-plans.toml -if json -of toml
     ''}
-    ${ctx.pkgs.lib.optionalString (builtins.isString privateBuildPlan
-      && (!ctx.pkgs.lib.hasPrefix builtins.storeDir privateBuildPlan)) ''
+    ${ctx.pkgs.lib.optionalString
+      (builtins.isString privateBuildPlan && (!ctx.pkgs.lib.hasPrefix builtins.storeDir privateBuildPlan))
+      ''
         cp "$buildPlanPath" private-build-plans.toml
-      ''}
-    ${ctx.pkgs.lib.optionalString (builtins.isString privateBuildPlan
-      && (ctx.pkgs.lib.hasPrefix builtins.storeDir privateBuildPlan)) ''
+      ''
+    }
+    ${ctx.pkgs.lib.optionalString
+      (builtins.isString privateBuildPlan && (ctx.pkgs.lib.hasPrefix builtins.storeDir privateBuildPlan))
+      ''
         cp "$buildPlan" private-build-plans.toml
-      ''}
+      ''
+    }
     runHook postConfigure
   '';
 

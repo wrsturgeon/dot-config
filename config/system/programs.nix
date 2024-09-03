@@ -1,16 +1,9 @@
 ctx:
-builtins.mapAttrs (k: v: v // { enable = true; }) {
+builtins.mapAttrs (k: v: v // { enable = true; }) ({
   bash = { enableCompletion = true; };
   direnv = {
     direnvrcExtra = "echo 'Loaded direnv'";
     nix-direnv.enable = true;
-  };
-  tmux = {
-    enableSensible = true;
-    enableVim = true;
-  } // ctx.linux-mac { } {
-    enableFzf = true;
-    enableMouse = true;
   };
   zsh = {
     enableBashCompletion = true;
@@ -22,4 +15,11 @@ builtins.mapAttrs (k: v: v // { enable = true; }) {
     promptInit =
       "source ${ctx.pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
   };
-}
+} // ctx.linux-mac { } {
+  tmux = {
+    enableFzf = true;
+    enableMouse = true;
+    enableSensible = true;
+    enableVim = true;
+  };
+})

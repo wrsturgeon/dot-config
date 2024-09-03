@@ -3,7 +3,7 @@
 set -eu
 
 export OS="$(uname -s)"
-export COMMIT_DATE='`'"$(date '+%Y/%m/%d %H:%M:%S') ${OS}"'`'
+export COMMIT_DATE='`'"$(date '+%Y/%m/%d %H:%M:%S') ${OS} "'`'
 
 # Synchronize Logseq notes:
 cd ~/Desktop/logseq
@@ -21,13 +21,13 @@ cd nix
 rm -f .build-succeeded .build-failed
 nixfmt .
 git add -A
-git commit -m "${COMMIT_DATE} :wrench:" || :
+git commit -m "${COMMIT_DATE}:wrench:" || :
 git push || :
 
 # Push ~/.config changes:
 nix flake update || : # rate limits!
 git add -A
-git commit -m "${COMMIT_DATE} :arrow_up:" || :
+git commit -m "${COMMIT_DATE}:arrow_up:" || :
 git push || :
 
 if [[ "${OS}" == "Linux" ]]; then
@@ -50,12 +50,12 @@ if
 then
   touch .build-succeeded
   git add -A
-  git commit -m "${COMMIT_DATE} :white_check_mark:" || :
+  git commit -m "${COMMIT_DATE}:white_check_mark:" || :
   git push || :
   ( nix-collect-garbage -j auto --delete-old > /dev/null 2>&1 & )
 else
   touch .build-failed
   git add -A
-  git commit -m "${COMMIT_DATE} :fire:" || :
+  git commit -m "${COMMIT_DATE}:fire:" || :
   git push || :
 fi

@@ -151,8 +151,9 @@
         cfg-args = {
           inherit github-dark-nvim iosevka laptop-name linux-mac nixos-hardware
             nixvim pkgs print self system terminal-settings;
-          dock-apps = [ kitty ]
-            ++ (with pkgs; [ spotify discord slack arc-browser logseq ]);
+          dock-apps = [ kitty ] ++ (with pkgs;
+            [ spotify discord slack logseq ]
+            ++ linux-mac [ firefox ] [ arc-browser ]);
           emacs = import config/programs/emacs cfg-args;
           git = pkgs.gitFull;
           hardware-configuration = import config/hardware-configuration.nix;

@@ -1,5 +1,5 @@
 ctx:
-builtins.mapAttrs ((k: v: v // { enable = true; }) ({
+(builtins.mapAttrs (_: v: v // { enable = true; }) ({
   direnv = {
     direnvrcExtra = "echo 'Loaded direnv'";
     nix-direnv.enable = true;

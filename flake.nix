@@ -133,6 +133,15 @@
         concat-lines = builtins.concatStringsSep "\n";
         spaces = n: builtins.concatStringsSep "" (builtins.genList (_: " ") n);
 
+        # Recursively delete null bindings
+        nonnull = s:
+          if builtins.isAttrs s then
+            builtins.mapAttrs nonnull (builtins.removeAttrs
+              (builtins.filter (x: builtins.isNull s.${x})
+                (builtins.attrNames s)) s)
+          else
+            x;
+
         # Config
         cfg-args = {
           inherit github-dark-nvim iosevka laptop-name linux-mac nixvim pkgs
@@ -155,9 +164,9 @@
               name = strings.removeSuffix ".nix" filename;
               value = import ./config/system/${filename} cfg-args;
             }) all-nix;
-            nonnull =
-              builtins.filter (x: !(builtins.isNull x.value)) all-configs;
-          in [ (builtins.listToAttrs nonnull) ];
+            configs = builtins.listToAttrs all-configs;
+            relevant = nonnull configs;
+          in [ relevant ];
         };
       in {
         apps.default = {

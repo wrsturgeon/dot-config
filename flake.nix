@@ -192,7 +192,7 @@
           modules =
             let
               all-files = builtins.attrNames (builtins.readDir ./config/system);
-              all-nix = builtins.filter (strings.hasSuffix ".nix") all-nix;
+              all-nix = builtins.filter (strings.hasSuffix ".nix") all-files;
               all-configs = builtins.map (filename: {
                 name = strings.removeSuffix ".nix" filename;
                 value = import ./config/system/${filename} cfg-args;

@@ -20,5 +20,6 @@ builtins.mapAttrs (k: v: v // { enable = true; }) {
     enableFzfGit = true;
     enableFzfHistory = true;
     enableSyntaxHighlighting = true;
+    promptInit = "source ${ctx.pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
   };
 }

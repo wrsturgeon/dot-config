@@ -13,7 +13,5 @@ ctx: {
       rustcPackage = ctx.rust.rustc;
     };
   };
-  keymaps.lspBuf = {
-    "K" = "hover";
-  };
+  keymaps.lspBuf = { "K" = "hover"; };
 }

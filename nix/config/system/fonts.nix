@@ -1,3 +1,1 @@
-ctx: {
-  packages = (with ctx; [ iosevka ]) ++ (with ctx.pkgs; [ nerdfonts ]);
-}
+ctx: { packages = (with ctx; [ iosevka ]) ++ (with ctx.pkgs; [ nerdfonts ]); }

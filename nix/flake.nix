@@ -34,40 +34,29 @@
     #   url = "github:shaunsingh/sfmono-nerd-font-ligaturized";
     # };
   };
-  outputs =
-    {
-      # apple-fonts,
-      fenix,
-      flake-utils,
-      github-dark-nvim-src,
-      nix-darwin,
-      nixpkgs,
-      nixvim,
-      self,
+  outputs = {
+    # apple-fonts,
+    fenix, flake-utils, github-dark-nvim-src, nix-darwin, nixpkgs, nixvim, self,
     # sf-mono-liga-src
     }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
+    flake-utils.lib.eachDefaultSystem (system:
       let
 
         # Nixpkgs
         pkgs = import nixpkgs {
           inherit system;
-          config = {
-            allowUnfree = true;
-          };
+          config = { allowUnfree = true; };
         };
 
         # OS introspection utils
         on-linux = pkgs.lib.strings.hasSuffix "linux" system;
         on-mac = pkgs.lib.strings.hasSuffix "darwin" system;
-        linux-mac =
-          if on-linux then
-            (a: b: a)
-          else if on-mac then
-            (a: b: b)
-          else
-            throw "Unrecognized OS in system `${system}`!";
+        linux-mac = if on-linux then
+          (a: b: a)
+        else if on-mac then
+          (a: b: b)
+        else
+          throw "Unrecognized OS in system `${system}`!";
 
         # Usernames
         laptop-name = "willsturgeon"; # "mbp-" + (linux-mac "nixos" "macos");
@@ -95,12 +84,7 @@
             ligations = {
               # enable all those not enabled by `dlig` below
               # (see the above link for a visual depiction):
-              enables = [
-                "eqexeq"
-                "eqslasheq"
-                "slasheq"
-                "tildeeq"
-              ];
+              enables = [ "eqexeq" "eqslasheq" "slasheq" "tildeeq" ];
               inherits = "dlig";
             };
             noCvSs = false;
@@ -125,90 +109,62 @@
 
         # Print deeply evaluated attribute sets
         print = print-indent 0;
-        print-indent =
-          indent: x:
-          if builtins.isAttrs x then
-            ''
-              {
-              ${concat-lines (
-                builtins.attrValues (
-                  builtins.mapAttrs (k: v: "${spaces indent}${k} = ${print-indent (indent + 2) v};") x
-                )
-              )}
-              ${spaces indent}}''
-          else if builtins.isString x then
-            "\"${x}\""
+        print-indent = indent: x:
+          if builtins.isAttrs x then ''
+            {
+            ${concat-lines (builtins.attrValues (builtins.mapAttrs
+              (k: v: "${spaces indent}${k} = ${print-indent (indent + 2) v};")
+              x))}
+            ${spaces indent}}'' else if builtins.isString x then
+            ''"${x}"''
           else if builtins.isNull x then
             "<null>"
           else if builtins.isBool x then
             if x then "true" else "false"
-          else if builtins.isList x then
-            ''
-              [
-              ${concat-lines (builtins.map (z: "${spaces indent}(${print-indent (indent + 2) z})\n") x)}
-              ${spaces indent}]''
-          else
+          else if builtins.isList x then ''
+            [
+            ${concat-lines (builtins.map (z: ''
+              ${spaces indent}(${print-indent (indent + 2) z})
+            '') x)}
+            ${spaces indent}]'' else
             builtins.toString x;
         concat-lines = builtins.concatStringsSep "\n";
         spaces = n: builtins.concatStringsSep "" (builtins.genList (_: " ") n);
 
         # Config
         cfg-args = {
-          inherit
-            github-dark-nvim
-            iosevka
-            laptop-name
-            linux-mac
-            nixvim
-            pkgs
-            print
-            self
-            system
-            terminal-settings
-            ;
-          dock-apps =
-            [ kitty ]
-            ++ (with pkgs; [
-              spotify
-              discord
-              slack
-              arc-browser
-              logseq
-            ]);
+          inherit github-dark-nvim iosevka laptop-name linux-mac nixvim pkgs
+            print self system terminal-settings;
+          dock-apps = [ kitty ]
+            ++ (with pkgs; [ spotify discord slack arc-browser logseq ]);
           emacs = import ./config/programs/emacs cfg-args;
           git = pkgs.gitFull;
           kitty-config = import ./config/programs/kitty/config.nix cfg-args;
           rust = fenix.packages.${system}.minimal;
-          vim = nixvim.legacyPackages.${system}.makeNixvim (import ./config/programs/neovim cfg-args);
+          vim = nixvim.legacyPackages.${system}.makeNixvim
+            (import ./config/programs/neovim cfg-args);
         };
         cfg = {
           inherit system;
           modules = [
-            (builtins.mapAttrs (_: filename: import ./config/system/${filename} cfg-args) (
-              builtins.listToAttrs (
-                builtins.map
-                  (filename: {
-                    name = pkgs.lib.strings.removeSuffix ".nix" filename;
-                    value = filename;
-                  })
-                  (
-                    builtins.filter (pkgs.lib.strings.hasSuffix ".nix") (
-                      builtins.attrNames (builtins.readDir ./config/system)
-                    )
-                  )
-              )
-            ))
+            (builtins.mapAttrs
+              (_: filename: import ./config/system/${filename} cfg-args)
+              (builtins.listToAttrs (builtins.map (filename: {
+                name = pkgs.lib.strings.removeSuffix ".nix" filename;
+                value = filename;
+              }) (builtins.filter (pkgs.lib.strings.hasSuffix ".nix")
+                (builtins.attrNames (builtins.readDir ./config/system))))))
           ];
         };
-      in
-      {
+      in {
         apps.default = {
           type = "app";
           program = ./rebuild;
         };
-        packages = linux-mac { nixosConfigurations.${laptop-name} = pkgs.lib.nixosSystem cfg; } {
+        packages = linux-mac {
+          nixosConfigurations.${laptop-name} = pkgs.lib.nixosSystem cfg;
+        } {
           darwinConfigurations.${laptop-name} = nix-darwin.lib.darwinSystem cfg;
         };
-      }
-    );
+      });
 }

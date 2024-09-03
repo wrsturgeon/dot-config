@@ -11,7 +11,7 @@ let
         };
       };
     in
-    builtins.trace (builtins.toString { k = overriden; }) overriden
+    builtins.trace "${k} = ${builtins.toString overriden}" overriden
   );
 in
 {

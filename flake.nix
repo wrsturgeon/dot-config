@@ -42,6 +42,9 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
 
+      	# `lib.strings`
+	inherit (nixpkgs.lib) strings;
+
         # Nixpkgs
         pkgs = import nixpkgs {
           inherit system;
@@ -49,8 +52,8 @@
         };
 
         # OS introspection utils
-        on-linux = pkgs.lib.strings.hasSuffix "linux" system;
-        on-mac = pkgs.lib.strings.hasSuffix "darwin" system;
+        on-linux = strings.hasSuffix "linux" system;
+        on-mac = strings.hasSuffix "darwin" system;
         linux-mac = if on-linux then
           (a: b: a)
         else if on-mac then
@@ -150,9 +153,9 @@
             (builtins.mapAttrs
               (_: filename: import ./config/system/${filename} cfg-args)
               (builtins.listToAttrs (builtins.map (filename: {
-                name = pkgs.lib.strings.removeSuffix ".nix" filename;
+                name = strings.removeSuffix ".nix" filename;
                 value = filename;
-              }) (builtins.filter (pkgs.lib.strings.hasSuffix ".nix")
+              }) (builtins.filter (strings.hasSuffix ".nix")
                 (builtins.attrNames (builtins.readDir ./config/system))))))
           ];
         };
@@ -162,7 +165,7 @@
           program = ./rebuild;
         };
         packages = linux-mac {
-          nixosConfigurations = let configured = pkgs.lib.nixosSystem cfg;
+          nixosConfigurations = let configured = nixpkgs.lib.nixosSystem cfg;
           in {
             ${laptop-name} = configured;
             "mbp-nixos" = configured;

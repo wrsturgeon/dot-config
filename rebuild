@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eu
+set -eux
 
 export OS="$(uname -s)"
 export COMMIT_DATE='`'"$(date '+%Y/%m/%d %H:%M:%S') ${OS} "'`'
@@ -16,6 +16,7 @@ git push
 
 # Remove succeed/failure flag:
 cd ~/.config/nix
+git pull
 rm -f .build-succeeded .build-failed
 nixfmt .
 git add -A

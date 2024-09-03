@@ -1,6 +1,6 @@
 ctx:
 let
-  daemons = builtins.mapAttrs (
+  with-service-config = builtins.mapAttrs (
     k: v:
     v
     // {
@@ -13,7 +13,7 @@ let
   );
 in
 {
-  daemons = daemons {
+  agents = with-service-config {
     custom-system-update = {
       script = ''
         cd ~/.config/nix

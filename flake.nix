@@ -53,7 +53,10 @@
         # Nixpkgs
         pkgs = import nixpkgs {
           inherit system;
-          config = { allowUnfree = true; };
+          config = {
+            allowUnfree = true;
+            permittedInsecurePackages = [ "electron-27.3.11" ];
+          };
         };
 
         # OS introspection utils

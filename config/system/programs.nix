@@ -6,14 +6,17 @@ ctx:
   };
   zsh = {
     enableBashCompletion = true;
-    enableCompletion = true;
-    enableSyntaxHighlighting = true;
     promptInit =
       "source ${ctx.pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-  } // ctx.linux-mac { } {
+  } // ctx.linux-mac {
+    completion.enable = true;
+    syntaxHighlighting.enable = true;
+  } {
+    enableCompletion = true;
     enableFzfCompletion = true;
     enableFzfGit = true;
     enableFzfHistory = true;
+    enableSyntaxHighlighting = true;
   };
 } // ctx.linux-mac { } {
   dconf = { };

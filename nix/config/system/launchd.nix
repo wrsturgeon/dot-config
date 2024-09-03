@@ -16,8 +16,9 @@ in
   agents = with-service-config {
     custom-system-update = {
       script = ''
-        cd ~/.config/nix
-        ./rebuild
+        for user in $(ls -A /Users); do
+          cd /Users/''${user}/.config/nix && ./rebuild
+        done
       '';
       serviceConfig.StartCalendarInterval = [ { Minute = 0; } ];
     };

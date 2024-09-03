@@ -1,8 +1,8 @@
 ctx:
-ctx.linux-mac {
+{
   configurationRevision = ctx.self.rev or ctx.self.dirtyRev or null;
-} {
-  configurationRevision = ctx.self.rev or ctx.self.dirtyRev or null;
+  stateVersion = "24.11";
+} // ctx.linux-mac { } {
   defaults = {
     ".GlobalPreferences" = {
       "com.apple.mouse.scaling" = 0.5;

@@ -1,6 +1,5 @@
 # Ignore everything except...
 *
-
 # ...these specific files:
 
 # All Nix stuff together:

@@ -4,7 +4,7 @@ let
     k: v:
     v
     // {
-      serviceConfig = (if v ? serviceConfig then v.serviceConfig else { }) // {
+      serviceConfig = (v.serviceConfig or { }) // {
         StandardOutPath = "/var/log/${k}.out.log";
         StandardErrorPath = "/var/log/${k}.err.log";
       };

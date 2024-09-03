@@ -1,4 +1,4 @@
 ctx:
 {
   hostName = ctx.laptop-name;
-} // linux-mac { } { computerName = "Will Sturgeon"; }
+} // ctx.linux-mac { } { computerName = "Will Sturgeon"; }

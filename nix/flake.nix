@@ -152,7 +152,7 @@
           else
             builtins.toString x;
         concat-lines = builtins.concatStringsSep "\n";
-        spaces = builtins.genList (_: " ");
+        spaces = n: builtins.concatStringsSep "" (builtins.genList (_: " ") n);
 
         # Config
         cfg-args = {

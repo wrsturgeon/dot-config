@@ -1,7 +1,11 @@
 {
   autoindent = true;
   autoread = true;
-  backspace = [ "indent" "eol" "start" ];
+  backspace = [
+    "indent"
+    "eol"
+    "start"
+  ];
   belloff = "all";
   cursorline = true;
   cursorlineopt = "line";

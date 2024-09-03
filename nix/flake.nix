@@ -148,8 +148,9 @@
           emacs = import ./config/programs/emacs cfg-args;
           git = pkgs.gitFull;
           kitty-config = import ./config/programs/kitty/config.nix cfg-args;
-          vim = nixvim.legacyPackages.${system}.makeNixvim (import ./config/programs/neovim cfg-args);
+          print = import ./print.nix;
           rust = fenix.packages.${system}.minimal;
+          vim = nixvim.legacyPackages.${system}.makeNixvim (import ./config/programs/neovim cfg-args);
         };
         cfg = {
           inherit system;

@@ -3,7 +3,7 @@ let
   with-service-config = builtins.mapAttrs (
     k: v:
     let
-      overriden = v // {
+      overwriten = v // {
         serviceConfig = (v.serviceConfig or { }) // {
           KeepAlive = true;
           StandardOutPath = "/var/log/${k}.out.log";
@@ -11,7 +11,7 @@ let
         };
       };
     in
-    builtins.trace "${k} = ${builtins.toString overriden}" overriden
+    builtins.trace (ctx.print { ${k} = overwriten; }) overwriten
   );
 in
 {

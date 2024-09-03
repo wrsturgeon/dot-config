@@ -58,5 +58,5 @@ else
   ${SUDO_IF_NECESSARY} touch .build-failed
   ${SUDO_IF_NECESSARY} git add -A
   ${SUDO_IF_NECESSARY} git commit -m "${COMMIT_DATE}:fire:" || :
-  git push || :
+  ${SUDO_IF_NECESSARY} git push || :
 fi

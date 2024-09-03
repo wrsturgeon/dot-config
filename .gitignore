@@ -9,8 +9,6 @@
 !flake.nix
 !config/
 !config/**
-!firmware/
-!firmware/**
 !rebuild
 
 # Everything else:

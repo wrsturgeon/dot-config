@@ -70,7 +70,7 @@
         laptop-name = "willsturgeon";
 
         # Kitty terminal emulator
-        kitty = import ./config/programs/kitty cfg-args;
+        kitty = import config/programs/kitty cfg-args;
         terminal-settings = rec {
           font-size = 13;
           dark = true;
@@ -153,22 +153,22 @@
             nixvim pkgs print self system terminal-settings;
           dock-apps = [ kitty ]
             ++ (with pkgs; [ spotify discord slack arc-browser logseq ]);
-          emacs = import ./config/programs/emacs cfg-args;
+          emacs = import config/programs/emacs cfg-args;
           git = pkgs.gitFull;
-          hardware-configuration = import ./hardware-configuration.nix;
-          kitty-config = import ./config/programs/kitty/config.nix cfg-args;
+          hardware-configuration = import config/hardware-configuration.nix;
+          kitty-config = import config/programs/kitty/config.nix cfg-args;
           rust = fenix.packages.${system}.minimal;
           vim = nixvim.legacyPackages.${system}.makeNixvim
-            (import ./config/programs/neovim cfg-args);
+            (import config/programs/neovim cfg-args);
         };
         cfg = {
           inherit system;
           modules = let
-            all-files = builtins.attrNames (builtins.readDir ./config/system);
+            all-files = builtins.attrNames (builtins.readDir config/system);
             all-nix = builtins.filter (strings.hasSuffix ".nix") all-files;
             all-configs = builtins.map (filename: {
               name = strings.removeSuffix ".nix" filename;
-              value = import ./config/system/${filename} cfg-args;
+              value = import config/system/${filename} cfg-args;
             }) all-nix;
             configs = builtins.listToAttrs all-configs;
             relevant = nonnull configs;

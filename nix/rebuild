@@ -15,17 +15,19 @@ git commit -m "${COMMIT_DATE}" || :
 git push
 
 # Remove succeed/failure flag:
-rm -f .build-succeeded .build-failed
-
-# Push ~/.config changes:
 cd ~/.config
 git pull
 cd nix
+rm -f .build-succeeded .build-failed
 nixfmt .
 git add -A
+git commit -m "${COMMIT_DATE} :wrench:" || :
+git push || :
+
+# Push ~/.config changes:
 nix flake update || : # rate limits!
 git add -A
-git commit -m "${COMMIT_DATE} :wrench:" || :
+git commit -m "${COMMIT_DATE} :arrow_up:" || :
 git push || :
 
 if [[ "${OS}" == "Linux" ]]; then

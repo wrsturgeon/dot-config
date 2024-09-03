@@ -164,19 +164,19 @@
           type = "app";
           program = ./rebuild;
         };
-        packages = linux-mac {
-          nixosConfigurations = let configured = nixpkgs.lib.nixosSystem cfg;
-          in {
-            ${laptop-name} = configured;
-            "mbp-nixos" = configured;
-          };
-        } {
-          darwinConfigurations =
-            let configured = nix-darwin.lib.darwinSystem cfg;
-            in {
-              ${laptop-name} = configured;
-              "mbp-macos" = configured;
-            };
-        };
+        # packages = linux-mac {
+        #   nixosConfigurations = let configured = nixpkgs.lib.nixosSystem cfg;
+        #   in {
+        #     ${laptop-name} = configured;
+        #     "mbp-nixos" = configured;
+        #   };
+        # } {
+        #   darwinConfigurations =
+        #     let configured = nix-darwin.lib.darwinSystem cfg;
+        #     in {
+        #       ${laptop-name} = configured;
+        #       "mbp-macos" = configured;
+        #     };
+        # };
       });
 }

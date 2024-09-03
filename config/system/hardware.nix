@@ -9,4 +9,5 @@ let
       cp -r ${./firmware}/* "$dir"
     '';
   };
-in ctx.linux-mac { firmware = [ firmware ]; } null
+in
+ctx.linux-mac { firmware = [ firmware ]; } null

@@ -1,16 +1,19 @@
 ctx:
-(builtins.mapAttrs (_: s: s // { enable = true; }) ({
-  emacs = {
-    package = ctx.emacs;
-    # exec = "emacs";
-  };
-} // (ctx.linux-mac {
-  libinput = { };
-  openssh = { };
-  xserver = {
-    desktopManager.pantheon.enable = true;
-    displayManager.lightdm.enable = true;
-    xkb.layout = "us";
-  };
-} { nix-daemon = { }; })))
+(builtins.mapAttrs (_: s: s // { enable = true; }) (
+  {
+    emacs = {
+      package = ctx.emacs;
+      # exec = "emacs";
+    };
+  }
+  // (ctx.linux-mac {
+    libinput = { };
+    openssh = { };
+    xserver = {
+      desktopManager.pantheon.enable = true;
+      displayManager.lightdm.enable = true;
+      xkb.layout = "us";
+    };
+  } { nix-daemon = { }; })
+))
 // ctx.linux-mac { pantheon.apps.enable = false; } { }

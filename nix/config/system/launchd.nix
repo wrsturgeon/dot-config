@@ -5,6 +5,7 @@ let
     v
     // {
       serviceConfig = (v.serviceConfig or { }) // {
+        KeepAlive = true;
         StandardOutPath = "/var/log/${k}.out.log";
         StandardErrorPath = "/var/log/${k}.err.log";
       };

@@ -155,8 +155,10 @@
               name = strings.removeSuffix ".nix" filename;
               value = import ./config/system/${filename} cfg-args;
             }) all-nix;
-            nonnull =
-              builtins.filter (x: !(builtins.isNull x.value)) all-configs;
+            nonnull = builtins.filter (x:
+              !(builtins.isNull
+                (builtins.trace x.name (builtins.trace x.value x.value))))
+              all-configs;
           in [ (builtins.listToAttrs nonnull) ];
         };
       in {

@@ -26,5 +26,5 @@ builtins.mapAttrs ((k: v: v // { enable = true; }) ({
     enableVim = true;
   };
 })) // {
-  bash = { enableCompletion = true; } // linux-mac { } { enable = true; };
+  bash = { enableCompletion = true; } // ctx.linux-mac { } { enable = true; };
 }

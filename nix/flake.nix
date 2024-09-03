@@ -126,22 +126,24 @@
         # Print deeply evaluated attribute sets
         print =
           x:
-          if builtins.isAttrs x then
-            "{ ${
-              pkgs.lib.strings.concatStringsSep "; " (
-                builtins.attrValues (builtins.mapAttrs (k: v: "${k} = ${print v}") x)
-              )
-            } }"
-          else if builtins.isString x then
-            x
-          else if builtins.isNull x then
-            "<null>"
-          else if builtins.isBool x then
-            if x then "true" else "false"
-          else if builtins.isList x then
-            "[ ${builtins.map (z: "(${print z}) ") x}]"
-          else
-            (builtins.toString x);
+          builtins.trace x (
+            if builtins.isAttrs x then
+              "{ ${
+                pkgs.lib.strings.concatStringsSep "; " (
+                  builtins.attrValues (builtins.mapAttrs (k: v: "${k} = ${print v}") x)
+                )
+              } }"
+            else if builtins.isString x then
+              x
+            else if builtins.isNull x then
+              "<null>"
+            else if builtins.isBool x then
+              if x then "true" else "false"
+            else if builtins.isList x then
+              "[ ${builtins.map (z: "(${print z}) ") x}]"
+            else
+              builtins.toString x
+          );
 
         # Config
         cfg-args = {

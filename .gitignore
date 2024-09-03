@@ -19,7 +19,3 @@ nix/**
 
 !.gitignore
 !.gitmodules
-
-!user-dirs.dirs
-
-**/*-old

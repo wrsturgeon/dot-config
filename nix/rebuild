@@ -3,10 +3,19 @@
 set -eu
 
 export OS="$(uname -s)"
+export COMMIT_DATE='`'"$(date '+%Y/%m/%d %H:%M:%S') ${OS}"'`'
 
 # Synchronize Logseq notes:
 cd ~/Desktop/logseq
+git pull
+git submodule update --init --recursive --remote
 make .updated
+git add -A
+git commit -m "${COMMIT_DATE}" || :
+git push
+
+# Remove succeed/failure flag:
+rm -f .build-succeeded .build-failed
 
 # Push ~/.config changes:
 cd ~/.config
@@ -16,7 +25,7 @@ nixfmt .
 git add -A
 nix flake update || : # rate limits!
 git add -A
-git commit -m '`'"$(date '+%Y/%m/%d %H:%M:%S') ${OS}"'`' || :
+git commit -m "${COMMIT_DATE} :wrench:" || :
 git push || :
 
 if [[ "${OS}" == "Linux" ]]; then
@@ -34,7 +43,17 @@ else
 fi
 
 # Rebuild the Nix system:
-${CMD} switch --flake . --keep-going -v -j auto --show-trace # --install-bootloader
-
-# Collect garbage
-( nix-collect-garbage -j auto --delete-old > /dev/null 2>&1 & )
+if
+  ${CMD} switch --flake . --keep-going -v -j auto --show-trace # --install-bootloader
+then
+  touch .build-succeeded
+  git add -A
+  git commit -m "${COMMIT_DATE} :white_check_mark:" || :
+  git push || :
+  ( nix-collect-garbage -j auto --delete-old > /dev/null 2>&1 & )
+else
+  touch .build-failed
+  git add -A
+  git commit -m "${COMMIT_DATE} :fire:" || :
+  git push || :
+fi

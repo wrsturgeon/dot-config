@@ -1,5 +1,7 @@
 ctx:
-ctx.linux-mac null {
+ctx.linux-mac {
+  configurationRevision = ctx.self.rev or ctx.self.dirtyRev or null;
+} {
   configurationRevision = ctx.self.rev or ctx.self.dirtyRev or null;
   defaults = {
     ".GlobalPreferences" = {

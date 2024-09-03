@@ -62,8 +62,7 @@
           throw "Unrecognized OS in system `${system}`!";
 
         # Usernames
-        laptop-name = "willsturgeon"; # "mbp-" + (linux-mac "nixos" "macos");
-        # username = linux-mac "will" "willsturgeon";
+        laptop-name = "willsturgeon";
 
         # Kitty terminal emulator
         kitty = import ./config/programs/kitty cfg-args;

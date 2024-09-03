@@ -45,7 +45,7 @@ fi
 
 # Rebuild the Nix system:
 if
-  ${CMD} --no-eval-cache switch --flake . --keep-going -v -j auto --show-trace # --install-bootloader
+  ${CMD} switch --flake . --keep-going -v -j auto --show-trace # --install-bootloader
 then
   cd ~/.config/nix
   touch .build-succeeded

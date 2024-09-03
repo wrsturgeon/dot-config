@@ -18,17 +18,21 @@ ctx:
         enableSyntaxHighlighting = true;
       };
   }
-  // ctx.linux-mac { } {
-    dconf = { };
-    mtr = { };
-    pantheon-tweaks = { };
-    tmux = {
-      enableFzf = true;
-      enableMouse = true;
-      enableSensible = true;
-      enableVim = true;
-    };
-  }
+  //
+    ctx.linux-mac
+      {
+        dconf = { };
+        mtr = { };
+        pantheon-tweaks = { };
+      }
+      {
+        tmux = {
+          enableFzf = true;
+          enableMouse = true;
+          enableSensible = true;
+          enableVim = true;
+        };
+      }
 ))
 // {
   bash = ctx.linux-mac { completion.enable = true; } {

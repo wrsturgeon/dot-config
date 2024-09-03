@@ -9,6 +9,7 @@
 nix/**
 !nix/flake.lock
 !nix/flake.nix
+!nix/print.nix
 !nix/config/
 !nix/config/**
 !nix/firmware/

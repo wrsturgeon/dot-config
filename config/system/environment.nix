@@ -39,7 +39,7 @@ ctx: {
   variables = let editor = "vi";
   in {
     EDITOR = editor;
-    LANG = lib.mkForce "fr_FR.UTF-8";
+    LANG = ctx.pkgs.lib.mkForce "fr_FR.UTF-8";
     KITTY_CONFIG_DIRECTORY = "${ctx.kitty-config}";
     VISUAL = editor;
   };

@@ -135,8 +135,7 @@
                   builtins.mapAttrs (k: v: "${spaces indent}${k} = ${print-indent (indent + 2) v};") x
                 )
               )}
-              }
-            ''
+              ${spaces indent}}''
           else if builtins.isString x then
             "\"${x}\""
           else if builtins.isNull x then
@@ -147,8 +146,7 @@
             ''
               [
               ${concat-lines (builtins.map (z: "${spaces indent}(${print-indent (indent + 2) z})\n") x)}
-              ]
-            ''
+              ${spaces indent}]''
           else
             builtins.toString x;
         concat-lines = builtins.concatStringsSep "\n";

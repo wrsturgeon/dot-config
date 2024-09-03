@@ -90,27 +90,35 @@ ctx.linux-mac null {
       mouse-over-hilite-stack = true;
       mru-spaces = true;
       orientation = "bottom";
-      persistent-apps = let
-        dock-apps = builtins.map (app:
-          let
-            appdir = "${app}/Applications";
-            appfile = builtins.head
-              (builtins.filter (ctx.pkgs.lib.strings.hasSuffix ".app")
-                (builtins.attrNames (builtins.readDir appdir)));
-          in "${appdir}/${appfile}") ctx.dock-apps;
-        trace = ''
+      persistent-apps =
+        let
+          dock-apps = builtins.map (
+            app:
+            let
+              appdir = "${app}/Applications";
+              appfile = builtins.head (
+                builtins.filter (ctx.pkgs.lib.strings.hasSuffix ".app") (
+                  builtins.attrNames (builtins.readDir appdir)
+                )
+              );
+            in
+            "${appdir}/${appfile}"
+          ) ctx.dock-apps;
+          trace = ''
 
 
-          Dock apps:
-          ${ctx.pkgs.lib.strings.concatLines dock-apps}'';
-      in [
-        "/System/Applications/System Settings.app"
-        "/System/Applications/Messages.app"
-        "/Applications/Spark.app"
-        "/System/Applications/Notes.app"
-        "/System/Applications/Reminders.app"
-        "/Applications/Notion Calendar.app"
-      ] ++ (builtins.trace trace dock-apps);
+            Dock apps:
+            ${ctx.pkgs.lib.strings.concatLines dock-apps}'';
+        in
+        [
+          "/System/Applications/System Settings.app"
+          "/System/Applications/Messages.app"
+          "/Applications/Spark.app"
+          "/System/Applications/Notes.app"
+          "/System/Applications/Reminders.app"
+          "/Applications/Notion Calendar.app"
+        ]
+        ++ (builtins.trace trace dock-apps);
       persistent-others = [ ];
       show-process-indicators = true;
       show-recents = false;

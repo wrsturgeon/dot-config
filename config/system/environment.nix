@@ -13,7 +13,13 @@ ctx: {
     vi = "vim";
     vim = "nvim";
   };
-  systemPackages = ctx.dock-apps ++ (with ctx; [ emacs git vim ])
+  systemPackages =
+    ctx.dock-apps
+    ++ (with ctx; [
+      emacs
+      git
+      vim
+    ])
     ++ (with ctx.pkgs; [
       coreutils-full
       fd
@@ -33,14 +39,21 @@ ctx: {
       # tor-browser
       tree
       zoom-us
-    ]) ++ (with ctx.rust; [ cargo rustc ])
+    ])
+    ++ (with ctx.rust; [
+      cargo
+      rustc
+    ])
     ++ (with ctx.pkgs.coqPackages; [ coq ])
     ++ (ctx.linux-mac [ ] [ ctx.pkgs.vlc-bin ]);
-  variables = let editor = "vi";
-  in {
-    EDITOR = editor;
-    LANG = "fr_FR.UTF-8";
-    KITTY_CONFIG_DIRECTORY = "${ctx.kitty-config}";
-    VISUAL = editor;
-  };
+  variables =
+    let
+      editor = "vi";
+    in
+    {
+      EDITOR = editor;
+      LANG = "fr_FR.UTF-8";
+      KITTY_CONFIG_DIRECTORY = "${ctx.kitty-config}";
+      VISUAL = editor;
+    };
 }

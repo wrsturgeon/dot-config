@@ -5,4 +5,5 @@ ctx:
     package = ctx.emacs;
     exec = "emacs";
   };
-} // (ctx.linux-mac { } { nix-daemon.enable = true; })
+}
+// (ctx.linux-mac { } { nix-daemon.enable = true; })

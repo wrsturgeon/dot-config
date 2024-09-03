@@ -1,5 +1,5 @@
 ctx:
-builtins.mapAttrs (s: s // { enable = true; }) ({
+builtins.mapAttrs (_: s: s // { enable = true; }) ({
   emacs = {
     package = ctx.emacs;
     # exec = "emacs";

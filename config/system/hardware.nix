@@ -1,6 +1,6 @@
 ctx:
 let
-  firmware = pkgs.stdenvNoCC.mkDerivation {
+  firmware = ctx.pkgs.stdenvNoCC.mkDerivation {
     pname = "brcm-firmware";
     version = "none";
     buildCommand = ''

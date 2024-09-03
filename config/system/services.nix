@@ -1,8 +1,16 @@
 ctx:
-{
+builtins.mapAttrs (s: s // { enable = true; }) ({
   emacs = {
-    enable = true;
     package = ctx.emacs;
     # exec = "emacs";
   };
-} // (ctx.linux-mac { } { nix-daemon.enable = true; })
+} // (ctx.linux-mac {
+  openssh = { };
+  pantheon.apps.enable = false;
+  xserver = {
+    desktopManager.pantheon.enable = true;
+    displayManager.lightdm.enable = true;
+    xkb.layout = "us";
+    libinput.enable = true;
+  };
+} { nix-daemon = { }; }))

@@ -2,7 +2,14 @@ ctx:
 {
   configurationRevision = ctx.self.rev or ctx.self.dirtyRev or null;
   stateVersion = "24.11";
-} // ctx.linux-mac { } {
+} // ctx.linux-mac {
+  autoUpgrade = {
+    dates = "04:00";
+    enable = true;
+    flags = [ "--update-input" "nixpkgs" ];
+    allowReboot = true;
+  };
+} {
   defaults = {
     ".GlobalPreferences" = {
       "com.apple.mouse.scaling" = 0.5;

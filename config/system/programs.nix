@@ -1,6 +1,5 @@
 ctx:
-builtins.mapAttrs (k: v: v // { enable = true; }) ({
-  # bash = { enableCompletion = true; };
+builtins.mapAttrs ((k: v: v // { enable = true; }) ({
   direnv = {
     direnvrcExtra = "echo 'Loaded direnv'";
     nix-direnv.enable = true;
@@ -17,10 +16,15 @@ builtins.mapAttrs (k: v: v // { enable = true; }) ({
     enableFzfHistory = true;
   };
 } // ctx.linux-mac { } {
+  dconf = { };
+  mtr = { };
+  pantheon-tweaks = { };
   tmux = {
     enableFzf = true;
     enableMouse = true;
     enableSensible = true;
     enableVim = true;
   };
-})
+})) // {
+  bash = { enableCompletion = true; } // linux-mac { } { enable = true; };
+}

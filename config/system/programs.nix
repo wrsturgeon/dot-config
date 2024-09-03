@@ -1,6 +1,6 @@
 ctx:
 builtins.mapAttrs (k: v: v // { enable = true; }) ({
-  bash = { enableCompletion = true; };
+  # bash = { enableCompletion = true; };
   direnv = {
     direnvrcExtra = "echo 'Loaded direnv'";
     nix-direnv.enable = true;

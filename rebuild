@@ -15,9 +15,7 @@ git commit -m "${COMMIT_DATE}" || :
 git push
 
 # Remove succeed/failure flag:
-cd ~/.config
-git pull
-cd nix
+cd ~/.config/nix
 rm -f .build-succeeded .build-failed
 nixfmt .
 git add -A

@@ -32,10 +32,12 @@ if [[ "${OS}" == "Linux" ]]; then
   cd /etc/nixos
   sudo git pull
   export CMD="sudo nixos-rebuild"
+  export SUDO_IF_NECESSARY="sudo"
 else
   if [[ "${OS}" == "Darwin" ]]; then
     # export CMD="nix run nix-darwin --"
     export CMD="darwin-rebuild"
+    export SUDO_IF_NECESSARY=""
   else
     echo 'Unrecognized OS'
     exit 1
@@ -46,14 +48,14 @@ fi
 if
   ${CMD} switch --flake . --keep-going -v -j auto --show-trace # --install-bootloader
 then
-  touch .build-succeeded
-  git add -A
-  git commit -m "${COMMIT_DATE}:white_check_mark:" || :
-  git push || :
+  ${SUDO_IF_NECESSARY} touch .build-succeeded
+  ${SUDO_IF_NECESSARY} git add -A
+  ${SUDO_IF_NECESSARY} git commit -m "${COMMIT_DATE}:white_check_mark:" || :
+  ${SUDO_IF_NECESSARY} git push || :
   ( nix-collect-garbage -j auto --delete-old > /dev/null 2>&1 & )
 else
-  touch .build-failed
-  git add -A
-  git commit -m "${COMMIT_DATE}:fire:" || :
+  ${SUDO_IF_NECESSARY} touch .build-failed
+  ${SUDO_IF_NECESSARY} git add -A
+  ${SUDO_IF_NECESSARY} git commit -m "${COMMIT_DATE}:fire:" || :
   git push || :
 fi

@@ -1,11 +1,11 @@
 ctx:
 {
   configurationRevision = ctx.self.rev or ctx.self.dirtyRev or null;
-  stateVersion = "24.11";
 }
 //
   ctx.linux-mac
     {
+      stateVersion = "23.05";
       autoUpgrade = {
         dates = "04:00";
         enable = true;

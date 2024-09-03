@@ -1,5 +1,5 @@
 ctx:
-linux-mac null (let
+ctx.linux-mac null (let
   with-service-config = builtins.mapAttrs (k: v:
     v // {
       serviceConfig = (v.serviceConfig or { }) // {

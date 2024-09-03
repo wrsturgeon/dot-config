@@ -21,6 +21,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:LnL7/nix-darwin";
     };
+    nixos-hardware = {
+      flake = false;
+      url = "github:kekrby/nixos-hardware";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixvim = {
       inputs = {
@@ -36,7 +40,8 @@
   };
   outputs = {
     # apple-fonts,
-    fenix, flake-utils, github-dark-nvim-src, nix-darwin, nixpkgs, nixvim, self,
+    fenix, flake-utils, github-dark-nvim-src, nix-darwin, nixos-hardware
+    , nixpkgs, nixvim, self,
     # sf-mono-liga-src
     }:
     flake-utils.lib.eachDefaultSystem (system:
@@ -144,12 +149,13 @@
 
         # Config
         cfg-args = {
-          inherit github-dark-nvim iosevka laptop-name linux-mac nixvim pkgs
-            print self system terminal-settings;
+          inherit github-dark-nvim iosevka laptop-name linux-mac nixos-hardware
+            nixvim pkgs print self system terminal-settings;
           dock-apps = [ kitty ]
             ++ (with pkgs; [ spotify discord slack arc-browser logseq ]);
           emacs = import ./config/programs/emacs cfg-args;
           git = pkgs.gitFull;
+          hardware-configuration = import ./hardware-configuration.nix;
           kitty-config = import ./config/programs/kitty/config.nix cfg-args;
           rust = fenix.packages.${system}.minimal;
           vim = nixvim.legacyPackages.${system}.makeNixvim

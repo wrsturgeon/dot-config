@@ -123,6 +123,14 @@
           '';
         };
 
+        # Print deeply evaluated attribute sets
+        print =
+          x:
+          if builtins.isAttrs x then
+            "{ ${pkgs.lib.strings.concatStringsSep "; " (builtins.mapAttrs (k: v: "${k} = ${print v}") x)} }"
+          else
+            (builtins.toString x);
+
         # Config
         cfg-args = {
           inherit
@@ -132,6 +140,7 @@
             linux-mac
             nixvim
             pkgs
+            print
             self
             system
             terminal-settings
@@ -148,7 +157,6 @@
           emacs = import ./config/programs/emacs cfg-args;
           git = pkgs.gitFull;
           kitty-config = import ./config/programs/kitty/config.nix cfg-args;
-          print = import ./print.nix;
           rust = fenix.packages.${system}.minimal;
           vim = nixvim.legacyPackages.${system}.makeNixvim (import ./config/programs/neovim cfg-args);
         };

@@ -35,7 +35,7 @@ ctx: {
       zoom-us
     ]) ++ (with ctx.rust; [ cargo rustc ])
     ++ (with ctx.pkgs.coqPackages; [ coq ])
-    ++ (ctx.linux-mac [ libsecret ] [ ctx.pkgs.vlc-bin ]);
+    ++ (ctx.linux-mac [ ctx.pkgs.libsecret ] [ ctx.pkgs.vlc-bin ]);
   variables = let editor = "vi";
   in {
     EDITOR = editor;

@@ -5,12 +5,12 @@ ctx:
     # exec = "emacs";
   };
 } // (ctx.linux-mac {
+  libinput = { };
   openssh = { };
   xserver = {
     desktopManager.pantheon.enable = true;
     displayManager.lightdm.enable = true;
     xkb.layout = "us";
-    libinput.enable = true;
   };
 } { nix-daemon = { }; })))
 // ctx.linux-mac { pantheon.apps.enable = false; } { }

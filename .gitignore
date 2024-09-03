@@ -6,6 +6,7 @@
 
 !nix/
 nix/**
+!nix/.build-*
 !nix/flake.lock
 !nix/flake.nix
 !nix/config/

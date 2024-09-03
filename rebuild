@@ -31,7 +31,7 @@ git push || :
 
 if [[ "${OS}" == "Linux" ]]; then
   cd /etc/nixos
-  sudo git pull
+  sudo git reset --hard origin/main
   export CMD="sudo nixos-rebuild"
   export SUDO_IF_NECESSARY="sudo"
 else

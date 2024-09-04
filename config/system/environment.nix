@@ -45,7 +45,13 @@ ctx: {
       rustc
     ])
     ++ (with ctx.pkgs.coqPackages; [ coq ])
-    ++ (ctx.linux-mac [ ctx.pkgs.libsecret ] [ ctx.pkgs.vlc-bin ]);
+    ++ (
+      with ctx.pkgs;
+      ctx.linux-mac [
+        libsecret
+        pantheon-tweaks
+      ] [ vlc-bin ]
+    );
   variables =
     let
       editor = "vi";

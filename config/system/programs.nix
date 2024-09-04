@@ -23,7 +23,6 @@ ctx:
       {
         dconf = { };
         mtr = { };
-        pantheon-tweaks = { };
       }
       {
         tmux = {

@@ -80,7 +80,10 @@
             throw "Unrecognized OS in system `${system}`!";
 
         # Usernames
-        usernames = [ "willsturgeon" ];
+        usernames = [
+          "willsturgeon"
+          "Figments-MacBook-Pro"
+        ];
         eachUsername =
           f:
           builtins.listToAttrs (

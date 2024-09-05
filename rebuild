@@ -6,16 +6,27 @@ export OS="$(uname -s)"
 export COMMIT_DATE='`'"$(date '+%Y/%m/%d %H:%M:%S') ${OS} "'`'
 
 # Synchronize Logseq notes:
-cd ~/Desktop/logseq
-git pull
-git submodule update --init --recursive --remote
-make .updated
-git add -A
-git commit -m "${COMMIT_DATE}" || :
-git push
+if [ -d ~/Desktop/logseq ]; then
+  cd ~/Desktop/logseq
+  git pull
+  git submodule update --init --recursive --remote
+  make .updated
+  git add -A
+  git commit -m "${COMMIT_DATE}" || :
+  git push
+fi
 
 # Remove succeed/failure flag:
-cd ~/.config/nix
+if [ -d ~/.config/nix ]; then
+  cd ~/.config/nix
+else
+  if [ -d /etc/nixos ]; then
+    cd /etc/nixos
+  else
+    echo 'Neither ~/.config/nix nor /etc/nixos exist!'
+    exit 1
+  fi
+fi
 git pull
 rm -f .build-succeeded .build-failed
 nixfmt .

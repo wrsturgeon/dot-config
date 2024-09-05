@@ -80,7 +80,7 @@
             throw "Unrecognized OS in system `${system}`!";
 
         # Usernames
-        usernames = strings.splitString "\n" (builtins.readFile ./usernames);
+        usernames = [ "willsturgeon" ];
         eachUsername =
           f:
           builtins.listToAttrs (

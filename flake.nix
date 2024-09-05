@@ -81,7 +81,14 @@
 
         # Usernames
         usernames = strings.splitString "\n" (builtins.readFile ./usernames);
-        eachUsername = value: builtins.listToAttrs (builtins.map (name: { inherit name value; }) usernames);
+        eachUsername =
+          f:
+          builtins.listToAttrs (
+            builtins.map (name: {
+              inherit name;
+              value = f name;
+            }) usernames
+          );
 
         # Kitty terminal emulator
         kitty = import config/programs/kitty cfg-args;
@@ -176,7 +183,7 @@
             s;
 
         # Config
-        cfg-args = {
+        cfg-args = laptop-name: {
           inherit
             github-dark-nvim
             iosevka
@@ -202,14 +209,16 @@
               ]
               ++ linux-mac [ firefox ] [ arc-browser ]
             );
-          emacs = import config/programs/emacs cfg-args;
+          emacs = import config/programs/emacs (cfg-args laptop-name);
           git = pkgs.gitFull;
           hardware-configuration = import config/hardware-configuration.nix;
-          kitty-config = import config/programs/kitty/config.nix cfg-args;
+          kitty-config = import config/programs/kitty/config.nix (cfg-args laptop-name);
           rust = fenix.packages.${system}.minimal;
-          vim = nixvim.legacyPackages.${system}.makeNixvim (import config/programs/neovim cfg-args);
+          vim = nixvim.legacyPackages.${system}.makeNixvim (
+            import config/programs/neovim (cfg-args laptop-name)
+          );
         };
-        cfg = {
+        cfg = laptop-name: {
           inherit system;
           modules =
             let
@@ -217,7 +226,7 @@
               all-nix = builtins.filter (strings.hasSuffix ".nix") all-files;
               all-configs = builtins.map (filename: {
                 name = strings.removeSuffix ".nix" filename;
-                value = import config/system/${filename} cfg-args;
+                value = import config/system/${filename} (cfg-args laptop-name);
               }) all-nix;
               configs = builtins.listToAttrs all-configs;
               relevant = nonnull configs;
@@ -231,8 +240,8 @@
           program = ./rebuild;
         };
         packages = {
-          nixosConfigurations = eachUsername (nixpkgs.lib.nixosSystem cfg);
-          darwinConfigurations = eachUsername (nix-darwin.lib.darwinSystem cfg);
+          nixosConfigurations = eachUsername (laptop-name: nixpkgs.lib.nixosSystem (cfg laptop-name));
+          darwinConfigurations = eachUsername (laptop-name: nix-darwin.lib.darwinSystem (cfg laptop-name));
         };
       }
     );

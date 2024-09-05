@@ -80,7 +80,8 @@
             throw "Unrecognized OS in system `${system}`!";
 
         # Usernames
-        laptop-name = builtins.readFile ./username;
+        usernames = strings.splitString "\n" (builtins.readFile ./usernames);
+        eachUsername = value: builtins.listToAttrs (builtins.map (name: { inherit name value; }) usernames);
 
         # Kitty terminal emulator
         kitty = import config/programs/kitty cfg-args;
@@ -230,22 +231,8 @@
           program = ./rebuild;
         };
         packages = {
-          nixosConfigurations =
-            let
-              configured = nixpkgs.lib.nixosSystem cfg;
-            in
-            {
-              ${laptop-name} = configured;
-              "mbp-nixos" = configured;
-            };
-          darwinConfigurations =
-            let
-              configured = nix-darwin.lib.darwinSystem cfg;
-            in
-            {
-              ${laptop-name} = configured;
-              "mbp-macos" = configured;
-            };
+          nixosConfigurations = eachUsername (nixpkgs.lib.nixosSystem cfg);
+          darwinConfigurations = eachUsername (nix-darwin.lib.darwinSystem cfg);
         };
       }
     );

@@ -4,8 +4,11 @@ set -eux
 
 export OS="$(uname -s)"
 export COMMIT_DATE='`'"$(date '+%Y/%m/%d %H:%M:%S') ${OS} "'`'
+export WHOAMI=$(whoami)
 
-echo "$(whoami)" > ./username
+if grep -Fxq "${WHOAMI}" ./usernames; then :; else
+  echo "${WHOAMI}" >> ./usernames
+fi
 
 if [ "${1:+1}" ]; then :; else
 

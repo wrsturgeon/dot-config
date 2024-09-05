@@ -5,9 +5,8 @@ set -eux
 export OS="$(uname -s)"
 export COMMIT_DATE='`'"$(date '+%Y/%m/%d %H:%M:%S') ${OS} "'`'
 
+# Synchronize Logseq notes:
 if [ "${1:+1}" ]; then :; else
-
-  # Synchronize Logseq notes:
   if [ -d ~/Desktop/logseq ]; then
     cd ~/Desktop/logseq
     git pull
@@ -17,27 +16,32 @@ if [ "${1:+1}" ]; then :; else
     git commit -m "${COMMIT_DATE}" || :
     git push
   fi
+fi
 
-  # Remove succeed/failure flag:
-  if [ -d ~/.config/nix ]; then
-    cd ~/.config/nix
+# Remove succeed/failure flag:
+if [ -d ~/.config/nix ]; then
+  cd ~/.config/nix
+else
+  if [ -d /etc/nixos ]; then
+    cd /etc/nixos
   else
-    if [ -d /etc/nixos ]; then
-      cd /etc/nixos
-    else
-      echo 'Neither ~/.config/nix nor /etc/nixos exist!'
-      exit 1
-    fi
+    echo 'Neither ~/.config/nix nor /etc/nixos exist!'
+    exit 1
   fi
+fi
+
+if [ "${1:+1}" ]; then :; else
   git pull
   rm -f .build-succeeded .build-failed
   nixfmt .
   git add -A
   git commit -m "${COMMIT_DATE}:wrench:" || :
   git push || :
+fi
 
-  # Push ~/.config changes:
-  nix flake update || : # rate limits!
+# Update dependencies:
+nix flake update || : # rate limits!
+if [ "${1:+1}" ]; then :; else
   git add -A
   git commit -m "${COMMIT_DATE}:arrow_up:" || :
   git push || :

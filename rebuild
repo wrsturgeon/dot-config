@@ -5,6 +5,8 @@ set -eux
 export OS="$(uname -s)"
 export COMMIT_DATE='`'"$(date '+%Y/%m/%d %H:%M:%S') ${OS} "'`'
 
+echo "$(whoami)" > ./username
+
 if [ "${1:+1}" ]; then :; else
 
   # Synchronize Logseq notes:

@@ -47,8 +47,8 @@ if [[ "${OS}" == "Linux" ]]; then
   export CMD="sudo nixos-rebuild"
 else
   if [[ "${OS}" == "Darwin" ]]; then
-    # export CMD="nix run nix-darwin --"
-    export CMD="darwin-rebuild"
+    export CMD="nix --extra-experimental-features flakes --extra-experimental-features nix-command run nix-darwin --"
+    # export CMD="darwin-rebuild"
   else
     echo 'Unrecognized OS'
     exit 1

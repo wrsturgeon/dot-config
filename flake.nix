@@ -91,7 +91,7 @@
           );
 
         # Kitty terminal emulator
-        kitty = import config/programs/kitty cfg-args;
+        kitty = laptop-name: import config/programs/kitty (cfg-args laptop-name);
         terminal-settings = rec {
           font-size = 13;
           dark = true;
@@ -198,7 +198,7 @@
             terminal-settings
             ;
           dock-apps =
-            [ kitty ]
+            [ (kitty laptop-name) ]
             ++ (
               with pkgs;
               [

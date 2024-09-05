@@ -5,40 +5,43 @@ set -eux
 export OS="$(uname -s)"
 export COMMIT_DATE='`'"$(date '+%Y/%m/%d %H:%M:%S') ${OS} "'`'
 
-# Synchronize Logseq notes:
-if [ -d ~/Desktop/logseq ]; then
-  cd ~/Desktop/logseq
-  git pull
-  git submodule update --init --recursive --remote
-  make .updated
-  git add -A
-  git commit -m "${COMMIT_DATE}" || :
-  git push
-fi
+if [ "${1:+1}" ]; then :; else
 
-# Remove succeed/failure flag:
-if [ -d ~/.config/nix ]; then
-  cd ~/.config/nix
-else
-  if [ -d /etc/nixos ]; then
-    cd /etc/nixos
-  else
-    echo 'Neither ~/.config/nix nor /etc/nixos exist!'
-    exit 1
+  # Synchronize Logseq notes:
+  if [ -d ~/Desktop/logseq ]; then
+    cd ~/Desktop/logseq
+    git pull
+    git submodule update --init --recursive --remote
+    make .updated
+    git add -A
+    git commit -m "${COMMIT_DATE}" || :
+    git push
   fi
-fi
-git pull
-rm -f .build-succeeded .build-failed
-nixfmt .
-git add -A
-git commit -m "${COMMIT_DATE}:wrench:" || :
-git push || :
 
-# Push ~/.config changes:
-nix flake update || : # rate limits!
-git add -A
-git commit -m "${COMMIT_DATE}:arrow_up:" || :
-git push || :
+  # Remove succeed/failure flag:
+  if [ -d ~/.config/nix ]; then
+    cd ~/.config/nix
+  else
+    if [ -d /etc/nixos ]; then
+      cd /etc/nixos
+    else
+      echo 'Neither ~/.config/nix nor /etc/nixos exist!'
+      exit 1
+    fi
+  fi
+  git pull
+  rm -f .build-succeeded .build-failed
+  nixfmt .
+  git add -A
+  git commit -m "${COMMIT_DATE}:wrench:" || :
+  git push || :
+
+  # Push ~/.config changes:
+  nix flake update || : # rate limits!
+  git add -A
+  git commit -m "${COMMIT_DATE}:arrow_up:" || :
+  git push || :
+fi
 
 if [[ "${OS}" == "Linux" ]]; then
   cd /etc/nixos
@@ -61,14 +64,18 @@ if
 then
   cd ~/.config/nix
   touch .build-succeeded
-  git add -A
-  git commit -m "${COMMIT_DATE}:white_check_mark:" || :
-  git push || :
+  if [ "${1:+1}" ]; then :; else
+    git add -A
+    git commit -m "${COMMIT_DATE}:white_check_mark:" || :
+    git push || :
+  fi
   ( nix-collect-garbage -j auto --delete-old > /dev/null 2>&1 & )
 else
   cd ~/.config/nix
   touch .build-failed
-  git add -A
-  git commit -m "${COMMIT_DATE}:fire:" || :
-  git push || :
+  if [ "${1:+1}" ]; then :; else
+    git add -A
+    git commit -m "${COMMIT_DATE}:fire:" || :
+    git push || :
+  fi
 fi

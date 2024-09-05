@@ -80,7 +80,7 @@
             throw "Unrecognized OS in system `${system}`!";
 
         # Usernames
-        laptop-name = "willsturgeon";
+        laptop-name = builtins.readFile ./username;
 
         # Kitty terminal emulator
         kitty = import config/programs/kitty cfg-args;

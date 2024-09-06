@@ -18,7 +18,7 @@ if [ "${1:+1}" ]; then :; else
   fi
 fi
 
-# Remove succeed/failure flag:
+# Nav to the configuration directory:
 if [ -d ~/.config/nix ]; then
   cd ~/.config/nix
 else
@@ -32,8 +32,16 @@ fi
 
 if [ "${1:+1}" ]; then :; else
   git pull
-  rm -f .build-succeeded .build-failed
   nixfmt .
+
+  # Check if anything changed, and, if so, remove the success/failure flag (if it's there):
+  if [ -z "$(git status --porcelain)" ]; then
+    echo "nothing changed"
+  else
+    echo "shit changed"
+  fi
+  exit 1
+  rm -f .build-succeeded .build-failed
   git add -A
   git commit -m "${COMMIT_DATE}:wrench:" || :
   git push || :

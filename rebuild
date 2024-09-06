@@ -3,7 +3,7 @@
 set -eux
 
 export OS="$(uname -s)"
-export COMMIT_DATE='`'"$(date '+%Y/%m/%d %H:%M:%S') ${OS} "'`'
+export COMMIT_DATE='`'"$(date '+%Y/%m/%d %H:%M:%S') ${OS} $(whoami) "'`'
 
 # Synchronize Logseq notes:
 if [ "${1:+1}" ]; then :; else

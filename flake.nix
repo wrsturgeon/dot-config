@@ -26,14 +26,12 @@
       url = "github:kekrby/nixos-hardware";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs.url = "github:nixos/nixpkgs/ad416d066ca1222956472ab7d0555a6946746a80";
     nixvim = {
       inputs = {
         nix-darwin.follows = "nix-darwin";
         nixpkgs.follows = "nixpkgs";
       };
-      # url = "github:nix-community/nixvim";
-      url = "github:nix-community/nixvim/2ef974182ef62a6a6992118f0beb54dce812ae9b";
+      url = "github:nix-community/nixvim";
     };
     # sf-mono-liga-src = {
     #   flake = false;

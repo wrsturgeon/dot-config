@@ -16,7 +16,7 @@ ctx.pkgs.kitty.override {
             in
             ''
               ${cfg.installPhase}
-              cp ${iosevka} ./fonts/SymbolsNerdFontMono-${ctx.terminal-settings.weight}.ttf
+              # cp ${iosevka} ./fonts/SymbolsNerdFontMono-${ctx.terminal-settings.weight}.ttf
               ${ctx.linux-mac "" "cp ${iosevka} $out/Applications/kitty.app/Contents/Resources/kitty/fonts/SymbolsNerdFontMono-Regular.ttf"}
               for f in $(find $out -name kitty); do
                 sed -i 's|"$@"|"--config" "${ctx.kitty-config}/kitty.conf" "$@"|' $f || echo "Couldn't add --config to $f"

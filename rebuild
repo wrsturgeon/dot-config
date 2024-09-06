@@ -34,17 +34,15 @@ if [ "${1:+1}" ]; then :; else
   git pull
   nixfmt .
 
-  # Check if anything changed, and, if so, remove the success/failure flag (if it's there):
-  if [ -z "$(git status --porcelain)" ]; then
-    echo "nothing changed"
-  else
-    echo "shit changed"
+  # Check if anything changed, and, if so,
+  # remove the success/failure flag (if it's there) and
+  # push the changes upstream with a WIP note:
+  if [ -z "$(git status --porcelain)" ]; then :; else
+    rm -f .build-succeeded .build-failed
+    git add -A
+    git commit -m "${COMMIT_DATE}:wrench:" || :
+    git push || :
   fi
-  exit 1
-  rm -f .build-succeeded .build-failed
-  git add -A
-  git commit -m "${COMMIT_DATE}:wrench:" || :
-  git push || :
 fi
 
 # Update dependencies:

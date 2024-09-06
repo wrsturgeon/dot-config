@@ -55,7 +55,7 @@ if [ "${1:+1}" ]; then :; else
   if [ -f .build-succeeded ]; then :; else
     if [ -f .build-failed ]; then :; else
       git add -A
-      git commit -m "${COMMIT_PREFIX}` `:wrench:` `${USER}" || :
+      git commit -m "${COMMIT_PREFIX}"'` `:wrench:` `'"${USER}" || :
       git push || :
     fi
   fi
@@ -65,7 +65,7 @@ fi
 nix flake update || : # rate limits!
 if [ "${1:+1}" ]; then :; else
   git add -A
-  git commit -m "${COMMIT_PREFIX}` `:arrow_up:` `${USER}" || :
+  git commit -m "${COMMIT_PREFIX}"'` `:arrow_up:` `'"${USER}" || :
   git push || :
 fi
 
@@ -92,7 +92,7 @@ then
   touch .build-succeeded
   if [ "${1:+1}" ]; then :; else
     git add -A
-    git commit -m "${COMMIT_PREFIX}` `:white_check_mark:` `${USER}" || :
+    git commit -m "${COMMIT_PREFIX}"'` `:white_check_mark:` `'"${USER}" || :
     git push || :
   fi
   ( nix-collect-garbage -j auto --delete-old > /dev/null 2>&1 & )
@@ -101,7 +101,7 @@ else
   touch .build-failed
   if [ "${1:+1}" ]; then :; else
     git add -A
-    git commit -m "${COMMIT_PREFIX}` `:fire:` `${USER}" || :
+    git commit -m "${COMMIT_PREFIX}"'` `:fire:` `'"${USER}" || :
     git push || :
   fi
 fi

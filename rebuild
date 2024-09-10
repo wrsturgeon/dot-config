@@ -44,7 +44,10 @@ else
 fi
 # cd ${ORIG_PWD}
 
-if [ "${1:+1}" ]; then :; else
+git fetch --all
+if [ "${1:+1}" ]; then
+  git reset --hard origin/main
+else
   git pull
 fi
 

@@ -193,7 +193,6 @@
             ++ (
               with pkgs;
               [
-                arc-browser
                 discord
                 logseq
                 # signal-desktop

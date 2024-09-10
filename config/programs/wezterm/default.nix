@@ -2,8 +2,7 @@ ctx:
 ctx.pkgs.stdenvNoCC.mkDerivation {
   name = "wezterm-configured";
   src = ./.;
-  buildPhase = ":";
-  installPhase = ''
+  buildPhase = ''
     cp -r ${ctx.pkgs.wezterm} $out
     for f in $(find $out -name 'wezterm'); do
       mv $f $f-raw

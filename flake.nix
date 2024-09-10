@@ -92,7 +92,7 @@
             }) usernames
           );
 
-        # Kitty terminal emulator
+        # Terminal emulator(s)
         kitty = laptop-name: import config/programs/kitty (cfg-args laptop-name);
         terminal-settings = rec {
           font-size = 13;
@@ -200,10 +200,13 @@
             terminal-settings
             ;
           dock-apps =
-            [ (kitty laptop-name) ]
+            [
+              # (kitty laptop-name)
+            ]
             ++ (
               with pkgs;
               [
+                wezterm
                 spotify
                 discord
                 slack

@@ -107,8 +107,6 @@ then
     git commit -m "${COMMIT_PREFIX}"'` `:white_check_mark:` `'"${USER}" || :
     git push || :
   fi
-  # ( nix-collect-garbage -j auto --delete-old > /dev/null 2>&1 & )
-  nix-collect-garbage -j auto --delete-old
 else
   cd ~/.config/nix
   rm -f .build-succeeded .build-failed

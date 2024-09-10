@@ -25,9 +25,10 @@ ctx.linux-mac null (
           for user in $(ls -A); do
             if [ -d /Users/''${user}/.config/nix ]; then
               cd /Users/''${user}/.config/nix
-              sudo -i -u "''${user}" export USER='autoupdate' && whoami && pwd && source /Users/''${user}/.config/nix/rebuild
+              sudo -i -u "''${user}" bash -c "export USER='autoupdate' && whoami && pwd && source ./rebuild"
             fi
           done
+          nix-collect-garbage -j auto --delete-old
         '';
         serviceConfig.StartCalendarInterval = [ { Minute = 0; } ];
       };

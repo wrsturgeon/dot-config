@@ -5,11 +5,11 @@ ctx.linux-mac null (
       k: v:
       v
       // {
-        serviceConfig = (v.serviceConfig or { }) // {
+        serviceConfig = {
           KeepAlive = true;
           StandardOutPath = "/var/log/${k}.out.log";
           StandardErrorPath = "/var/log/${k}.err.log";
-        };
+        } // (v.serviceConfig or { });
       }
     );
   in
@@ -17,8 +17,17 @@ ctx.linux-mac null (
     daemons = with-service-config {
       custom-system-update = {
         script = ''
-          for user in $(ls -A /Users); do
-            cd /Users/''${user}/.config/nix && ./rebuild
+          set -eux
+          echo
+          echo "$(date)"
+          echo '================================'
+          cd /Users
+          for user in $(ls -A); do
+            if [ -d /Users/''${user}/.config/nix ]; then
+              cd /Users/''${user}/.config/nix
+              export USER="''${user}"
+              ./rebuild
+            fi
           done
         '';
         serviceConfig.StartCalendarInterval = [ { Minute = 0; } ];

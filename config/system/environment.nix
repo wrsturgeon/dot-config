@@ -25,7 +25,8 @@ ctx: {
       fd
       gcc
       gimp
-      git-credential-manager
+      # git-credential-manager
+      git-credential-oauth
       gnumake
       # minecraft # broken!
       nil

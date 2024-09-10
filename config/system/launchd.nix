@@ -24,8 +24,7 @@ ctx.linux-mac null (
           cd /Users
           for user in $(ls -A); do
             if [ -d /Users/''${user}/.config/nix ]; then
-              cd /Users/''${user}/.config/nix
-              sudo -i -u "''${user}" bash -c "export USER='autoupdate' && whoami && pwd && source ./rebuild"
+              sudo -i -u "''${user}" bash -eux -c "export USER='autoupdate' && whoami && cd /Users/''${user}/.config/nix && source ./rebuild"
             fi
           done
           nix-collect-garbage -j auto --delete-old

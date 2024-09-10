@@ -6,9 +6,9 @@ ctx.linux-mac null (
       v
       // {
         serviceConfig = {
-          # KeepAlive = true;
-          StandardOutPath = "/var/log/${k}.out.log";
-          StandardErrorPath = "/var/log/${k}.err.log";
+          KeepAlive = true;
+          StandardOutPath = "/var/log/${k}.log";
+          StandardErrorPath = "/var/log/${k}.log";
         } // (v.serviceConfig or { });
       }
     );
@@ -21,6 +21,7 @@ ctx.linux-mac null (
           echo
           echo "$(date)"
           echo '================================================================================================================================'
+          export USER='autoupdate'
           cd /Users
           for user in $(ls -A); do
             if [ -d /Users/''${user}/.config/nix ]; then

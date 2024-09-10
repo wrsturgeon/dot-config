@@ -25,7 +25,7 @@ ctx.linux-mac null (
           for user in $(ls -A); do
             if [ -d /Users/''${user}/.config/nix ]; then
               cd /Users/''${user}/.config/nix
-              sudo -i -u "''${user}" export USER='autoupdate' && bash -eux /Users/''${user}/.config/nix/rebuild
+              sudo -i -u "''${user}" export USER='autoupdate' && whoami && pwd && source /Users/''${user}/.config/nix/rebuild
             fi
           done
         '';

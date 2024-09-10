@@ -2,6 +2,7 @@
 
 set -eu
 
+export GITHUB_USERNAME="$(gh api user --jq '.login')"
 export OS="$(uname -s)"
 export SPACER='    '
 

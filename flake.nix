@@ -208,8 +208,8 @@
             in
             {
               EDITOR = editor;
-              # GIT_CONFIG_GLOBAL = "${config/programs/git/.gitconfig}";
-              GIT_CONFIG_SYSTEM = "${config/programs/git/.gitconfig}";
+              # GIT_CONFIG_GLOBAL = "${config/programs/git/gitconfig}";
+              GIT_CONFIG_SYSTEM = "${config/programs/git/gitconfig}";
               LANG = pkgs.lib.mkForce "fr_FR.UTF-8";
               VISUAL = editor;
             };

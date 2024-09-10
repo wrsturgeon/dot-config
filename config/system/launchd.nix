@@ -26,8 +26,7 @@ ctx.linux-mac null (
           for user in $(ls -A); do
             if [ -d /Users/''${user}/.config/nix ]; then
               cd /Users/''${user}/.config/nix
-              export USER="''${user}"
-              source ./rebuild
+              sudo -i -u "''${user}" ./rebuild
             fi
           done
         '';

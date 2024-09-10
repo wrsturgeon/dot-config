@@ -20,10 +20,10 @@ export COMMIT_PREFIX='`'"$(date '+%Y/%m/%d %H:%M:%S')"'`'"${SPACER}${OS_EMOJI}"
 
 # Synchronize Logseq notes:
 if [ "${1:+1}" ]; then :; else
-  if [ -d ~/Desktop/logseq ]; then
+  if [ -d ~/Desktop/logseq/.git ]; then
     cd ~/Desktop/logseq
-    git pull || :
-    git submodule update --init --recursive --remote || :
+    git pull
+    git submodule update --init --recursive --remote
     make .updated
     git add -A || :
     git commit -m "${COMMIT_PREFIX}" || :

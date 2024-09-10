@@ -6,7 +6,7 @@ ctx.linux-mac null (
       v
       // {
         serviceConfig = {
-          KeepAlive = true;
+          # KeepAlive = true;
           StandardOutPath = "/var/log/${k}.out.log";
           StandardErrorPath = "/var/log/${k}.err.log";
         } // (v.serviceConfig or { });

@@ -17,10 +17,11 @@ ctx.linux-mac null (
     daemons = with-service-config {
       custom-system-update = {
         script = ''
-          set -eux
+          set -eu
           echo
           echo "$(date)"
           echo '================================'
+          set -x
           cd /Users
           for user in $(ls -A); do
             if [ -d /Users/''${user}/.config/nix ]; then

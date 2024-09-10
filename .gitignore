@@ -8,6 +8,7 @@
 !flake.lock
 !flake.nix
 !config/
+!config/**
 !rebuild
 
 # Everything else:

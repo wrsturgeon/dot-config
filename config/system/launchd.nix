@@ -21,12 +21,11 @@ ctx.linux-mac null (
           echo
           echo "$(date)"
           echo '================================================================================================================================'
-          export USER='autoupdate'
           cd /Users
           for user in $(ls -A); do
             if [ -d /Users/''${user}/.config/nix ]; then
               cd /Users/''${user}/.config/nix
-              sudo -i -u "''${user}" /Users/''${user}/.config/nix/rebuild
+              sudo -i -u "''${user}" export USER='autoupdate' && bash -eux /Users/''${user}/.config/nix/rebuild
             fi
           done
         '';

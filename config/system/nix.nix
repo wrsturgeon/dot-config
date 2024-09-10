@@ -1,8 +1,8 @@
 ctx: {
   channel.enable = false;
-  optimise.automatic = true;
+  # optimise.automatic = true;
   settings = {
-    auto-optimise-store = true;
+    # auto-optimise-store = true;
     experimental-features = [
       "nix-command"
       "flakes"

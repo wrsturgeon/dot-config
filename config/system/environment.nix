@@ -53,13 +53,5 @@ ctx: {
         pantheon-tweaks
       ] [ vlc-bin ]
     );
-  variables =
-    let
-      editor = "vi";
-    in
-    {
-      EDITOR = editor;
-      LANG = ctx.pkgs.lib.mkForce "fr_FR.UTF-8";
-      VISUAL = editor;
-    };
+  variables = ctx.env;
 }

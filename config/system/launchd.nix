@@ -37,8 +37,6 @@ ctx.linux-mac null (
         serviceConfig.StartCalendarInterval = [ { Minute = 0; } ];
       };
     };
-    envVariables = {
-      LANG = "fr_FR.UTF-8";
-    };
+    envVariables = ctx.env;
   }
 )

@@ -9,7 +9,7 @@ ctx.pkgs.stdenvNoCC.mkDerivation {
         echo "${''
           #!/usr/bin/env bash
 
-          $f --config-file ${./config.lua}
+          $out/$f --config-file ${./config.lua}
         ''}" > "$f"
         chmod +x "$f"
       fi

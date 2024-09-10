@@ -1,0 +1,13 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Will Sturgeon
+	email = willstrgn@gmail.com
+	signingkey = 73DE855B64B7764D
+[commit]
+	gpgSign = false
+[init]
+	defaultBranch = main
+[credential]
+	helper = osxkeychain
+	helper = oauth

@@ -4,6 +4,6 @@ ctx.pkgs.stdenvNoCC.mkDerivation {
   src = ./.;
   buildPhase = ":";
   installPhase = ''
-    mv ${ctx.pkgs.wezterm} $out
+    cp -r ${ctx.pkgs.wezterm} $out
   '';
 }

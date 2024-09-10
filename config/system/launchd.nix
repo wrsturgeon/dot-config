@@ -7,10 +7,10 @@ ctx.linux-mac null (
       // {
         serviceConfig =
           let
-            log-path = "/var/log/${k}/log";
+            log-path = "/var/log/${k}.log";
           in
           {
-            # KeepAlive = true;
+            KeepAlive = true;
             StandardOutPath = log-path;
             StandardErrorPath = log-path;
           }

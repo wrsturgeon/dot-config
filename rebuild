@@ -3,6 +3,7 @@
 set -eu
 
 export OS="$(uname -s)"
+export SPACER='    '
 
 if [ "${OS}" = "Darwin" ]; then
   export OS_EMOJI=':apple:'
@@ -15,7 +16,7 @@ else
   fi
 fi
 
-export COMMIT_PREFIX='`'"$(date '+%Y/%m/%d %H:%M:%S')"' `'"${OS_EMOJI}"
+export COMMIT_PREFIX='`'"$(date '+%Y/%m/%d %H:%M:%S')"'`'"${SPACER}${OS_EMOJI}"
 
 # Synchronize Logseq notes:
 if [ "${1:+1}" ]; then :; else
@@ -59,7 +60,7 @@ if [ "${1:+1}" ]; then :; else
   if [ -f .build-succeeded ]; then :; else
     if [ -f .build-failed ]; then :; else
       git add -A
-      git commit -m "${COMMIT_PREFIX}"'` `:wrench:` `'"${USER}" || :
+      git commit -m "${COMMIT_PREFIX}${SPACER}:wrench:${SPACER}${USER}" || :
       git push || :
     fi
   fi
@@ -75,7 +76,7 @@ if [ -z "$(git status --porcelain)" ]; then
 else
   if [ "${1:+1}" ]; then :; else
     git add -A
-    git commit -m "${COMMIT_PREFIX}"'` `:arrow_up:` `'"${USER}" || :
+    git commit -m "${COMMIT_PREFIX}${SPACER}:arrow_up:${SPACER}${USER}" || :
     git push || :
   fi
 fi
@@ -107,7 +108,7 @@ then
   touch .build-succeeded
   if [ "${1:+1}" ]; then :; else
     git add -A
-    git commit -m "${COMMIT_PREFIX}"'` `:white_check_mark:` `'"${USER}" || :
+    git commit -m "${COMMIT_PREFIX}${SPACER}:white_check_mark:${SPACER}${USER}" || :
     git push || :
   fi
 else
@@ -116,7 +117,7 @@ else
   touch .build-failed
   if [ "${1:+1}" ]; then :; else
     git add -A
-    git commit -m "${COMMIT_PREFIX}"'` `:fire:` `'"${USER}" || :
+    git commit -m "${COMMIT_PREFIX}${SPACER}:fire:${SPACER}${USER}" || :
     git push || :
   fi
 fi

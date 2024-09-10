@@ -5,7 +5,8 @@ ctx.pkgs.stdenvNoCC.mkDerivation {
   buildPhase = ''
     cp -r ${ctx.pkgs.wezterm} $out
     for f in $(find $out -name 'wezterm'); do
-      mv $f $f-raw
+      cp $f $f-raw
+      rm $f
       echo "${''
         #!/usr/bin/env bash
 

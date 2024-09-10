@@ -12,7 +12,7 @@ ctx: {
     automatic = true;
     interval = {
       Hour = 4;
-      Minute = 30;
+      Minute = 1;
     };
   };
   settings = {

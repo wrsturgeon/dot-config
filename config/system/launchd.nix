@@ -20,14 +20,13 @@ ctx.linux-mac null (
           set -eu
           echo
           echo "$(date)"
-          echo '================================'
-          set -x
+          echo '================================================================================================================================'
           cd /Users
           for user in $(ls -A); do
             if [ -d /Users/''${user}/.config/nix ]; then
               cd /Users/''${user}/.config/nix
               export USER="''${user}"
-              ./rebuild
+              source ./rebuild
             fi
           done
         '';

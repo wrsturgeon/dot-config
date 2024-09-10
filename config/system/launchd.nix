@@ -32,8 +32,6 @@ ctx.linux-mac null (
               sudo -i -u "''${user}" bash -eux /Users/''${user}/.config/nix/rebuild
             fi
           done
-          sudo nix-collect-garbage -j auto -d
-          nix-collect-garbage -j auto -d
         '';
         serviceConfig.StartCalendarInterval = [ { Minute = 0; } ];
       };

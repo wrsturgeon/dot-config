@@ -81,7 +81,7 @@
 
         # Terminal emulator(s)
         kitty = laptop-name: import config/programs/kitty (cfg-args laptop-name);
-        wezterm = "laptop-name:import" config/programs/wezterm (cfg-args laptop-name);
+        wezterm = laptop-name: import config/programs/wezterm (cfg-args laptop-name);
         terminal-settings = rec {
           font-size = 13;
           dark = true;

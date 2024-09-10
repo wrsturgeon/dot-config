@@ -1,12 +1,10 @@
 ctx:
 ctx.pkgs.stdenvNoCC.mkDerivation {
   name = "wezterm-configured";
-  src = ./.;
+  src = ctx.pkgs.wezterm;
   buildPhase = ''
-    cp -r ${ctx.pkgs.wezterm} $out
-    for f in $(find $out -name 'wezterm'); do
-      cp $f $f-raw
-      rm $f
+    for f in $(find . -name 'wezterm'); do
+      mv $f $f-raw
       echo "${''
         #!/usr/bin/env bash
 
@@ -14,4 +12,5 @@ ctx.pkgs.stdenvNoCC.mkDerivation {
       ''}" > $f
     done
   '';
+  installPhase = "cp -r . $out";
 }

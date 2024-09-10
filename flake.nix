@@ -1,13 +1,6 @@
 {
   description = "System flakes";
   inputs = {
-    # apple-fonts = {
-    #   url = "github:lyndeno/apple-fonts.nix";
-    #   inputs = {
-    #     flake-utils.follows = "flake-utils";
-    #     nixpkgs.follows = "nixpkgs";
-    #   };
-    # };
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,14 +26,9 @@
       };
       url = "github:nix-community/nixvim/2ef974182ef62a6a6992118f0beb54dce812ae9b";
     };
-    # sf-mono-liga-src = {
-    #   flake = false;
-    #   url = "github:shaunsingh/sfmono-nerd-font-ligaturized";
-    # };
   };
   outputs =
     {
-      # apple-fonts,
       fenix,
       flake-utils,
       github-dark-nvim-src,
@@ -49,7 +37,6 @@
       nixpkgs,
       nixvim,
       self,
-    # sf-mono-liga-src
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
@@ -94,6 +81,7 @@
 
         # Terminal emulator(s)
         kitty = laptop-name: import config/programs/kitty (cfg-args laptop-name);
+        wezterm = "laptop-name:import" config/programs/wezterm (cfg-args laptop-name);
         terminal-settings = rec {
           font-size = 13;
           dark = true;
@@ -200,13 +188,13 @@
             terminal-settings
             ;
           dock-apps =
-            [
-              # (kitty laptop-name)
-            ]
+            (builtins.map (f: f laptop-name) [
+              # kitty
+              wezterm
+            ])
             ++ (
               with pkgs;
               [
-                wezterm
                 spotify
                 discord
                 slack

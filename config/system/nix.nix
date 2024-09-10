@@ -2,7 +2,7 @@ ctx: {
   channel.enable = false;
   optimise = {
     automatic = true;
-    dates = [ "03:45" ];
+    dates = [ "04:01" ];
   }; # <https://discourse.nixos.org/t/difference-between-nix-settings-auto-optimise-store-and-nix-optimise-automatic/25350>
   gc = {
     automatic = true;

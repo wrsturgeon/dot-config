@@ -1,9 +1,5 @@
 ctx: {
   channel.enable = false;
-  optimise = {
-    automatic = true;
-    dates = [ "04:01" ];
-  }; # <https://discourse.nixos.org/t/difference-between-nix-settings-auto-optimise-store-and-nix-optimise-automatic/25350>
   gc = {
     automatic = true;
     dates = [ "04:00" ];
@@ -13,8 +9,12 @@ ctx: {
     };
     options = "-d";
   };
+  optimise = {
+    automatic = true;
+    dates = [ "04:01" ];
+  };
   settings = {
-    # auto-optimise-store = true;
+    # auto-optimise-store = true; # <https://discourse.nixos.org/t/difference-between-nix-settings-auto-optimise-store-and-nix-optimise-automatic/25350>
     experimental-features = [
       "nix-command"
       "flakes"

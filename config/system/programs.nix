@@ -9,7 +9,11 @@ ctx:
       {
         enableBashCompletion = true;
         enableCompletion = true;
-        promptInit = "source ${ctx.pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+        promptInit = ''
+          # source ${ctx.pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+          source ${config/programs/p10k/instant-prompt.zsh}
+          source ${config/programs/p10k/config.zsh}
+        '';
       }
       // ctx.linux-mac { syntaxHighlighting.enable = true; } {
         enableFzfCompletion = true;

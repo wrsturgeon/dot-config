@@ -204,7 +204,7 @@
           emacs = import config/programs/emacs (cfg-args laptop-name);
           git = pkgs.gitFull;
           hardware-configuration = import config/hardware-configuration.nix;
-          programs = ./programs;
+          programs = config/programs;
           rust = fenix.packages.${system}.minimal;
           vim = nixvim.legacyPackages.${system}.makeNixvim (
             import config/programs/neovim (cfg-args laptop-name)

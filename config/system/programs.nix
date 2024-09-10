@@ -10,7 +10,8 @@ ctx:
         enableBashCompletion = true;
         enableCompletion = true;
         promptInit = ''
-          # source ${ctx.pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+          rm -f ~/.zsh*
+          source ${ctx.pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
           source ${"${ctx.dir}/programs/p10k/instant-prompt.zsh"}
           source ${"${ctx.dir}/programs/p10k/config.zsh"}
         '';

@@ -193,6 +193,7 @@
             ++ (
               with pkgs;
               [
+                signal
                 spotify
                 discord
                 slack

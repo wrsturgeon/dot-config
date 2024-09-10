@@ -87,7 +87,7 @@ if [[ "${OS}" == "Linux" ]]; then
   export CMD="sudo nixos-rebuild"
 else
   if [[ "${OS}" == "Darwin" ]]; then
-    if command -v 'darwin-rebuild'; then
+    if command -v 'darwin-rebuild' &> /dev/null; then
       export CMD='darwin-rebuild'
     else
       export CMD="nix --extra-experimental-features flakes --extra-experimental-features nix-command run nix-darwin --"

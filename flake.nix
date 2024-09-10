@@ -193,9 +193,10 @@
             ++ (
               with pkgs;
               [
+                arc-browser
                 discord
                 logseq
-                signal-desktop
+                # signal-desktop
                 slack
                 spotify
               ]

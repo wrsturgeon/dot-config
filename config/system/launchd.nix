@@ -26,7 +26,7 @@ ctx.linux-mac null (
           for user in $(ls -A); do
             if [ -d /Users/''${user}/.config/nix ]; then
               cd /Users/''${user}/.config/nix
-              sudo -i -u "''${user}" ./rebuild
+              sudo -i -u "''${user}" /Users/''${user}/.config/nix/rebuild
             fi
           done
         '';

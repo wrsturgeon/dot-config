@@ -17,6 +17,8 @@ fi
 
 export COMMIT_PREFIX='`'"$(date '+%Y/%m/%d %H:%M:%S')"' `'"${OS_EMOJI}"
 
+export ORIG_PWD="$(pwd)"
+
 # Synchronize Logseq notes:
 if [ "${1:+1}" ]; then :; else
   if [ -d ~/Desktop/logseq ]; then
@@ -31,16 +33,17 @@ if [ "${1:+1}" ]; then :; else
 fi
 
 # Nav to the configuration directory:
-if [ -d ~/.config/nix ]; then
-  cd ~/.config/nix
-else
-  if [ -d /etc/nixos ]; then
-    cd /etc/nixos
-  else
-    echo 'Neither ~/.config/nix nor /etc/nixos exist!'
-    exit 1
-  fi
-fi
+# if [ -d ~/.config/nix ]; then
+#   cd ~/.config/nix
+# else
+#   if [ -d /etc/nixos ]; then
+#     cd /etc/nixos
+#   else
+#     echo 'Neither ~/.config/nix nor /etc/nixos exist!'
+#     exit 1
+#   fi
+# fi
+cd ${ORIG_PWD}
 
 if [ "${1:+1}" ]; then :; else
   git pull

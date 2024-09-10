@@ -80,7 +80,6 @@
           );
 
         # Terminal emulator(s)
-        kitty = laptop-name: import config/programs/kitty (cfg-args laptop-name);
         wezterm = laptop-name: import config/programs/wezterm (cfg-args laptop-name);
         terminal-settings = rec {
           font-size = 13;
@@ -189,7 +188,6 @@
             ;
           dock-apps =
             (builtins.map (f: f laptop-name) [
-              # kitty
               wezterm
             ])
             ++ (
@@ -205,7 +203,6 @@
           emacs = import config/programs/emacs (cfg-args laptop-name);
           git = pkgs.gitFull;
           hardware-configuration = import config/hardware-configuration.nix;
-          kitty-config = import config/programs/kitty/config.nix (cfg-args laptop-name);
           rust = fenix.packages.${system}.minimal;
           vim = nixvim.legacyPackages.${system}.makeNixvim (
             import config/programs/neovim (cfg-args laptop-name)

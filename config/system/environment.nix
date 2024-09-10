@@ -59,7 +59,6 @@ ctx: {
     {
       EDITOR = editor;
       LANG = ctx.pkgs.lib.mkForce "fr_FR.UTF-8";
-      KITTY_CONFIG_DIRECTORY = "${ctx.kitty-config}";
       VISUAL = editor;
     };
 }

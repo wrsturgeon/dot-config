@@ -3,8 +3,8 @@ ctx: {
   gc = {
     automatic = true;
     interval = {
-      Hour = 4;
-      Minute = 0;
+      Hour = 3;
+      Minute = 1;
     };
     options = "-d";
   };

@@ -28,11 +28,11 @@ ctx.linux-mac null (
           echo '================================================================================================================================'
           cd /Users
           for user in $(ls -A); do
-            if [ -d /Users/''${user}/.config/nix ]; then
+            if [ -f /Users/''${user}/.config/nix/rebuild ]; then
               sudo -i -u "''${user}" bash -eux /Users/''${user}/.config/nix/rebuild
             fi
           done
-        '';
+        ''; # For some reason, `nix-collect-garbage` is not recognized in the above
         serviceConfig.StartCalendarInterval = [ { Minute = 0; } ];
       };
     };

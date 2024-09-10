@@ -22,6 +22,7 @@ ctx.pkgs.stdenvNoCC.mkDerivation {
 
       $out/bin/wezterm-gui-raw --config-file ${./config.lua}
     ''}" > bin/wezterm-gui
+    chmod +x bin/wezterm-gui
   '';
   installPhase = "cp -r . $out";
 }

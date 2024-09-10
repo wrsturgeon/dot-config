@@ -67,7 +67,12 @@ fi
 
 # Update dependencies:
 nix flake update || : # rate limits!
-if [ -z "$(git status --porcelain)" ]; then :; else
+if [ -z "$(git status --porcelain)" ]; then
+  if [ -f .build-succeeded ]; then
+    echo 'Already successfully built!'
+    exit
+  fi
+else
   if [ "${1:+1}" ]; then :; else
     git add -A
     git commit -m "${COMMIT_PREFIX}"'` `:arrow_up:` `'"${USER}" || :

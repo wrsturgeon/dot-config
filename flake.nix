@@ -24,7 +24,7 @@
         nix-darwin.follows = "nix-darwin";
         nixpkgs.follows = "nixpkgs";
       };
-      url = "github:nix-community/nixvim/2ef974182ef62a6a6992118f0beb54dce812ae9b";
+      url = "github:nix-community/nixvim";
     };
   };
   outputs =
@@ -204,6 +204,7 @@
           emacs = import config/programs/emacs (cfg-args laptop-name);
           git = pkgs.gitFull;
           hardware-configuration = import config/hardware-configuration.nix;
+          programs = ./programs;
           rust = fenix.packages.${system}.minimal;
           vim = nixvim.legacyPackages.${system}.makeNixvim (
             import config/programs/neovim (cfg-args laptop-name)

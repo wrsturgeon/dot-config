@@ -3,7 +3,7 @@ ctx: {
   optimise.automatic = true; # <https://discourse.nixos.org/t/difference-between-nix-settings-auto-optimise-store-and-nix-optimise-automatic/25350>
   gc = {
     automatic = true;
-    dates = "weekly";
+    dates = [ "04:00" ];
     interval = {
       Hour = 4;
       Minute = 0;

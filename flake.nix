@@ -210,7 +210,7 @@
               EDITOR = editor;
               GIT_CONFIG_SYSTEM = "${config/programs/git/gitconfig}";
               LANG = pkgs.lib.mkForce "fr_FR.UTF-8";
-              SUDO_ASKPASS = "${pkgs.x11_ssh_askpass}/bin/ssh-askpass";
+              SUDO_ASKPASS = "${pkgs.x11_ssh_askpass}/libexec/ssh-askpass";
               VISUAL = editor;
             };
           git = pkgs.gitFull;

@@ -20,7 +20,7 @@ fi
 export COMMIT_PREFIX='`'"$(date '+%Y/%m/%d %H:%M:%S')"'`'"${SPACER}${OS_EMOJI}"
 
 # Synchronize Logseq notes:
-if [ "${GITHUB_USERNAME}" = "willsturgeon" ]; then
+if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then
   if [ -d ~/Desktop/logseq/.git ]; then
     cd ~/Desktop/logseq
     git pull
@@ -46,7 +46,7 @@ fi
 # cd ${ORIG_PWD}
 
 git fetch --all
-if [ "${GITHUB_USERNAME}" = "willsturgeon" ]; then
+if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then
   git pull
 else
   git reset --hard origin/main
@@ -60,7 +60,7 @@ if [ -z "$(git status --porcelain)" ]; then :; else
 fi
 
 # Push changes upstream with a W.I.P. note (wrench emoji):
-if [ "${GITHUB_USERNAME}" = "willsturgeon" ]; then
+if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then
   if [ -f .build-succeeded ]; then :; else
     if [ -f .build-failed ]; then :; else
       git add -A
@@ -78,7 +78,7 @@ if [ -z "$(git status --porcelain)" ]; then
     exit
   fi
 else
-  if [ "${GITHUB_USERNAME}" = "willsturgeon" ]; then
+  if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then
     git add -A
     git commit -m "${COMMIT_PREFIX}${SPACER}:arrow_up:${SPACER}${USER}" || :
     git push || :
@@ -110,7 +110,7 @@ then
   cd ~/.config/nix
   rm -f .build-succeeded .build-failed
   touch .build-succeeded
-  if [ "${GITHUB_USERNAME}" = "willsturgeon" ]; then
+  if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then
     git add -A
     git commit -m "${COMMIT_PREFIX}${SPACER}:white_check_mark:${SPACER}${USER}" || :
     git push || :
@@ -119,7 +119,7 @@ else
   cd ~/.config/nix
   rm -f .build-succeeded .build-failed
   touch .build-failed
-  if [ "${GITHUB_USERNAME}" = "willsturgeon" ]; then
+  if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then
     git add -A
     git commit -m "${COMMIT_PREFIX}${SPACER}:fire:${SPACER}${USER}" || :
     git push || :

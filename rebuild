@@ -124,4 +124,8 @@ else
     git commit -m "${COMMIT_PREFIX}${SPACER}:fire:${SPACER}${USER}" || :
     git push || :
   fi
+  exit 1
 fi
+
+gh api user --jq '.login' || gh auth login
+sudo -i gh api user --jq '.login' || sudo -i gh auth login

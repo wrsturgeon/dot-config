@@ -1,5 +1,5 @@
 [commit]
-	gpgSign = false
+	gpgSign = true
 [init]
 	defaultBranch = main
 [credential]

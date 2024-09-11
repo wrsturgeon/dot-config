@@ -33,7 +33,12 @@ ctx.linux-mac null (
             fi
           done
         ''; # For some reason, `nix-collect-garbage` is not recognized in the above
-        serviceConfig.StartCalendarInterval = [ { Minute = 0; } ];
+        serviceConfig.StartCalendarInterval = [
+          { Minute = 0; }
+          { Minute = 15; }
+          { Minute = 30; }
+          { Minute = 45; }
+        ];
       };
     };
     envVariables = ctx.env;

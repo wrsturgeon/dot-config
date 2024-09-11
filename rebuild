@@ -87,9 +87,9 @@ fi
 
 if [[ "${OS}" == "Linux" ]]; then
   cd /etc/nixos
-  sudo git fetch
-  sudo git reset --hard origin/main
-  export CMD="sudo nixos-rebuild"
+  sudo -A git fetch
+  sudo -A git reset --hard origin/main
+  export CMD="sudo -A nixos-rebuild"
 else
   if [[ "${OS}" == "Darwin" ]]; then
     if command -v 'darwin-rebuild' &> /dev/null; then

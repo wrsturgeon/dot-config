@@ -10,7 +10,7 @@ ctx.linux-mac null (
             log-path = "/var/log/${k}.log";
           in
           {
-            KeepAlive = true;
+            # KeepAlive = true;
             StandardOutPath = log-path;
             StandardErrorPath = log-path;
           }

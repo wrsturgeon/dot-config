@@ -21,6 +21,6 @@ let
   ) user-cfg;
 in
 {
-  mutableUsers = false;
+  # mutableUsers = false; # not yet since this might overwrite the root password
   inherit users;
 }

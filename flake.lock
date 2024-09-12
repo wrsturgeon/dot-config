@@ -314,7 +314,8 @@
         "nix-darwin": "nix-darwin",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "nixvim": "nixvim"
+        "nixvim": "nixvim",
+        "wezterm-zip": "wezterm-zip"
       }
     },
     "rust-analyzer-src": {
@@ -383,6 +384,19 @@
         "owner": "numtide",
         "repo": "treefmt-nix",
         "type": "github"
+      }
+    },
+    "wezterm-zip": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1726025816,
+        "narHash": "sha256-yZ4ka9sieaKPYID/Oy7Args+TpNMpPPfQ66ju+qg8VM=",
+        "type": "tarball",
+        "url": "https://github.com/wez/wezterm/releases/download/nightly/WezTerm-macos-nightly.zip"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/wez/wezterm/releases/download/nightly/WezTerm-macos-nightly.zip"
       }
     }
   },

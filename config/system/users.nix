@@ -24,7 +24,9 @@ let
   ) user-cfg;
 in
 {
-  defaultUserShell = ctx.pkgs.zsh;
   # mutableUsers = false; # not yet since this might overwrite the root password
   inherit users;
 }
+// ctx.linux-mac {
+  defaultUserShell = ctx.pkgs.zsh;
+} { }

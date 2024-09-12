@@ -69,7 +69,7 @@ fi
 if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then
   if [ -f .build-succeeded ]; then :; else
     if [ -f .build-failed ]; then :; else
-      git add -A
+      git add -A || :
       git commit -m "${COMMIT_PREFIX}${SPACER}:wrench:${SPACER}${USER}" || :
       git push || :
     fi
@@ -111,7 +111,7 @@ fi
 
 # Rebuild the Nix system:
 if
-  ${CMD} switch --flake . --keep-going -v -j auto --show-trace # --install-bootloader
+  ${CMD} switch --flake . --keep-going -v -j auto --show-trace --install-bootloader
 then
   cd "${HOME}/.config/nix"
   rm -f .build-succeeded .build-failed

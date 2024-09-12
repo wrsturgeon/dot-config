@@ -53,7 +53,6 @@ if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then
 fi
 
 # Nav to the configuration directory:
-echo "Configuration directory: ${CONFIG_DIR}"
 cd "${CONFIG_DIR}"
 
 # git fetch --all
@@ -93,8 +92,8 @@ fi
 
 if [[ "${OS}" == "Linux" ]]; then
   cd /etc/nixos
-  sudo -iA git fetch
-  sudo -iA git reset --hard origin/main
+  sudo -A git fetch
+  sudo -A git reset --hard origin/main
   export CMD="sudo -iA nixos-rebuild"
 else
   if [[ "${OS}" == "Darwin" ]]; then

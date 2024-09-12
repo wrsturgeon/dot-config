@@ -18,7 +18,12 @@ ctx.pkgs.stdenvNoCC.mkDerivation {
       mv $f ''${f}-raw
       echo "${''
         #!/usr/bin/env bash
-        ''${f}-raw --config-file ${./config.lua}
+        ''${f}-raw --config-file ${
+          ctx.pkgs.writeTextFile {
+            name = "config.lua";
+            text = import ./config.nix ctx;
+          }
+        }
       ''}" > $f
       chmod +x $f
     done

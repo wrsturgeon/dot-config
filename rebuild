@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+if [ -z "${1}" ]; then :; else
+  export USER="${1}" # overwrite
+fi
+
 set -eu
 
 export GITHUB_USERNAME="$(gh api user --jq '.login')"
@@ -8,9 +12,11 @@ export SPACER='    '
 
 if [ "${OS}" = "Darwin" ]; then
   export OS_EMOJI=':apple:'
+  export HOME="/Users/${USER}"
 else
   if [ "${OS}" = "Linux" ]; then
     export OS_EMOJI=':penguin:'
+    export HOME="/home/${USER}"
   else
     echo 'Unrecognized OS! Got "'"${OS}"'" but expected either "Darwin" or "Linux"'
     exit 1
@@ -21,36 +27,36 @@ export COMMIT_PREFIX='`'"$(date '+%Y/%m/%d %H:%M:%S')"'`'"${SPACER}${OS_EMOJI}"
 
 # Synchronize Logseq notes:
 if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then
-  if [ -d ~/Desktop/logseq/.git ]; then
-    cd ~/Desktop/logseq
-    git pull
-    git submodule update --init --recursive --remote
+  if [ -d "${HOME}/Desktop/logseq/.git" ]; then
+    cd "${HOME}/Desktop/logseq"
+    git pull || :
+    git submodule update --init --recursive --remote || :
     make .updated
-    git add -A
+    git add -A || :
     git commit -m "${COMMIT_PREFIX}" || :
     git push || :
   fi
 fi
 
 # Nav to the configuration directory:
-if [ -d ~/.config/nix ]; then
-  cd ~/.config/nix
+if [ -d "${HOME}/.config/nix" ]; then
+  cd "${HOME}/.config/nix"
 else
   if [ -d /etc/nixos ]; then
     cd /etc/nixos
   else
-    echo 'Neither ~/.config/nix nor /etc/nixos exist!'
+    echo "Neither ${HOME}/.config/nix nor /etc/nixos exist!"
     exit 1
   fi
 fi
 # cd ${ORIG_PWD}
 
-git fetch --all
-if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then
-  git pull
-else
-  git reset --hard origin/main
-fi
+# git fetch --all
+# if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then
+  git pull || :
+# else
+#   git reset --hard origin/main
+# fi
 
 nixfmt .
 
@@ -107,7 +113,7 @@ fi
 if
   ${CMD} switch --flake . --keep-going -v -j auto --show-trace # --install-bootloader
 then
-  cd ~/.config/nix
+  cd "${HOME}/.config/nix"
   rm -f .build-succeeded .build-failed
   touch .build-succeeded
   if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then
@@ -116,7 +122,7 @@ then
     git push || :
   fi
 else
-  cd ~/.config/nix
+  cd "${HOME}/.config/nix"
   rm -f .build-succeeded .build-failed
   touch .build-failed
   if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then

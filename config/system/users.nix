@@ -11,6 +11,9 @@ let
       group = "users";
     };
   };
+in
+{
+  mutableUsers = false;
   users = builtins.mapAttrs (
     name: v:
     v
@@ -20,7 +23,4 @@ let
       isNormalUser = true;
     }
   ) user-cfg;
-in
-{
-  inherit users;
 }

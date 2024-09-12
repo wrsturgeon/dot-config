@@ -9,7 +9,6 @@ ctx:
       {
         enableBashCompletion = true;
         enableCompletion = true;
-        enableGlobalCompinit = true;
         shellInit = ''
           # Lines configured by zsh-newuser-install
           HISTFILE=~/.zsh_history
@@ -40,6 +39,7 @@ ctx:
         enableFzfCompletion = true;
         enableFzfGit = true;
         enableFzfHistory = true;
+        enableGlobalCompinit = true;
         enableSyntaxHighlighting = true;
       };
   }

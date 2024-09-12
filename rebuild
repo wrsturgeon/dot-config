@@ -53,6 +53,7 @@ if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then
 fi
 
 # Nav to the configuration directory:
+echo "Configuration directory: ${CONFIG_DIR}"
 cd "${CONFIG_DIR}"
 
 # git fetch --all

@@ -3,24 +3,24 @@ let
   user-dir = ctx.linux-mac "/home" "/Users";
   user-cfg = {
     "${ctx.linux-mac "will" "willsturgeon"}" = {
-      createHome = true;
       description = "Will Sturgeon";
-      extraGroups = [
-        "wheel"
-      ];
-      group = "users";
+      extraGroups = [ "wheel" ];
     };
   };
-in
-{
-  mutableUsers = false;
   users = builtins.mapAttrs (
     name: v:
     v
     // {
       inherit name;
+      createHome = true;
+      group = "users";
       home = "${user-dir}/${name}";
       isNormalUser = true;
+      password = ""; # there fucking must be a better way
     }
   ) user-cfg;
+in
+{
+  mutableUsers = false;
+  inherit users;
 }

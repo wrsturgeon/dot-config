@@ -26,6 +26,10 @@
       };
       url = "github:nix-community/nixvim";
     };
+    wezterm-zip = {
+      flake = false;
+      url = "https://github.com/wez/wezterm/releases/download/nightly/WezTerm-macos-nightly.zip";
+    };
   };
   outputs =
     {
@@ -37,6 +41,7 @@
       nixpkgs,
       nixvim,
       self,
+      wezterm-zip,
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
@@ -185,6 +190,7 @@
             self
             system
             terminal-settings
+            wezterm-zip
             ;
           dock-apps =
             (builtins.map (f: f laptop-name) [

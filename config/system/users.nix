@@ -16,7 +16,7 @@ let
       group = "users";
       home = "${user-dir}/${name}";
       isNormalUser = true;
-      password = ""; # there fucking must be a better way
+      initialPassword = ""; # there fucking must be a better way
     }
   ) user-cfg;
 in

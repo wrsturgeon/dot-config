@@ -9,8 +9,28 @@ ctx:
       {
         enableBashCompletion = true;
         enableCompletion = true;
+        enableGlobalCompinit = true;
+        shellInit = ''
+          # Lines configured by zsh-newuser-install
+          HISTFILE=~/.zsh_history
+          HISTSIZE=2048
+          SAVEHIST=2048
+          setopt extendedglob nomatch notify
+          unsetopt autocd beep
+          bindkey -v
+          # End of lines configured by zsh-newuser-install
+          # The following lines were added by compinstall
+          zstyle :compinstall filename '/etc/zshrc'
+
+          autoload -Uz compinit
+          compinit
+          # End of lines added by compinstall
+
+          echo '#' > ~/.zshrc
+        '';
         promptInit = ''
           rm -fr ~/.z*
+          echo '#' > ~/.zshrc
           source ${ctx.pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
           source ${"${ctx.dir}/programs/p10k/instant-prompt.zsh"}
           source ${"${ctx.dir}/programs/p10k/config.zsh"}

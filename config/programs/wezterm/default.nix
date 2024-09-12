@@ -5,6 +5,7 @@ ctx.pkgs.stdenvNoCC.mkDerivation {
   buildPhase = ''
     pwd
     ls -A
+    ls -A WezTerm.app
     mv bin/wezterm-gui bin/wezterm-gui-raw
     echo "${''
       #!/usr/bin/env bash

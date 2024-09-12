@@ -29,11 +29,11 @@
         "rust-analyzer-src": "rust-analyzer-src"
       },
       "locked": {
-        "lastModified": 1726036322,
-        "narHash": "sha256-9Hwl4lzB5yFah00OaXSMDPDubCy99wtLgsYxMVpMwlM=",
+        "lastModified": 1726116637,
+        "narHash": "sha256-tU2GhwU887mPg6C4c2k+CEBAnKY6R0tSeQYtoqjZmLM=",
         "owner": "nix-community",
         "repo": "fenix",
-        "rev": "3e50a3c915882f07cb3f6c246f09febc4ad36c3e",
+        "rev": "96a04a213838c5001619ad57400c5a176fa040b1",
         "type": "github"
       },
       "original": {
@@ -389,8 +389,8 @@
     "wezterm-zip": {
       "flake": false,
       "locked": {
-        "lastModified": 1726025816,
-        "narHash": "sha256-yZ4ka9sieaKPYID/Oy7Args+TpNMpPPfQ66ju+qg8VM=",
+        "lastModified": 1726112529,
+        "narHash": "sha256-h4zf/bnuuANnfwb9ALXipjRzP7NJiYV4FZtwul4smYY=",
         "type": "tarball",
         "url": "https://github.com/wez/wezterm/releases/download/nightly/WezTerm-macos-nightly.zip"
       },

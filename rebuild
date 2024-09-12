@@ -97,7 +97,7 @@ if [[ "${OS}" == "Linux" ]]; then
   cd /etc/nixos
   sudo -A git fetch
   sudo -A git reset --hard origin/main
-  export CMD="sudo -iA nixos-rebuild"
+  export CMD="sudo -A nixos-rebuild"
 else
   if [[ "${OS}" == "Darwin" ]]; then
     if command -v 'darwin-rebuild' &> /dev/null; then
@@ -113,7 +113,7 @@ fi
 
 # Rebuild the Nix system:
 if
-  ${CMD} switch --flake . --keep-going -v -j auto --show-trace ${INSTALL_BOOTLOADER}
+  ${CMD} switch --flake "${CONFIG_DIR}" --keep-going -v -j auto --show-trace ${INSTALL_BOOTLOADER}
 then
   cd "${CONFIG_DIR}"
   rm -f .build-succeeded .build-failed

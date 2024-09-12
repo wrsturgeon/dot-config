@@ -4,6 +4,7 @@ ctx.pkgs.stdenvNoCC.mkDerivation {
   src = ctx.linux-mac ctx.pkgs.wezterm ctx.wezterm-zip;
   buildPhase = ":";
   installPhase = ''
+    mkdir -p $out
     ${ctx.linux-mac "" ''
       mkdir -p $out/Applications
       cp -r WezTerm.app $out/Applications/WezTerm.app

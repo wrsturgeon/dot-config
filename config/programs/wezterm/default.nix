@@ -16,7 +16,7 @@ ctx.pkgs.stdenvNoCC.mkDerivation {
   installPhase = ''
     ${ctx.pkgs.tree}/bin/tree .
     mkdir -p $out/Applications
-    cp ./WezTerm.app $out/Applications/WezTerm.app
+    cp -r WezTerm.app $out/Applications/WezTerm.app
     mkdir -p $out/bin
     echo "${''
       #!/usr/bin/env bash

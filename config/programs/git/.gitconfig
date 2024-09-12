@@ -1,7 +1,10 @@
 [commit]
 	gpgSign = false # true
-[init]
-	defaultBranch = main
 [credential]
 	helper = cache --timeout 21600	# six hours
 	helper = oauth
+[init]
+	defaultBranch = main
+[user]
+  name = "Will Sturgeon"
+  email = "willstrgn@gmail.com"

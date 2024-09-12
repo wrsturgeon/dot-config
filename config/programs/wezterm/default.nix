@@ -1,7 +1,7 @@
 ctx:
 ctx.pkgs.stdenvNoCC.mkDerivation {
   name = "wezterm-configured";
-  src = ctx.wezterm-zip;
+  src = ctx.linux-mac ctx.pkgs.wezterm ctx.wezterm-zip;
   buildPhase = ":";
   # buildPhase = ''
   #   mv bin/wezterm-gui bin/wezterm-gui-raw

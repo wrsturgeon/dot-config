@@ -17,6 +17,7 @@ let
     // {
       inherit name;
       home = "${user-dir}/${name}";
+      isNormalUser = true;
     }
   ) user-cfg;
 in

@@ -78,12 +78,7 @@ fi
 
 # Update dependencies:
 nix flake update || : # rate limits!
-if [ -z "$(git status --porcelain)" ]; then
-  if [ -f .build-succeeded ]; then
-    echo 'Already successfully built!'
-    exit
-  fi
-else
+if [ -z "$(git status --porcelain)" ]; then :; else
   if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then
     git add -A
     git commit -m "${COMMIT_PREFIX}${SPACER}:arrow_up:${SPACER}${USER}" || :

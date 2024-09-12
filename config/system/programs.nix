@@ -39,7 +39,6 @@ ctx:
         enableFzfCompletion = true;
         enableFzfGit = true;
         enableFzfHistory = true;
-        enableGlobalCompinit = true;
         enableSyntaxHighlighting = true;
       };
   }

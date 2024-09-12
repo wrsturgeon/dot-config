@@ -27,6 +27,7 @@ ctx.linux-mac null (
           echo "$(date)"
           echo '================================================================================================================================'
           cd /Users
+          export NIX_SSHOPTS='-tt'
           for user in $(ls -A); do
             if [ -f /Users/''${user}/.config/nix/rebuild ]; then
               sudo -A -i -u "''${user}" bash -x /Users/''${user}/.config/nix/rebuild

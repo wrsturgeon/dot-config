@@ -4,8 +4,7 @@ ctx.pkgs.stdenvNoCC.mkDerivation {
   src = ctx.wezterm-zip;
   buildPhase = ''
     pwd
-    ls -A
-    ls -A WezTerm.app
+    ${ctx.pkgs.tree}/bin/tree -a .
     mv bin/wezterm-gui bin/wezterm-gui-raw
     echo "${''
       #!/usr/bin/env bash

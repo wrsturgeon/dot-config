@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo '${SUDO_ASKPASS}'="${SUDO_ASKPASS}"
+
 export OS="$(uname -s)"
 if [ -z "${1}" ]; then :; else
   export USER="${1}" # overwrite

@@ -20,11 +20,11 @@ let
       inherit name;
       createHome = true;
       home = "${user-dir}/${name}";
-      isNormalUser = true;
     }
     // ctx.linux-mac {
       group = "users";
       initialPassword = ""; # there fucking must be a better way
+      isNormalUser = true;
     } { }
   ) user-cfg;
 in

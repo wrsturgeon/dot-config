@@ -24,6 +24,7 @@ ctx.pkgs.stdenvNoCC.mkDerivation {
         #!/usr/bin/env bash
         ''${f}-raw --config-file ${./config.lua}
       ''}" > $f
+      chmod +x $f
     done
   '';
 }

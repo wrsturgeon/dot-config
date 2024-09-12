@@ -127,5 +127,5 @@ else
   exit 1
 fi
 
-gh api user --jq '.login' || gh auth login
-sudo -i gh api user --jq '.login' || sudo -i gh auth login
+gh api user --jq '.login' &> /dev/null || gh auth login
+sudo -i gh api user --jq '.login' &> /dev/null || sudo -i gh auth login

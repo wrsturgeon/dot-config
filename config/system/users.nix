@@ -21,10 +21,10 @@ let
       createHome = true;
       home = "${user-dir}/${name}";
       isNormalUser = true;
-      initialPassword = ""; # there fucking must be a better way
     }
     // ctx.linux-mac {
       group = "users";
+      initialPassword = ""; # there fucking must be a better way
     } { }
   ) user-cfg;
 in

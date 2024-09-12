@@ -23,7 +23,7 @@ let
     }
     // ctx.linux-mac {
       group = "users";
-      password = "password"; # there fucking must be a better way
+      initialPassword = ""; # there fucking must be a better way
       isNormalUser = true;
     } { }
   ) user-cfg;

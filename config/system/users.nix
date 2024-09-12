@@ -4,7 +4,10 @@ let
   user-cfg = {
     "${ctx.linux-mac "will" "willsturgeon"}" = {
       description = "Will Sturgeon";
-      extraGroups = [ "wheel" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
     };
   };
   users = builtins.mapAttrs (

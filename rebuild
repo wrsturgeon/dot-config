@@ -117,7 +117,7 @@ then
   rm -f .build-succeeded .build-failed
   touch .build-succeeded
   if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then
-    git add -A
+    git add -A || :
     git commit -m "${COMMIT_PREFIX}${SPACER}:white_check_mark:${SPACER}${USER}" || :
     git push || :
   fi
@@ -126,7 +126,7 @@ else
   rm -f .build-succeeded .build-failed
   touch .build-failed
   if [ "${GITHUB_USERNAME}" = "wrsturgeon" ]; then
-    git add -A
+    git add -A || :
     git commit -m "${COMMIT_PREFIX}${SPACER}:fire:${SPACER}${USER}" || :
     git push || :
   fi

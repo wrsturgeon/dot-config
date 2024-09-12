@@ -3,6 +3,8 @@ ctx.pkgs.stdenvNoCC.mkDerivation {
   name = "wezterm-configured";
   src = ctx.wezterm-zip;
   buildPhase = ''
+    pwd
+    ls -A
     mv bin/wezterm-gui bin/wezterm-gui-raw
     echo "${''
       #!/usr/bin/env bash

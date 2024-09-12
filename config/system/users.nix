@@ -2,13 +2,16 @@ ctx:
 let
   user-dir = ctx.linux-mac "/home" "/Users";
   user-cfg = {
-    "${ctx.linux-mac "will" "willsturgeon"}" = {
-      description = "Will Sturgeon";
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-      ];
-    };
+    "${ctx.linux-mac "will" "willsturgeon"}" =
+      {
+        description = "Will Sturgeon";
+      }
+      // ctx.linux-mac {
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+        ];
+      } { };
   };
   users = builtins.mapAttrs (
     name: v:

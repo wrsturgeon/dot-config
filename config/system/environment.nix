@@ -7,7 +7,7 @@ ctx: {
   extraInit = ''
     # echo 'Hello from `extraInit`!'
   '';
-  pathsToLink = [ "/share/zsh" ];
+  # pathsToLink = [ "/share/zsh" ];
   shellAliases = {
     e = "emacs";
     vi = "vim";

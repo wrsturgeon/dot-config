@@ -4,12 +4,16 @@ ctx.pkgs.stdenvNoCC.mkDerivation {
   src = ctx.linux-mac ctx.pkgs.wezterm ctx.wezterm-zip;
   buildPhase = ":";
   installPhase = ''
-    mkdir -p $out
-    ${ctx.linux-mac "" ''
-      mkdir -p $out/Applications
-      cp -r WezTerm.app $out/Applications/WezTerm.app
-      ln -s $out/Applications/WezTerm.app/Contents/MacOS $out/bin
-    ''}
+    ${ctx.linux-mac
+      ''
+        cp -r . $out
+      ''
+      ''
+        mkdir -p $out/Applications
+        cp -r WezTerm.app $out/Applications/WezTerm.app
+        ln -s $out/Applications/WezTerm.app/Contents/MacOS $out/bin
+      ''
+    }
     for f in $(find $out -name 'wezterm-gui'); do
       mv $f ''${f}-raw
       echo "${''

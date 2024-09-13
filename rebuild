@@ -140,8 +140,12 @@ fi
 gh api user --jq '.login' &> /dev/null || gh auth login
 sudo -i gh api user --jq '.login' &> /dev/null || sudo -i gh auth login
 
+# Delete all old `result` symlinks from `nix build`s:
+nix-store --gc --print-roots | grep 'result -> ' | sed -n -e 's/ -> .*$//p' | xargs rm
+nix-store --gc --print-roots | grep '\/\.direnv' | sed -n -e 's/.direnv.*$/.direnv/p' | xargs rm -fr
+
 # Garbage collection:
-nix-collect-garbage --delete-older-than 1d
+nix-collect-garbage --delete-older-than 1d --verbose
 
 # Store optimization:
-nix-store --optimise
+nix-store --optimise --verbose

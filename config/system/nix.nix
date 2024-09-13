@@ -1,9 +1,13 @@
 ctx: {
   channel.enable = false;
+  extraOptions = ''
+    keep-outputs = false
+    keep-derivations = false
+  '';
   gc =
     {
       automatic = true;
-      options = "-d";
+      options = "--delete-older-than 1d";
     }
     // ctx.linux-mac { } {
       interval = {
@@ -28,6 +32,6 @@ ctx: {
       "flakes"
     ];
     log-lines = 48;
-    # sandbox = true;
+    sandbox = true;
   };
 }

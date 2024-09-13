@@ -144,6 +144,9 @@ sudo -i gh api user --jq '.login' &> /dev/null || sudo -i gh auth login
 nix-store --gc --print-roots | grep 'result -> ' | sed -n -e 's/ -> .*$//p' | xargs rm
 nix-store --gc --print-roots | grep '\/\.direnv' | sed -n -e 's/.direnv.*$/.direnv/p' | xargs rm -fr
 
+# From <https://nixos.wiki/wiki/Cleaning_the_nix_store>:
+nix-store --gc --print-roots | grep -E -v "^(/nix/var|/run/\w+-system|\{memory|/proc)" | sed -n -e 's/ -> .*$//p' | grep -v '^{censored}$' | xargs rm
+
 # Garbage collection:
 nix-collect-garbage --delete-older-than 1d --verbose
 

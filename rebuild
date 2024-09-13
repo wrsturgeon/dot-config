@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-echo '${SUDO_ASKPASS}'="${SUDO_ASKPASS}"
-
 export OS="$(uname -s)"
 if [ -z "${1}" ]; then :; else
   export USER="${1}" # overwrite
@@ -141,3 +139,9 @@ fi
 
 gh api user --jq '.login' &> /dev/null || gh auth login
 sudo -i gh api user --jq '.login' &> /dev/null || sudo -i gh auth login
+
+# Garbage collection:
+nix-collect-garbage --delete-older-than 1d
+
+# Store optimization:
+nix-store --optimise

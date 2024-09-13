@@ -107,10 +107,15 @@ else
     fi
     if [ -f /etc/nix/nix.conf ]; then
       if [ -z "$(grep '^sandbox = true' /etc/nix/nix.conf)" ]; then :; else
+        # <https://github.com/NixOS/nix/issues/11002#issuecomment-2200216968>
         rm -f ./nix-conf
-        sudo cp /etc/nix/nix.conf ./nix-conf
+        sudo cp /etc/nix/nix.conf /etc/nix/nix.conf.old
+        sudo cp /etc/nix/nix.conf.old ./nix-conf
         sed -i '' 's/^sandbox = true/sandbox = false/g' ./nix-conf
         sudo mv ./nix-conf /etc/nix/nix.conf
+        sudo launchctl unload /Library/LaunchDaemons/org.nixos.nix-daemon.plist
+        sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist
+        sudo mv /etc/nix/nix.conf.old /etc/nix/nix.conf
       fi
     fi
   else

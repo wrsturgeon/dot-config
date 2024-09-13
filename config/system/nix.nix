@@ -8,6 +8,7 @@ ctx: {
     {
       automatic = true;
       options = "--delete-older-than 1d";
+      user = "root";
     }
     // ctx.linux-mac { } {
       interval = {
@@ -18,6 +19,7 @@ ctx: {
   optimise =
     {
       automatic = true;
+      user = "root";
     }
     // ctx.linux-mac { } {
       interval = {

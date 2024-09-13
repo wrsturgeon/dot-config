@@ -105,6 +105,11 @@ else
     else
       export CMD="nix --extra-experimental-features flakes --extra-experimental-features nix-command run nix-darwin --"
     fi
+    if [ -f /etc/nix/nix.conf ]; then
+      if [ -z "$(grep '^sandbox = true' /etc/nix/nix.conf)" ]; then :; else
+        sudo sed -i 's/^sandbox = true/sandbox = false/' /etc/nix/nix.conf
+      fi
+    fi
   else
     echo 'Unrecognized OS'
     exit 1

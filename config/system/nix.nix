@@ -32,6 +32,6 @@ ctx: {
       "flakes"
     ];
     log-lines = 48;
-    sandbox = true;
+    sandbox = ctx.linux-mac true false;
   };
 }

@@ -107,10 +107,10 @@ else
     fi
     if [ -f /etc/nix/nix.conf ]; then
       if [ -z "$(grep '^sandbox = true' /etc/nix/nix.conf)" ]; then :; else
-        sudo cp /etc/nix/nix.conf nix-conf
-        sed -i '' 's/^sandbox = true/sandbox = false/g' nix-conf
-        sudo mv nix-conf /etc/nix/nix.conf
-        rm nix-conf
+        sudo cp /etc/nix/nix.conf ./nix-conf
+        sed -i '' 's/^sandbox = true/sandbox = false/g' ./nix-conf
+        sudo mv ./nix-conf /etc/nix/nix.conf
+        rm ./nix-conf
       fi
     fi
   else

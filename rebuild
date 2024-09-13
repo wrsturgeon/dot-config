@@ -100,7 +100,7 @@ if [[ "${OS}" == "Linux" ]]; then
   export CMD="sudo -A nixos-rebuild"
 else
   if [[ "${OS}" == "Darwin" ]]; then
-    export CMD="nix --extra-experimental-features 'flakes nix-command' run --no-sandbox nix-darwin --"
+    export CMD='nix --extra-experimental-features "flakes nix-command" run --no-sandbox nix-darwin --'
     # if [ -f /etc/nix/nix.conf ]; then
     #   if [ -z "$(grep '^sandbox = true' /etc/nix/nix.conf)" ]; then :; else
     #     # <https://github.com/NixOS/nix/issues/11002#issuecomment-2200216968>

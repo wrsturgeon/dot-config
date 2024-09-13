@@ -222,4 +222,5 @@ ctx:
         swapLeftCtrlAndFn = false;
       };
       startup.chime = true;
+      stateVersion = 5;
     }

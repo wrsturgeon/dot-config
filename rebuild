@@ -17,7 +17,7 @@ export SPACER='    '
 
 if [ "${OS}" = "Darwin" ]; then
   export OS_EMOJI=':apple:'
-  export EXTRA_OPTIONS="--option xosandbox false"
+  export EXTRA_OPTIONS="--option sandbox false"
 else
   if [ "${OS}" = "Linux" ]; then
     export OS_EMOJI=':penguin:'
@@ -100,11 +100,7 @@ if [[ "${OS}" == "Linux" ]]; then
   export CMD="sudo -A nixos-rebuild"
 else
   if [[ "${OS}" == "Darwin" ]]; then
-    if command -v 'darwin-rebuild' &> /dev/null; then
-      export CMD='darwin-rebuild'
-    else
-      export CMD="nix --extra-experimental-features flakes --extra-experimental-features nix-command run nix-darwin --"
-    fi
+    export CMD="nix --extra-experimental-features 'flakes nix-command' run --no-sandbox nix-darwin --"
     # if [ -f /etc/nix/nix.conf ]; then
     #   if [ -z "$(grep '^sandbox = true' /etc/nix/nix.conf)" ]; then :; else
     #     # <https://github.com/NixOS/nix/issues/11002#issuecomment-2200216968>

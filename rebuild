@@ -17,11 +17,11 @@ export SPACER='    '
 
 if [ "${OS}" = "Darwin" ]; then
   export OS_EMOJI=':apple:'
-  export INSTALL_BOOTLOADER=""
+  export EXTRA_OPTIONS="--option sandbox false"
 else
   if [ "${OS}" = "Linux" ]; then
     export OS_EMOJI=':penguin:'
-    export INSTALL_BOOTLOADER="--install-bootloader"
+    export EXTRA_OPTIONS="--install-bootloader"
   else
     echo 'Unrecognized OS! Got "'"${OS}"'" but expected either "Darwin" or "Linux"'
     exit 1
@@ -105,18 +105,18 @@ else
     else
       export CMD="nix --extra-experimental-features flakes --extra-experimental-features nix-command run nix-darwin --"
     fi
-    if [ -f /etc/nix/nix.conf ]; then
-      if [ -z "$(grep '^sandbox = true' /etc/nix/nix.conf)" ]; then :; else
-        # <https://github.com/NixOS/nix/issues/11002#issuecomment-2200216968>
-        sudo cp /etc/nix/nix.conf /etc/nix/nix.conf.old
-        sudo cp /etc/nix/nix.conf.old ./nix-conf
-        sed -i '' 's/^sandbox = true/sandbox = false/g' ./nix-conf
-        sudo mv ./nix-conf /etc/nix/nix.conf
-        sudo launchctl unload /Library/LaunchDaemons/org.nixos.nix-daemon.plist
-        sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist
-        sudo mv /etc/nix/nix.conf.old /etc/nix/nix.conf
-      fi
-    fi
+    # if [ -f /etc/nix/nix.conf ]; then
+    #   if [ -z "$(grep '^sandbox = true' /etc/nix/nix.conf)" ]; then :; else
+    #     # <https://github.com/NixOS/nix/issues/11002#issuecomment-2200216968>
+    #     sudo cp /etc/nix/nix.conf /etc/nix/nix.conf.old
+    #     sudo cp /etc/nix/nix.conf.old ./nix-conf
+    #     sed -i '' 's/^sandbox = true/sandbox = false/g' ./nix-conf
+    #     sudo mv ./nix-conf /etc/nix/nix.conf
+    #     sudo launchctl unload /Library/LaunchDaemons/org.nixos.nix-daemon.plist
+    #     sudo launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist
+    #     sudo mv /etc/nix/nix.conf.old /etc/nix/nix.conf
+    #   fi
+    # fi
   else
     echo 'Unrecognized OS'
     exit 1
@@ -125,7 +125,7 @@ fi
 
 # Rebuild the Nix system:
 if
-  ${CMD} switch --flake "${CONFIG_DIR}" --keep-going -v -j auto --show-trace ${INSTALL_BOOTLOADER}
+  ${CMD} switch --flake "${CONFIG_DIR}" --keep-going -v -j auto --show-trace ${EXTRA_OPTIONS}
 then
   cd "${CONFIG_DIR}"
   rm -f .build-succeeded .build-failed

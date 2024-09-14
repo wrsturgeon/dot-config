@@ -353,7 +353,7 @@
                 done
 
                 # From <https://nixos.wiki/wiki/Cleaning_the_nix_store>:
-                nix-store --gc --print-roots | grep -E -v "^(/nix/var|/run/\w+-system|\{memory|/proc)" | sed -n -e 's/ -> .*$//p' | grep -v '^{censored}$' | grep -v '^/var/root/.cache/nix/flake-registry.json$' | xargs rm
+                nix-store --gc --print-roots | grep -E -v "^(/nix/var|/run/\w+-system|\{memory|/proc)" | sed -n -e 's/ -> .*$//p' | grep -v '^{censored}$' | grep -v '^{lsof}$' | grep -v '^/var/root/.cache/nix/flake-registry.json$' | xargs rm
 
                 # Garbage collection:
                 nix-collect-garbage --delete-older-than 1d --verbose

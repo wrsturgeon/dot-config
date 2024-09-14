@@ -84,7 +84,7 @@ pkgs.writeScriptBin "rebuild" ''
   fi
 
   # Update dependencies:
-  ${nix} flake update # rate limits!
+  ${nix} flake update || : # rate limits!
   if [ -z "$(${git} status --porcelain)" ]; then :; else
     if [ "''${GITHUB_USERNAME}" = "wrsturgeon" ]; then
       ${git} add -A

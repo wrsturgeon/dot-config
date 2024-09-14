@@ -334,14 +334,9 @@
 
                 cd ${config-dir}
                 rm -f .build-succeeded .build-failed
-                echo 'automatically generated file' > ''${BUILD_STATUS_FILE}
+                touch ''${BUILD_STATUS_FILE}
                 if [ "''${GITHUB_USERNAME}" = "wrsturgeon" ]; then
-                  if [ -z "$(git diff origin/main -- .build-succeeded)" ]; then :; else
-                    git add .build-succeeded
-                  fi
-                  if [ -z "$(git diff origin/main -- .build-failed)" ]; then :; else
-                    git add .build-failed
-                  fi
+                  git status --porcelain | cut -d ' ' -f 2 | grep '^\.build' | xargs git add
                   git commit -m "''${COMMIT_PREFIX}${spacer}''${STATUS_EMOJI}${spacer}''${USER}"
                   git push
                 fi

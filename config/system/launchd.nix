@@ -28,11 +28,7 @@ ctx.linux-mac null (
           echo '================================================================================================================================'
           cd /Users
           export NIX_SSHOPTS='-tt'
-          for user in $(ls -A); do
-            if [ -f /Users/''${user}/.config/nix/rebuild ]; then
-              sudo -A -H -i -u "''${user}" bash -x /Users/''${user}/.config/nix/rebuild
-            fi
-          done
+          nix run /etc/nixos
         ''; # For some reason, `nix-collect-garbage` is not recognized in the above
         serviceConfig.StartCalendarInterval = [
           { Minute = 0; }

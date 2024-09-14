@@ -18,6 +18,7 @@ ctx: {
     ++ (with ctx; [
       emacs
       git
+      rebuild
       vim
     ])
     ++ (with ctx.pkgs; [

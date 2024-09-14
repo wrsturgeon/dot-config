@@ -259,6 +259,9 @@
 
                 set -eux
 
+                gh api user --jq '.login' &> /dev/null || gh auth login
+                sudo -i gh api user --jq '.login' &> /dev/null || sudo -i gh auth login
+
                 export GITHUB_USERNAME="$(${pkgs.gh}/bin/gh api user --jq '.login')"
                 export COMMIT_PREFIX='`'"$(date '+%Y/%m/%d %H:%M:%S')"'`${spacer}${os-emoji}'
 
@@ -317,46 +320,31 @@
                     exit 0
                   fi
                 fi
-                ${linux-mac
-                  ''
 
-                    cd /etc/nixos
-                    sudo -A git fetch
-                    sudo -A git reset --hard origin/main
-
-                  ''
-                  ''
-
-                  ''
-                }
                 # Rebuild the Nix system:
                 if
                   ${cmd} switch --flake ${config-dir} --keep-going -v -j auto --show-trace ${extra-options}
                 then
-                  cd ${config-dir}
-                  rm -f .build-succeeded .build-failed
-                  touch .build-succeeded
-                  if [ "''${GITHUB_USERNAME}" = "wrsturgeon" ]; then
-                    git add .build-succeeded
-                    git add .build-failed
-                    git commit -m "''${COMMIT_PREFIX}${spacer}:white_check_mark:${spacer}''${USER}"
-                    git push
-                  fi
+                  export BUILD_STATUS_FILE='.build-succeeded'
+                  export STATUS_EMOJI=':white_check_mark:'
                 else
-                  cd ${config-dir}
-                  rm -f .build-succeeded .build-failed
-                  touch .build-failed
-                  if [ "''${GITHUB_USERNAME}" = "wrsturgeon" ]; then
-                    git add .build-succeeded
-                    git add .build-failed
-                    git commit -m "''${COMMIT_PREFIX}${spacer}:fire:${spacer}''${USER}"
-                    git push
-                  fi
-                  exit 1
+                  export BUILD_STATUS_FILE='.build-failed'
+                  export STATUS_EMOJI=':fire:'
                 fi
 
-                gh api user --jq '.login' &> /dev/null || gh auth login
-                sudo -i gh api user --jq '.login' &> /dev/null || sudo -i gh auth login
+                cd ${config-dir}
+                rm -f .build-succeeded .build-failed
+                touch ''${BUILD_STATUS_FILE}
+                if [ "''${GITHUB_USERNAME}" = "wrsturgeon" ]; then
+                  if [ -z "$(git diff origin/main -- .build-succeeded)" ]; then :; else
+                    git add .build-succeeded
+                  fi
+                  if [ -z "$(git diff origin/main -- .build-failed)" ]; then :; else
+                    git add .build-failed
+                  fi
+                  git commit -m "''${COMMIT_PREFIX}${spacer}''${STATUS_EMOJI}${spacer}''${USER}"
+                  git push
+                fi
 
                 # Delete all old `result` symlinks from `nix build`s:
                 nix-store --gc --print-roots | grep 'result -> ' | sed -n -e 's/ -> .*$//p' | xargs rm

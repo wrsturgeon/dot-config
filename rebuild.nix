@@ -31,7 +31,7 @@ in
 pkgs.writeScriptBin "rebuild" ''
   #!${pkgs.bash}/bin/bash
 
-  set -eux
+  set -eu
 
   ${gh} api user --jq '.login' &> /dev/null || ${gh} auth login
   ${sudo} -i ${gh} api user --jq '.login' &> /dev/null || ${sudo} -i ${gh} auth login

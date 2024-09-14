@@ -25,7 +25,7 @@ let
   stat = "${pkgs.coreutils}/bin/stat";
   sudo = "sudo"; # for now
   touch = "${pkgs.coreutils}/bin/touch";
-  xargs = "${pkgs.findutils}/bin/xargs";
+  xargs = "${pkgs.findutils}/bin/xargs -r";
 
 in
 pkgs.writeScriptBin "rebuild" ''

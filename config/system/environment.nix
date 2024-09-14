@@ -24,7 +24,6 @@ ctx: {
       coreutils-full
       fd
       gcc
-      gh
       gimp
       # git-credential-manager
       git-credential-oauth

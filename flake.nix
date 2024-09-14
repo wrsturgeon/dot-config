@@ -246,7 +246,138 @@
       {
         apps.default = {
           type = "app";
-          program = ./rebuild;
+          program =
+            let
+              spacer = "    ";
+              os-emoji = linux-mac ":penguin:" ":apple:";
+              extra-options = linux-mac "--install-bootloader" "--option sandbox false";
+              cmd = linux-mac "sudo -A nixos-rebuild" "nix --extra-experimental-features flakes --extra-experimental-features nix-command run --no-sandbox nix-darwin --";
+              config-dir = "/etc/nixos";
+              users-dir = linux-mac "/home" "/Users";
+              script = pkgs.writeScriptBin "rebuild.bash" ''
+                #!${pkgs.bash}/bin/bash
+
+                set -eu
+
+                export GITHUB_USERNAME="$(${pkgs.gh}/bin/gh api user --jq '.login')"
+                export COMMIT_PREFIX='`'"$(date '+%Y/%m/%d %H:%M:%S')"'`${spacer}${os-emoji}'
+
+                # Synchronize Logseq notes:
+                cd ${users-dir}
+                for user in $(ls .); do
+                  if [ -d ${users-dir}/''${user}/Desktop/logseq/.git ]; then
+                    cd ${users-dir}/''${user}/Desktop/logseq
+                    git pull
+                    git submodule update --init --recursive --remote
+                    make .updated
+                    git add -A
+                    git commit -m "''${COMMIT_PREFIX}"
+                    git push
+                  fi
+                done
+
+                # Nav to the configuration directory:
+                cd ${config-dir}
+
+                git fetch --all
+                if [ -z "$(git diff origin/main)" ]; then
+                  git pull
+                  nix run
+                  exit 0
+                fi
+
+                nixfmt .
+
+                # Check if anything changed, and, if so, remove the success/failure flag:
+                if [ -z "$(git status --porcelain)" ]; then :; else
+                  rm -f .build-succeeded .build-failed
+                fi
+
+                # Push changes upstream with a W.I.P. note (wrench emoji):
+                if [ "''${GITHUB_USERNAME}" = "wrsturgeon" ]; then
+                  if [ -f .build-succeeded ]; then :; else
+                    if [ -f .build-failed ]; then :; else
+                      git add -A
+                      git commit -m "''${COMMIT_PREFIX}${spacer}:wrench:${spacer}''${USER}"
+                      git push
+                    fi
+                  fi
+                fi
+
+                # Update dependencies:
+                nix flake update # rate limits!
+                if [ -z "$(git status --porcelain)" ]; then :; else
+                  if [ "''${GITHUB_USERNAME}" = "wrsturgeon" ]; then
+                    git add -A
+                    git commit -m "''${COMMIT_PREFIX}${spacer}:arrow_up:${spacer}''${USER}"
+                    git push
+                    nix run
+                    exit 0
+                  fi
+                fi
+                ${linux-mac
+                  ''
+
+                    cd /etc/nixos
+                    sudo -A git fetch
+                    sudo -A git reset --hard origin/main
+
+                  ''
+                  ''
+
+                  ''
+                }
+                # Rebuild the Nix system:
+                if
+                  ${cmd} switch --flake ${config-dir} --keep-going -v -j auto --show-trace ${extra-options}
+                then
+                  cd ${config-dir}
+                  rm -f .build-succeeded .build-failed
+                  touch .build-succeeded
+                  if [ "''${GITHUB_USERNAME}" = "wrsturgeon" ]; then
+                    git add .build-succeeded
+                    git add .build-failed
+                    git commit -m "''${COMMIT_PREFIX}${spacer}:white_check_mark:${spacer}''${USER}"
+                    git push
+                  fi
+                else
+                  cd ${config-dir}
+                  rm -f .build-succeeded .build-failed
+                  touch .build-failed
+                  if [ "''${GITHUB_USERNAME}" = "wrsturgeon" ]; then
+                    git add .build-succeeded
+                    git add .build-failed
+                    git commit -m "''${COMMIT_PREFIX}${spacer}:fire:${spacer}''${USER}"
+                    git push
+                  fi
+                  exit 1
+                fi
+
+                gh api user --jq '.login' &> /dev/null || gh auth login
+                sudo -i gh api user --jq '.login' &> /dev/null || sudo -i gh auth login
+
+                # Delete all old `result` symlinks from `nix build`s:
+                nix-store --gc --print-roots | grep 'result -> ' | sed -n -e 's/ -> .*$//p' | xargs rm
+
+                # Delete old `.direnv` environments:
+                export ONE_WEEK_AGO="$(( $(date +%s) - 604800 ))"
+                for d in $(nix-store --gc --print-roots | grep '\/\.direnv' | sed -n -e 's/.direnv.*$/.direnv/p'); do
+                  if (( "$(stat --format '%X' "''${d}")" < "''${ONE_WEEK_AGO}" )); then
+                    rm -r "''${d}"
+                  fi
+                done
+
+                # From <https://nixos.wiki/wiki/Cleaning_the_nix_store>:
+                nix-store --gc --print-roots | grep -E -v "^(/nix/var|/run/\w+-system|\{memory|/proc)" | sed -n -e 's/ -> .*$//p' | grep -v '^{censored}$' | grep -v '^/var/root/.cache/nix/flake-registry.json$' | xargs rm
+
+                # Garbage collection:
+                nix-collect-garbage --delete-older-than 1d --verbose
+
+                # Store optimization:
+                nix-store --optimise --verbose
+              '';
+            in
+            builtins.trace "${script}" "${script}/bin/rebuild.bash";
         };
         packages = {
           nixosConfigurations = eachUsername (laptop-name: nixpkgs.lib.nixosSystem (cfg laptop-name));

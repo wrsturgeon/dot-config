@@ -334,7 +334,7 @@
 
                 cd ${config-dir}
                 rm -f .build-succeeded .build-failed
-                touch ''${BUILD_STATUS_FILE}
+                echo 'automatically generated file' > ''${BUILD_STATUS_FILE}
                 if [ "''${GITHUB_USERNAME}" = "wrsturgeon" ]; then
                   if [ -z "$(git diff origin/main -- .build-succeeded)" ]; then :; else
                     git add .build-succeeded

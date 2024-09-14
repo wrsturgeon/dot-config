@@ -30,6 +30,9 @@ ctx:
         promptInit = ''
           rm -fr ~/.z*
           echo '#' > ~/.zshrc
+          rm -fr ~/.config/coq
+          mkdir -p ~/.config/coq
+          echo 'From Hammer Require Import Tactics.' > ~/.config/coq/coqrc.${builtins.trace (builtins.attrNames ctx.pkgs.coq) ctx.pkgs.coq.versionn}
           source ${ctx.pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
           source ${"${ctx.dir}/programs/p10k/instant-prompt.zsh"}
           source ${"${ctx.dir}/programs/p10k/config.zsh"}

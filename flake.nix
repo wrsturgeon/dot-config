@@ -257,7 +257,7 @@
               script = pkgs.writeScriptBin "rebuild.bash" ''
                 #!${pkgs.bash}/bin/bash
 
-                set -eu
+                set -eux
 
                 export GITHUB_USERNAME="$(${pkgs.gh}/bin/gh api user --jq '.login')"
                 export COMMIT_PREFIX='`'"$(date '+%Y/%m/%d %H:%M:%S')"'`${spacer}${os-emoji}'
@@ -271,8 +271,10 @@
                     git submodule update --init --recursive --remote
                     make .updated
                     git add -A
-                    git commit -m "''${COMMIT_PREFIX}"
-                    git push
+                    if [ -z "$(git status --porcelain)" ]; then :; else
+                      git commit -m "''${COMMIT_PREFIX}"
+                      git push
+                    fi
                   fi
                 done
 

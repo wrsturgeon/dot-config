@@ -14,8 +14,8 @@ ctx:
           HISTFILE=~/.zsh_history
           HISTSIZE=2048
           SAVEHIST=2048
-          setopt extendedglob nomatch notify
-          unsetopt autocd beep
+          setopt extendedglob notify
+          unsetopt autocd beep nomatch
           bindkey -v
           # End of lines configured by zsh-newuser-install
           # The following lines were added by compinstall

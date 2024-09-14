@@ -92,25 +92,29 @@ let
       git push
     fi
 
-    # Delete all old `result` symlinks from `nix build`s:
-    nix-store --gc --print-roots | grep 'result -> ' | sed -n -e 's/ -> .*$//p' | xargs rm
+    if [ "''${BUILD_STATUS_FILE}" = '.build-succeeded' ]; then
 
-    # Delete old `.direnv` environments:
-    export ONE_WEEK_AGO="$(( $(date +%s) - 604800 ))"
-    for d in $(nix-store --gc --print-roots | grep '\/\.direnv' | sed -n -e 's/.direnv.*$/.direnv/p'); do
-      if (( "$(stat --format '%X' "''${d}")" < "''${ONE_WEEK_AGO}" )); then
-        rm -r "''${d}"
-      fi
-    done
+      # Delete all old `result` symlinks from `nix build`s:
+      nix-store --gc --print-roots | grep 'result -> ' | sed -n -e 's/ -> .*$//p' | xargs rm
 
-    # From <https://nixos.wiki/wiki/Cleaning_the_nix_store>:
-    nix-store --gc --print-roots | grep -E -v "^(/nix/var|/run/\w+-system|\{memory|/proc)" | sed -n -e 's/ -> .*$//p' | grep -v '^{censored}$' | grep -v '^{lsof}$' | grep -v '^/var/root/.cache/nix/flake-registry.json$' | xargs rm
+      # Delete old `.direnv` environments:
+      export ONE_WEEK_AGO="$(( $(date +%s) - 604800 ))"
+      for d in $(nix-store --gc --print-roots | grep '\/\.direnv' | sed -n -e 's/.direnv.*$/.direnv/p'); do
+        if (( "$(stat --format '%X' "''${d}")" < "''${ONE_WEEK_AGO}" )); then
+          rm -r "''${d}"
+        fi
+      done
 
-    # Garbage collection:
-    nix-collect-garbage --delete-older-than 1d --verbose
+      # From <https://nixos.wiki/wiki/Cleaning_the_nix_store>:
+      nix-store --gc --print-roots | grep -E -v "^(/nix/var|/run/\w+-system|\{memory|/proc)" | sed -n -e 's/ -> .*$//p' | grep -v '^{censored}$' | grep -v '^{lsof}$' | grep -v '^/var/root/.cache/nix/flake-registry.json$' | xargs rm
 
-    # Store optimization:
-    nix-store --optimise --verbose
+      # Garbage collection:
+      nix-collect-garbage --delete-older-than 1d --verbose
+
+      # Store optimization:
+      nix-store --optimise --verbose
+
+    fi
   '';
   meta-script = actual-script: ''
     #!${pkgs.bash}/bin/bash

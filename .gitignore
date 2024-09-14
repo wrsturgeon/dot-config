@@ -2,16 +2,17 @@
 *
 # ...these specific files:
 
-# All Nix stuff together:
-
-!.build-*
-!flake.lock
+# The interesting stuff:
 !flake.nix
 !config/
 !config/**
 !rebuild.nix
 
-# Everything else:
+# Success/failure flags:
+!.build-*
 
+# Lock file (for consistent versions):
+!flake.lock
+
+# Git config:
 !.gitignore
-!.gitmodules

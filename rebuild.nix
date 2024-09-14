@@ -1,7 +1,7 @@
 ctx:
 let
   inherit (ctx) pkgs linux-mac;
-  spacer = "    ";
+  spacer = " ";
   os-emoji = linux-mac ":penguin:" ":apple:";
   extra-options = linux-mac "--install-bootloader" "--option sandbox false";
   cmd = linux-mac "${sudo} -A nixos-rebuild" "${nix} --extra-experimental-features flakes --extra-experimental-features nix-command run --no-sandbox nix-darwin --";
@@ -77,7 +77,7 @@ pkgs.writeScriptBin "rebuild" ''
     if [ -f .build-succeeded ]; then :; else
       if [ -f .build-failed ]; then :; else
         ${git} add -A
-        ${git} commit -m "''${COMMIT_PREFIX}${spacer}:wrench:${spacer}''${USER}"
+        ${git} commit -m "''${COMMIT_PREFIX}${spacer}:wrench:"
         ${git} push
       fi
     fi
@@ -88,7 +88,7 @@ pkgs.writeScriptBin "rebuild" ''
   if [ -z "$(${git} status --porcelain)" ]; then :; else
     if [ "''${GITHUB_USERNAME}" = "wrsturgeon" ]; then
       ${git} add -A
-      ${git} commit -m "''${COMMIT_PREFIX}${spacer}:arrow_up:${spacer}''${USER}"
+      ${git} commit -m "''${COMMIT_PREFIX}${spacer}:arrow_up:"
       ${git} push
     fi
   fi
@@ -109,7 +109,7 @@ pkgs.writeScriptBin "rebuild" ''
   ${touch} ''${BUILD_STATUS_FILE}
   if [ "''${GITHUB_USERNAME}" = "wrsturgeon" ]; then
     ${git} status --porcelain | ${cut} -d ' ' -f 2 | ${grep} '^\.build' | ${xargs} ${git} add
-    ${git} commit -m "''${COMMIT_PREFIX}${spacer}''${STATUS_EMOJI}${spacer}''${USER}"
+    ${git} commit -m "''${COMMIT_PREFIX}${spacer}''${STATUS_EMOJI}"
     ${git} push
   fi
 

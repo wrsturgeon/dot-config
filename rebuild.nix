@@ -40,10 +40,8 @@ let
     git config --global --add safe.directory ${config-dir}/.git
 
     git fetch --all
-    if [ -z "$(git diff origin/main)" ]; then
+    if [ -z "$(git status --porcelain)" ]; then
       git pull
-      nix run
-      exit 0
     fi
 
     nixfmt .
@@ -71,8 +69,6 @@ let
         git add -A
         git commit -m "''${COMMIT_PREFIX}${spacer}:arrow_up:${spacer}''${USER}"
         git push
-        nix run
-        exit 0
       fi
     fi
 

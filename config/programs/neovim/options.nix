@@ -28,6 +28,7 @@
   showmode = true;
   sidescrolloff = 5;
   signcolumn = "yes";
+  smartcase = true;
   smarttab = true;
   splitbelow = true;
   splitright = true;

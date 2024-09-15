@@ -14,5 +14,9 @@
 # Lock file (for consistent versions):
 !flake.lock
 
+# Dummy flake to delete inputs:
+!null/
+!null/**
+
 # Git config:
 !.gitignore

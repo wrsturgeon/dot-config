@@ -4,7 +4,7 @@ ctx: {
     clangd = { };
     hls = { };
     nixd = { };
-    ocamllsp = { };
+    ocamllsp.program = ctx.coq.ocamlPackages.ocaml-lsp;
     ruff = { };
     rust-analyzer = {
       installCargo = true;

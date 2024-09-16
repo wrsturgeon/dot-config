@@ -11,7 +11,7 @@ let
   cut = "${pkgs.coreutils}/bin/cut";
   date = "${pkgs.coreutils}/bin/date";
   gh = "${pkgs.gh}/bin/gh";
-  git = "${pkgs.git}/bin/git";
+  git = "${ctx.git}/bin/git";
   grep = "${pkgs.gnugrep}/bin/grep";
   ls = "${pkgs.coreutils}/bin/ls";
   make = "${pkgs.gnumake}/bin/make";

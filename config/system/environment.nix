@@ -16,6 +16,7 @@ ctx: {
   systemPackages =
     ctx.dock-apps
     ++ (with ctx; [
+      coq
       emacs
       git
       rebuild
@@ -46,7 +47,6 @@ ctx: {
       cargo
       rustc
     ])
-    ++ (with ctx.pkgs.coqPackages; [ coq ])
     ++ (
       with ctx.pkgs;
       ctx.linux-mac [

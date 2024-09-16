@@ -195,6 +195,7 @@
             terminal-settings
             wezterm-zip
             ;
+          coq = pkgs.coqPackages.coq;
           dock-apps =
             (builtins.map (f: f laptop-name) [
               wezterm

@@ -119,7 +119,7 @@ pkgs.writeScriptBin "rebuild" ''
 
     # Delete old `.direnv` environments:
     export ONE_WEEK_AGO="$(( $(${date} +%s) - 604800 ))"
-    for d in $(${nix-store} --gc --print-roots | ${grep} '\/\.direnv' | ${sed} -n -e 's/.direnv.*$/.direnv/p'); do
+    for d in $(${nix-store} --gc --print-roots | ${grep} '/\.direnv' | ${sed} -n -e 's/.direnv.*$/.direnv/p'); do
       if (( "$(${stat} --format '%X' "''${d}")" < "''${ONE_WEEK_AGO}" )); then
         ${rm} -r "''${d}"
       fi

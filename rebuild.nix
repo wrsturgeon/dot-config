@@ -33,8 +33,7 @@ pkgs.writeScriptBin "rebuild" ''
 
   set -eu
 
-  ${gh} api user --jq '.login' &> /dev/null || ${gh} auth login
-  ${sudo} -i ${gh} api user --jq '.login' &> /dev/null || ${sudo} -i ${gh} auth login
+  # ${gh} api user --jq '.login' &> /dev/null || ${gh} auth login
 
   export GITHUB_USERNAME="$(${gh} api user --jq '.login')"
   export COMMIT_PREFIX='`'"$(${date} '+%Y/%m/%d %H:%M:%S')"'`${spacer}${os-emoji}'

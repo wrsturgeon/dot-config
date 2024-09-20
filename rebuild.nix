@@ -121,12 +121,12 @@ pkgs.writeScriptBin "rebuild" ''
     export ONE_WEEK_AGO="$(( $(${date} +%s) - 604800 ))"
     for d in $(${nix-store} --gc --print-roots | ${grep} '/\.direnv' | ${sed} -n -e 's/.direnv.*$/.direnv/p'); do
       if (( "$(${stat} --format '%X' "''${d}")" < "''${ONE_WEEK_AGO}" )); then
-        ${rm} -r "''${d}"
+        ${rm} -fr "''${d}"
       fi
     done
 
     # From <https://nixos.wiki/wiki/Cleaning_the_nix_store>:
-    ${nix-store} --gc --print-roots | ${grep} -E -v "^(/nix/var|/run/\w+-system|\{memory|/proc)" | ${sed} -n -e 's/ -> .*$//p' | ${grep} -v '^{censored}$' | ${grep} -v '^{lsof}$' | ${grep} -v '^/var/root/.cache/nix/flake-registry.json$' | ${xargs} ${rm}
+    ${nix-store} --gc --print-roots | ${grep} -E -v "^(/nix/var|/run/\w+-system|\{memory|/proc)" | ${sed} -n -e 's/ -> .*$//p' | ${grep} -v '^{censored}$' | ${grep} -v '^{lsof}$' | ${grep} -v '^/var/root/.cache/nix/flake-registry.json$' | ${xargs} ${rm} -f
 
     # Garbage collection:
     ${nix-collect-garbage} --delete-older-than 1d --verbose

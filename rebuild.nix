@@ -115,7 +115,7 @@ pkgs.writeScriptBin "rebuild" ''
   if [ "''${BUILD_STATUS_FILE}" = '.build-succeeded' ]; then
 
     # Delete all old `result` symlinks from `nix build`s:
-    ${nix-store} --gc --print-roots | ${grep} 'result -> ' | ${sed} -n -e 's/ -> .*$//p' | ${xargs} ${rm}
+    ${nix-store} --gc --print-roots | ${grep} 'result -> ' | ${sed} -n -e 's/ -> .*$//p' | ${xargs} ${rm} -f
 
     # Delete old `.direnv` environments:
     export ONE_WEEK_AGO="$(( $(${date} +%s) - 604800 ))"

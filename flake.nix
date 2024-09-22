@@ -21,13 +21,11 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixvim = {
       inputs = {
-        home-manager.follows = "null";
         nix-darwin.follows = "nix-darwin";
         nixpkgs.follows = "nixpkgs";
       };
       url = "github:nix-community/nixvim";
     };
-    null.url = "./null";
     wezterm-zip = {
       flake = false;
       url = "https://github.com/wez/wezterm/releases/download/nightly/WezTerm-macos-nightly.zip";
@@ -42,7 +40,6 @@
       nixos-hardware,
       nixpkgs,
       nixvim,
-      null,
       self,
       wezterm-zip,
     }:

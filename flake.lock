@@ -181,6 +181,27 @@
         "type": "github"
       }
     },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixvim",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1726902823,
+        "narHash": "sha256-Gkc7pwTVLKj4HSvRt8tXNvosl8RS9hrBAEhOjAE0Tt4=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "14929f7089268481d86b83ed31ffd88713dcd415",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -239,9 +260,7 @@
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
         "git-hooks": "git-hooks",
-        "home-manager": [
-          "null"
-        ],
+        "home-manager": "home-manager",
         "nix-darwin": [
           "nix-darwin"
         ],
@@ -263,18 +282,6 @@
         "owner": "nix-community",
         "repo": "nixvim",
         "type": "github"
-      }
-    },
-    "null": {
-      "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-gYxgZOa1skFxHaTQkfoo8UP38YFBaJAGrVNpLsPVmpw=",
-        "path": "/nix/store/jwfn3xf5z0wx0m3sy1aqqbpiy53pq856-source/null",
-        "type": "path"
-      },
-      "original": {
-        "path": "/nix/store/jwfn3xf5z0wx0m3sy1aqqbpiy53pq856-source/null",
-        "type": "path"
       }
     },
     "nuschtosSearch": {
@@ -308,7 +315,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
-        "null": "null",
         "wezterm-zip": "wezterm-zip"
       }
     },
@@ -383,7 +389,7 @@
     "wezterm-zip": {
       "flake": false,
       "locked": {
-        "lastModified": 1727030534,
+        "lastModified": 1727030529,
         "narHash": "sha256-Wx8lW+Qt3T/C9iYKi/veixbI3ELX7udL6f3Zy2YOjZg=",
         "type": "tarball",
         "url": "https://github.com/wez/wezterm/releases/download/nightly/WezTerm-macos-nightly.zip"

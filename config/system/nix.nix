@@ -8,13 +8,13 @@ ctx: {
     {
       automatic = true;
       options = "--delete-older-than 1d";
-      user = "root";
     }
     // ctx.linux-mac { } {
       interval = {
         Hour = 3;
         Minute = 1;
       };
+      user = "root";
     };
   optimise =
     {

@@ -29,11 +29,11 @@
         "rust-analyzer-src": "rust-analyzer-src"
       },
       "locked": {
-        "lastModified": 1726813972,
-        "narHash": "sha256-t6turZgoSAVgj7hn5mxzNlLOeVeZvymFo8+ymB52q34=",
+        "lastModified": 1726986637,
+        "narHash": "sha256-webLScPFCax18Z2lQHhaWzqqQRvV2Y1lOADqUa7VQbU=",
         "owner": "nix-community",
         "repo": "fenix",
-        "rev": "251caeafc75b710282ee7e375800f75f4c8c5727",
+        "rev": "f5a9b01cd81b46228b3737669e8275b1f2da7d35",
         "type": "github"
       },
       "original": {
@@ -188,11 +188,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1726742753,
-        "narHash": "sha256-QclpWrIFIg/yvWRiOUaMp1WR+TGUE9tb7RE31xHlxWc=",
+        "lastModified": 1727003835,
+        "narHash": "sha256-Cfllbt/ADfO8oxbT984MhPHR6FJBaglsr1SxtDGbpec=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "c03f85fa42d68d1056ca1740f3113b04f3addff2",
+        "rev": "bd7d1e3912d40f799c5c0f7e5820ec950f1e0b3d",
         "type": "github"
       },
       "original": {
@@ -252,11 +252,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1726846628,
-        "narHash": "sha256-0CH44sEwiljiN2q7eIFCvabyUm1WeEiF8ofP/z5ca0Q=",
+        "lastModified": 1727031271,
+        "narHash": "sha256-OvekOLCj7kEq6X8Ncgyda1ud4BMD+OxHu7bdIsCtl/g=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "3211ce356be612ae89a38c60799992bde8a47127",
+        "rev": "b473bdc5ae1260296d0f43f8f1fba6248b1ee078",
         "type": "github"
       },
       "original": {
@@ -269,11 +269,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-gYxgZOa1skFxHaTQkfoo8UP38YFBaJAGrVNpLsPVmpw=",
-        "path": "/nix/store/s8qpp2kvpq1lrgi3cjd95lnx7nmz8niv-source/null",
+        "path": "/nix/store/1l2yhjvsanjr38sfrjgz62h1clrs3djz-source/null",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/s8qpp2kvpq1lrgi3cjd95lnx7nmz8niv-source/null",
+        "path": "/nix/store/1l2yhjvsanjr38sfrjgz62h1clrs3djz-source/null",
         "type": "path"
       }
     },
@@ -383,8 +383,8 @@
     "wezterm-zip": {
       "flake": false,
       "locked": {
-        "lastModified": 1726803803,
-        "narHash": "sha256-9qlDvxs9rMUajANhGUYjdT15gpznNNEUAgW69mdvPZU=",
+        "lastModified": 1727030529,
+        "narHash": "sha256-Wx8lW+Qt3T/C9iYKi/veixbI3ELX7udL6f3Zy2YOjZg=",
         "type": "tarball",
         "url": "https://github.com/wez/wezterm/releases/download/nightly/WezTerm-macos-nightly.zip"
       },

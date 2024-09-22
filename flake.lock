@@ -269,11 +269,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-gYxgZOa1skFxHaTQkfoo8UP38YFBaJAGrVNpLsPVmpw=",
-        "path": "/nix/store/0dv0hq2n16g8r3ik1zb7mrzryygad5kl-source/null",
+        "path": "/nix/store/zjrp6sqgbhxkb3crahy6cp10bbf3fh55-source/null",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/0dv0hq2n16g8r3ik1zb7mrzryygad5kl-source/null",
+        "path": "/nix/store/zjrp6sqgbhxkb3crahy6cp10bbf3fh55-source/null",
         "type": "path"
       }
     },
@@ -383,7 +383,7 @@
     "wezterm-zip": {
       "flake": false,
       "locked": {
-        "lastModified": 1727030529,
+        "lastModified": 1727030534,
         "narHash": "sha256-Wx8lW+Qt3T/C9iYKi/veixbI3ELX7udL6f3Zy2YOjZg=",
         "type": "tarball",
         "url": "https://github.com/wez/wezterm/releases/download/nightly/WezTerm-macos-nightly.zip"

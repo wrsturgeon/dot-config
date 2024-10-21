@@ -61,8 +61,11 @@ ctx:
       }
 ))
 // {
-  bash = ctx.linux-mac { completion.enable = true; } {
-    enable = true;
-    enableCompletion = true;
-  };
+  bash =
+    {
+      completion.enable = true;
+    }
+    // ctx.linux-mac { } {
+      enable = true;
+    };
 }

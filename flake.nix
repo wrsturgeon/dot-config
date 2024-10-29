@@ -12,6 +12,11 @@
     };
     hammer = {
       url = "github:wrsturgeon/coqhammer-nix";
+      inputs.src.follows = "hammer-src";
+    };
+    hammer-src = {
+      url = "github:lukaszcz/coqhammer";
+      flake = false;
     };
     nix-darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +45,7 @@
       flake-utils,
       github-dark-nvim-src,
       hammer,
+      hammer-src,
       nix-darwin,
       nixos-hardware,
       nixpkgs,

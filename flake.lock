@@ -183,7 +183,9 @@
     },
     "hammer": {
       "inputs": {
-        "src": "src"
+        "src": [
+          "hammer-src"
+        ]
       },
       "locked": {
         "lastModified": 1716603050,
@@ -196,6 +198,22 @@
       "original": {
         "owner": "wrsturgeon",
         "repo": "coqhammer-nix",
+        "type": "github"
+      }
+    },
+    "hammer-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1712685986,
+        "narHash": "sha256-4b8QTDlm3B3FyiiNdNObgMAFQsvXVj+h60TfW76hgfY=",
+        "owner": "lukaszcz",
+        "repo": "coqhammer",
+        "rev": "772ba94b389fe808d5071307ef0ebddb5e0ec9e7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lukaszcz",
+        "repo": "coqhammer",
         "type": "github"
       }
     },
@@ -359,6 +377,7 @@
         "flake-utils": "flake-utils",
         "github-dark-nvim-src": "github-dark-nvim-src",
         "hammer": "hammer",
+        "hammer-src": "hammer-src",
         "nix-darwin": "nix-darwin",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
@@ -380,22 +399,6 @@
         "owner": "rust-lang",
         "ref": "nightly",
         "repo": "rust-analyzer",
-        "type": "github"
-      }
-    },
-    "src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1712685986,
-        "narHash": "sha256-4b8QTDlm3B3FyiiNdNObgMAFQsvXVj+h60TfW76hgfY=",
-        "owner": "lukaszcz",
-        "repo": "coqhammer",
-        "rev": "772ba94b389fe808d5071307ef0ebddb5e0ec9e7",
-        "type": "github"
-      },
-      "original": {
-        "owner": "lukaszcz",
-        "repo": "coqhammer",
         "type": "github"
       }
     },

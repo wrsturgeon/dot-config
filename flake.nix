@@ -186,6 +186,7 @@
         # Config
         cfg-args = laptop-name: {
           inherit
+            coq-pkgs
             github-dark-nvim
             hammer
             iosevka

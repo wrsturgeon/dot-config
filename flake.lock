@@ -204,15 +204,16 @@
     "hammer-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1712685986,
-        "narHash": "sha256-4b8QTDlm3B3FyiiNdNObgMAFQsvXVj+h60TfW76hgfY=",
+        "lastModified": 1722164119,
+        "narHash": "sha256-v22BbFaGmkgN1h92X/hYDATu/MbIaOkJDvrKM/WsOqY=",
         "owner": "lukaszcz",
         "repo": "coqhammer",
-        "rev": "772ba94b389fe808d5071307ef0ebddb5e0ec9e7",
+        "rev": "eca86302384cec35c2b894b741137a6dda1d50bb",
         "type": "github"
       },
       "original": {
         "owner": "lukaszcz",
+        "ref": "master",
         "repo": "coqhammer",
         "type": "github"
       }

@@ -15,7 +15,7 @@
       inputs.src.follows = "hammer-src";
     };
     hammer-src = {
-      url = "github:lukaszcz/coqhammer";
+      url = "github:lukaszcz/coqhammer/master";
       flake = false;
     };
     nix-darwin = {

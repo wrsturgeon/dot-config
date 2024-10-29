@@ -19,6 +19,7 @@ ctx: {
       coq
       emacs
       git
+      (hammer.lib.with-pkgs pkgs ctx.coq-pkgs).whole-enchilada
       rebuild
       vim
     ])

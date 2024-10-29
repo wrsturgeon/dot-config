@@ -10,6 +10,9 @@
       flake = false;
       url = "github:vv9k/vim-github-dark";
     };
+    hammer = {
+      url = "github:wrsturgeon/coqhammer-nix";
+    };
     nix-darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:LnL7/nix-darwin";
@@ -36,6 +39,7 @@
       fenix,
       flake-utils,
       github-dark-nvim-src,
+      hammer,
       nix-darwin,
       nixos-hardware,
       nixpkgs,
@@ -176,10 +180,14 @@
           else
             s;
 
+        # Coq package set
+        coq-pkgs = pkgs.coqPackages;
+
         # Config
         cfg-args = laptop-name: {
           inherit
             github-dark-nvim
+            hammer
             iosevka
             laptop-name
             linux-mac
@@ -192,7 +200,7 @@
             terminal-settings
             wezterm-zip
             ;
-          coq = pkgs.coqPackages.coq;
+          inherit (coq-pkgs) coq;
           dock-apps =
             (builtins.map (f: f laptop-name) [
               wezterm

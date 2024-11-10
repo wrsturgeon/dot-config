@@ -38,7 +38,6 @@ ctx: {
       ripgrep
       rss2email
       rust-analyzer
-      rustfmt
       # steam
       taplo
       # tor-browser

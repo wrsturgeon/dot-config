@@ -21,6 +21,7 @@ ctx: {
       git
       (hammer.lib.with-pkgs pkgs coq-pkgs).whole-enchilada
       rebuild
+      rust
       vim
     ])
     ++ (with ctx.pkgs; [
@@ -43,10 +44,6 @@ ctx: {
       # tor-browser
       tree
       zoom-us
-    ])
-    ++ (with ctx.rust; [
-      cargo
-      rustc
     ])
     ++ (
       with ctx.pkgs;

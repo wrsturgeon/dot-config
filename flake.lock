@@ -458,7 +458,7 @@
       "flake": false,
       "locked": {
         "lastModified": 1730951169,
-        "narHash": "sha256-q/iYgz9fX55nOve8K4E9pSdDQNesJZzUujmF1QspNaY=",
+        "narHash": "sha256-eC4tQBYywZaRdEYDObCjCBJJTn+DkqKnxR138FvoRtk=",
         "type": "tarball",
         "url": "https://github.com/wez/wezterm/releases/download/nightly/WezTerm-macos-nightly.zip"
       },

@@ -5,13 +5,13 @@ ctx: {
     hls = {
       installGhc = false;
     };
-    nixd = {
+    nixd = { };
+    ocamllsp.package = ctx.coq.ocamlPackages.ocaml-lsp;
+    ruff = { };
+    rust_analyzer = {
       installCargo = false;
       installRustc = false;
     };
-    ocamllsp.package = ctx.coq.ocamlPackages.ocaml-lsp;
-    ruff = { };
-    rust_analyzer = { };
   };
   keymaps.lspBuf = {
     "K" = "hover";

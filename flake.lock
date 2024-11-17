@@ -389,11 +389,11 @@
     "rust-analyzer-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1731342671,
-        "narHash": "sha256-36eYDHoPzjavnpmEpc2MXdzMk557S0YooGms07mDuKk=",
+        "lastModified": 1731773819,
+        "narHash": "sha256-/HdIf8T0CE1OkI+qJ3Ii+L8nIFirItYAO7adWewadGw=",
         "owner": "rust-lang",
         "repo": "rust-analyzer",
-        "rev": "fc98e0657abf3ce07eed513e38274c89bbb2f8ad",
+        "rev": "9224ec44978b6817510b0b2999c7cf25c1ab837f",
         "type": "github"
       },
       "original": {

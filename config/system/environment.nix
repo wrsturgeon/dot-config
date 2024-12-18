@@ -46,10 +46,12 @@ ctx: {
     ])
     ++ (
       with ctx.pkgs;
-      ctx.linux-mac [
-        libsecret
-        pantheon-tweaks
-      ] [ vlc-bin ]
+      ctx.linux-mac
+        [
+          libsecret
+          pantheon-tweaks
+        ]
+        [ vlc-bin ]
     );
   variables = ctx.env;
 }

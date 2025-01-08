@@ -16,14 +16,6 @@
       flake = false;
       url = "github:vv9k/vim-github-dark";
     };
-    hammer = {
-      url = "github:wrsturgeon/coqhammer-nix";
-      inputs.src.follows = "hammer-src";
-    };
-    hammer-src = {
-      url = "github:lukaszcz/coqhammer/master";
-      flake = false;
-    };
     nix-darwin = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:LnL7/nix-darwin";
@@ -50,8 +42,6 @@
       fenix,
       flake-utils,
       github-dark-nvim-src,
-      hammer,
-      hammer-src,
       nix-darwin,
       nixos-hardware,
       nixpkgs,
@@ -200,7 +190,6 @@
           inherit
             coq-pkgs
             github-dark-nvim
-            hammer
             iosevka
             laptop-name
             linux-mac

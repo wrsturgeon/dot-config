@@ -177,43 +177,6 @@
         "type": "github"
       }
     },
-    "hammer": {
-      "inputs": {
-        "src": [
-          "hammer-src"
-        ]
-      },
-      "locked": {
-        "lastModified": 1730228124,
-        "narHash": "sha256-uT85AlXkJgFvO9CokqI6ik4vHJjS2pQ+3c+d7QrT7xs=",
-        "owner": "wrsturgeon",
-        "repo": "coqhammer-nix",
-        "rev": "3ba408bae9deb4ed4d883d1e3e24f7c8e24b6eeb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "wrsturgeon",
-        "repo": "coqhammer-nix",
-        "type": "github"
-      }
-    },
-    "hammer-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1731695807,
-        "narHash": "sha256-mhIFSJcw6Q9YnSfYriwNDhs9JsILPrbz7goK+YemMFg=",
-        "owner": "lukaszcz",
-        "repo": "coqhammer",
-        "rev": "31442e8178a5d85a9f57a323b65bf9f719ded8ec",
-        "type": "github"
-      },
-      "original": {
-        "owner": "lukaszcz",
-        "ref": "master",
-        "repo": "coqhammer",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -373,8 +336,6 @@
         "fenix": "fenix",
         "flake-utils": "flake-utils",
         "github-dark-nvim-src": "github-dark-nvim-src",
-        "hammer": "hammer",
-        "hammer-src": "hammer-src",
         "nix-darwin": "nix-darwin",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",

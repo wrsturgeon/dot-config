@@ -97,7 +97,7 @@ ctx:
           autohide-time-modifier = 0.1;
           dashboard-in-overlay = true;
           expose-animation-duration = 0.1;
-          expose-group-by-app = false;
+          expose-app-groups = false;
           largesize = null;
           launchanim = true;
           magnification = false;

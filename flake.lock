@@ -29,11 +29,11 @@
         "rust-analyzer-src": "rust-analyzer-src"
       },
       "locked": {
-        "lastModified": 1736318091,
-        "narHash": "sha256-RkRHXZaMgOMGgkW2YmEqxxDDYRiGFbfr1JuaI0VrCKo=",
+        "lastModified": 1736490741,
+        "narHash": "sha256-bDvp2cajJ4IaXk4hqtdtsKpLTxmx1GO9nIi651ko6hE=",
         "owner": "nix-community",
         "repo": "fenix",
-        "rev": "9e13860d50cbfd42e79101a516e1939c7723f093",
+        "rev": "ff8cb1e6d1755aa3ace7c662f79f74882cc5022f",
         "type": "github"
       },
       "original": {
@@ -346,11 +346,11 @@
     "rust-analyzer-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1736517563,
-        "narHash": "sha256-YJ5ajpMsyXITc91ZfnI0Mdocd+tmCFkZ3BLozUkB44M=",
+        "lastModified": 1736424758,
+        "narHash": "sha256-OvLkhb1Bh4XzeJEROwN4XLdv9exyMD/H93cFsGV0vXA=",
         "owner": "rust-lang",
         "repo": "rust-analyzer",
-        "rev": "4f35021ca9a8e7f9ed4344139b9eaf770a2e5725",
+        "rev": "cc016df54b03d8c1bbb1aae761da01dbfae5f126",
         "type": "github"
       },
       "original": {
@@ -414,8 +414,8 @@
     "wezterm-zip": {
       "flake": false,
       "locked": {
-        "lastModified": 1736395250,
-        "narHash": "sha256-s2T2dPO3TN2c5CNLyRnzdS0ECwW1YySdi4I5xwlyK6k=",
+        "lastModified": 1736480978,
+        "narHash": "sha256-sPf0Go2g8IosWXUHsltcluulOVKpsurFksyow6isLi4=",
         "type": "tarball",
         "url": "https://github.com/wez/wezterm/releases/download/nightly/WezTerm-macos-nightly.zip"
       },

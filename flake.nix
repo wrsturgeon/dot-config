@@ -234,7 +234,7 @@
           hardware-configuration = import config/hardware-configuration.nix;
           dir = ./config;
           rebuild = import ./rebuild.nix (cfg-args laptop-name);
-          rust = fenix.packages.${system}.complete;
+          rust = fenix.packages.${system}.latest;
           vim = nixvim.legacyPackages.${system}.makeNixvim (
             import config/programs/neovim (cfg-args laptop-name)
           );

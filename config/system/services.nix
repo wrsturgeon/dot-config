@@ -14,6 +14,6 @@ ctx:
       displayManager.lightdm.enable = true;
       xkb.layout = "us";
     };
-  } { nix-daemon = { }; })
+  } { })
 ))
 // ctx.linux-mac { pantheon.apps.enable = false; } { }

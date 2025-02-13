@@ -5,10 +5,10 @@
       url = "github:nix-community/fenix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        rust-analyzer-src = {
-          url = "github:rust-lang/rust-analyzer/nightly";
-          flake = false;
-        };
+        # rust-analyzer-src = {
+        #   url = "github:rust-lang/rust-analyzer/nightly";
+        #   flake = false;
+        # };
       };
     };
     flake-utils.url = "github:numtide/flake-utils";
@@ -234,12 +234,7 @@
           hardware-configuration = import config/hardware-configuration.nix;
           dir = ./config;
           rebuild = import ./rebuild.nix (cfg-args laptop-name);
-          rust = fenix.packages.${system}.default.withComponents [
-            "cargo"
-            "clippy"
-            "rustc"
-            "rustfmt"
-          ];
+          rust = fenix.packages.${system}.complete;
           vim = nixvim.legacyPackages.${system}.makeNixvim (
             import config/programs/neovim (cfg-args laptop-name)
           );

@@ -5,10 +5,10 @@
       url = "github:nix-community/fenix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        # rust-analyzer-src = {
-        #   url = "github:rust-lang/rust-analyzer/nightly";
-        #   flake = false;
-        # };
+        rust-analyzer-src = {
+          url = "github:rust-lang/rust-analyzer/nightly";
+          flake = false;
+        };
       };
     };
     flake-utils.url = "github:numtide/flake-utils";
